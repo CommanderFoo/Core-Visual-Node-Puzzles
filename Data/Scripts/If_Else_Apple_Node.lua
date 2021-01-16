@@ -10,11 +10,12 @@ local node = API.Node:new(script)
 
 node:stop_data_flow()
 
-local if_condition = "Red"
+local if_condition = nil
 local top_items = {}
 local bottom_items = {}
 
 node:data_received(function(data)
+	print(if_condition)
 	if(data.color == if_condition) then
 		if(node:has_top_connection()) then
 			local obj = World.SpawnAsset(red_apple, {parent = container})
@@ -42,7 +43,7 @@ node:data_received(function(data)
 			
 			})
 		end	
-	else
+	elseif(if_condition) then
 		if(node:has_bottom_connection()) then
 			local obj = World.SpawnAsset(green_apple, {parent = container})
 			local line = node:get_bottom_connector_line()
@@ -87,3 +88,7 @@ function Tick(dt)
 		end
 	end
 end
+
+Events.Connect("on_apples_color_option_selected", function(index, option, value)
+	if_condition = option.text
+end)
