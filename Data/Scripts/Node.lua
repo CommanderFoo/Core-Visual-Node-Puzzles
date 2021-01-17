@@ -37,7 +37,7 @@ local Node = {
 
 }
 
-function Node:setup(s)
+function Node:setup(r)
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil
@@ -54,7 +54,7 @@ function Node:setup(s)
 	self.can_flow_data = true
 	self.on_connection_func = nil
 
-	self.root = s:FindTemplateRoot()
+	self.root = r
 
 	self:setup_node()
 	self:setup_output_connections()
@@ -85,6 +85,7 @@ function Node:setup_node(root)
 	self.highlight = self.root:FindDescendantByName("Highlight Border")
 	self.id = self.handle.id
 	self.error_warning = self.root:FindDescendantByName("Error Warning")
+	self.delete_button = self.root:FindDescendantByName("Delete Node")
 
 	self.handle.pressedEvent:Connect(function(obj)
 		self:clear_active_connection()
@@ -109,6 +110,16 @@ function Node:setup_node(root)
 
 			Node_Events.trigger("begin_drag_node", self)
 		end
+	end)
+
+	self.delete_button.pressedEvent:Connect(function(obj)
+		self:clear_active_connection()
+
+		-- Need a break all connections method.
+
+		--Node_Events.trigger("break_connection", connections[c].id, true)
+
+		self.root:Destroy()
 	end)
 end
 
@@ -232,6 +243,14 @@ function Node:move_connections()
 			end
 		end
 	end
+end
+
+function Node:is_moving_connection()
+	if(self.active_connection ~= nil and self.active_connection.moving) then
+		return true
+	end
+
+	return false
 end
 
 function Node:get_current_connection()
@@ -504,6 +523,30 @@ function Node:on_connection(func)
 	self.on_connection_func = func
 end
 
+function Node:get_top_connector()
+	for _, c in pairs(self.output_connections) do
+		if(c.connector.name == "Connection Handle Top") then
+			return c.connector
+		end
+	end
+end
+
+function Node:get_middle_connector()
+	for _, c in pairs(self.output_connections) do
+		if(c.connector.name == "Connection Handle Middle") then
+			return c.connector
+		end
+	end
+end
+
+function Node:get_bottom_connector()
+	for _, c in pairs(self.output_connections) do
+		if(c.connector.name == "Connection Handle Bottom") then
+			return c.connector
+		end
+	end
+end
+
 function Node:get_top_connector_line()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
@@ -534,12 +577,12 @@ function Node:get_bottom_connector_line()
 	end
 end
 
-function Node:new(s)
+function Node:new(r)
 	self.__index = self
 	
 	local o = setmetatable({}, self)
 
-	 o:setup(s)
+	 o:setup(r)
 
 	 return o
 end

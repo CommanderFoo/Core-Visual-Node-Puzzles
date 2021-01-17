@@ -30,4 +30,4 @@ function spawn_nodes()
 	d = World.SpawnAsset(propGreenAppleOuputNode, {parent = propContainer})
 end
 
-spawn_nodes()
+--spawn_nodes()
