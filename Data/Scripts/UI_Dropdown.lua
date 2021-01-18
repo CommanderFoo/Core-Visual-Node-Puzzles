@@ -97,8 +97,10 @@ for i = 1, total_options do
 end
 
 function close_select()
-	options_panel.visibility = Visibility.FORCE_OFF
-	arrow.rotationAngle = 180
+	if(Object.IsValid(options_panel)) then
+		options_panel.visibility = Visibility.FORCE_OFF
+		arrow.rotationAngle = 180
+	end
 end
 
 selected.clickedEvent:Connect(function()

@@ -47,7 +47,7 @@ function Node:setup(r)
 	self.input_connected_to = {}
 	self.output_data = {}
 	self.input_data = {}
-	self.can_tick = false
+	self.ticking_task = nil
 	self.data_received_func = nil
 	self.default_connector_color = Color.New(0.215861, 0.215861, 0.215861)
 	self.error_task = nil
@@ -78,6 +78,36 @@ function Node:setup(r)
 			self:stop_all_drag()
 		end
 	end)
+
+	self:tick()
+end
+
+function Node:tick()
+	if(self.options.tick and self.ticking_task == nil) then
+		self.ticking_task = Task.Spawn(function()
+			self.options.tick(self)
+		end)
+
+		self.ticking_task.repeatCount = self.options.repeat_count
+		self.ticking_task.repeatInterval = self.options.repeat_interval
+	end
+end
+
+function Node:get_tick()
+	return self.ticking_task
+end
+
+function Node:stop_tick()
+	if(self.ticking_task ~= nil) then
+		self.ticking_task:Cancel()
+		self.ticking_task = nil
+	end
+end
+
+function Node:receive_data(data, from_node)
+	if(self.options.on_data_received ~= nil) then
+		self.options.on_data_received(data, self, from_node)
+	end
 end
 
 function Node:setup_node(root)
@@ -471,50 +501,44 @@ function Node:has_bottom_connection()
 	return false
 end
 
-function Node:send_data_top_connection(data)
-	for _, c in pairs(self.output_connected_to) do
-		for i, cs in pairs(c) do
-			if(cs.connection.connector.name == "Connection Handle Top") then
-				cs.connected_to_node:set_input_data(data)
-				cs.connected_to_node:send_data()
-				break
-			end
-		end
-	end
-end
-
-function Node:send_data_middle_connection(data)
-	for _, c in pairs(self.output_connected_to) do
-		for i, cs in pairs(c) do
-			if(cs.connection.connector.name == "Connection Handle Middle") then
-				cs.connected_to_node:set_input_data(data)
-				cs.connected_to_node:send_data()
-				break
-			end
-		end
-	end
-end
-
-function Node:send_data_bottom_connection(data)
-	for _, c in pairs(self.output_connected_to) do
-		for i, cs in pairs(c) do
-			if(cs.connection.connector.name == "Connection Handle Bottom") then
-				cs.connected_to_node:set_input_data(data)
-				cs.connected_to_node:send_data()
-				break
-			end
-		end
-	end
-end
-
-function Node:send_data()
+function Node:send_data_top(data)
 	for _, c in pairs(self.output_connected_to) do
 		for i, e in ipairs(c) do
-			e.connected_to_node:set_input_data(self.output_data)
-
-			if(self.id ~= e.connected_to_node.id and e.connected_to_node:can_auto_flow_data()) then
-				e.connected_to_node:send_data()
+			if(e.connection.connector.name == "Connection Handle Top") then
+				e.connected_to_node:receive_data(data, self)
 			end
+		end
+	end
+end
+
+function Node:send_data_middle(data)
+	for _, c in pairs(self.output_connected_to) do
+		for i, e in ipairs(c) do
+			if(e.connection.connector.name == "Connection Handle Middle") then
+				e.connected_to_node:receive_data(data, self)
+			end
+		end
+	end
+end
+
+function Node:send_data_bottom(data)
+	for _, c in pairs(self.output_connected_to) do
+		for i, e in ipairs(c) do
+			if(e.connection.connector.name == "Connection Handle Bottom") then
+				e.connected_to_node:receive_data(data, self)
+			end
+		end
+	end
+end
+
+function Node:send_data(data)
+	for _, c in pairs(self.output_connected_to) do
+		for i, e in ipairs(c) do
+			e.connected_to_node:receive_data(data, self)
+
+			--if(self.id ~= e.connected_to_node.id) then
+			--	e.connected_to_node:send_data()
+			--end
 		end
 	end
 end
@@ -577,10 +601,14 @@ function Node:get_bottom_connector_line()
 	end
 end
 
-function Node:new(r)
+function Node:new(r, options)
 	self.__index = self
 	
-	local o = setmetatable({}, self)
+	local o = setmetatable({
+
+		options = options or {}
+
+	}, self)
 
 	 o:setup(r)
 

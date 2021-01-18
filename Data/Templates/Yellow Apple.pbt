@@ -1,13 +1,13 @@
 ﻿Assets {
-  Id: 9313343399765628902
-  Name: "Red Apple"
+  Id: 8343815789063798870
+  Name: "Yellow Apple"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 6899325833784075728
       Objects {
         Id: 6899325833784075728
-        Name: "Red Apple"
+        Name: "Yellow Apple"
         Transform {
           Scale {
             X: 1
@@ -35,7 +35,9 @@
               Id: 12963408877106328672
             }
             Color {
-              R: 1
+              R: 0.751746178
+              G: 1
+              B: 0.218000054
               A: 1
             }
             TeamSettings {

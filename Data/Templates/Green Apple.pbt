@@ -32,12 +32,10 @@
           }
           Image {
             Brush {
-              Id: 14883210605206439919
+              Id: 12963408877106328672
             }
             Color {
-              R: 1
               G: 1
-              B: 1
               A: 1
             }
             TeamSettings {
@@ -59,12 +57,12 @@
       }
     }
     Assets {
-      Id: 14883210605206439919
-      Name: "Survival Food Apple 002"
+      Id: 12963408877106328672
+      Name: "Icon Apple"
       PlatformAssetType: 9
       PrimaryAsset {
         AssetType: "PlatformBrushAssetRef"
-        AssetId: "UI_Survival_Food_038"
+        AssetId: "Icon_Apple"
       }
     }
     PrimaryAssetId {

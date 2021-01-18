@@ -7,6 +7,8 @@ local node = API.Node:new(script.parent.parent)
 
 local total = 0
 
+node:stop_data_flow()
+
 node:data_received(function(data)
 	if(string.lower(data.color) == color) then
 		total = total + data.count
