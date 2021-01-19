@@ -1,5 +1,5 @@
 ﻿local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
-local Node, Node_Events = require(script:GetCustomProperty("Node"))
+local Node, Node_Events, Node_Type = require(script:GetCustomProperty("Node"))
 
 local API = {
 
@@ -9,6 +9,7 @@ local API = {
 }
 
 API.Node = Node
+API.Node_Type = Node_Type
 API.Node_Events = Node_Events
 
 API.ticking_nodes = {}
@@ -18,16 +19,6 @@ API.active_node = nil
 function API.register_node(node)
 	table.insert(API.nodes, #API.nodes + 1, node)
 end
-
---[[function API.register_ticking_node(node)
-	API.register_node(node)
-	API.ticking_nodes[node:get_id()] = {
-		
-		node:get_ticking_task()
-		node = node
-
-	}
-end--]]
 
 API.Node_Events.on("begin_drag_node", function(node)
 	API.active_node = node
@@ -45,20 +36,6 @@ API.Node_Events.on("input_connect", function(node_connected, node_connection)
 		API.Node_Events.trigger("node_connected", API.active_node)
 	end
 end)
-
---[[
-function API.tick_nodes()
-	for _, n in pairs(API.ticking_nodes) do
-		if(n.task == nil) then
-			n.task = Task.Spawn(function()
-				n.node:tick()
-			end)
-
-
-		end
-	end
-end
---]]
 
 function API.get_path(obj, line, changed, offset)
 	local angle = line.rotationAngle
@@ -85,6 +62,10 @@ end
 
 function API.get_bottom_offset(node)
 	 return node:get_bottom_connector().y / 2
+end
+
+function API.insert(obj, t)
+	table.insert(t, #t + 1, obj)
 end
 
 local ticking_task = Task.Spawn(function()

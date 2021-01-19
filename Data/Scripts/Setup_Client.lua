@@ -22,4 +22,4 @@ function spawn_nodes()
 	
 end
 
-spawn_nodes()
+--spawn_nodes()

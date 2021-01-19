@@ -54,6 +54,13 @@ function Node:setup(r)
 	self.can_flow_data = true
 	self.on_connection_func = nil
 
+	self.OFFSETS = {
+
+		TOP_OFFSET = 0,
+		BOTTOM_OFFSET = 25
+	
+	}
+
 	self.root = r
 
 	self:setup_node()
@@ -79,7 +86,9 @@ function Node:setup(r)
 		end
 	end)
 
-	self:tick()
+	if(self.options.tick) then
+		self:tick()
+	end
 end
 
 function Node:tick()
@@ -601,6 +610,58 @@ function Node:get_bottom_connector_line()
 	end
 end
 
+function Node:get_connector_line(condition)
+	if(condition) then
+		return self:get_top_connector_line()
+	end
+
+	return self:get_bottom_connector_line()
+end
+
+function Node:create_tween(line)
+	if(not line) then
+		return nil
+	end
+
+	local t = self.options.YOOTIL.Tween:new(self.options.tween_duration, {a = 0}, {a = line.width})
+
+	if(self.options.tween_delay) then
+		t:set_delay(self.options.tween_delay)
+	end
+
+	return t
+end
+
+function Node:get_path(obj, line, changed, offset)
+	local angle = line.rotationAngle
+	local rad = angle * (math.pi / 180)
+
+	return (changed.a * math.cos(rad)), ((changed.a * math.sin(rad)) -(obj.height / 2)) + (offset or 0)
+end
+
+function Node:get_bottom_offset()
+	return self:get_bottom_connector().y / 2
+end
+
+function Node:insert(obj, t)
+	table.insert(t, #t + 1, obj)
+end
+
+function Node:set_option(opt, val)
+	self.options[opt] = val
+end
+
+function Node:spawn_asset(asset, x, y)
+	local obj = World.SpawnAsset(asset, {parent = self.options.container})
+
+	obj.x = x
+	obj.y = y
+
+	obj.visibility = Visibility.FORCE_OFF
+
+	return obj
+end
+
 function Node:new(r, options)
 	self.__index = self
 	
@@ -615,4 +676,218 @@ function Node:new(r, options)
 	 return o
 end
 
-return Node, Node_Events
+-- If Node
+
+local Node_If = {}
+
+function Node_If:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	if(not this.options_if_condition) then
+		this.options.if_condition = nil
+	end
+
+	if(not this.options.tween_duration) then
+		this.options.tween_duration = 1.5
+	end
+
+	this:setup(r)
+
+	local queue = this.options.YOOTIL.Utils.Queue:new()
+
+	this.options.on_data_received = function(data, node)
+		local queue_func = function()
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local condition = (data.condition == this.options.if_condition)
+				local obj = nil
+				local line = this:get_connector_line(condition)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(condition and this:has_top_connection()) then
+					obj = this:spawn_asset(data.asset, line.x, line.y)
+					connection_method = "send_data_top"
+		
+					this:insert({
+						
+						obj = obj,
+						tween = tween
+					
+					}, this.options.tween_items)
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+					obj = this:spawn_asset(data.asset, line.x, line.y)
+					connection_method = "send_data_bottom"
+		
+					this:insert({
+						
+						obj = obj,
+						tween = tween
+					
+					}, this.options.tween_items)
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+						obj:Destroy()
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+
+	if(this.options.node_time ~= nil and this.options.node_time > 0) then
+		local queue_task = Task.Spawn(function()
+			if(not queue:is_empty()) then
+				queue:pop()()
+			end
+		end, this.options.node_time)
+		
+		queue_task.repeatCount = -1
+		queue_task.repeatInterval = this.options.node_time
+	end
+
+	return this
+end
+
+-- End If Node
+
+-- Data Node
+
+local Node_Data = {}
+
+function Node_Data:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	if(not this.options.repeat_count) then
+		this.options.repeat_count = -1
+	end
+
+	if(not this.options.repeat_interval) then
+		this.options.repeat_interval = .4
+	end
+
+	if(not this.options.tween_duration) then
+		this.options.tween_duration = 1.5
+	end
+
+	this.options.total_data_items = 0
+	this.options.index = 1
+	this.options.count = 0
+
+	for _, d in pairs(this.options.data_items) do
+		this.options.total_data_items = this.options.total_data_items + d.count
+	end
+
+	this.options.tick = function()
+		if(this:has_connection()) then
+			if(this.options.count == this.options.total_data_items) then
+				this:stop_tick()
+				return
+			end
+			
+			if(this.options.index == (#this.options.data_items + 1)) then
+				this.options.index = 1
+			end
+
+			if(not Object.IsValid(this.options.data_items[this.options.index].ui)) then
+				return
+			end
+
+			local item = this.options.data_items[this.options.index]
+
+			item.count = item.count - 1
+			item.ui.text = tostring(item.count)
+
+			local line = this:get_top_connector_line()
+			local obj = this:spawn_asset(item.asset, line.x, line.y)
+			local tween = this:create_tween(line)
+
+			tween:on_start(function()
+				obj.visibility = Visibility.FORCE_ON
+			end)
+
+			tween:on_complete(function()
+				this:send_data({
+					
+					asset = item.asset,
+					condition = item.condition,
+					count = 1
+				})
+
+				obj:Destroy()
+				tween = nil
+			end)
+
+			tween:on_change(function(changed)
+				local x, y = this:get_path(obj, line, changed)
+		
+				obj.x = x
+				obj.y = y
+			end)
+
+			this:insert({
+					
+				obj = obj,
+				tween = tween
+			
+			}, this.options.tween_items)
+
+			this.options.index = this.options.index + 1
+			this.options.count = this.options.count + 1
+		end
+	end
+	
+	this:setup(r)
+
+	return this
+end
+
+-- End Output Node
+
+return Node, Node_Events, {
+
+	If = Node_If,
+	Data = Node_Data
+
+}
