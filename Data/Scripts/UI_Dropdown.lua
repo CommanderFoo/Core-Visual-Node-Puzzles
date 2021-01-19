@@ -112,6 +112,8 @@ selected.clickedEvent:Connect(function()
 		options_panel.visibility = Visibility.FORCE_ON
 		arrow.rotationAngle = 0
 	end
+
+	Events.Broadcast("on_" .. event .. "focused")
 end)
 
 function disable_select(clear_selected)
@@ -133,3 +135,6 @@ local_player.bindingPressedEvent:Connect(close_select)
 
 Events.Connect("on_" .. event .. "disable", disable_select)
 Events.Connect("on_" .. event .. "enable", enable_select)
+
+Events.Connect("on_disable_all_dropdowns", disable_select)
+Events.Connect("on_enable_all_dropdowns", enable_select)

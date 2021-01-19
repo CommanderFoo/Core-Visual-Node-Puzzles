@@ -86,12 +86,6 @@
             Name: "cs:max_in_connections"
             Int: 0
           }
-          Overrides {
-            Name: "cs:container"
-            ObjectReference {
-              SubObjectId: 4481084631965608177
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -435,7 +429,7 @@
       }
       Objects {
         Id: 4481084631965608177
-        Name: "Moving Items"
+        Name: "Items Container"
         Transform {
           Location {
           }
@@ -1101,12 +1095,6 @@
         ParentId: 2383255680623143552
         UnregisteredParameters {
           Overrides {
-            Name: "cs:container"
-            ObjectReference {
-              SubObjectId: 4481084631965608177
-            }
-          }
-          Overrides {
             Name: "cs:red_count"
             ObjectReference {
               SubObjectId: 6441039752719880362
@@ -1179,12 +1167,6 @@
           Overrides {
             Name: "cs:max_in_connections"
             Int: 0
-          }
-          Overrides {
-            Name: "cs:container"
-            ObjectReference {
-              SubObjectId: 14123490834381304344
-            }
           }
           Overrides {
             Name: "cs:green_apple"
@@ -1991,7 +1973,7 @@
       }
       Objects {
         Id: 14123490834381304344
-        Name: "Moving Items"
+        Name: "Items Container"
         Transform {
           Location {
           }
@@ -2519,7 +2501,7 @@
         UnregisteredParameters {
           Overrides {
             Name: "cs:event"
-            String: "apples_color"
+            String: "color"
           }
           Overrides {
             Name: "cs:hovered_color"
@@ -3518,10 +3500,8 @@
         ParentId: 7802238566092086642
         UnregisteredParameters {
           Overrides {
-            Name: "cs:container"
-            ObjectReference {
-              SubObjectId: 14123490834381304344
-            }
+            Name: "cs:dropdown_event"
+            String: "color"
           }
         }
         Collidable_v2 {
@@ -4535,7 +4515,7 @@
         ParentId: 15362039464833978169
         UnregisteredParameters {
           Overrides {
-            Name: "cs:color"
+            Name: "cs:condition"
             String: "red"
           }
           Overrides {
@@ -5556,7 +5536,7 @@
         ParentId: 18084173312060281056
         UnregisteredParameters {
           Overrides {
-            Name: "cs:color"
+            Name: "cs:condition"
             String: "green"
           }
           Overrides {

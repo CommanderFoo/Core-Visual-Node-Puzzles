@@ -1,6 +1,14 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local root = script.parent.parent
-local node = API.Node:new(root)
+local count = script:GetCustomProperty("count"):WaitForObject()
+local condition = script:GetCustomProperty("condition")
 
-API.register_node(node)
+local total = 0
+
+API.register_node(API.Node:new(script.parent.parent, {
+
+	on_data_received = function(data, node)
+		
+	end
+
+}))

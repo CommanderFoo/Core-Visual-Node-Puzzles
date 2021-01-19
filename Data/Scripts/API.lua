@@ -15,6 +15,7 @@ API.Node_Events = Node_Events
 API.ticking_nodes = {}
 API.nodes = {}
 API.active_node = nil
+API.can_edit_nodes = true
 
 function API.register_node(node)
 	table.insert(API.nodes, #API.nodes + 1, node)
@@ -69,7 +70,7 @@ function API.insert(obj, t)
 end
 
 local ticking_task = Task.Spawn(function()
-	if(API.active_node ~= nil) then
+	if(API.active_node ~= nil and API.can_edit_nodes) then
 		API.active_node:drag_node()
 		API.active_node:drag_connection()
 	end
@@ -78,12 +79,26 @@ end)
 ticking_task.repeatCount = -1
 
 Game.GetLocalPlayer().bindingPressedEvent:Connect(function(obj, binding)
-	if(binding == "ability_secondary") then
+	if(binding == "ability_secondary" and API.can_edit_nodes) then
 		if(API.active_node ~= nil) then
 			API.active_node:stop_all_drag()
 			API.active_node = nil
 		end
 	end
+end)
+
+Events.Connect("puzzle_run", function()
+	API.can_edit_nodes = false
+	API.Node_Events.trigger("edit", API.can_edit_nodes)
+
+	Events.Broadcast("on_disable_all_dropdowns")
+end)
+
+Events.Connect("puzzle_edit", function()
+	API.can_edit_nodes = true
+	API.Node_Events.trigger("edit", API.can_edit_nodes)
+
+	Events.Broadcast("on_enable_all_dropdowns")
 end)
 
 return API, YOOTIL

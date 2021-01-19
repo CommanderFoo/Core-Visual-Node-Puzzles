@@ -1,22 +1,18 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local container = script:GetCustomProperty("container"):WaitForObject()
 local dropdown_event = script:GetCustomProperty("dropdown_event")
-
-local tween_items = {}
 
 local if_node = API.Node_Type.If:new(script.parent.parent, {
 
-	tween_items = tween_items,
-	container = container,
-	YOOTIL = YOOTIL
+	YOOTIL = YOOTIL,
+	node_time = 0.3
 
 })
 
 API.register_node(if_node)
 
 function Tick(dt)
-	for _, i in ipairs(tween_items) do
+	for _, i in ipairs(if_node:get_tweens()) do
 		if(i.tween ~= nil) then
 			i.tween:tween(dt)
 		end
@@ -25,4 +21,8 @@ end
 
 Events.Connect("on_" .. dropdown_event .. "_selected", function(index, option, value)
 	if_node:set_option("if_condition", string.lower(option.text))
+end)
+
+Events.Connect("puzzle_edit", function()
+	if_node:reset()
 end)

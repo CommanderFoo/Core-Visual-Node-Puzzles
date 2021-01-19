@@ -1,4 +1,4 @@
-﻿local reset = script:GetCustomProperty("reset"):WaitForObject()
+﻿--[[local reset = script:GetCustomProperty("reset"):WaitForObject()
 local local_player = Game.GetLocalPlayer()
 
 local propContainer = script:GetCustomProperty("container"):WaitForObject()
@@ -22,4 +22,4 @@ function spawn_nodes()
 	
 end
 
---spawn_nodes()
+--spawn_nodes()--]]

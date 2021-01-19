@@ -51,8 +51,12 @@ function Node:setup(r)
 	self.data_received_func = nil
 	self.default_connector_color = Color.New(0.215861, 0.215861, 0.215861)
 	self.error_task = nil
-	self.can_flow_data = true
 	self.on_connection_func = nil
+	self.tweens = {}
+	self.can_edit_nodes = true
+
+	self.options.tween_duration = self.options.tween_duration or 1.5
+	self.options.speed = self.options.speed or 1
 
 	self.OFFSETS = {
 
@@ -86,9 +90,15 @@ function Node:setup(r)
 		end
 	end)
 
-	if(self.options.tick) then
-		self:tick()
-	end
+	Node_Events.on("edit", function(can_edit)
+		self.can_edit_nodes = can_edit
+
+		if(can_edit) then
+			self.delete_button.isInteractable = true
+		else
+			self.delete_button.isInteractable = false
+		end
+	end)
 end
 
 function Node:tick()
@@ -98,7 +108,14 @@ function Node:tick()
 		end)
 
 		self.ticking_task.repeatCount = self.options.repeat_count
-		self.ticking_task.repeatInterval = self.options.repeat_interval
+		self.ticking_task.repeatInterval = (self.options.repeat_interval or 0.1) / self:get_speed()
+	end
+end
+
+function Node:cancel_tick()
+	if(self.ticking_task ~= nil) then
+		self.ticking_task:Cancel()
+		self.ticking_task = nil
 	end
 end
 
@@ -106,7 +123,7 @@ function Node:get_tick()
 	return self.ticking_task
 end
 
-function Node:stop_tick()
+function Node:stop_ticking()
 	if(self.ticking_task ~= nil) then
 		self.ticking_task:Cancel()
 		self.ticking_task = nil
@@ -125,8 +142,13 @@ function Node:setup_node(root)
 	self.id = self.handle.id
 	self.error_warning = self.root:FindDescendantByName("Error Warning")
 	self.delete_button = self.root:FindDescendantByName("Delete Node")
+	self.items_container = self.root:FindDescendantByName("Items Container")
 
 	self.handle.pressedEvent:Connect(function(obj)
+		if(not self.can_edit_nodes) then
+			return
+		end
+
 		self:clear_active_connection()
 
 		if(self.moving) then
@@ -152,6 +174,10 @@ function Node:setup_node(root)
 	end)
 
 	self.delete_button.pressedEvent:Connect(function(obj)
+		if(not self.can_edit_nodes) then
+			return
+		end
+
 		self:clear_active_connection()
 
 		-- Need a break all connections method.
@@ -181,6 +207,10 @@ function Node:setup_output_connections()
 			}
 
 			connections[c].pressedEvent:Connect(function(obj)
+				if(not self.can_edit_nodes) then
+					return
+				end
+
 				Node_Events.trigger("break_connection", connections[c].id, true)
 
 				self.active_connection = self.output_connections[connections[c].id]
@@ -222,6 +252,10 @@ function Node:setup_input_connections()
 			}
 
 			connections[c].pressedEvent:Connect(function(obj)
+				if(not self.can_edit_nodes) then
+					return
+				end
+
 				Node_Events.trigger("input_connect", self, self.input_connections[connections[c].id])
 			end)
 		end
@@ -378,30 +412,6 @@ function Node:get_root()
 	return self.root
 end
 
-function Node:get_input_data()
-	return self.input_data
-end
-
-function Node:get_output_data()
-	return self.output_data
-end
-
-function Node:set_output_data(data)
-	self.output_data = data
-end
-
-function Node:set_input_data(data)
-	self.input_data = data
-
-	if(self.data_received_func ~= nil) then
-		self.data_received_func(self.input_data)
-	end
-end
-
-function Node:data_received(func)
-	self.data_received_func = func
-end
-
 function Node:has_input_connection(ignore_id)
 	for id, c in pairs(self.input_connected_to) do
 		if(id ~= ignore_id) then
@@ -450,7 +460,10 @@ function Node:hide_error_info()
 	if(self.error_task ~= nil) then
 		self.error_task:Cancel()
 		self.error_task = nil
-		self.error_warning.visibility = Visibility.FORCE_OFF
+
+		if(Object.IsValid(self.error_warning)) then
+			self.error_warning.visibility = Visibility.FORCE_OFF
+		end
 	end
 end
 
@@ -460,18 +473,6 @@ function Node:has_errors(b)
 	else
 		self:hide_error_info()
 	end
-end
-
-function Node:stop_data_flow()
-	self.can_flow_data = false
-end
-
-function Node:start_data_flow()
-	self.can_flow_data = true
-end
-
-function Node:can_auto_flow_data()
-	return self.can_flow_data
 end
 
 function Node:has_top_connection()
@@ -544,10 +545,6 @@ function Node:send_data(data)
 	for _, c in pairs(self.output_connected_to) do
 		for i, e in ipairs(c) do
 			e.connected_to_node:receive_data(data, self)
-
-			--if(self.id ~= e.connected_to_node.id) then
-			--	e.connected_to_node:send_data()
-			--end
 		end
 	end
 end
@@ -623,16 +620,20 @@ function Node:create_tween(line)
 		return nil
 	end
 
-	local t = self.options.YOOTIL.Tween:new(self.options.tween_duration, {a = 0}, {a = line.width})
+	local t = self.options.YOOTIL.Tween:new(self:get_tween_duration(), {a = 0}, {a = line.width})
 
 	if(self.options.tween_delay) then
-		t:set_delay(self.options.tween_delay)
+		t:set_delay(self.options.tween_delay / self.options.speed)
 	end
 
 	return t
 end
 
 function Node:get_path(obj, line, changed, offset)
+	if(not Object.IsValid(obj) or not Object.IsValid(line)) then
+		return
+	end
+
 	local angle = line.rotationAngle
 	local rad = angle * (math.pi / 180)
 
@@ -643,8 +644,8 @@ function Node:get_bottom_offset()
 	return self:get_bottom_connector().y / 2
 end
 
-function Node:insert(obj, t)
-	table.insert(t, #t + 1, obj)
+function Node:insert_tween(obj)
+	table.insert(self.tweens, #self.tweens + 1, obj)
 end
 
 function Node:set_option(opt, val)
@@ -652,7 +653,7 @@ function Node:set_option(opt, val)
 end
 
 function Node:spawn_asset(asset, x, y)
-	local obj = World.SpawnAsset(asset, {parent = self.options.container})
+	local obj = World.SpawnAsset(asset, {parent = self.items_container})
 
 	obj.x = x
 	obj.y = y
@@ -662,18 +663,50 @@ function Node:spawn_asset(asset, x, y)
 	return obj
 end
 
+function Node:clear_items_container()
+	if(self.items_container ~= nil and #self.items_container:GetChildren() > 0) then
+		for i, c in pairs(self.items_container:GetChildren()) do
+			c:Destroy()
+		end
+	end
+end
+
+function Node:get_tweens()
+	return self.tweens
+end
+
+function Node:clear_tweens()
+	self.tweens = {}
+end
+
+function Node:set_speed(speed)
+	self.options.speed = tonumber(speed)
+end
+
+function Node:get_speed()
+	return self.options.speed or 1
+end
+
+function Node:set_tween_duration(speed)
+	self.options.tween_duration = tonumber(speed)
+end
+
+function Node:get_tween_duration()
+	return self.options.tween_duration / self:get_speed()
+end
+
 function Node:new(r, options)
 	self.__index = self
-	
+
 	local o = setmetatable({
 
 		options = options or {}
 
 	}, self)
 
-	 o:setup(r)
+	o:setup(r)
 
-	 return o
+	return o
 end
 
 -- If Node
@@ -695,15 +728,31 @@ function Node_If:new(r, options)
 		this.options.if_condition = nil
 	end
 
-	if(not this.options.tween_duration) then
-		this.options.tween_duration = 1.5
-	end
-
 	this:setup(r)
 
+	local queue_task = nil
 	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local monitor_started = false
 
-	this.options.on_data_received = function(data, node)
+	function monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			queue_task.repeatCount = -1
+			queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+			monitor_queue(from_node:get_speed())
+		end
+
 		local queue_func = function()
 			if(this:has_top_connection() or this:has_bottom_connection()) then
 				local condition = (data.condition == this.options.if_condition)
@@ -717,23 +766,23 @@ function Node_If:new(r, options)
 					obj = this:spawn_asset(data.asset, line.x, line.y)
 					connection_method = "send_data_top"
 		
-					this:insert({
+					this:insert_tween({
 						
 						obj = obj,
 						tween = tween
 					
-					}, this.options.tween_items)
+					})
 				elseif(this:has_bottom_connection()) then
 					offset = this:get_bottom_offset()
 					obj = this:spawn_asset(data.asset, line.x, line.y)
 					connection_method = "send_data_bottom"
 		
-					this:insert({
+					this:insert_tween({
 						
 						obj = obj,
 						tween = tween
 					
-					}, this.options.tween_items)
+					})
 				else
 					this:has_errors(true)
 				end
@@ -745,13 +794,21 @@ function Node_If:new(r, options)
 
 					tween:on_complete(function()
 						this[connection_method](this, data)
-						obj:Destroy()
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
 						tween = nil
 					end)
 		
 					tween:on_change(function(changed)
 						local x, y = this:get_path(obj, line, changed, offset)
 						
+						if(x == nil or y == nil) then
+							return
+						end
+
 						obj.x = x
 						obj.y = y
 					end)
@@ -767,16 +824,19 @@ function Node_If:new(r, options)
 			queue_func()
 		end
 	end
+	
+	this.reset = function()
+		if(queue_task ~= nil) then
+			queue_task:Cancel()
+			queue_task = nil
+		end
 
-	if(this.options.node_time ~= nil and this.options.node_time > 0) then
-		local queue_task = Task.Spawn(function()
-			if(not queue:is_empty()) then
-				queue:pop()()
-			end
-		end, this.options.node_time)
-		
-		queue_task.repeatCount = -1
-		queue_task.repeatInterval = this.options.node_time
+		monitor_started = false
+		queue = this.options.YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
 	end
 
 	return this
@@ -799,6 +859,8 @@ function Node_Data:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
+	this:setup(r)
+
 	if(not this.options.repeat_count) then
 		this.options.repeat_count = -1
 	end
@@ -807,22 +869,37 @@ function Node_Data:new(r, options)
 		this.options.repeat_interval = .4
 	end
 
-	if(not this.options.tween_duration) then
-		this.options.tween_duration = 1.5
-	end
-
 	this.options.total_data_items = 0
 	this.options.index = 1
 	this.options.count = 0
 
-	for _, d in pairs(this.options.data_items) do
-		this.options.total_data_items = this.options.total_data_items + d.count
+	function setup_data()
+		this.options.total_data_items = 0
+
+		for _, d in pairs(this.options.data_items) do
+			d.data_count = d.count
+			this.options.total_data_items = this.options.total_data_items + d.count
+		end
+	end
+
+	setup_data()
+
+	this.reset = function()
+		this:stop_ticking()
+		this:clear_items_container()
+		this:hide_error_info()
+
+		setup_data()
+
+		this.options.index = 1
+		this.options.count = 0
+		this.tweens = {}
 	end
 
 	this.options.tick = function()
 		if(this:has_connection()) then
 			if(this.options.count == this.options.total_data_items) then
-				this:stop_tick()
+				this:stop_ticking()
 				return
 			end
 			
@@ -836,8 +913,8 @@ function Node_Data:new(r, options)
 
 			local item = this.options.data_items[this.options.index]
 
-			item.count = item.count - 1
-			item.ui.text = tostring(item.count)
+			item.data_count = item.data_count - 1
+			item.ui.text = tostring(item.data_count)
 
 			local line = this:get_top_connector_line()
 			local obj = this:spawn_asset(item.asset, line.x, line.y)
@@ -855,30 +932,35 @@ function Node_Data:new(r, options)
 					count = 1
 				})
 
-				obj:Destroy()
+				if(Object.IsValid(obj)) then
+					obj:Destroy()
+				end
+
 				tween = nil
 			end)
 
 			tween:on_change(function(changed)
 				local x, y = this:get_path(obj, line, changed)
 		
+				if(x == nil or y == nil) then
+					return
+				end
+
 				obj.x = x
 				obj.y = y
 			end)
 
-			this:insert({
+			this:insert_tween({
 					
 				obj = obj,
 				tween = tween
 			
-			}, this.options.tween_items)
+			})
 
 			this.options.index = this.options.index + 1
 			this.options.count = this.options.count + 1
 		end
 	end
-	
-	this:setup(r)
 
 	return this
 end

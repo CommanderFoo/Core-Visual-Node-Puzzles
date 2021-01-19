@@ -14,8 +14,6 @@ local yellow_apple = script:GetCustomProperty("yellow_apple")
 local blue_apple = script:GetCustomProperty("blue_apple")
 local dark_green_apple = script:GetCustomProperty("dark_green_apple")
 
-local container = script:GetCustomProperty("container"):WaitForObject()
-
 local data = {
 	
 	{ condition = "red", count = 10, ui = red_count, asset = red_apple },
@@ -37,7 +35,6 @@ local tween_items = {}
 API.register_node(API.Node_Type.Data:new(script.parent.parent, {
 
 	tween_items = tween_items,
-	container = container,
 	data_items = data,
 	YOOTIL = YOOTIL,
 	repeat_interval = 0.1,
