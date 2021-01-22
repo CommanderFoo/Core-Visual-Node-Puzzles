@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 6777657195105611110
   Name: "UI Toggle 1.0"
   PlatformAssetType: 5
@@ -52,5 +52,5 @@
     Version: "1.1.0"
     Description: "A UI toggle component.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Toggle-Docs/"
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

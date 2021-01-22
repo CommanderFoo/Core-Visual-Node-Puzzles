@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 16583630153844482224
   Name: "If Else Node"
   PlatformAssetType: 5
@@ -2455,5 +2455,5 @@
       AssetId: "None"
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

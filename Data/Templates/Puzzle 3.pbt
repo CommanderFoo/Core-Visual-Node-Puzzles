@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 11065597513059798753
   Name: "Puzzle 3"
   PlatformAssetType: 5
@@ -21496,5 +21496,5 @@
       AssetId: "None"
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 1855864744465018431
   Name: "Puzzle_1_Output_Node"
   PlatformAssetType: 3
@@ -12,5 +12,5 @@
       }
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

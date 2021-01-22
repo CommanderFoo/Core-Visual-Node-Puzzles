@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 11146737847086138394
   Name: "Green Apple"
   PlatformAssetType: 5
@@ -70,5 +70,5 @@
       AssetId: "None"
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

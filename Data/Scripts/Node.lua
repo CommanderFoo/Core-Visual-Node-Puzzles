@@ -143,6 +143,7 @@ function Node:setup_node(root)
 	self.error_warning = self.root:FindDescendantByName("Error Warning")
 	self.delete_button = self.root:FindDescendantByName("Delete Node")
 	self.items_container = self.root:FindDescendantByName("Items Container")
+	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI")
 
 	self.handle.pressedEvent:Connect(function(obj)
 		if(not self.can_edit_nodes) then
@@ -339,7 +340,7 @@ function Node:get_input_connection(id)
 end
 
 function Node:move_to_front()
-	self.root.parent = self.root.parent
+	self.root.parent = self.node_ui
 end
 
 function Node:drag_node()

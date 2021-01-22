@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 11355776926042268297
   Name: "API"
   PlatformAssetType: 3
@@ -24,5 +24,5 @@
       }
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 8546366439812724013
   Name: "Data_Node"
   PlatformAssetType: 3
@@ -12,5 +12,5 @@
       }
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

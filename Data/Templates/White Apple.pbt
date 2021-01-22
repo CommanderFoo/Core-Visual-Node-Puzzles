@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 17281876239352242542
   Name: "White Apple"
   PlatformAssetType: 5
@@ -72,5 +72,5 @@
       AssetId: "None"
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

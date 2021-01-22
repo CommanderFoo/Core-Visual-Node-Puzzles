@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 14312378350869970613
   Name: "Blue Apple"
   PlatformAssetType: 5
@@ -72,5 +72,5 @@
       AssetId: "None"
     }
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
 }

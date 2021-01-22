@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 13418948569537525247
   Name: "UI Toggle Example"
   PlatformAssetType: 5
@@ -1330,6 +1330,6 @@
   Marketplace {
     Description: "A UI toggle component.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Toggle-Docs/"
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
   DirectlyPublished: true
 }

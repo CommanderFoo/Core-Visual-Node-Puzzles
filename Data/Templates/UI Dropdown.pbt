@@ -1,4 +1,4 @@
-﻿Assets {
+Assets {
   Id: 11346386205888519929
   Name: "UI Dropdown"
   PlatformAssetType: 5
@@ -915,6 +915,6 @@
   Marketplace {
     Description: "A UI dropdown component where you can select an option from the list.  Easy to setup and use.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Dropdown-Docs/"
   }
-  SerializationVersion: 72
+  SerializationVersion: 73
   DirectlyPublished: true
 }
