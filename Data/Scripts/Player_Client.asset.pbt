@@ -1,6 +1,6 @@
 Assets {
   Id: 12955436264733002318
-  Name: "Puzzle_Manager_Client"
+  Name: "Player_Client"
   PlatformAssetType: 3
   TextAsset {
   }

@@ -93,10 +93,12 @@ function Node:setup(r)
 	Node_Events.on("edit", function(can_edit)
 		self.can_edit_nodes = can_edit
 
-		if(can_edit) then
-			self.delete_button.isInteractable = true
-		else
-			self.delete_button.isInteractable = false
+		if(Object.IsValid(self.delete_button)) then
+			if(can_edit) then
+				self.delete_button.isInteractable = true
+			else
+				self.delete_button.isInteractable = false
+			end
 		end
 	end)
 end
@@ -144,6 +146,14 @@ function Node:setup_node(root)
 	self.delete_button = self.root:FindDescendantByName("Delete Node")
 	self.items_container = self.root:FindDescendantByName("Items Container")
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI")
+	
+	if(self.options.node_time) then
+		local node_time_ui = self.root:FindDescendantByName("Node Time")
+
+		if(Object.IsValid(node_time_ui)) then
+			node_time_ui.text = tostring(self.options.node_time) .. " Sec"
+		end
+	end
 
 	self.handle.pressedEvent:Connect(function(obj)
 		if(not self.can_edit_nodes) then
@@ -932,7 +942,9 @@ function Node_Data:new(r, options)
 					
 					asset = item.asset,
 					condition = item.condition,
-					count = 1
+					count = 1,
+					total_count = item.count
+
 				})
 
 				if(Object.IsValid(obj)) then

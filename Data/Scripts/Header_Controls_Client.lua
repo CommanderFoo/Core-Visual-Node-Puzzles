@@ -8,6 +8,8 @@ local run_edit_button = script:GetCustomProperty("run_edit_button"):WaitForObjec
 local available_nodes_button = script:GetCustomProperty("available_nodes_button"):WaitForObject()
 local available_nodes_container = script:GetCustomProperty("available_nodes_container"):WaitForObject()
 
+local timer = script:GetCustomProperty("timer"):WaitForObject()
+
 local running = false
 local speed = 1
 
@@ -56,10 +58,14 @@ run_edit_button.clickedEvent:Connect(function()
 		run_edit_button.text = "Run Solution"
 		running = false
 
+		enable_ui()
+
 		Events.Broadcast("puzzle_edit")
 	else
 		run_edit_button.text = "Edit Solution"
 		running = true
+
+		disable_ui()
 
 		Events.Broadcast("puzzle_run", speed)
 	end
@@ -80,3 +86,18 @@ slow_down_button.clickedEvent:Connect(function()
 
 	current_speed.text = tostring(speed)
 end)
+
+function disable_ui()
+	slow_down_button.isInteractable = false
+	speed_up_button.isInteractable = false
+	available_nodes_button.isInteractable = false
+end
+
+function enable_ui()
+	slow_down_button.isInteractable = true
+	speed_up_button.isInteractable = true
+	available_nodes_button.isInteractable = true
+end
+
+Events.Connect("disable_ui", disable_ui)
+Events.Connect("enable_ui", enable_ui)

@@ -11,6 +11,10 @@ API.register_node(API.Node:new(script.parent.parent, {
 		if(data ~= nil and data.condition ~= nil and string.lower(data.condition) == condition) then
 			total = total + data.count
 			count.text = tostring(total)
+
+			if(total == data.total_count) then
+				API.Puzzle_Events.trigger("output_2_complete")
+			end
 		else
 			node:has_errors(true)
 		end

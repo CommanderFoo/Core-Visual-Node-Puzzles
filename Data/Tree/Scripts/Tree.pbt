@@ -141,6 +141,12 @@ Objects {
         SelfId: 7410864171820395270
       }
     }
+    Overrides {
+      Name: "cs:timer"
+      ObjectReference {
+        SelfId: 841534158063459245
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -209,7 +215,7 @@ Objects {
 }
 Objects {
   Id: 15235961953144066896
-  Name: "Puzzle_Manager_Client"
+  Name: "Player_Client"
   Transform {
     Location {
     }

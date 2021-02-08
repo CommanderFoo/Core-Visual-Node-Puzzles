@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 5413493479523348419
+        ParentId: 3627026760658224672
         ChildIds: 4538315442536929283
         ChildIds: 5750773084601582143
         ChildIds: 18228674150473653646
@@ -1021,6 +1021,7 @@ Assets {
         ChildIds: 16192639063635145916
         ChildIds: 16840986955040964166
         ChildIds: 2167800026317571007
+        ChildIds: 17730680790284730012
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -2153,6 +2154,63 @@ Assets {
         Script {
           ScriptAsset {
             Id: 10160624171473996663
+          }
+        }
+      }
+      Objects {
+        Id: 17730680790284730012
+        Name: "Node Time"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 10555237814934487790
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Control {
+          Width: 60
+          Height: 40
+          UIX: -6
+          UIY: 33
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Text {
+            Color {
+              R: 0.370000064
+              G: 0.400000393
+              B: 1
+              A: 1
+            }
+            Size: 11
+            Justification {
+              Value: "mc:etextjustify:left"
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleright"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleright"
+              }
+            }
           }
         }
       }

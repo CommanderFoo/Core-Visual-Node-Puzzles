@@ -1,5 +1,6 @@
 ﻿local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 local Node, Node_Events, Node_Type = require(script:GetCustomProperty("Node"))
+local Puzzle_Events = require(script:GetCustomProperty("Puzzle_Events"))
 
 local API = {
 
@@ -11,6 +12,7 @@ local API = {
 API.Node = Node
 API.Node_Type = Node_Type
 API.Node_Events = Node_Events
+API.Puzzle_Events = Puzzle_Events
 
 API.ticking_nodes = {}
 API.nodes = {}

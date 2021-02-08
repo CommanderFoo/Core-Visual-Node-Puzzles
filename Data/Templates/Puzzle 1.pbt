@@ -16,6 +16,7 @@ Assets {
           }
         }
         ParentId: 7410864171820395270
+        ChildIds: 10150079077114674195
         ChildIds: 15550338242960485518
         ChildIds: 3878324066539436413
         ChildIds: 14747109185687077507
@@ -55,6 +56,58 @@ Assets {
                 Value: "mc:euianchor:topleft"
               }
             }
+          }
+        }
+      }
+      Objects {
+        Id: 10150079077114674195
+        Name: "Client Scripts"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 258527659784217339
+        ChildIds: 404157222086864228
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:forceoff"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        NetworkContext {
+        }
+      }
+      Objects {
+        Id: 404157222086864228
+        Name: "Puzzle_1"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 10150079077114674195
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Script {
+          ScriptAsset {
+            Id: 8656503419981178459
           }
         }
       }

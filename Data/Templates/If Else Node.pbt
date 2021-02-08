@@ -66,8 +66,8 @@ Assets {
         Control {
           Width: 250
           Height: 150
-          UIX: 746.91333
-          UIY: 193.434082
+          UIX: -110.119995
+          UIY: 31.4507446
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1029,6 +1029,7 @@ Assets {
         ChildIds: 11714606103205093127
         ChildIds: 3626955498976514245
         ChildIds: 6652670402638897758
+        ChildIds: 894774176828370520
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -2161,6 +2162,64 @@ Assets {
         Script {
           ScriptAsset {
             Id: 10160624171473996663
+          }
+        }
+      }
+      Objects {
+        Id: 894774176828370520
+        Name: "Node Time"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 4506773717866217985
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Control {
+          Width: 60
+          Height: 40
+          UIX: -6
+          UIY: 33
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Text {
+            Label: "5.567 Sec"
+            Color {
+              R: 0.370000064
+              G: 0.400000393
+              B: 1
+              A: 1
+            }
+            Size: 11
+            Justification {
+              Value: "mc:etextjustify:left"
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleright"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleright"
+              }
+            }
           }
         }
       }

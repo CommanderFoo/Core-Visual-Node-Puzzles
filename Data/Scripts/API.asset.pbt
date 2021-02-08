@@ -22,6 +22,12 @@ Assets {
           Id: 12963190350601996938
         }
       }
+      Overrides {
+        Name: "cs:Puzzle_Events"
+        AssetReference {
+          Id: 4960534203524449140
+        }
+      }
     }
   }
   SerializationVersion: 74
