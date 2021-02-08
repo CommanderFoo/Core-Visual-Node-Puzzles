@@ -1,4 +1,4 @@
-﻿ObjectSettings {
+ObjectSettings {
   ObjectStates {
     key: 127840742270341861
     value {
@@ -308,6 +308,7 @@
   ObjectStates {
     key: 4162202766529424981
     value {
+      IsHidden: true
     }
   }
   ObjectStates {

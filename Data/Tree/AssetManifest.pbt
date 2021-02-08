@@ -16,12 +16,3 @@ Assets {
     AssetId: "BackgroundNoOutline_019"
   }
 }
-Assets {
-  Id: 15322576452248986664
-  Name: "BG Flat 004"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "BackgroundNoOutline_22"
-  }
-}

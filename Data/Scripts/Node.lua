@@ -185,6 +185,8 @@ function Node:setup_node(root)
 
 		--Node_Events.trigger("break_connection", connections[c].id, true)
 
+		Node_Events.trigger("node_destroyed", self.root.id, self.root.sourceTemplateId)
+
 		self.root:Destroy()
 	end)
 end

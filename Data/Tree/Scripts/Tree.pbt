@@ -171,21 +171,27 @@ Objects {
   ParentId: 2456857752610234367
   UnregisteredParameters {
     Overrides {
-      Name: "cs:ui_container"
+      Name: "cs:nodes_container"
       ObjectReference {
-        SelfId: 3627026760658224672
+        SelfId: 7410864171820395270
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_name"
+      ObjectReference {
+        SelfId: 7400731441112918373
       }
     }
     Overrides {
       Name: "cs:puzzle_1"
       AssetReference {
-        Id: 18342310647756492933
+        Id: 2907093068677695656
       }
     }
     Overrides {
-      Name: "cs:puzzle_2"
-      AssetReference {
-        Id: 10469967699431797903
+      Name: "cs:data"
+      ObjectReference {
+        SelfId: 3720954960903579450
       }
     }
   }
@@ -217,12 +223,6 @@ Objects {
   }
   ParentId: 2456857752610234367
   UnregisteredParameters {
-    Overrides {
-      Name: "cs:data"
-      ObjectReference {
-        SelfId: 3720954960903579450
-      }
-    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

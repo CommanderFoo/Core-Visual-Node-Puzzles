@@ -1,9 +1,11 @@
-﻿local ui_container = script:GetCustomProperty("ui_container"):WaitForObject()
+﻿local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
+local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
+local data = script:GetCustomProperty("data"):WaitForObject()
 
 local puzzles = {}
 
 for p, v in pairs(script:GetCustomProperties()) do
-	if(p ~= "ui_container") then
+	if(p ~= "nodes_container") then
 		puzzles[p] = v
 	end
 end
@@ -16,10 +18,16 @@ function load_puzzle(id)
 	end
 
 	if(puzzles["puzzle_" .. id]) then
-		current_puzzle = World.SpawnAsset(puzzles["puzzle_" .. id], { parent = ui_container })
+		current_puzzle = World.SpawnAsset(puzzles["puzzle_" .. id], { parent = nodes_container })
+
+		puzzle_name.text = current_puzzle:GetCustomProperty("name")
 	else
 		print("No puzzle")
 	end
 end
 
---Events.Connect("puzzle_load", load_puzzle)
+data.networkedPropertyChangedEvent:Connect(function(obj, prop)
+	if(prop == "puzzle_id") then
+		load_puzzle(data:GetCustomProperty(prop))
+	end
+end)
