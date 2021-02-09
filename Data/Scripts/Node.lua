@@ -677,7 +677,7 @@ function Node:spawn_asset(asset, x, y)
 end
 
 function Node:clear_items_container()
-	if(self.items_container ~= nil and #self.items_container:GetChildren() > 0) then
+	if(Object.IsValid(self.items_container) and #self.items_container:GetChildren() > 0) then
 		for i, c in pairs(self.items_container:GetChildren()) do
 			c:Destroy()
 		end

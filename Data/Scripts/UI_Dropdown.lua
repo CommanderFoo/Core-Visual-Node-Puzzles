@@ -1,4 +1,5 @@
 ﻿local root = script.parent.parent
+local node_root = root.parent.parent
 
 local options_panel = root:FindDescendantByName("Options Panel")
 local options_container = root:FindDescendantByName("Options")
@@ -8,7 +9,7 @@ local selected_border = root:FindDescendantByName("Selected Border")
 local options_border = root:FindDescendantByName("Options Border")
 local options_background = root:FindDescendantByName("Options Background")
 
-local event = root:GetCustomProperty("event") or ""
+local event = node_root.id or ""
 local hovered_color = root:GetCustomProperty("hovered_color")
 local unhovered_color = root:GetCustomProperty("unhovered_color")
 local disabled_color = root:GetCustomProperty("disabled_color")
@@ -17,7 +18,7 @@ local arrow_color = root:GetCustomProperty("arrow_color")
 local text_hovered_color = root:GetCustomProperty("text_hovered_color")
 local text_unhovered_color = root:GetCustomProperty("text_unhovered_color")
 
-
+print(event)
 local local_player = Game.GetLocalPlayer()
 
 local options = options_container:GetChildren()
@@ -118,11 +119,14 @@ end)
 
 function disable_select(clear_selected)
 	disabled = true
-	selected:SetButtonColor(disabled_color)
 
-	if(clear_selected) then
-		selected_option = selected
-		selected_option.text = ""
+	if(Object.IsValid(selected)) then
+		selected:SetButtonColor(disabled_color)
+
+		if(clear_selected) then
+			selected_option = selected
+			selected_option.text = ""
+		end
 	end
 end
 

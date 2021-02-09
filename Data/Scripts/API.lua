@@ -71,6 +71,10 @@ function API.insert(obj, t)
 	table.insert(t, #t + 1, obj)
 end
 
+function API.get_total_nodes()
+	return #API.nodes
+end
+
 local ticking_task = Task.Spawn(function()
 	if(API.active_node ~= nil and API.can_edit_nodes) then
 		API.active_node:drag_node()

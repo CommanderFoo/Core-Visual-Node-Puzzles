@@ -144,7 +144,33 @@ Objects {
     Overrides {
       Name: "cs:timer"
       ObjectReference {
-        SelfId: 841534158063459245
+      }
+    }
+    Overrides {
+      Name: "cs:gold_award"
+      ObjectReference {
+        SelfId: 17695944796071942173
+        SubObjectId: 9123463160940538860
+        InstanceId: 17578521251814157664
+        TemplateId: 3563390086910122431
+      }
+    }
+    Overrides {
+      Name: "cs:silver_award"
+      ObjectReference {
+        SelfId: 4460568831204173262
+        SubObjectId: 10307689033462092511
+        InstanceId: 3938458423291239208
+        TemplateId: 10438144223879621155
+      }
+    }
+    Overrides {
+      Name: "cs:bronze_award"
+      ObjectReference {
+        SelfId: 11699668853634421299
+        SubObjectId: 17480121017144831975
+        InstanceId: 3122469898748972966
+        TemplateId: 4242474907989208124
       }
     }
   }

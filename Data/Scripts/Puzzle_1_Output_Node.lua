@@ -8,6 +8,8 @@ local total = 0
 local node = API.Node:new(script.parent.parent, {
 
 	on_data_received = function(data, node)
+		local error = false
+
 		if(data ~= nil and data.condition ~= nil and string.lower(data.condition) == condition) then
 			total = total + data.count
 			count.text = tostring(total)
@@ -17,6 +19,11 @@ local node = API.Node:new(script.parent.parent, {
 			end
 		else
 			node:has_errors(true)
+			error = true
+		end
+
+		if(error) then
+			API.Puzzle_Events.trigger("output_error")
 		end
 	end
 

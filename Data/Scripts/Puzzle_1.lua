@@ -5,11 +5,11 @@ local output_green_complete = false
 
 local showing_result_ui = false
 
-API.Puzzle_Events.on("output_red_complete", function()
+API.Puzzle_Events.on("output_red_complete", function(errors)
 	output_red_complete = true
 end)
 
-API.Puzzle_Events.on("output_green_complete", function()
+API.Puzzle_Events.on("output_green_complete", function(errors)
 	output_green_complete = true
 end)
 
@@ -23,7 +23,7 @@ function show_result()
 	if(not showing_result_ui) then
 		showing_result_ui = true
 
-		Events.Broadcast("on_show_result")
+		Events.Broadcast("show_result", errors)
 		Events.Broadcast("disable_ui")
 	end
 end
@@ -33,7 +33,7 @@ function hide_result()
 	output_red_complete = false
 	output_green_complete = false
 	
-	Events.Broadcast("on_hide_result")
+	Events.Broadcast("hide_result")
 	Events.Broadcast("enable_ui")
 end
 

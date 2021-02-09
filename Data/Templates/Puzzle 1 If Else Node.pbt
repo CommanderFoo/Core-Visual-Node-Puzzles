@@ -2425,10 +2425,6 @@ Assets {
         }
         ParentId: 11135984539710810511
         UnregisteredParameters {
-          Overrides {
-            Name: "cs:dropdown_event"
-            String: "color"
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"

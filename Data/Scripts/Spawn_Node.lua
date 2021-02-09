@@ -15,11 +15,13 @@ API.Node_Events.on("node_destroyed", function(id, tpl_id)
 		if(total_spawned < total) then
 			button.isInteractable = true
 		end
+
+		API.Puzzle_Events.trigger("node_total_change")
 	end
 end)
 
 button.clickedEvent:Connect(function()
-	if(total_spawned < total) then
+	if(total_spawned < total) then		
 		local n = World.SpawnAsset(node, { parent = container })
 		
 		template_id = n.sourceTemplateId
@@ -28,5 +30,7 @@ button.clickedEvent:Connect(function()
 		if(total_spawned == total) then
 			button.isInteractable = false
 		end
+
+		API.Puzzle_Events.trigger("node_total_change")
 	end
 end)

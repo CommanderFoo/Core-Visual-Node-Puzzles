@@ -612,6 +612,10 @@ Assets {
               Id: 15874700923123276554
             }
           }
+          Overrides {
+            Name: "cs:total"
+            Int: 4
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1118,6 +1122,10 @@ Assets {
               Id: 3138596828004793381
             }
           }
+          Overrides {
+            Name: "cs:total"
+            Int: 2
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1127,7 +1135,7 @@ Assets {
         }
         Script {
           ScriptAsset {
-            Id: 8591442532305828044
+            Id: 4265263488546421963
           }
         }
       }
