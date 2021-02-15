@@ -31,6 +31,14 @@ API.Node_Events.on("begin_drag_connection", function(node, connection)
 	API.active_node = node
 end)
 
+API.Node_Events.on("node_destroyed", function(node_id)
+	for k, v in pairs(API.nodes) do
+		if(v:get_id() == node_id) then
+			API.nodes[k] = nil
+		end
+	end
+end)
+
 API.Node_Events.on("input_connect", function(node_connected, node_connection)
 	if(API.active_node ~= nil and API.active_node:get_id() ~= node_connected:get_id() and API.active_node:is_moving_connection()) then
 		API.active_node:output_connect_to(node_connected, node_connection)

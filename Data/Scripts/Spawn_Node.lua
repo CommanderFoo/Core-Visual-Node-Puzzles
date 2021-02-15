@@ -8,7 +8,7 @@ local total = script:GetCustomProperty("total")
 local total_spawned = 0
 local template_id = nil
 
-API.Node_Events.on("node_destroyed", function(id, tpl_id)
+API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 	if(tpl_id == template_id) then
 		total_spawned = total_spawned - 1
 

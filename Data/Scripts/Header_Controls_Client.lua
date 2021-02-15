@@ -108,7 +108,7 @@ end)
 
 API.Puzzle_Events.on("node_total_change", function()
 	local total_nodes = API.get_total_nodes()
-print(total_nodes)
+
 	if(total_nodes > 4) then
 		gold_color.a = 0.3
 		gold_award:SetColor(gold_color)

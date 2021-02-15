@@ -1,10 +1,10 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-print(script.parent.parent.id)
 local if_node = API.Node_Type.If:new(script.parent.parent, {
 
 	YOOTIL = YOOTIL,
-	node_time = 0.3
+	node_time = 0.3,
+	a = math.random(100)
 
 })
 

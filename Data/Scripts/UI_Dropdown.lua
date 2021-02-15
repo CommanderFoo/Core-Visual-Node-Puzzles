@@ -18,7 +18,6 @@ local arrow_color = root:GetCustomProperty("arrow_color")
 local text_hovered_color = root:GetCustomProperty("text_hovered_color")
 local text_unhovered_color = root:GetCustomProperty("text_unhovered_color")
 
-print(event)
 local local_player = Game.GetLocalPlayer()
 
 local options = options_container:GetChildren()
@@ -132,7 +131,10 @@ end
 
 function enable_select()
 	disabled = false
-	selected:SetButtonColor(unhovered_color)
+
+	if(Object.IsValid(selected)) then
+		selected:SetButtonColor(unhovered_color)
+	end
 end
 
 local_player.bindingPressedEvent:Connect(close_select)

@@ -195,7 +195,7 @@ function Node:setup_node(root)
 
 		--Node_Events.trigger("break_connection", connections[c].id, true)
 
-		Node_Events.trigger("node_destroyed", self.root.id, self.root.sourceTemplateId)
+		Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
 
 		self.root:Destroy()
 	end)
@@ -317,7 +317,7 @@ end
 function Node:move_connections()
 	for _, c in pairs(self.output_connected_to) do
 		for i, e in ipairs(c) do
-			if(Object.IsValid(e.connected_to_connection.connection)) then
+			if(Object.IsValid(e.connected_to_connection.connection) and Object.IsValid(e.connection.connector)) then
 				local from_handle_y = e.connected_to_connection.connection.y + 30
 				local to_handle_y = e.connection.connector.y + 30
 
@@ -722,6 +722,10 @@ function Node:new(r, options)
 	return o
 end
 
+function Node:test()
+	return self.options.a
+end
+
 -- If Node
 
 local Node_If = {}
@@ -747,9 +751,9 @@ function Node_If:new(r, options)
 	local queue = this.options.YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 
-	function monitor_queue(speed)
+	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
-			queue_task = Task.Spawn(function()
+			queue_task = Task.Spawn(function()		
 				if(not queue:is_empty()) then
 					queue:pop()()
 				end
@@ -763,7 +767,7 @@ function Node_If:new(r, options)
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
-			monitor_queue(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
 		end
 
 		local queue_func = function()
@@ -838,7 +842,7 @@ function Node_If:new(r, options)
 		end
 	end
 	
-	this.reset = function()
+	function this:reset()
 		if(queue_task ~= nil) then
 			queue_task:Cancel()
 			queue_task = nil
@@ -851,6 +855,13 @@ function Node_If:new(r, options)
 		this:clear_items_container()
 		this:hide_error_info()
 	end
+
+	Node_Events.on("node_destroyed", function()
+		if(queue_task ~= nil) then
+			queue_task:Cancel()
+			queue_task = nil
+		end
+	end)
 
 	return this
 end
@@ -897,7 +908,7 @@ function Node_Data:new(r, options)
 
 	setup_data()
 
-	this.reset = function()
+	function this:reset()
 		this:stop_ticking()
 		this:clear_items_container()
 		this:hide_error_info()
