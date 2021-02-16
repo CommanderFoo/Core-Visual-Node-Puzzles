@@ -25,9 +25,37 @@ local showing_nodes = true
 local tween = nil
 local errors = 0
 
+local total_puzzle_time = 0
+local time_conditions = nil
+
+local floor = math.floor
+
 function Tick(dt)
 	if(tween ~= nil) then
 		tween:tween(dt)
+	end
+
+	if(running and time_conditions) then
+		if(floor(total_puzzle_time) > time_conditions.silver) then
+			gold_color.a = 0.3
+			gold_award:SetColor(gold_color)
+
+			silver_color.a = .3
+			silver_award:SetColor(silver_color)
+
+			bronze_color.a = 1
+			bronze_award:SetColor(bronze_color)
+		elseif(floor(total_puzzle_time) > time_conditions.gold) then
+			gold_color.a = 0.3
+			gold_award:SetColor(gold_color)
+
+			silver_color.a = 1
+			silver_award:SetColor(silver_color)
+
+			bronze_color.a = .3
+		else
+			reset_award()
+		end
 	end
 end
 
@@ -64,27 +92,16 @@ end)
 
 run_edit_button.clickedEvent:Connect(function()
 	if(running) then
-		run_edit_button.text = "Run Solution"
-		running = false
-		errors = 0
-
-		gold_color.a = 1
-		gold_award:SetColor(gold_color)
-
-		silver_color.a = .3
-		silver_award:SetColor(silver_color)
-
-		bronze_color.a = .3
-		bronze_award:SetColor(bronze_color)
-	
+		reset_award()	
 		enable_ui()
 
 		Events.Broadcast("puzzle_edit")
 	else
 		run_edit_button.text = "Edit Solution"
 		running = true
+		timer_run = true
 
-		disable_ui()
+		disable_ui(false)
 
 		Events.Broadcast("puzzle_run", speed)
 	end
@@ -109,7 +126,7 @@ end)
 API.Puzzle_Events.on("node_total_change", function()
 	local total_nodes = API.get_total_nodes()
 
-	if(total_nodes > 4) then
+	if(total_nodes > 141) then
 		gold_color.a = 0.3
 		gold_award:SetColor(gold_color)
 
@@ -126,17 +143,57 @@ API.Puzzle_Events.on("node_total_change", function()
 	end
 end)
 
-function disable_ui()
+function reset_award()
+	gold_color.a = 1
+	gold_award:SetColor(gold_color)
+
+	silver_color.a = .3
+	silver_award:SetColor(silver_color)
+
+	bronze_color.a = .3
+	bronze_award:SetColor(bronze_color)
+end
+
+function disable_ui(disable_run_edit)
 	slow_down_button.isInteractable = false
 	speed_up_button.isInteractable = false
 	available_nodes_button.isInteractable = false
+
+	if(disable_run_edit) then
+		run_edit_button.isInteractable = false
+	end
 end
 
 function enable_ui()
 	slow_down_button.isInteractable = true
 	speed_up_button.isInteractable = true
 	available_nodes_button.isInteractable = true
+	run_edit_button.isInteractable = true
 end
 
-Events.Connect("disable_ui", disable_ui)
-Events.Connect("enable_ui", enable_ui)
+Events.Connect("disable_header_ui", disable_ui)
+Events.Connect("enable_header_ui", enable_ui)
+
+Events.Connect("puzzle_edit", function()
+	run_edit_button.text = "Run Solution"
+	running = false
+	total_time_allowed = time_conditions.gold + time_conditions.silver + time_conditions.bronze
+	errors = 0
+	total_puzzle_time = 0
+
+	enable_ui()
+	reset_award()
+end)
+
+Events.Connect("puzzle_complete", function()
+	running = false
+end)
+
+Events.Connect("timer", function(t)
+	total_puzzle_time = total_puzzle_time + t
+end)
+
+Events.Connect("time_conditions", function(c)
+	total_time_allowed = c.gold + c.silver + c.bronze
+	time_conditions = c
+end)

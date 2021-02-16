@@ -21,6 +21,14 @@ function load_puzzle(id)
 		current_puzzle = World.SpawnAsset(puzzles["puzzle_" .. id], { parent = nodes_container })
 
 		puzzle_name.text = current_puzzle:GetCustomProperty("name")
+
+		Events.Broadcast("time_conditions", {
+
+			gold = current_puzzle:GetCustomProperty("gold_time"),
+			silver = current_puzzle:GetCustomProperty("silver_time"),
+			bronze = current_puzzle:GetCustomProperty("bronze_time")
+
+		})
 	else
 		print("No puzzle")
 	end

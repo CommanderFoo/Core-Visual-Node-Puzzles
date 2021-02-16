@@ -5,6 +5,9 @@ local output_green_complete = false
 
 local showing_result_ui = false
 
+local gold_time = 11
+local silver_time = 14
+
 API.Puzzle_Events.on("output_red_complete", function(errors)
 	output_red_complete = true
 end)
@@ -23,20 +26,14 @@ function show_result()
 	if(not showing_result_ui) then
 		showing_result_ui = true
 
+		Events.Broadcast("disable_header_ui", true)
+		Events.Broadcast("puzzle_complete")
 		Events.Broadcast("show_result", errors)
-		Events.Broadcast("disable_ui")
 	end
 end
 
-function hide_result()
-	showing_result_ui = false
+Events.Connect("puzzle_edit", function()
 	output_red_complete = false
 	output_green_complete = false
-	
-	Events.Broadcast("hide_result")
-	Events.Broadcast("enable_ui")
-end
-
-Events.Connect("puzzle_edit", function()
-	hide_result()
+	showing_result_ui = false
 end)

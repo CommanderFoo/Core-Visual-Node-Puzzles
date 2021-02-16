@@ -3,8 +3,7 @@
 local if_node = API.Node_Type.If:new(script.parent.parent, {
 
 	YOOTIL = YOOTIL,
-	node_time = 0.3,
-	a = math.random(100)
+	node_time = 0.3
 
 })
 

@@ -26,11 +26,15 @@ SOFTWARE.
 
 local _Vector2 = {}
 
+local sqrt = math.sqrt
+local deg = math.deg
+local atan = math.atan
+
 _Vector2.distance = function(a, b)
 	local dx = a.x - b.x
 	local dy = a.y - b.y
 
-	return math.sqrt(dx * dx + dy * dy)
+	return sqrt(dx * dx + dy * dy)
 end
 
 _Vector2.distance_squared = function(a, b)
@@ -57,7 +61,7 @@ _Vector2.dot = function(a, b)
 end
 
 _Vector2.len = function(a)
-	return math.sqrt(a.x * a.x + a.y * a.y)
+	return sqrt(a.x * a.x + a.y * a.y)
 end
 
 _Vector2.normalize = function(a)
@@ -70,10 +74,10 @@ end
 
 _Vector2.angle_to = function(a, b)
 	if(b) then
-		return math.deg(math.atan(a.y - b.y, a.x - b.x))
+		return deg(atan(a.y - b.y, a.x - b.x))
 	end
 
-	return math.deg(math.atan(a.y, a.x))
+	return deg(atan(a.y, a.x))
 end
 
 return _Vector2

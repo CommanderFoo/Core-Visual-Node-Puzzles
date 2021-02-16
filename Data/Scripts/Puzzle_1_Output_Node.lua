@@ -32,7 +32,7 @@ local node = API.Node:new(script.parent.parent, {
 API.register_node(node)
 
 Events.Connect("puzzle_edit", function()
-	if(Object.IsValid(node)) then
+	if(count) then
 		count.text = "0"
 		total = 0
 		node:hide_error_info()

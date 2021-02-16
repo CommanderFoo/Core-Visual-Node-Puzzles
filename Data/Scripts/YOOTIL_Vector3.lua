@@ -26,12 +26,14 @@ SOFTWARE.
 
 local _Vector3 = {}
 
+local sqrt = math.sqrt
+
 _Vector3.distance = function(a, b)
 	local dx = a.x - b.x
 	local dy = a.y - b.y
 	local dz = a.z - b.z
 
-	return math.sqrt(dx * dx + dy * dy + dz * dz)
+	return sqrt(dx * dx + dy * dy + dz * dz)
 end
 
 _Vector3.distance_squared = function(a, b)
@@ -63,7 +65,7 @@ _Vector3.dot = function(a, b)
 end
 
 _Vector3.len = function(a)
-	return math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z)
+	return sqrt(a.x * a.x + a.y * a.y + a.z * a.z)
 end
 
 _Vector3.normalize = function(a)

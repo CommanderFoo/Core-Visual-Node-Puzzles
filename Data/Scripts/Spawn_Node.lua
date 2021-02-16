@@ -34,3 +34,11 @@ button.clickedEvent:Connect(function()
 		API.Puzzle_Events.trigger("node_total_change")
 	end
 end)
+
+Events.Connect("puzzle_run", function()
+	button.isInteractable = false
+end)
+
+Events.Connect("puzzle_edit", function()
+	button.isInteractable = true
+end)

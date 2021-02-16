@@ -24,6 +24,9 @@ SOFTWARE.
 
 local Utils = {}
 
+local random = math.random
+local randomseed = math.randomseed
+
 function Utils.dump(o)
 	if(type(o) == "table") then
 	   local s = "{ "
@@ -92,12 +95,12 @@ function Utils.truncate(str, len, post_str)
 end
 
 function Utils.uuid()
-	math.randomseed(os.time())
+	randomseed(os.time())
 
 	local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
     
 	return string.gsub(template, "[xy]", function(c)
-		local v = (c == "x") and math.random(0, 0xf) or math.random(8, 0xb)
+		local v = (c == "x") and random(0, 0xf) or random(8, 0xb)
         
 		return string.format("%x", v)
 	end)

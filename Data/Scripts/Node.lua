@@ -1,5 +1,14 @@
 ﻿local Node_Events = {}
 
+local floor = math.floor
+local abs = math.abs
+local sqrt = math.sqrt
+local cos = math.cos
+local sin = math.sin
+local deg = math.deg
+local pi = math.pi
+local atan = math.atan
+
 function Node_Events.on(event, fn)
 	if(Node_Events[event] == nil) then
 		Node_Events[event] = {}
@@ -24,15 +33,15 @@ local Node = {
 		local dx = a.x - b.x
 		local dy = a.y - b.y
 	
-		return math.floor(math.abs(math.sqrt(dx * dx + dy * dy)))
+		return floor(abs(sqrt(dx * dx + dy * dy)))
 	end,
 	
 	angle_to = function(a, b)
 		if(b) then
-			return math.deg(math.atan(a.y - b.y, a.x - b.x))
+			return deg(atan(a.y - b.y, a.x - b.x))
 		end
 	
-		return math.deg(math.atan(a.y, a.x))
+		return deg(atan(a.y, a.x))
 	end
 
 }
@@ -637,6 +646,8 @@ function Node:create_tween(line)
 
 	if(self.options.tween_delay) then
 		t:set_delay(self.options.tween_delay / self.options.speed)
+
+		Events.Broadcast("timer", self.options.tween_delay)
 	end
 
 	return t
@@ -648,9 +659,9 @@ function Node:get_path(obj, line, changed, offset)
 	end
 
 	local angle = line.rotationAngle
-	local rad = angle * (math.pi / 180)
+	local rad = angle * (pi / 180)
 
-	return (changed.a * math.cos(rad)), ((changed.a * math.sin(rad)) -(obj.height / 2)) + (offset or 0)
+	return (changed.a * cos(rad)), ((changed.a * sin(rad)) -(obj.height / 2)) + (offset or 0)
 end
 
 function Node:get_bottom_offset()
@@ -754,7 +765,7 @@ function Node_If:new(r, options)
 	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
 			queue_task = Task.Spawn(function()		
-				if(not queue:is_empty()) then
+				if(not queue:is_empty()) then										
 					queue:pop()()
 				end
 			end, this.options.node_time / speed)
@@ -771,6 +782,8 @@ function Node_If:new(r, options)
 		end
 
 		local queue_func = function()
+			Events.Broadcast("timer", this.options.node_time)
+
 			if(this:has_top_connection() or this:has_bottom_connection()) then
 				local condition = (data.condition == this.options.if_condition)
 				local obj = nil
@@ -920,11 +933,13 @@ function Node_Data:new(r, options)
 		this.tweens = {}
 	end
 
-	this.options.tick = function()
+	this.options.tick = function()		
 		if(this:has_connection()) then
 			if(this.options.count == this.options.total_data_items) then
 				this:stop_ticking()
 				return
+			else
+				Events.Broadcast("timer", (this.options.repeat_interval or 0.1))
 			end
 			
 			if(this.options.index == (#this.options.data_items + 1)) then

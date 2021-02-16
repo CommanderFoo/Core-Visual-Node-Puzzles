@@ -9,3 +9,8 @@ end)
 Events.Connect("hide_result", function()
 	script.parent.parent.visibility = Visibility.FORCE_OFF
 end)
+
+edit_button.clickedEvent:Connect(function()
+	Events.Broadcast("puzzle_edit")
+	script.parent.parent.visibility = Visibility.FORCE_OFF
+end)

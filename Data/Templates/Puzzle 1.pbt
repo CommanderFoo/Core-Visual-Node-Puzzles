@@ -26,6 +26,18 @@ Assets {
             Name: "cs:name"
             String: "Tutorial 1"
           }
+          Overrides {
+            Name: "cs:gold_time"
+            Float: 11
+          }
+          Overrides {
+            Name: "cs:silver_time"
+            Float: 14
+          }
+          Overrides {
+            Name: "cs:bronze_time"
+            Float: 20
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"

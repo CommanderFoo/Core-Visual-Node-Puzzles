@@ -144,6 +144,7 @@ Objects {
     Overrides {
       Name: "cs:timer"
       ObjectReference {
+        SelfId: 2812763968205190776
       }
     }
     Overrides {
