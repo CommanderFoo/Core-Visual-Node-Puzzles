@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 Disclaimer for Robert Penner's Easing Equations license:
 
 TERMS OF USE - EASING EQUATIONS

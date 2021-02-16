@@ -1,7 +1,7 @@
-﻿--[[
+--[[
 The MIT License (MIT)
 
-Copyright (c) 2020 pixeldepth.net
+Copyright (c) 2021 pixeldepth.net
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,5 +32,6 @@ API.Utils = API.require("Utils")
 API.Tween = API.require("Tween")
 API.Vector3 = API.require("Vector3")
 API.Vector2 = API.require("Vector2")
+API.Input = API.require("Input")
 
 return API

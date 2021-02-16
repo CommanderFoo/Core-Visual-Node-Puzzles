@@ -1,9 +1,9 @@
-﻿--[[
+--[[
 https://github.com/excessive/cpml/blob/master/modules/vec2.lua
 
 The MIT License (MIT)
 
-Copyright (c) 2020 pixeldepth.net
+Copyright (c) 2021 pixeldepth.net
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ local _Vector2 = {}
 local sqrt = math.sqrt
 local deg = math.deg
 local atan = math.atan
+local acos = math.acos
 
 _Vector2.distance = function(a, b)
 	local dx = a.x - b.x
@@ -78,6 +79,14 @@ _Vector2.angle_to = function(a, b)
 	end
 
 	return deg(atan(a.y, a.x))
+end
+
+_Vector2.lerp = function(a, b, s)
+	return a + (b - a) * s
+end
+
+_Vector2.to_string = function(a)
+	return string.format("(%+0.3f, %+0.3f)", a.x, a.y)
 end
 
 return _Vector2

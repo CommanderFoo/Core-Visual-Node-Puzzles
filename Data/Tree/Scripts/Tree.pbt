@@ -142,12 +142,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:timer"
-      ObjectReference {
-        SelfId: 2812763968205190776
-      }
-    }
-    Overrides {
       Name: "cs:gold_award"
       ObjectReference {
         SelfId: 17695944796071942173

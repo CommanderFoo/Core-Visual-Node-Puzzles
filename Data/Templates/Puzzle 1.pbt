@@ -28,11 +28,11 @@ Assets {
           }
           Overrides {
             Name: "cs:gold_time"
-            Float: 11
+            Float: 12
           }
           Overrides {
             Name: "cs:silver_time"
-            Float: 14
+            Float: 18
           }
           Overrides {
             Name: "cs:bronze_time"
@@ -626,7 +626,7 @@ Assets {
           }
           Overrides {
             Name: "cs:total"
-            Int: 4
+            Int: 14
           }
         }
         Collidable_v2 {

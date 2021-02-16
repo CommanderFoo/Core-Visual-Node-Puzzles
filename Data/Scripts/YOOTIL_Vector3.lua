@@ -1,9 +1,9 @@
-﻿--[[
+--[[
 https://github.com/excessive/cpml/blob/master/modules/vec3.lua
 
 The MIT License (MIT)
 
-Copyright (c) 2020 pixeldepth.net
+Copyright (c) 2021 pixeldepth.net
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -74,6 +74,14 @@ _Vector3.normalize = function(a)
 	end
 
 	return Vector3.scale(a, 1 / Vector3.len(a))
+end
+
+_Vector3.lerp = function(a, b, s)
+	return a + (b - a) * s
+end
+
+_Vector3.to_string = function(a)
+	return string.format("(%+0.3f, %+0.3f, %+0.3f)", a.x, a.y, a.z)
 end
 
 return _Vector3

@@ -16,8 +16,6 @@ local gold_color = gold_award:GetColor()
 local silver_color = silver_award:GetColor()
 local bronze_color = bronze_award:GetColor()
 
-local timer = script:GetCustomProperty("timer"):WaitForObject()
-
 local running = false
 local speed = 1
 
@@ -36,26 +34,30 @@ function Tick(dt)
 	end
 
 	if(running and time_conditions) then
-		if(floor(total_puzzle_time) > time_conditions.silver) then
-			gold_color.a = 0.3
-			gold_award:SetColor(gold_color)
+		--if(floor(total_puzzle_time) > time_conditions.bronze) then
+		--	print("too long")
+		--else
+			if(floor(total_puzzle_time) > time_conditions.silver) then
+				gold_color.a = 0.3
+				gold_award:SetColor(gold_color)
 
-			silver_color.a = .3
-			silver_award:SetColor(silver_color)
+				silver_color.a = .3
+				silver_award:SetColor(silver_color)
 
-			bronze_color.a = 1
-			bronze_award:SetColor(bronze_color)
-		elseif(floor(total_puzzle_time) > time_conditions.gold) then
-			gold_color.a = 0.3
-			gold_award:SetColor(gold_color)
+				bronze_color.a = 1
+				bronze_award:SetColor(bronze_color)
+			elseif(floor(total_puzzle_time) > time_conditions.gold) then
+				gold_color.a = 0.3
+				gold_award:SetColor(gold_color)
 
-			silver_color.a = 1
-			silver_award:SetColor(silver_color)
+				silver_color.a = 1
+				silver_award:SetColor(silver_color)
 
-			bronze_color.a = .3
-		else
-			reset_award()
-		end
+				bronze_color.a = .3
+			else
+				reset_award()
+			end
+		--end
 	end
 end
 
@@ -108,7 +110,7 @@ run_edit_button.clickedEvent:Connect(function()
 end)
 
 speed_up_button.clickedEvent:Connect(function()
-	if(speed < 5) then
+	if(speed < 10) then
 		speed = speed + 1
 	end
 
@@ -194,6 +196,6 @@ Events.Connect("timer", function(t)
 end)
 
 Events.Connect("time_conditions", function(c)
-	total_time_allowed = c.gold + c.silver + c.bronze
+	total_time_allowed = c.gold + c.silver
 	time_conditions = c
 end)
