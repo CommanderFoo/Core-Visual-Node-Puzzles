@@ -37,25 +37,18 @@ function Tick(dt)
 		--if(floor(total_puzzle_time) > time_conditions.bronze) then
 		--	print("too long")
 		--else
-			if(floor(total_puzzle_time) > time_conditions.silver) then
-				gold_color.a = 0.3
-				gold_award:SetColor(gold_color)
-
-				silver_color.a = .3
-				silver_award:SetColor(silver_color)
-
-				bronze_color.a = 1
-				bronze_award:SetColor(bronze_color)
-			elseif(floor(total_puzzle_time) > time_conditions.gold) then
-				gold_color.a = 0.3
-				gold_award:SetColor(gold_color)
-
-				silver_color.a = 1
-				silver_award:SetColor(silver_color)
-
-				bronze_color.a = .3
+			if(floor(total_puzzle_time) <= time_conditions.gold) then
+				API.set_award(gold_award, 1)
+				API.set_award(silver_award, .2)
+				API.set_award(bronze_award, .2)
+			elseif(floor(total_puzzle_time) <= time_conditions.silver) then
+				API.set_award(gold_award, .2)
+				API.set_award(silver_award, 1)
+				API.set_award(bronze_award, .2)
 			else
-				reset_award()
+				API.set_award(gold_award, .2)
+				API.set_award(silver_award, .2)
+				API.set_award(bronze_award, 1)
 			end
 		--end
 	end
@@ -125,35 +118,10 @@ slow_down_button.clickedEvent:Connect(function()
 	current_speed.text = tostring(speed)
 end)
 
-API.Puzzle_Events.on("node_total_change", function()
-	local total_nodes = API.get_total_nodes()
-
-	if(total_nodes > 141) then
-		gold_color.a = 0.3
-		gold_award:SetColor(gold_color)
-
-		if(total_nodes > 6) then
-			silver_color.a = .3
-			silver_award:SetColor(silver_color)
-
-			bronze_color.a = 1
-			bronze_award:SetColor(bronze_color)
-		else
-			silver_color.a = 1
-			silver_award:SetColor(silver_color)
-		end
-	end
-end)
-
 function reset_award()
-	gold_color.a = 1
-	gold_award:SetColor(gold_color)
-
-	silver_color.a = .3
-	silver_award:SetColor(silver_color)
-
-	bronze_color.a = .3
-	bronze_award:SetColor(bronze_color)
+	API.set_award(gold_award, 1)
+	API.set_award(silver_award, .2)
+	API.set_award(bronze_award, .2)
 end
 
 function disable_ui(disable_run_edit)

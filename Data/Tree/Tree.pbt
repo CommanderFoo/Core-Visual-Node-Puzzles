@@ -211,6 +211,45 @@ Objects {
         SelfId: 11898753146948464473
       }
     }
+    Overrides {
+      Name: "cs:gold_award"
+      ObjectReference {
+        SelfId: 14194057262219524395
+        SubObjectId: 9123463160940538860
+        InstanceId: 8150621180901353096
+        TemplateId: 3563390086910122431
+      }
+    }
+    Overrides {
+      Name: "cs:silver_award"
+      ObjectReference {
+        SelfId: 4811322912619957691
+        SubObjectId: 10307689033462092511
+        InstanceId: 12455724449721287714
+        TemplateId: 10438144223879621155
+      }
+    }
+    Overrides {
+      Name: "cs:bronze_award"
+      ObjectReference {
+        SelfId: 15384594436765225464
+        SubObjectId: 17480121017144831975
+        InstanceId: 9301760752645100114
+        TemplateId: 4242474907989208124
+      }
+    }
+    Overrides {
+      Name: "cs:API"
+      AssetReference {
+        Id: 11355776926042268297
+      }
+    }
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -451,6 +490,8 @@ Objects {
   ChildIds: 8150621180901353096
   ChildIds: 12455724449721287714
   ChildIds: 9301760752645100114
+  UnregisteredParameters {
+  }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -532,7 +573,7 @@ Objects {
             R: 0.610495746
             G: 0.212230802
             B: 0.0318960547
-            A: 0.3
+            A: 0.2
           }
         }
         Overrides {
@@ -603,7 +644,7 @@ Objects {
             R: 0.527115345
             G: 0.527115345
             B: 0.527115345
-            A: 0.3
+            A: 0.2
           }
         }
         Overrides {
@@ -673,7 +714,7 @@ Objects {
           Color {
             R: 1
             G: 0.679542601
-            A: 0.3
+            A: 0.2
           }
         }
         Overrides {
@@ -1628,7 +1669,7 @@ Objects {
             R: 0.610495746
             G: 0.212230802
             B: 0.0318960547
-            A: 0.3
+            A: 0.2
           }
         }
       }
@@ -1699,7 +1740,7 @@ Objects {
             R: 0.527115345
             G: 0.527115345
             B: 0.527115345
-            A: 0.3
+            A: 0.2
           }
         }
       }

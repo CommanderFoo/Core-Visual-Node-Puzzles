@@ -83,6 +83,14 @@ function API.get_total_nodes()
 	return #API.nodes
 end
 
+function API.set_award(award, alpha)
+	local c = award:GetColor()
+
+	c.a = alpha
+
+	award:SetColor(c)
+end
+
 local ticking_task = Task.Spawn(function()
 	if(API.active_node ~= nil and API.can_edit_nodes) then
 		API.active_node:drag_node()
