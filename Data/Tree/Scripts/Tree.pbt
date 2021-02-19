@@ -48,6 +48,10 @@ Objects {
         SelfId: 3720954960903579450
       }
     }
+    Overrides {
+      Name: "cs:clear_player_data"
+      Bool: true
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -219,6 +223,12 @@ Objects {
       Name: "cs:data"
       ObjectReference {
         SelfId: 3720954960903579450
+      }
+    }
+    Overrides {
+      Name: "cs:tutorial_container"
+      ObjectReference {
+        SelfId: 6452927242494604331
       }
     }
   }

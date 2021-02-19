@@ -91,6 +91,16 @@ function API.set_award(award, alpha)
 	award:SetColor(c)
 end
 
+function API.disable_nodes()
+	API.can_edit_nodes = false
+	API.Node_Events.trigger("edit", API.can_edit_nodes)
+end
+
+function API.enable_nodes()
+	API.can_edit_nodes = true
+	API.Node_Events.trigger("edit", API.can_edit_nodes)
+end
+
 local ticking_task = Task.Spawn(function()
 	if(API.active_node ~= nil and API.can_edit_nodes) then
 		API.active_node:drag_node()
@@ -109,16 +119,15 @@ Game.GetLocalPlayer().bindingPressedEvent:Connect(function(obj, binding)
 	end
 end)
 
+
 Events.Connect("puzzle_run", function()
-	API.can_edit_nodes = false
-	API.Node_Events.trigger("edit", API.can_edit_nodes)
+	API.disable_nodes()
 
 	Events.Broadcast("on_disable_all_dropdowns")
 end)
 
 Events.Connect("puzzle_edit", function()
-	API.can_edit_nodes = true
-	API.Node_Events.trigger("edit", API.can_edit_nodes)
+	API.enable_nodes()
 
 	Events.Broadcast("on_enable_all_dropdowns")
 end)

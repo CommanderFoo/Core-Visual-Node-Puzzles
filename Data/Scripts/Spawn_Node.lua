@@ -35,6 +35,14 @@ button.clickedEvent:Connect(function()
 	end
 end)
 
+Events.Connect("disable_available_nodes", function()
+	button.isInteractable = false
+end)
+
+Events.Connect("enable_available_nodes", function()
+	button.isInteractable = true
+end)
+
 Events.Connect("puzzle_run", function()
 	button.isInteractable = false
 end)

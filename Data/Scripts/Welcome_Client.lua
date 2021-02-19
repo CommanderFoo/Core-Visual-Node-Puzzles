@@ -7,7 +7,6 @@ end)
 
 ready.clickedEvent:Connect(function()
 	welcome.visibility = Visibility.FORCE_OFF
-	
-	Events.Broadcast("enable_header_ui")
-	Events.BroadcastToServer("load_puzzle", 1)
+
+	Events.BroadcastToServer("load_puzzle", 1, true)
 end)

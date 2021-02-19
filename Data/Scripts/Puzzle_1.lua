@@ -6,6 +6,8 @@ local gold_time = root:GetCustomProperty("gold_time")
 local silver_time = root:GetCustomProperty("silver_time")
 local bronze_time = root:GetCustomProperty("bronze_time")
 
+local tutorial = root:GetCustomProperty("tutorial")
+
 local output_red_complete = false
 local output_green_complete = false
 

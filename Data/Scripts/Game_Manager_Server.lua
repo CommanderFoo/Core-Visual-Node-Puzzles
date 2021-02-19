@@ -1,4 +1,5 @@
 ﻿local data = script:GetCustomProperty("data"):WaitForObject()
+local clear_player_data = script:GetCustomProperty("clear_player_data")
 
 local current_puzzle = 0
 local showing_nodes = false
@@ -29,21 +30,31 @@ function on_player_joined(player)
 end
 
 function on_player_left(player)
-	Storage.SetPlayerData(player, {
+	local data = {
 
 		pid = current_puzzle,
 		sn = showing_nodes,
 		s = current_speed
 
-	})
+	}
+
+	if(clear_player_data) then
+		data = {}
+	end
+
+	Storage.SetPlayerData(player, data)
 end
 
-function load_puzzle(id)
+function load_puzzle(id, force_show_nodes)
 	current_puzzle = id
 
 	data:SetNetworkedCustomProperty("puzzle_id", current_puzzle)
 
 	if(id > 0) then
+		if(force_show_nodes) then
+			showing_nodes = true
+		end
+
 		data:SetNetworkedCustomProperty("show_nodes", showing_nodes)
 	end
 

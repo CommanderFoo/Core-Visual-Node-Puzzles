@@ -1,6 +1,7 @@
 ﻿local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 local data = script:GetCustomProperty("data"):WaitForObject()
+local tutorial_container = script:GetCustomProperty("tutorial_container"):WaitForObject()
 
 local local_player = Game.GetLocalPlayer()
 
@@ -31,6 +32,12 @@ function load_puzzle(id)
 			bronze = current_puzzle:GetCustomProperty("bronze_time")
 
 		})
+
+		local tutorial = current_puzzle:GetCustomProperty("tutorial")
+
+		if(tutorial ~= nil) then
+			World.SpawnAsset(tutorial, { parent = tutorial_container })
+		end
 	else
 		Events.Broadcast("disable_header_ui", true)
 		Events.Broadcast("show_welcome")

@@ -38,6 +38,12 @@ Assets {
             Name: "cs:bronze_time"
             Float: 20
           }
+          Overrides {
+            Name: "cs:tutorial"
+            AssetReference {
+              Id: 15216112992079948461
+            }
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
