@@ -19,7 +19,7 @@ local bronze_color = bronze_award:GetColor()
 local running = false
 local speed = 1
 
-local showing_nodes = true
+local showing_nodes = false
 local tween = nil
 local errors = 0
 
@@ -83,6 +83,8 @@ available_nodes_button.clickedEvent:Connect(function()
 	tween:on_change(function(changed)
 		available_nodes_container.x = changed.v
 	end)
+
+	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
 end)
 
 run_edit_button.clickedEvent:Connect(function()
@@ -92,7 +94,7 @@ run_edit_button.clickedEvent:Connect(function()
 
 		Events.Broadcast("puzzle_edit")
 	else
-		run_edit_button.text = "Edit Solution"
+		run_edit_button.text = "Edit Program"
 		running = true
 		timer_run = true
 
@@ -108,6 +110,8 @@ speed_up_button.clickedEvent:Connect(function()
 	end
 
 	current_speed.text = tostring(speed)
+
+	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
 end)
 
 slow_down_button.clickedEvent:Connect(function()
@@ -116,6 +120,8 @@ slow_down_button.clickedEvent:Connect(function()
 	end
 
 	current_speed.text = tostring(speed)
+
+	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
 end)
 
 function reset_award()
@@ -145,9 +151,15 @@ Events.Connect("disable_header_ui", disable_ui)
 Events.Connect("enable_header_ui", enable_ui)
 
 Events.Connect("puzzle_edit", function()
-	run_edit_button.text = "Run Solution"
+	run_edit_button.text = "Run Program"
 	running = false
-	total_time_allowed = time_conditions.gold + time_conditions.silver + time_conditions.bronze
+
+	if(time_conditions ~= nil) then
+		total_time_allowed = time_conditions.gold + time_conditions.silver + time_conditions.bronze
+	else
+		total_time_allowed = 0
+	end
+
 	errors = 0
 	total_puzzle_time = 0
 
@@ -166,4 +178,29 @@ end)
 Events.Connect("time_conditions", function(c)
 	total_time_allowed = c.gold + c.silver
 	time_conditions = c
+end)
+
+Events.Connect("show_nodes", function()
+	tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -30})
+	available_nodes_button.text = "Hide Available Nodes"
+	showing_nodes = true
+
+	tween:on_start(function()
+		available_nodes_container.visibility = Visibility.FORCE_ON
+	end)
+
+	tween:on_complete(function()
+		tween = nil
+	end)
+
+	tween:set_easing("inOutBack")
+
+	tween:on_change(function(changed)
+		available_nodes_container.x = changed.v
+	end)
+end)
+
+Events.Connect("set_speed", function(s)
+	speed = s
+	current_speed.text = tostring(speed)
 end)

@@ -2,6 +2,8 @@
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 local data = script:GetCustomProperty("data"):WaitForObject()
 
+local local_player = Game.GetLocalPlayer()
+
 local puzzles = {}
 
 for p, v in pairs(script:GetCustomProperties()) do
@@ -30,12 +32,17 @@ function load_puzzle(id)
 
 		})
 	else
-		print("No puzzle")
+		Events.Broadcast("disable_header_ui", true)
+		Events.Broadcast("show_welcome")
 	end
 end
 
 data.networkedPropertyChangedEvent:Connect(function(obj, prop)
 	if(prop == "puzzle_id") then
 		load_puzzle(data:GetCustomProperty(prop))
+	elseif(prop == "show_nodes" and data:GetCustomProperty(prop)) then
+		Events.Broadcast("show_nodes")
+	elseif(prop == "speed") then
+		Events.Broadcast("set_speed", data:GetCustomProperty("speed"))
 	end
 end)
