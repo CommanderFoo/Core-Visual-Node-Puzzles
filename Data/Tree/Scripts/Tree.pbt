@@ -50,7 +50,7 @@ Objects {
     }
     Overrides {
       Name: "cs:clear_player_data"
-      Bool: true
+      Bool: false
     }
   }
   Collidable_v2 {

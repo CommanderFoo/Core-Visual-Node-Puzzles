@@ -2,6 +2,12 @@
 local Node, Node_Events, Node_Type = require(script:GetCustomProperty("Node"))
 local Puzzle_Events = require(script:GetCustomProperty("Puzzle_Events"))
 
+local click_sound = script:GetCustomProperty("click_sound"):WaitForObject()
+local connect_sound = script:GetCustomProperty("connect_sound"):WaitForObject()
+local hover_sound = script:GetCustomProperty("hover_sound"):WaitForObject()
+local delete_sound = script:GetCustomProperty("delete_sound"):WaitForObject()
+
+
 local API = {
 
 	TOP_OFFSET = 0,
@@ -29,12 +35,16 @@ end)
 
 API.Node_Events.on("begin_drag_connection", function(node, connection)
 	API.active_node = node
+	API.play_click_sound()
 end)
 
 API.Node_Events.on("node_destroyed", function(node_id)
 	for k, v in pairs(API.nodes) do
 		if(v:get_id() == node_id) then
 			API.nodes[k] = nil
+			API.play_delete_sound()
+
+			break
 		end
 	end
 end)
@@ -47,6 +57,22 @@ API.Node_Events.on("input_connect", function(node_connected, node_connection)
 		API.Node_Events.trigger("node_connected", API.active_node)
 	end
 end)
+
+API.Node_Events.on("node_connected", function()
+	connect_sound:Play()
+end)
+
+function API.play_click_sound()
+	click_sound:Play()
+end
+
+function API.play_hover_sound()
+	hover_sound:Play()
+end
+
+function API.play_delete_sound()
+	delete_sound:Play()
+end
 
 function API.get_path(obj, line, changed, offset)
 	local angle = line.rotationAngle

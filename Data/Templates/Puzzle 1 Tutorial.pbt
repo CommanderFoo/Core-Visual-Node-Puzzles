@@ -920,7 +920,7 @@ Assets {
           AddSizeToParentIfUsingParentSize: true
           UseParentWidth: true
           Text {
-            Label: "We can control the speed of the program by using the slow down and speed up arrows.  This is if you would like to speed up the game a little."
+            Label: "You can control the speed of the program by using the slow down and speed up arrows.  This is if you would like to speed up the game a little."
             Color {
               R: 1
               G: 1

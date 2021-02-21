@@ -28,6 +28,30 @@ Assets {
           Id: 4960534203524449140
         }
       }
+      Overrides {
+        Name: "cs:click_sound"
+        ObjectReference {
+          SelfId: 7452552501637593875
+        }
+      }
+      Overrides {
+        Name: "cs:connect_sound"
+        ObjectReference {
+          SelfId: 2648738033150741634
+        }
+      }
+      Overrides {
+        Name: "cs:hover_sound"
+        ObjectReference {
+          SelfId: 8328458776128072025
+        }
+      }
+      Overrides {
+        Name: "cs:delete_sound"
+        ObjectReference {
+          SelfId: 9528793479787612668
+        }
+      }
     }
   }
   SerializationVersion: 74

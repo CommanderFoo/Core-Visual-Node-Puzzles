@@ -85,6 +85,7 @@ available_nodes_button.clickedEvent:Connect(function()
 	end)
 
 	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
+	API.play_click_sound()
 end)
 
 run_edit_button.clickedEvent:Connect(function()
@@ -102,6 +103,8 @@ run_edit_button.clickedEvent:Connect(function()
 
 		Events.Broadcast("puzzle_run", speed)
 	end
+
+	API.play_click_sound()
 end)
 
 speed_up_button.clickedEvent:Connect(function()
@@ -112,6 +115,7 @@ speed_up_button.clickedEvent:Connect(function()
 	current_speed.text = tostring(speed)
 
 	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
+	API.play_click_sound()
 end)
 
 slow_down_button.clickedEvent:Connect(function()
@@ -122,6 +126,7 @@ slow_down_button.clickedEvent:Connect(function()
 	current_speed.text = tostring(speed)
 
 	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
+	API.play_click_sound()
 end)
 
 function reset_award()

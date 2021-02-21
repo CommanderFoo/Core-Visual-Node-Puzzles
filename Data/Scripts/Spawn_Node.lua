@@ -32,6 +32,7 @@ button.clickedEvent:Connect(function()
 		end
 
 		API.Puzzle_Events.trigger("node_total_change")
+		API.play_click_sound()
 	end
 end)
 
