@@ -171,6 +171,18 @@ Objects {
         TemplateId: 4242474907989208124
       }
     }
+    Overrides {
+      Name: "cs:settings_button"
+      ObjectReference {
+        SelfId: 6420074902797676133
+      }
+    }
+    Overrides {
+      Name: "cs:settings"
+      ObjectReference {
+        SelfId: 14116838315011425361
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

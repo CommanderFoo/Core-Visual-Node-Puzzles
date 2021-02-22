@@ -12,6 +12,11 @@ local gold_award = script:GetCustomProperty("gold_award"):WaitForObject()
 local silver_award = script:GetCustomProperty("silver_award"):WaitForObject()
 local bronze_award = script:GetCustomProperty("bronze_award"):WaitForObject()
 
+local settings_button = script:GetCustomProperty("settings_button"):WaitForObject()
+local settings = script:GetCustomProperty("settings"):WaitForObject()
+
+local settings_open = false
+
 local gold_color = gold_award:GetColor()
 local silver_color = silver_award:GetColor()
 local bronze_color = bronze_award:GetColor()
@@ -143,7 +148,7 @@ function reset_award()
 	API.set_award(bronze_award, .2)
 end
 
-function disable_ui(disable_run_edit)
+function disable_ui(disable_run_edit, ignore_settings)
 	slow_down_button.isInteractable = false
 	speed_up_button.isInteractable = false
 	available_nodes_button.isInteractable = false
@@ -151,6 +156,12 @@ function disable_ui(disable_run_edit)
 	if(disable_run_edit) then
 		run_edit_button.isInteractable = false
 	end
+
+	if(not ignore_settings) then
+		settings_button.isInteractable = false
+	end
+
+	Events.Broadcast("disable_available_nodes")
 end
 
 function enable_ui()
@@ -158,7 +169,42 @@ function enable_ui()
 	speed_up_button.isInteractable = true
 	available_nodes_button.isInteractable = true
 	run_edit_button.isInteractable = true
+	settings_button.isInteractable = true
+
+	Events.Broadcast("enable_available_nodes")
 end
+
+settings_button.hoveredEvent:Connect(function()
+	settings_button:GetChildren()[1]:SetColor(settings_button:GetHoveredColor())
+	API.play_hover_sound()
+end)
+
+settings_button.unhoveredEvent:Connect(function()
+	settings_button:GetChildren()[1]:SetColor(settings_button:GetPressedColor())
+	API.play_hover_sound()
+end)
+
+settings_button.clickedEvent:Connect(function()
+	if(settings_open) then
+		enable_ui()
+		
+		settings.visibility = Visibility.FORCE_OFF
+		settings_open = false
+
+		API.enable_nodes()
+		Events.Broadcast("on_enable_all_dropdowns")
+	else
+		disable_ui(true, true)
+
+		settings.visibility = Visibility.FORCE_ON
+		settings_open = true
+		
+		API.disable_nodes()
+		Events.Broadcast("on_disable_all_dropdowns")
+	end
+
+	API.play_click_sound()
+end)
 
 Events.Connect("disable_header_ui", disable_ui)
 Events.Connect("enable_header_ui", enable_ui)

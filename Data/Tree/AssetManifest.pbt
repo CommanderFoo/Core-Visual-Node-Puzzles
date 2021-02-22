@@ -26,6 +26,15 @@ Assets {
   }
 }
 Assets {
+  Id: 17110950640834597915
+  Name: "Icon Settings"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "Icon_Settings"
+  }
+}
+Assets {
   Id: 12726923135669644958
   Name: "Button Click Press Core 01 SFX"
   PlatformAssetType: 7

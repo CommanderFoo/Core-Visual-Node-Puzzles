@@ -45,11 +45,3 @@ end)
 Events.Connect("enable_available_nodes", function()
 	button.isInteractable = true
 end)
-
-Events.Connect("puzzle_run", function()
-	button.isInteractable = false
-end)
-
-Events.Connect("puzzle_edit", function()
-	button.isInteractable = true
-end)
