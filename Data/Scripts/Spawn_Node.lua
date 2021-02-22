@@ -20,6 +20,8 @@ API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 	end
 end)
 
+button.hoveredEvent:Connect(API.play_hover_sound)
+
 button.clickedEvent:Connect(function()
 	if(total_spawned < total) then		
 		local n = World.SpawnAsset(node, { parent = container })

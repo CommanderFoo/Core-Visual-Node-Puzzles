@@ -54,6 +54,8 @@ function Tick(dt)
 	end
 end
 
+available_nodes_button.hoveredEvent:Connect(API.play_hover_sound)
+
 available_nodes_button.clickedEvent:Connect(function()
 	if(tween ~= nil) then
 		tween:stop()
@@ -88,6 +90,8 @@ available_nodes_button.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
+run_edit_button.hoveredEvent:Connect(API.play_hover_sound)
+
 run_edit_button.clickedEvent:Connect(function()
 	if(running) then
 		reset_award()	
@@ -107,6 +111,8 @@ run_edit_button.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
+speed_up_button.hoveredEvent:Connect(API.play_hover_sound)
+
 speed_up_button.clickedEvent:Connect(function()
 	if(speed < 10) then
 		speed = speed + 1
@@ -117,6 +123,8 @@ speed_up_button.clickedEvent:Connect(function()
 	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
 	API.play_click_sound()
 end)
+
+slow_down_button.hoveredEvent:Connect(API.play_hover_sound)
 
 slow_down_button.clickedEvent:Connect(function()
 	if(speed > 1) then

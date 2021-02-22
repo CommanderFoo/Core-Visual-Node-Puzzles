@@ -7,6 +7,10 @@ local connect_sound = script:GetCustomProperty("connect_sound"):WaitForObject()
 local hover_sound = script:GetCustomProperty("hover_sound"):WaitForObject()
 local delete_sound = script:GetCustomProperty("delete_sound"):WaitForObject()
 
+local random = math.random
+local cos = math.cos
+local sin = math.cos
+local pi = math.pi
 
 local API = {
 
@@ -31,6 +35,11 @@ end
 
 API.Node_Events.on("begin_drag_node", function(node)
 	API.active_node = node
+	API.play_click_sound()
+end)
+
+API.Node_Events.on("end_drag_node", function()
+	API.play_click_sound()
 end)
 
 API.Node_Events.on("begin_drag_connection", function(node, connection)
@@ -59,26 +68,38 @@ API.Node_Events.on("input_connect", function(node_connected, node_connection)
 end)
 
 API.Node_Events.on("node_connected", function()
+	API.change_sound_pitch(connect_sound)
+
 	connect_sound:Play()
 end)
 
 function API.play_click_sound()
+	API.change_sound_pitch(click_sound)
+
 	click_sound:Play()
 end
 
 function API.play_hover_sound()
+	API.change_sound_pitch(hover_sound)
+
 	hover_sound:Play()
 end
 
 function API.play_delete_sound()
+	API.change_sound_pitch(delete_sound)
+
 	delete_sound:Play()
+end
+
+function API.change_sound_pitch(snd)
+	snd.pitch = random(-150, 150)
 end
 
 function API.get_path(obj, line, changed, offset)
 	local angle = line.rotationAngle
-	local rad = angle * (math.pi / 180)
+	local rad = angle * (pi / 180)
 
-	return (changed.a * math.cos(rad)), ((changed.a * math.sin(rad)) -(obj.height / 2)) + (offset or 0)
+	return (changed.a * cos(rad)), ((changed.a * sin(rad)) -(obj.height / 2)) + (offset or 0)
 end
 
 function API.get_connector_line(node, condition)

@@ -1,13 +1,5 @@
 Entries {
   Key {
-    StringVar: "current_puzzle"
-  }
-  SimpleValue {
-    IntVar: 1
-  }
-}
-Entries {
-  Key {
     StringVar: "showing_nodes"
   }
   SimpleValue {
@@ -24,9 +16,17 @@ Entries {
 }
 Entries {
   Key {
+    StringVar: "current_puzzle"
+  }
+  SimpleValue {
+    IntVar: 1
+  }
+}
+Entries {
+  Key {
     StringVar: "current_speed"
   }
   SimpleValue {
-    IntVar: 5
+    IntVar: 1
   }
 }

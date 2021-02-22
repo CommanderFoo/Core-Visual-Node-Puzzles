@@ -424,23 +424,25 @@ function Node:drag_node()
 	if(self.moving) then
 		local pos = UI.GetCursorPosition()
 
-		if(pos.x >= 0) then
-			self.root.x = pos.x - self.offset.x
-			
-			if(pos.x <= 0) then
-				self.root.x = 0
-			elseif(self.root.x >= screen_size.x) then
-				self.root.x = screen_size.x
+		if(Object.IsValid(self.root)) then
+			if(pos.x >= 0) then
+				self.root.x = pos.x - self.offset.x
+				
+				if(pos.x <= 0) then
+					self.root.x = 0
+				elseif(self.root.x >= screen_size.x) then
+					self.root.x = screen_size.x
+				end
 			end
-		end
 
-		if(pos.y >= 0) then
-			self.root.y = pos.y - self.offset.y
+			if(pos.y >= 0) then
+				self.root.y = pos.y - self.offset.y
 
-			if(pos.y < 0) then
-				self.root.y = self.root.height
-			elseif(self.root.y >= screen_size.y) then
-				self.root.y = screen_size.y
+				if(pos.y < 0) then
+					self.root.y = self.root.height
+				elseif(self.root.y >= screen_size.y) then
+					self.root.y = screen_size.y
+				end
 			end
 		end
 
