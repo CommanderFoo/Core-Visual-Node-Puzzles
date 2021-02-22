@@ -1,4 +1,84 @@
-﻿local Node_Events = {}
+﻿function print_table(node)
+    local cache, stack, output = {},{},{}
+    local depth = 1
+    local output_str = "{\n"
+
+    while true do
+        local size = 0
+        for k,v in pairs(node) do
+            size = size + 1
+        end
+
+        local cur_index = 1
+        for k,v in pairs(node) do
+            if (cache[node] == nil) or (cur_index >= cache[node]) then
+
+                if (string.find(output_str,"}",output_str:len())) then
+                    output_str = output_str .. ",\n"
+                elseif not (string.find(output_str,"\n",output_str:len())) then
+                    output_str = output_str .. "\n"
+                end
+
+                -- This is necessary for working with HUGE tables otherwise we run out of memory using concat on huge strings
+                table.insert(output,output_str)
+                output_str = ""
+
+                local key
+                if (type(k) == "number" or type(k) == "boolean") then
+                    key = "["..tostring(k).."]"
+                else
+                    key = "['"..tostring(k).."']"
+                end
+
+                if (type(v) == "number" or type(v) == "boolean") then
+                    output_str = output_str .. string.rep('\t',depth) .. key .. " = "..tostring(v)
+                elseif (type(v) == "table") then
+                    output_str = output_str .. string.rep('\t',depth) .. key .. " = {\n"
+                    table.insert(stack,node)
+                    table.insert(stack,v)
+                    cache[node] = cur_index+1
+                    break
+                else
+                    output_str = output_str .. string.rep('\t',depth) .. key .. " = '"..tostring(v).."'"
+                end
+
+                if (cur_index == size) then
+                    output_str = output_str .. "\n" .. string.rep('\t',depth-1) .. "}"
+                else
+                    output_str = output_str .. ","
+                end
+            else
+                -- close the table
+                if (cur_index == size) then
+                    output_str = output_str .. "\n" .. string.rep('\t',depth-1) .. "}"
+                end
+            end
+
+            cur_index = cur_index + 1
+        end
+
+        if (size == 0) then
+            output_str = output_str .. "\n" .. string.rep('\t',depth-1) .. "}"
+        end
+
+        if (#stack > 0) then
+            node = stack[#stack]
+            stack[#stack] = nil
+            depth = cache[node] == nil and depth + 1 or depth - 1
+        else
+            break
+        end
+    end
+
+    -- This is necessary for working with HUGE tables otherwise we run out of memory using concat on huge strings
+    table.insert(output,output_str)
+    output_str = table.concat(output)
+
+    print(output_str)
+end
+
+
+local Node_Events = {}
 
 local floor = math.floor
 local abs = math.abs
@@ -47,6 +127,7 @@ local Node = {
 }
 
 function Node:setup(r)
+	self.debug_node = false
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil
@@ -110,6 +191,34 @@ function Node:setup(r)
 			end
 		end
 	end)
+
+	Node_Events.on("node_input_update", function(node_id)
+		if(node_id ~= self:get_id()) then
+			for k, v in pairs(self.input_connected_to) do
+				for i, c in ipairs(v) do
+					if(c.connected_from_node:get_id() == node_id) then
+						v[i] = nil
+					end
+				end
+			end
+		end
+	end)
+
+	Node_Events.on("node_output_update", function(node_id)
+		if(node_id ~= self:get_id()) then
+			for k, v in pairs(self.output_connected_to) do
+				for i, c in ipairs(v) do
+					if(c.connected_to_node:get_id() == node_id) then
+						if(Object.IsValid(c.connection.line)) then
+							c.connection.line.width = 0
+						end
+
+						v[i] = nil
+					end
+				end
+			end
+		end
+	end)
 end
 
 function Node:tick()
@@ -165,6 +274,8 @@ function Node:setup_node(root)
 	end
 
 	self.handle.pressedEvent:Connect(function(obj)
+		self:debug()
+
 		if(not self.can_edit_nodes) then
 			return
 		end
@@ -200,14 +311,36 @@ function Node:setup_node(root)
 
 		self:clear_active_connection()
 
-		-- Need a break all connections method.
-
-		--Node_Events.trigger("break_connection", connections[c].id, true)
-
+		Node_Events.trigger("node_input_update", self:get_id())
+		Node_Events.trigger("node_output_update", self:get_id())
 		Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
 
 		self.root:Destroy()
 	end)
+end
+
+function Node:debug()
+	if(not self.debug_node) then
+		return
+	end
+
+	local inputs = 0
+	local outputs = 0
+
+	for k, v in pairs(self.input_connected_to) do
+		for i, c in ipairs(v) do
+			inputs = inputs + 1
+		end
+	end
+
+	for k, v in pairs(self.output_connected_to) do
+		for i, c in ipairs(v) do
+			outputs = outputs + 1
+		end
+	end
+
+	print("Inputs: " .. tostring(inputs))
+	print("Outputs: " .. tostring(outputs))
 end
 
 function Node:setup_output_connections()
@@ -269,7 +402,8 @@ function Node:setup_input_connections()
 
 				id = connections[c].id,
 				connection = connections[c],
-				can_be_connected_to = true
+				can_be_connected_to = true,
+				line = connections[c]:FindDescendantByName("Line")
 
 			}
 

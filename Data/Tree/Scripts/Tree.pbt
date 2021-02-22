@@ -80,7 +80,6 @@ Objects {
     }
   }
   ParentId: 5021637449606560396
-  ChildIds: 5768206974450963472
   ChildIds: 15235961953144066896
   ChildIds: 16099356608972045403
   ChildIds: 12262875492945277035
@@ -270,35 +269,6 @@ Objects {
   Script {
     ScriptAsset {
       Id: 12955436264733002318
-    }
-  }
-}
-Objects {
-  Id: 5768206974450963472
-  Name: "Setup_Client"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 2456857752610234367
-  UnregisteredParameters {
-  }
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  Script {
-    ScriptAsset {
-      Id: 6862747020204020962
     }
   }
 }

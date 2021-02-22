@@ -35,7 +35,9 @@ Events.Connect("puzzle_edit", function()
 	data_node:reset()
 
 	for _, d in ipairs(data) do
-		d.ui.text = tostring(d.count)
+		if(Object.IsValid(d.ui)) then
+			d.ui.text = tostring(d.count)
+		end
 	end
 end)
 

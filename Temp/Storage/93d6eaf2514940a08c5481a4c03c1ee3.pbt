@@ -1,17 +1,17 @@
 Entries {
   Key {
-    StringVar: "showing_nodes"
-  }
-  SimpleValue {
-    BoolVar: false
-  }
-}
-Entries {
-  Key {
     StringVar: "p1t"
   }
   SimpleValue {
     IntVar: 1
+  }
+}
+Entries {
+  Key {
+    StringVar: "showing_nodes"
+  }
+  SimpleValue {
+    BoolVar: true
   }
 }
 Entries {
