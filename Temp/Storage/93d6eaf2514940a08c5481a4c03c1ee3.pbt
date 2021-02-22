@@ -1,6 +1,6 @@
 Entries {
   Key {
-    StringVar: "p1t"
+    StringVar: "current_puzzle"
   }
   SimpleValue {
     IntVar: 1
@@ -16,17 +16,17 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "current_speed"
+    StringVar: "p1t"
   }
   SimpleValue {
-    IntVar: 5
+    IntVar: 1
   }
 }
 Entries {
   Key {
-    StringVar: "current_puzzle"
+    StringVar: "current_speed"
   }
   SimpleValue {
-    IntVar: 1
+    IntVar: 5
   }
 }
