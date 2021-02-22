@@ -27,7 +27,8 @@ next_button.clickedEvent:Connect(function()
 	if(current_step == 8) then
 		Events.Broadcast("enable_available_nodes")
 		Events.Broadcast("enable_header_ui")
-		
+		Events.BroadcastToServer("save_puzzle_tutorial_seen")
+
 		script.parent.parent:Destroy()
 	else
 		current_step = current_step + 1

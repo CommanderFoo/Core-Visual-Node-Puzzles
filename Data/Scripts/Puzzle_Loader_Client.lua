@@ -34,8 +34,9 @@ function load_puzzle(id)
 		})
 
 		local tutorial = current_puzzle:GetCustomProperty("tutorial")
+		local seen_tutorial = local_player:GetResource("p" .. id .. "t")
 
-		if(tutorial ~= nil) then
+		if(tutorial ~= nil and seen_tutorial == 0) then
 			World.SpawnAsset(tutorial, { parent = tutorial_container })
 		end
 	else

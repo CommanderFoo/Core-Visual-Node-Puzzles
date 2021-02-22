@@ -1,22 +1,30 @@
 Entries {
   Key {
-    StringVar: "s"
+    StringVar: "showing_nodes"
   }
   SimpleValue {
-    IntVar: 6
+    BoolVar: false
   }
 }
 Entries {
   Key {
-    StringVar: "sn"
+    StringVar: "p1t"
   }
   SimpleValue {
-    BoolVar: true
+    IntVar: 1
   }
 }
 Entries {
   Key {
-    StringVar: "pid"
+    StringVar: "current_speed"
+  }
+  SimpleValue {
+    IntVar: 5
+  }
+}
+Entries {
+  Key {
+    StringVar: "current_puzzle"
   }
   SimpleValue {
     IntVar: 1
