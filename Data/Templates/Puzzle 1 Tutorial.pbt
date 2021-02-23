@@ -306,8 +306,8 @@ Assets {
           Value: "mc:evisibilitysetting:inheritfromparent"
         }
         Control {
-          Width: 579
-          Height: 354
+          Width: 585
+          Height: 383
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -531,28 +531,31 @@ Assets {
           Button {
             Label: "Next"
             FontColor {
+              R: 1
+              G: 0.818
+              B: 0.818
               A: 1
             }
             FontSize: 16
             ButtonColor {
-              G: 0.493397146
-              B: 0.818000078
+              G: 0.101041637
+              B: 0.0827249438
               A: 1
             }
             HoveredColor {
-              G: 0.804000378
-              B: 0.938000083
+              G: 0.159375027
+              B: 0.130483732
               A: 1
             }
             PressedColor {
-              G: 0.804000378
-              B: 0.938000083
+              G: 0.101041637
+              B: 0.0827249438
               A: 1
             }
             DisabledColor {
-              G: 0.804000378
-              B: 0.938000083
-              A: 1
+              G: 0.101041637
+              B: 0.0827249438
+              A: 0.2
             }
             Brush {
               Id: 841534158063459245

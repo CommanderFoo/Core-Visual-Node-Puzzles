@@ -75,10 +75,20 @@ function disable_toggle(clear_check)
 	end
 end
 
-function enable_select()
+function enable_toggle()
 	disabled = false
 	toggle_button:SetButtonColor(unhovered_color)
 end
 
 Events.Connect("on_" .. event .. "disable", disable_toggle)
-Events.Connect("on_" .. event .. "enable", enable_select)
+Events.Connect("on_" .. event .. "enable", enable_toggle)
+
+Events.Connect(event .. "toggle_on", function()
+	check.visibility = Visibility.FORCE_ON
+	toggled = true
+end)
+
+Events.Connect(event .. "toggle_off", function()
+	check.visibility = Visibility.FORCE_OFF
+	toggled = false
+end)

@@ -7,6 +7,9 @@ local local_player = Game.GetLocalPlayer()
 
 local puzzles = {}
 
+local sfx_slider_updated = false
+local music_slider_updated = false
+
 for p, v in pairs(script:GetCustomProperties()) do
 	if(p ~= "nodes_container") then
 		puzzles[p] = v
@@ -45,12 +48,36 @@ function load_puzzle(id)
 	end
 end
 
-data.networkedPropertyChangedEvent:Connect(function(obj, prop)
+local_player.resourceChangedEvent:Connect(function(obj, prop)
 	if(prop == "puzzle_id") then
-		load_puzzle(data:GetCustomProperty(prop))
-	elseif(prop == "show_nodes" and data:GetCustomProperty(prop)) then
-		Events.Broadcast("show_nodes")
+		load_puzzle(local_player:GetResource("puzzle_id"))
+	elseif(prop == "show_nodes") then
+		if(local_player:GetResource("show_nodes") == 1) then
+			Events.Broadcast("show_nodes")
+		end
 	elseif(prop == "speed") then
-		Events.Broadcast("set_speed", data:GetCustomProperty("speed"))
+		Events.Broadcast("set_speed", local_player:GetResource("speed"))
+	elseif(prop == "sfx_volume") then
+		if(not sfx_slider_updated) then
+			Events.Broadcast("set_sfx_slider_amount", local_player:GetResource("sfx_volume"))
+			sfx_slider_updated = true
+		end
+
+		Events.Broadcast("on_update_sfx_volume", local_player:GetResource("sfx_volume"))
+	elseif(prop == "music_volume") then
+		if(not music_slider_updated) then
+			Events.Broadcast("set_music_slider_amount", local_player:GetResource("music_volume"))
+			music_slider_updated = true
+
+			--Events.Broadcast("play_music")
+		end
+
+		Events.Broadcast("on_update_music_volume", local_player:GetResource("music_volume"))
+	elseif(prop == "show_notifications") then
+		if(local_player:GetResource("show_notifications") == 1) then
+			Events.Broadcast("show_notifications_toggle_on")
+		else
+			Events.Broadcast("show_notifications_toggle_off")
+		end
 	end
 end)

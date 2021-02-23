@@ -184,15 +184,20 @@ settings_button.unhoveredEvent:Connect(function()
 	API.play_hover_sound()
 end)
 
+function close_settings()
+	enable_ui()
+		
+	settings.visibility = Visibility.FORCE_OFF
+	settings_open = false
+
+	API.enable_nodes()
+	Events.Broadcast("on_enable_all_dropdowns")
+	Events.Broadcast("slider_release_handle")
+end
+
 settings_button.clickedEvent:Connect(function()
 	if(settings_open) then
-		enable_ui()
-		
-		settings.visibility = Visibility.FORCE_OFF
-		settings_open = false
-
-		API.enable_nodes()
-		Events.Broadcast("on_enable_all_dropdowns")
+		close_settings()
 	else
 		disable_ui(true, true)
 
@@ -263,3 +268,5 @@ Events.Connect("set_speed", function(s)
 	speed = s
 	current_speed.text = tostring(speed)
 end)
+
+Events.Connect("close_settings", close_settings)

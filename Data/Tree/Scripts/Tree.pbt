@@ -83,6 +83,7 @@ Objects {
   ChildIds: 15235961953144066896
   ChildIds: 16099356608972045403
   ChildIds: 12262875492945277035
+  ChildIds: 225476450877697714
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -90,6 +91,41 @@ Objects {
     Value: "mc:evisibilitysetting:inheritfromparent"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 225476450877697714
+  Name: "Music_Manager_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:music_folder"
+      ObjectReference {
+        SelfId: 17829228507645182166
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 14017043884502793907
+    }
   }
 }
 Objects {

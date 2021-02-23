@@ -1,5 +1,37 @@
 Entries {
   Key {
+    StringVar: "s"
+  }
+  SimpleValue {
+    IntVar: 100
+  }
+}
+Entries {
+  Key {
+    StringVar: "cs"
+  }
+  SimpleValue {
+    IntVar: 6
+  }
+}
+Entries {
+  Key {
+    StringVar: "n"
+  }
+  SimpleValue {
+    IntVar: 1
+  }
+}
+Entries {
+  Key {
+    StringVar: "cp"
+  }
+  SimpleValue {
+    IntVar: 1
+  }
+}
+Entries {
+  Key {
     StringVar: "p1t"
   }
   SimpleValue {
@@ -8,23 +40,15 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "current_speed"
+    StringVar: "m"
   }
   SimpleValue {
-    IntVar: 1
+    IntVar: 100
   }
 }
 Entries {
   Key {
-    StringVar: "showing_nodes"
-  }
-  SimpleValue {
-    BoolVar: true
-  }
-}
-Entries {
-  Key {
-    StringVar: "current_puzzle"
+    StringVar: "sn"
   }
   SimpleValue {
     IntVar: 1
