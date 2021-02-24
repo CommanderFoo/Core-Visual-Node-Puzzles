@@ -3552,28 +3552,29 @@ Objects {
       }
       FontSize: 16
       ButtonColor {
-        G: 0.493397146
-        B: 0.818000078
+        G: 0.101041637
+        B: 0.0827249438
         A: 1
       }
       HoveredColor {
-        G: 0.804000378
-        B: 0.938000083
+        G: 0.159375027
+        B: 0.130483732
         A: 1
       }
       PressedColor {
-        G: 0.493397146
-        B: 0.818000078
+        G: 0.101041637
+        B: 0.0827249438
         A: 1
       }
       DisabledColor {
-        G: 0.493397146
-        B: 0.818000078
-        A: 1
+        G: 0.101041637
+        B: 0.0827249438
+        A: 0.2
       }
       Brush {
         Id: 841534158063459245
       }
+      IsButtonEnabled: true
       ClickMode {
         Value: "mc:ebuttonclickmode:default"
       }

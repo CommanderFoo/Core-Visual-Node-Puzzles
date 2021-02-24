@@ -235,8 +235,27 @@ function Node:setup_node(root)
 		Node_Events.trigger("node_output_update", self:get_id())
 		Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
 
-		self.root:Destroy()
+		self:remove()
 	end)
+end
+
+function Node:remove()
+	if(self.ticking_task ~= nil) then
+		self.ticking_task:Cancel()
+		self.ticking_task = nil
+	end
+
+	if(self.error_task ~= nil) then
+		self.error_task:Cancel()
+		self.error_task = nil
+	end
+
+	if(self.options.queue_task ~= nil) then
+		self.options.queue_task:Cancel()
+		self.options.queue_task = nil
+	end
+
+	self.root:Destroy()
 end
 
 function Node:debug()
@@ -814,20 +833,21 @@ function Node_If:new(r, options)
 
 	this:setup(r)
 
-	local queue_task = nil
+	this.options.queue_task = nil
+
 	local queue = this.options.YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 
 	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
-			queue_task = Task.Spawn(function()		
+			this.options.queue_task = Task.Spawn(function()
 				if(not queue:is_empty()) then										
 					queue:pop()()
 				end
 			end, this.options.node_time / speed)
 			
-			queue_task.repeatCount = -1
-			queue_task.repeatInterval = (this.options.node_time / speed)
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
 		end
 	end
 
@@ -912,9 +932,9 @@ function Node_If:new(r, options)
 	end
 	
 	function this:reset()
-		if(queue_task ~= nil) then
-			queue_task:Cancel()
-			queue_task = nil
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
 		end
 
 		monitor_started = false
@@ -926,9 +946,9 @@ function Node_If:new(r, options)
 	end
 
 	Node_Events.on("node_destroyed", function()
-		if(queue_task ~= nil) then
-			queue_task:Cancel()
-			queue_task = nil
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
 		end
 	end)
 

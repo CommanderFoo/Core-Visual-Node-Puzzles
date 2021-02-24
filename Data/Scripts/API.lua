@@ -148,6 +148,14 @@ function API.enable_nodes()
 	API.Node_Events.trigger("edit", API.can_edit_nodes)
 end
 
+function API.clear_graph()
+	for k, v in pairs(API.nodes) do
+		v:remove()
+	end
+
+	API.nodes = {}
+end
+
 local ticking_task = Task.Spawn(function()
 	if(API.active_node ~= nil and API.can_edit_nodes) then
 		API.active_node:drag_node()
@@ -165,7 +173,6 @@ Game.GetLocalPlayer().bindingPressedEvent:Connect(function(obj, binding)
 		end
 	end
 end)
-
 
 Events.Connect("puzzle_run", function()
 	API.disable_nodes()

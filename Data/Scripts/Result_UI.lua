@@ -15,6 +15,8 @@ local bronze_color = bronze_award:GetColor()
 local floor = math.floor
 
 Events.Connect("show_result", function(puzzle_time, gold_time, silver_time, bronze_time)
+	next_button.isInteractable = true
+
 	if(floor(puzzle_time) <= gold_time) then
 		API.set_award(gold_award, 1)
 		API.set_award(silver_award, .2)
@@ -36,7 +38,23 @@ Events.Connect("hide_result", function()
 	script.parent.parent.visibility = Visibility.FORCE_OFF
 end)
 
+edit_button.hoveredEvent:Connect(API.play_hover_sound)
+
 edit_button.clickedEvent:Connect(function()
 	Events.Broadcast("puzzle_edit")
 	script.parent.parent.visibility = Visibility.FORCE_OFF
+
+	API.play_click_sound()
+end)
+
+next_button.hoveredEvent:Connect(API.play_hover_sound)
+
+next_button.clickedEvent:Connect(function()
+	API.clear_graph()
+
+	Events.Broadcast("puzzle_edit")
+	API.play_click_sound()
+	
+	script.parent.parent.visibility = Visibility.FORCE_OFF
+	next_button.isInteractable = false
 end)
