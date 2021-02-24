@@ -3,7 +3,7 @@ Entries {
     StringVar: "s"
   }
   SimpleValue {
-    IntVar: 100
+    IntVar: 20
   }
 }
 Entries {
@@ -16,7 +16,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "n"
+    StringVar: "p1t"
   }
   SimpleValue {
     IntVar: 1
@@ -32,7 +32,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "p1t"
+    StringVar: "sn"
   }
   SimpleValue {
     IntVar: 1
@@ -48,7 +48,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sn"
+    StringVar: "n"
   }
   SimpleValue {
     IntVar: 1
