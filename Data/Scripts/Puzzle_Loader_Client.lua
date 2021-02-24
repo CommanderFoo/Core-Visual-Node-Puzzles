@@ -43,6 +43,8 @@ function load_puzzle(id)
 		if(tutorial ~= nil and seen_tutorial == 0) then
 			World.SpawnAsset(tutorial, { parent = tutorial_container })
 		end
+
+		Events.Broadcast("enable_header_ui")
 	else
 		Events.Broadcast("disable_header_ui", true)
 		Events.Broadcast("show_welcome")

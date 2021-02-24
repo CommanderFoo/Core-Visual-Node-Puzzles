@@ -25,20 +25,14 @@ Events.Connect("show_result", function(puzzle_time, gold_time, silver_time, bron
 	bronze_award:GetChildren()[1].text = string.format("%.2f", bronze_color)
 
 	if(floor(puzzle_time) <= gold_time) then
-		--program_time:SetColor(gold_color)
-
 		API.set_award(gold_award, 1)
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, .1)
 	elseif(floor(puzzle_time) <= silver_time) then
-		--program_time:SetColor(silver_color)
-
 		API.set_award(gold_award, .1)
 		API.set_award(silver_award, 1)
 		API.set_award(bronze_award, .1)
 	else
-		--program_time:SetColor(bronze_color)
-
 		API.set_award(gold_award, .1)
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, 1)
@@ -61,6 +55,9 @@ edit_button.clickedEvent:Connect(function()
 end)
 
 next_button.hoveredEvent:Connect(API.play_hover_sound)
+
+-- @TODO: Clear currently loaded puzzle in available nodes panel
+-- Call load_puzzle broadcast with the next puzzle id
 
 next_button.clickedEvent:Connect(function()
 	API.clear_graph()
