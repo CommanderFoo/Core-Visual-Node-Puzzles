@@ -3076,7 +3076,7 @@ Objects {
   Control {
     Width: 150
     Height: 40
-    UIY: -35
+    UIY: -30
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -3450,6 +3450,12 @@ Objects {
         Id: 16622261663679835299
       }
     }
+    Overrides {
+      Name: "cs:program_time"
+      ObjectReference {
+        SelfId: 9344745075629321891
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -3484,6 +3490,7 @@ Objects {
   ChildIds: 24449148980855888
   ChildIds: 6565952566436155257
   ChildIds: 11898753146948464473
+  ChildIds: 9344745075629321891
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -3499,6 +3506,63 @@ Objects {
       }
     }
     Panel {
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 9344745075629321891
+  Name: "Program Time"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 17225765648467528558
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 200
+    Height: 60
+    UIY: 115
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Label: "Program Time: 14.0 Seconds"
+      Color {
+        R: 1
+        G: 0.802
+        B: 0.802
+        A: 1
+      }
+      Size: 15
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -3539,7 +3603,7 @@ Objects {
     Width: 130
     Height: 40
     UIX: 75
-    UIY: 325
+    UIY: -30
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -3548,6 +3612,9 @@ Objects {
     Button {
       Label: "Next Puzzle"
       FontColor {
+        R: 1
+        G: 0.818
+        B: 0.818
         A: 1
       }
       FontSize: 16
@@ -3582,12 +3649,12 @@ Objects {
     AnchorLayout {
       SelfAnchor {
         Anchor {
-          Value: "mc:euianchor:topcenter"
+          Value: "mc:euianchor:bottomcenter"
         }
       }
       TargetAnchor {
         Anchor {
-          Value: "mc:euianchor:topcenter"
+          Value: "mc:euianchor:bottomcenter"
         }
       }
     }
@@ -3618,7 +3685,7 @@ Objects {
     Width: 130
     Height: 40
     UIX: -75
-    UIY: 325
+    UIY: -30
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -3662,12 +3729,12 @@ Objects {
     AnchorLayout {
       SelfAnchor {
         Anchor {
-          Value: "mc:euianchor:topcenter"
+          Value: "mc:euianchor:bottomcenter"
         }
       }
       TargetAnchor {
         Anchor {
-          Value: "mc:euianchor:topcenter"
+          Value: "mc:euianchor:bottomcenter"
         }
       }
     }
@@ -3688,9 +3755,9 @@ Objects {
     }
   }
   ParentId: 17225765648467528558
-  ChildIds: 8150621180901353096
-  ChildIds: 12455724449721287714
-  ChildIds: 9301760752645100114
+  ChildIds: 14194057262219524395
+  ChildIds: 4811322912619957691
+  ChildIds: 15384594436765225464
   UnregisteredParameters {
   }
   Collidable_v2 {
@@ -3701,8 +3768,8 @@ Objects {
   }
   Control {
     Width: 100
-    Height: 100
-    UIY: 160
+    Height: 120
+    UIY: -15
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -3714,19 +3781,19 @@ Objects {
     AnchorLayout {
       SelfAnchor {
         Anchor {
-          Value: "mc:euianchor:topcenter"
+          Value: "mc:euianchor:middlecenter"
         }
       }
       TargetAnchor {
         Anchor {
-          Value: "mc:euianchor:topcenter"
+          Value: "mc:euianchor:middlecenter"
         }
       }
     }
   }
 }
 Objects {
-  Id: 9301760752645100114
+  Id: 15384594436765225464
   Name: "Bronze Award"
   Transform {
     Scale {
@@ -3736,68 +3803,113 @@ Objects {
     }
   }
   ParentId: 24449148980855888
-  TemplateInstance {
-    ParameterOverrideMap {
-      key: 17480121017144831975
-      value {
-        Overrides {
-          Name: "Name"
-          String: "Bronze Award"
+  ChildIds: 11396877453267992766
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 150
+    Height: 150
+    UIX: 125
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Image {
+      Brush {
+        Id: 820275713672694117
+      }
+      Color {
+        R: 0.610495746
+        G: 0.212230802
+        B: 0.0318960547
+        A: 0.1
+      }
+      TeamSettings {
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
-        Overrides {
-          Name: "Scale"
-          Vector {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        Overrides {
-          Name: "UIX"
-          Float: 125
-        }
-        Overrides {
-          Name: "UIY"
-          Float: 0
-        }
-        Overrides {
-          Name: "Width"
-          Int: 150
-        }
-        Overrides {
-          Name: "Height"
-          Int: 150
-        }
-        Overrides {
-          Name: "Color"
-          Color {
-            R: 0.610495746
-            G: 0.212230802
-            B: 0.0318960547
-            A: 0.2
-          }
-        }
-        Overrides {
-          Name: "Anchor"
-          Enum {
-            Value: "mc:euianchor:middlecenter"
-          }
-        }
-        Overrides {
-          Name: "Dock"
-          Enum {
-            Value: "mc:euianchor:middlecenter"
-          }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
       }
     }
-    TemplateAsset {
-      Id: 4242474907989208124
+  }
+  InstanceHistory {
+    SelfId: 15384594436765225464
+    SubobjectId: 17480121017144831975
+    InstanceId: 9301760752645100114
+    TemplateId: 4242474907989208124
+    WasRoot: true
+  }
+}
+Objects {
+  Id: 11396877453267992766
+  Name: "Time"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 15384594436765225464
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 50
+    Height: 60
+    UIY: 2
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Color {
+        G: 0.23074007
+        B: 0.396755308
+        A: 1
+      }
+      Size: 15
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:bottomcenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:bottomcenter"
+        }
+      }
     }
   }
 }
 Objects {
-  Id: 12455724449721287714
+  Id: 4811322912619957691
   Name: "Silver Award"
   Transform {
     Scale {
@@ -3807,68 +3919,112 @@ Objects {
     }
   }
   ParentId: 24449148980855888
-  TemplateInstance {
-    ParameterOverrideMap {
-      key: 10307689033462092511
-      value {
-        Overrides {
-          Name: "Name"
-          String: "Silver Award"
+  ChildIds: 9218715853991735830
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 150
+    Height: 150
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Image {
+      Brush {
+        Id: 820275713672694117
+      }
+      Color {
+        R: 0.527115345
+        G: 0.527115345
+        B: 0.527115345
+        A: 0.1
+      }
+      TeamSettings {
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
-        Overrides {
-          Name: "Scale"
-          Vector {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        Overrides {
-          Name: "UIX"
-          Float: 0
-        }
-        Overrides {
-          Name: "UIY"
-          Float: 0
-        }
-        Overrides {
-          Name: "Width"
-          Int: 150
-        }
-        Overrides {
-          Name: "Height"
-          Int: 150
-        }
-        Overrides {
-          Name: "Color"
-          Color {
-            R: 0.527115345
-            G: 0.527115345
-            B: 0.527115345
-            A: 0.2
-          }
-        }
-        Overrides {
-          Name: "Anchor"
-          Enum {
-            Value: "mc:euianchor:middlecenter"
-          }
-        }
-        Overrides {
-          Name: "Dock"
-          Enum {
-            Value: "mc:euianchor:middlecenter"
-          }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
       }
     }
-    TemplateAsset {
-      Id: 10438144223879621155
+  }
+  InstanceHistory {
+    SelfId: 4811322912619957691
+    SubobjectId: 10307689033462092511
+    InstanceId: 12455724449721287714
+    TemplateId: 10438144223879621155
+    WasRoot: true
+  }
+}
+Objects {
+  Id: 9218715853991735830
+  Name: "Time"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 4811322912619957691
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 50
+    Height: 60
+    UIY: 2
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Color {
+        G: 0.23074007
+        B: 0.396755308
+        A: 1
+      }
+      Size: 15
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:bottomcenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:bottomcenter"
+        }
+      }
     }
   }
 }
 Objects {
-  Id: 8150621180901353096
+  Id: 14194057262219524395
   Name: "Gold Award"
   Transform {
     Scale {
@@ -3878,62 +4034,107 @@ Objects {
     }
   }
   ParentId: 24449148980855888
-  TemplateInstance {
-    ParameterOverrideMap {
-      key: 9123463160940538860
-      value {
-        Overrides {
-          Name: "Name"
-          String: "Gold Award"
+  ChildIds: 15832761573421310145
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 150
+    Height: 150
+    UIX: -125
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Image {
+      Brush {
+        Id: 820275713672694117
+      }
+      Color {
+        R: 1
+        G: 0.679542601
+        A: 0.1
+      }
+      TeamSettings {
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
-        Overrides {
-          Name: "Scale"
-          Vector {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        Overrides {
-          Name: "UIX"
-          Float: -125
-        }
-        Overrides {
-          Name: "UIY"
-          Float: 0
-        }
-        Overrides {
-          Name: "Width"
-          Int: 150
-        }
-        Overrides {
-          Name: "Height"
-          Int: 150
-        }
-        Overrides {
-          Name: "Color"
-          Color {
-            R: 1
-            G: 0.679542601
-            A: 0.2
-          }
-        }
-        Overrides {
-          Name: "Anchor"
-          Enum {
-            Value: "mc:euianchor:middlecenter"
-          }
-        }
-        Overrides {
-          Name: "Dock"
-          Enum {
-            Value: "mc:euianchor:middlecenter"
-          }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
       }
     }
-    TemplateAsset {
-      Id: 3563390086910122431
+  }
+  InstanceHistory {
+    SelfId: 14194057262219524395
+    SubobjectId: 9123463160940538860
+    InstanceId: 8150621180901353096
+    TemplateId: 3563390086910122431
+    WasRoot: true
+  }
+}
+Objects {
+  Id: 15832761573421310145
+  Name: "Time"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 14194057262219524395
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Control {
+    Width: 50
+    Height: 60
+    UIY: 2
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Color {
+        G: 0.23074007
+        B: 0.396755308
+        A: 1
+      }
+      Size: 15
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:bottomcenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:bottomcenter"
+        }
+      }
     }
   }
 }
@@ -3972,10 +4173,9 @@ Objects {
       Color {
         R: 1
         G: 1
-        B: 1
         A: 1
       }
-      Size: 50
+      Size: 46
       Justification {
         Value: "mc:etextjustify:center"
       }

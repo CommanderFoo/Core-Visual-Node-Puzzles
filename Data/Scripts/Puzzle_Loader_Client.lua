@@ -24,6 +24,7 @@ function load_puzzle(id)
 	end
 
 	if(puzzles["puzzle_" .. id]) then
+		
 		current_puzzle = World.SpawnAsset(puzzles["puzzle_" .. id], { parent = nodes_container })
 
 		puzzle_name.text = current_puzzle:GetCustomProperty("name")
@@ -80,4 +81,8 @@ local_player.resourceChangedEvent:Connect(function(obj, prop)
 			Events.Broadcast("show_notifications_toggle_off")
 		end
 	end
+end)
+
+Task.Spawn(function()
+	Events.BroadcastToServer("game_ready")
 end)

@@ -3,7 +3,7 @@ local clear_player_data = script:GetCustomProperty("clear_player_data")
 
 local tutorial_data = {}
 
-function on_player_joined(player)
+function init(player)
 	local player_data = Storage.GetPlayerData(player)
 	
 	player_data.cp = player_data.cp or 0
@@ -78,7 +78,6 @@ function load_puzzle(player, puzzle_id, force_show_nodes)
 	end
 end
 
-Game.playerJoinedEvent:Connect(on_player_joined)
 Game.playerLeftEvent:Connect(on_player_left)
 
 Events.ConnectForPlayer("update_player_prefs", function(player, speed, show_nodes)
@@ -98,3 +97,4 @@ Events.ConnectForPlayer("save_puzzle_tutorial_seen", function(player)
 end)
 
 Events.ConnectForPlayer("load_puzzle", load_puzzle)
+Events.ConnectForPlayer("game_ready", init)

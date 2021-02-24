@@ -1021,7 +1021,7 @@ Assets {
         ChildIds: 16192639063635145916
         ChildIds: 16840986955040964166
         ChildIds: 2167800026317571007
-        ChildIds: 17730680790284730012
+        ChildIds: 879426794442650199
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -2158,7 +2158,7 @@ Assets {
         }
       }
       Objects {
-        Id: 17730680790284730012
+        Id: 879426794442650199
         Name: "Node Time"
         Transform {
           Location {
@@ -2172,16 +2172,17 @@ Assets {
           }
         }
         ParentId: 10555237814934487790
+        ChildIds: 3605700723413745154
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
         Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
+          Value: "mc:evisibilitysetting:forceoff"
         }
         Control {
-          Width: 60
+          Width: 55
           Height: 40
-          UIX: -6
+          UIX: 9.99993896
           UIY: 33
           RenderTransformPivot {
             Anchor {
@@ -2209,6 +2210,68 @@ Assets {
             TargetAnchor {
               Anchor {
                 Value: "mc:euianchor:middleright"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 3605700723413745154
+        Name: "Clock"
+        Transform {
+          Location {
+            X: 41.5214539
+            Y: 102.598244
+            Z: 247.261353
+          }
+          Rotation {
+            Yaw: 4.83096409
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 879426794442650199
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Control {
+          Width: 20
+          Height: 20
+          UIX: -25
+          UIY: -8
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Image {
+            Brush {
+              Id: 12125222595592029656
+            }
+            Color {
+              R: 0.370000064
+              G: 0.400000393
+              B: 1
+              A: 1
+            }
+            TeamSettings {
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
               }
             }
           }
@@ -2491,6 +2554,15 @@ Assets {
       PrimaryAsset {
         AssetType: "PlatformBrushAssetRef"
         AssetId: "CenterArrow_005Wedge"
+      }
+    }
+    Assets {
+      Id: 12125222595592029656
+      Name: "Icon Clock"
+      PlatformAssetType: 9
+      PrimaryAsset {
+        AssetType: "PlatformBrushAssetRef"
+        AssetId: "Icon_Clock"
       }
     }
     Assets {

@@ -28,15 +28,15 @@ Assets {
           }
           Overrides {
             Name: "cs:gold_time"
-            Float: 12
+            Float: 11
           }
           Overrides {
             Name: "cs:silver_time"
-            Float: 18
+            Float: 14
           }
           Overrides {
             Name: "cs:bronze_time"
-            Float: 20
+            Float: 17
           }
           Overrides {
             Name: "cs:tutorial"
@@ -760,7 +760,7 @@ Assets {
           }
           Overrides {
             Name: "cs:total"
-            Int: 1
+            Int: 5
           }
           Overrides {
             Name: "cs:total_count"

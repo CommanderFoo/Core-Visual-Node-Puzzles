@@ -52,3 +52,12 @@ Assets {
     AssetId: "Icon_Checkmark"
   }
 }
+Assets {
+  Id: 820275713672694117
+  Name: "Award"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "UI_Military_Icon_036"
+  }
+}

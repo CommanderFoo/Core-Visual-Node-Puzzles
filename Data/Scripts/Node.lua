@@ -189,7 +189,9 @@ function Node:setup_node(root)
 		local node_time_ui = self.root:FindDescendantByName("Node Time")
 
 		if(Object.IsValid(node_time_ui)) then
-			node_time_ui.text = tostring(self.options.node_time) .. " Sec"
+			node_time_ui.visibility = Visibility.FORCE_ON
+			
+			node_time_ui.text = string.format("%.2f", self.options.node_time)
 		end
 	end
 
