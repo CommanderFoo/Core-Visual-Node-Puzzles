@@ -3799,6 +3799,12 @@ Objects {
         SelfId: 9344745075629321891
       }
     }
+    Overrides {
+      Name: "cs:available_nodes"
+      ObjectReference {
+        SelfId: 7410864171820395270
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

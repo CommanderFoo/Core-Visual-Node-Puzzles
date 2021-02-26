@@ -126,6 +126,8 @@ function disable_select(clear_selected)
 			selected_option = selected
 			selected_option.text = ""
 		end
+
+		close_select()
 	end
 end
 

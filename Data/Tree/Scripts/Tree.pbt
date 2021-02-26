@@ -261,12 +261,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:puzzle_1"
-      AssetReference {
-        Id: 2907093068677695656
-      }
-    }
-    Overrides {
       Name: "cs:data"
       ObjectReference {
         SelfId: 3720954960903579450
@@ -276,6 +270,18 @@ Objects {
       Name: "cs:tutorial_container"
       ObjectReference {
         SelfId: 6452927242494604331
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_1"
+      AssetReference {
+        Id: 2907093068677695656
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_2"
+      AssetReference {
+        Id: 8432808241900387766
       }
     }
   }

@@ -4,6 +4,7 @@ local title = script:GetCustomProperty("title"):WaitForObject()
 local edit_button = script:GetCustomProperty("edit_button"):WaitForObject()
 local next_button = script:GetCustomProperty("next_button"):WaitForObject()
 local program_time = script:GetCustomProperty("program_time"):WaitForObject()
+local available_nodes = script:GetCustomProperty("available_nodes"):WaitForObject()
 
 local gold_award = script:GetCustomProperty("gold_award"):WaitForObject()
 local silver_award = script:GetCustomProperty("silver_award"):WaitForObject()
@@ -21,8 +22,8 @@ Events.Connect("show_result", function(puzzle_time, gold_time, silver_time, bron
 	program_time.text = string.format("Program Time: %.2f Seconds", puzzle_time)
 
 	gold_award:GetChildren()[1].text = string.format("%.2f", gold_time)
-	silver_award:GetChildren()[1].text = string.format("%.2f", silver_color)
-	bronze_award:GetChildren()[1].text = string.format("%.2f", bronze_color)
+	silver_award:GetChildren()[1].text = string.format("%.2f", silver_time)
+	bronze_award:GetChildren()[1].text = string.format("%.2f", bronze_time)
 
 	if(floor(puzzle_time) <= gold_time) then
 		API.set_award(gold_award, 1)
@@ -54,6 +55,20 @@ edit_button.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
+function find_active_puzzle()
+	local children = available_nodes:GetChildren()
+
+	for k, v in pairs(children) do
+		local id = string.find(v.name, "Puzzle %d+")
+	
+		if(id) then
+			return v, id
+		end
+	end
+
+	return nil
+end
+
 next_button.hoveredEvent:Connect(API.play_hover_sound)
 
 -- @TODO: Clear currently loaded puzzle in available nodes panel
@@ -62,9 +77,18 @@ next_button.hoveredEvent:Connect(API.play_hover_sound)
 next_button.clickedEvent:Connect(function()
 	API.clear_graph()
 
-	Events.Broadcast("puzzle_edit")
+	local active_puzzle, id = find_active_puzzle()
+
 	API.play_click_sound()
-	
+
 	script.parent.parent.visibility = Visibility.FORCE_OFF
 	next_button.isInteractable = false
+
+	if(active_puzzle and id) then
+		--active_puzzle:Destroy()
+
+		Events.BroadcastToServer("load_puzzle", tonumber(id) + 1)
+	end
+
+	Events.Broadcast("puzzle_edit")
 end)

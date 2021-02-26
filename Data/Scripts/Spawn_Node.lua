@@ -48,7 +48,7 @@ Events.Connect("disable_available_nodes", function()
 end)
 
 Events.Connect("enable_available_nodes", function()
-	if(total_spawned < total) then
+	if(total_spawned < total and Object.IsValid(button)) then
 		button.isInteractable = true
 	end
 end)
