@@ -1,13 +1,13 @@
 Assets {
-  Id: 17281876239352242542
-  Name: "White Apple"
+  Id: 1215131136983781123
+  Name: "Circle Shape"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 6899325833784075728
       Objects {
         Id: 6899325833784075728
-        Name: "White Apple"
+        Name: "Circle Shape"
         Transform {
           Scale {
             X: 1
@@ -23,8 +23,8 @@ Assets {
           Value: "mc:evisibilitysetting:inheritfromparent"
         }
         Control {
-          Width: 50
-          Height: 50
+          Width: 40
+          Height: 40
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -32,7 +32,7 @@ Assets {
           }
           Image {
             Brush {
-              Id: 12963408877106328672
+              Id: 282048513447773438
             }
             Color {
               R: 1
@@ -59,12 +59,12 @@ Assets {
       }
     }
     Assets {
-      Id: 12963408877106328672
-      Name: "Icon Apple"
+      Id: 282048513447773438
+      Name: "UI Basic Shape Circle"
       PlatformAssetType: 9
       PrimaryAsset {
         AssetType: "PlatformBrushAssetRef"
-        AssetId: "Icon_Apple"
+        AssetId: "UI_Basic_Shape_Circle"
       }
     }
     PrimaryAssetId {

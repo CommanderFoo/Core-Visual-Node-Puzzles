@@ -27,6 +27,8 @@ local offset = 0
 local selected_option = selected
 local disabled = root:GetCustomProperty("disabled")
 
+local selected_shape = selected:FindChildByName("Shape")
+
 arrow:SetColor(arrow_color)
 
 selected_border:SetColor(border_color)
@@ -90,6 +92,11 @@ for i = 1, total_options do
 	options[i].clickedEvent:Connect(function()
 		selected_option = options[i]
 		selected.text = options[i].text
+
+		selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
+		selected_shape.visibility = Visibility.FORCE_ON
+		selected_shape:SetColor(options[i]:FindChildByName("Shape"):GetColor())
+
 		close_select()
 
 		Events.Broadcast("on_" .. event .. "selected", i, options[i], options[i]:GetCustomProperty("value"))

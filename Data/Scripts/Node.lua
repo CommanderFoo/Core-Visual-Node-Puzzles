@@ -191,7 +191,7 @@ function Node:setup_node(root)
 		if(Object.IsValid(node_time_ui)) then
 			node_time_ui.visibility = Visibility.FORCE_ON
 			
-			node_time_ui.text = string.format("%.2f", self.options.node_time)
+			node_time_ui.text = string.format("%.2fs", self.options.node_time)
 		end
 	end
 
@@ -882,15 +882,18 @@ function Node_If:new(r, options)
 					})
 				elseif(this:has_bottom_connection()) then
 					offset = this:get_bottom_offset()
-					obj = this:spawn_asset(data.asset, line.x, line.y)
-					connection_method = "send_data_bottom"
-		
-					this:insert_tween({
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
 						
-						obj = obj,
-						tween = tween
-					
-					})
+						})
+					end
 				else
 					this:has_errors(true)
 				end
@@ -1011,7 +1014,7 @@ function Node_Data:new(r, options)
 		this.tweens = {}
 	end
 
-	this.options.tick = function()		
+	this.options.tick = function()	
 		if(this:has_connection()) then
 			if(this.options.count == this.options.total_data_items) then
 				this:stop_ticking()
@@ -1059,7 +1062,7 @@ function Node_Data:new(r, options)
 			end)
 
 			tween:on_change(function(changed)
-				local x, y = this:get_path(obj, line, changed)
+				local x, y = this:get_path(obj, line, changed, -obj.height / 2)
 		
 				if(x == nil or y == nil) then
 					return

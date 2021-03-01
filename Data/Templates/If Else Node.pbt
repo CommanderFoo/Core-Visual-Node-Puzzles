@@ -47,13 +47,13 @@ Assets {
           Overrides {
             Name: "cs:green_apple"
             AssetReference {
-              Id: 11146737847086138394
+              Id: 841534158063459245
             }
           }
           Overrides {
             Name: "cs:red_apple"
             AssetReference {
-              Id: 9313343399765628902
+              Id: 841534158063459245
             }
           }
         }

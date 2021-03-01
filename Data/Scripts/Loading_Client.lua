@@ -1,79 +1,63 @@
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
-local progress = script:GetCustomProperty("progress"):WaitForObject()
+local square = script:GetCustomProperty("square"):WaitForObject()
+local circle = script:GetCustomProperty("circle"):WaitForObject()
+local triangle = script:GetCustomProperty("triangle"):WaitForObject()
 
-local x_time = 1
-local y_time = .5
+local shapes = {
 
-local left_right_tween = YOOTIL.Tween:new(x_time, {x = -219}, {x = 218})
-local right_down_tween = YOOTIL.Tween:new(y_time, {y = -24}, {y = 24})
-local right_left_tween = YOOTIL.Tween:new(x_time, {x = 218}, {x = -219})
-local left_up_tween = YOOTIL.Tween:new(y_time, {y = 44}, {y = -43})
+	[1] = {
+		
+		image = square,
+		color = square:GetColor()
 
-local active_tween = left_right_tween
+	},
 
--- Left to right
+	[2] = {
 
-left_right_tween:on_start(function()
-	progress.y = -45
+		image = circle,
+		color = circle:GetColor()
+
+	},
+
+	[3] = {
+
+		image = triangle,
+		color = triangle:GetColor()
+		
+	}
+
+}
+
+local tween = YOOTIL.Tween:new(.5, {x = -180, a = 0}, {x = 180, a = .8})
+
+local current_shape_index = math.random(1, #shapes)
+local current_shape = shapes[current_shape_index]
+
+tween:on_complete(function()
+	current_shape_index = math.random(1, #shapes)
+	current_shape = shapes[current_shape_index]
+
+	tween:reset()
 end)
 
-left_right_tween:on_complete(function()
-	active_tween = right_down_tween
-	left_right_tween:reset()
+tween:on_change(function(v)
+	current_shape.image.x = v.x
+	
+	if(v.a >= .4) then
+		v.a = .8 - v.a
+	end
+
+	current_shape.color.a = v.a
+	current_shape.image:SetColor(current_shape.color)
 end)
 
-left_right_tween:on_change(function(v)
-	progress.x = v.x
+tween:on_start(function()
+	current_shape.color.a = 0
+	current_shape.image:SetColor(current_shape.color)
 end)
 
--- Right to down
-
-right_down_tween:on_start(function()
-	progress.x = 221
-end)
-
-right_down_tween:on_complete(function()
-	active_tween = right_left_tween
-	right_down_tween:reset()
-end)
-
-right_down_tween:on_change(function(v)
-	progress.y = v.y
-end)
-
--- Right to left
-
-right_left_tween:on_start(function()
-	progress.y = 45
-end)
-
-right_left_tween:on_complete(function()
-	active_tween = left_up_tween
-	right_left_tween:reset()
-end)
-
-right_left_tween:on_change(function(v)
-	progress.x = v.x
-end)
-
--- Left to up
-
-left_up_tween:on_start(function()
-	progress.x = -221
-end)
-
-left_up_tween:on_complete(function()
-	active_tween = left_right_tween
-	left_up_tween:reset()
-end)
-
-left_up_tween:on_change(function(v)
-	progress.y = v.y
-end)
 
 function Tick(dt)
-	if(active_tween ~= nil) then
-		--active_tween:tween(dt)
-	end
+	tween:tween(dt)
 end

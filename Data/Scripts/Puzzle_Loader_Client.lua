@@ -2,6 +2,7 @@
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 local data = script:GetCustomProperty("data"):WaitForObject()
 local tutorial_container = script:GetCustomProperty("tutorial_container"):WaitForObject()
+local loading = script:GetCustomProperty("loading"):WaitForObject()
 
 local local_player = Game.GetLocalPlayer()
 
@@ -19,6 +20,10 @@ end
 local current_puzzle = nil
 
 function load_puzzle(id)
+	if(Object.IsValid(loading)) then
+		loading:Destroy()
+	end
+
 	if(current_puzzle ~= nil and Object.IsValid(current_puzzle)) then
 		current_puzzle:Destroy()
 	end

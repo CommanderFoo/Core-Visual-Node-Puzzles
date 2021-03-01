@@ -1,13 +1,13 @@
 Assets {
-  Id: 1298492605103316524
-  Name: "Data Dummy Node"
+  Id: 5479818181507216108
+  Name: "Null Dummy Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
-      RootId: 13970098765297739689
+      RootId: 17415300834445331129
       Objects {
-        Id: 13970098765297739689
-        Name: "Data Dummy Node"
+        Id: 17415300834445331129
+        Name: "Null Dummy Node"
         Transform {
           Scale {
             X: 1
@@ -16,14 +16,14 @@ Assets {
           }
         }
         ParentId: 3627026760658224672
-        ChildIds: 9635114758448607551
-        ChildIds: 13064002283519166929
-        ChildIds: 8929289385585733398
-        ChildIds: 2752460220424690404
+        ChildIds: 1344663786493615860
+        ChildIds: 2636348733127940164
+        ChildIds: 13782930980477283309
+        ChildIds: 2141766959939575783
         UnregisteredParameters {
           Overrides {
             Name: "cs:total"
-            Int: 1
+            Int: 0
           }
         }
         Collidable_v2 {
@@ -36,7 +36,7 @@ Assets {
           Width: 250
           Height: 60
           UIX: -10
-          UIY: 25
+          UIY: 155
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -59,7 +59,7 @@ Assets {
         }
       }
       Objects {
-        Id: 9635114758448607551
+        Id: 1344663786493615860
         Name: "Header Background"
         Transform {
           Location {
@@ -72,7 +72,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 13970098765297739689
+        ParentId: 17415300834445331129
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -93,9 +93,9 @@ Assets {
               Id: 2010827857625261080
             }
             Color {
-              R: 0.332451582
-              G: 0.0343398117
-              B: 0.0481718332
+              R: 0.01
+              G: 0.01
+              B: 0.01
               A: 1
             }
             TeamSettings {
@@ -116,7 +116,7 @@ Assets {
         }
       }
       Objects {
-        Id: 13064002283519166929
+        Id: 2636348733127940164
         Name: "Node Handle"
         Transform {
           Location {
@@ -129,7 +129,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 13970098765297739689
+        ParentId: 17415300834445331129
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -146,7 +146,7 @@ Assets {
           }
           UseParentWidth: true
           Button {
-            Label: "Data"
+            Label: "Null"
             FontColor {
               R: 0.723055363
               G: 0.67954272
@@ -201,7 +201,7 @@ Assets {
         }
       }
       Objects {
-        Id: 8929289385585733398
+        Id: 13782930980477283309
         Name: "Client Scripts"
         Transform {
           Location {
@@ -214,8 +214,8 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 13970098765297739689
-        ChildIds: 11786148467765224060
+        ParentId: 17415300834445331129
+        ChildIds: 8886807115565859665
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -226,7 +226,7 @@ Assets {
         }
       }
       Objects {
-        Id: 11786148467765224060
+        Id: 8886807115565859665
         Name: "Spawn_Node"
         Transform {
           Location {
@@ -239,24 +239,12 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 8929289385585733398
+        ParentId: 13782930980477283309
         UnregisteredParameters {
-          Overrides {
-            Name: "cs:API"
-            AssetReference {
-              Id: 11355776926042268297
-            }
-          }
           Overrides {
             Name: "cs:node"
             AssetReference {
-              Id: 841534158063459245
-            }
-          }
-          Overrides {
-            Name: "cs:container"
-            ObjectReference {
-              SelfId: 3627026760658224672
+              Id: 17056670638480361309
             }
           }
         }
@@ -273,7 +261,7 @@ Assets {
         }
       }
       Objects {
-        Id: 2752460220424690404
+        Id: 2141766959939575783
         Name: "Total Bubble"
         Transform {
           Location {
@@ -286,8 +274,8 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 13970098765297739689
-        ChildIds: 9724823301824392877
+        ParentId: 17415300834445331129
+        ChildIds: 4634154258023820200
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -308,9 +296,9 @@ Assets {
               Id: 9402814787072448834
             }
             Color {
-              R: 0.332451582
-              G: 0.0343398117
-              B: 0.0481718332
+              R: 0.01
+              G: 0.01
+              B: 0.01
               A: 1
             }
             TeamSettings {
@@ -331,7 +319,7 @@ Assets {
         }
       }
       Objects {
-        Id: 9724823301824392877
+        Id: 4634154258023820200
         Name: "Total"
         Transform {
           Location {
@@ -344,7 +332,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 2752460220424690404
+        ParentId: 2141766959939575783
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -354,7 +342,7 @@ Assets {
         Control {
           Width: 200
           Height: 60
-          UIY: 1
+          UIY: -10
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -363,14 +351,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Text {
-            Label: "1"
+            Label: "\342\210\236"
             Color {
               R: 0.723055363
               G: 0.67954272
               B: 0.67954272
               A: 1
             }
-            Size: 15
+            Size: 24
             Justification {
               Value: "mc:etextjustify:center"
             }

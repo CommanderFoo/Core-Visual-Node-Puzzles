@@ -1,13 +1,13 @@
 Assets {
   Id: 3138596828004793381
-  Name: "Puzzle 1 Red Ouput Node"
+  Name: "Puzzle 1 Circle Ouput Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 3194892701475606914
       Objects {
         Id: 3194892701475606914
-        Name: "Puzzle 1 Red Ouput Node"
+        Name: "Puzzle 1 Circle Ouput Node"
         Transform {
           Scale {
             X: 1
@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 5413493479523348419
+        ParentId: 3627026760658224672
         ChildIds: 4577696565183868713
         ChildIds: 13626389031446345135
         ChildIds: 5706731354496968832
@@ -28,20 +28,6 @@ Assets {
             Name: "cs:can_move"
             Bool: true
           }
-          Overrides {
-            Name: "cs:max_out_connections"
-            Int: 1
-          }
-          Overrides {
-            Name: "cs:max_in_connections"
-            Int: 0
-          }
-          Overrides {
-            Name: "cs:count"
-            ObjectReference {
-              SubObjectId: 9780315848540922289
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -51,7 +37,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 100
+          Height: 120
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -572,7 +558,7 @@ Assets {
           }
         }
         ParentId: 6829325835321948273
-        ChildIds: 9780315848540922289
+        ChildIds: 2887163788385553142
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -580,9 +566,9 @@ Assets {
           Value: "mc:evisibilitysetting:forceon"
         }
         Control {
-          Width: 70
-          Height: 70
-          UIY: 25
+          Width: 50
+          Height: 50
+          UIY: 10
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -590,10 +576,12 @@ Assets {
           }
           Image {
             Brush {
-              Id: 12963408877106328672
+              Id: 282048513447773438
             }
             Color {
               R: 1
+              G: 1
+              B: 1
               A: 1
             }
             TeamSettings {
@@ -614,8 +602,8 @@ Assets {
         }
       }
       Objects {
-        Id: 9780315848540922289
-        Name: "Count"
+        Id: 2887163788385553142
+        Name: "Bubble"
         Transform {
           Location {
           }
@@ -628,6 +616,7 @@ Assets {
           }
         }
         ParentId: 2880741671324668323
+        ChildIds: 15005084936540976255
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -636,8 +625,64 @@ Assets {
         }
         Control {
           Width: 50
-          Height: 50
-          UIY: 20
+          Height: 25
+          UIY: 35
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Image {
+            Brush {
+            }
+            Color {
+              R: 0.198069349
+              G: 0.0231533684
+              B: 0.0307134502
+              A: 1
+            }
+            TeamSettings {
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:bottomcenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:bottomcenter"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 15005084936540976255
+        Name: "Count"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 2887163788385553142
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        Control {
+          Width: 200
+          Height: 60
+          UIY: -1
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -648,15 +693,15 @@ Assets {
           Text {
             Label: "0"
             Color {
-              R: 0.0290476475
-              B: 0.122000098
+              R: 1
+              G: 1
+              B: 1
               A: 1
             }
-            Size: 25
+            Size: 13
             Justification {
               Value: "mc:etextjustify:center"
             }
-            AutoWrapText: true
           }
           AnchorLayout {
             SelfAnchor {
@@ -999,12 +1044,12 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:condition"
-            String: "red"
+            String: "circle"
           }
           Overrides {
             Name: "cs:count"
             ObjectReference {
-              SubObjectId: 9780315848540922289
+              SubObjectId: 15005084936540976255
             }
           }
         }
@@ -1049,12 +1094,12 @@ Assets {
       }
     }
     Assets {
-      Id: 12963408877106328672
-      Name: "Icon Apple"
+      Id: 282048513447773438
+      Name: "UI Basic Shape Circle"
       PlatformAssetType: 9
       PrimaryAsset {
         AssetType: "PlatformBrushAssetRef"
-        AssetId: "Icon_Apple"
+        AssetId: "UI_Basic_Shape_Circle"
       }
     }
     Assets {

@@ -145,6 +145,10 @@ Assets {
         ChildIds: 7666742046538875355
         ChildIds: 14642953788054148535
         UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 1
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -370,23 +374,13 @@ Assets {
           Overrides {
             Name: "cs:node"
             AssetReference {
-              Id: 9154814252120369553
+              Id: 15053508962363864049
             }
           }
           Overrides {
             Name: "cs:container"
             ObjectReference {
               SelfId: 3627026760658224672
-            }
-          }
-          Overrides {
-            Name: "cs:total"
-            Int: 1
-          }
-          Overrides {
-            Name: "cs:total_count"
-            ObjectReference {
-              SubObjectId: 13944337767371490821
             }
           }
         }
@@ -536,6 +530,10 @@ Assets {
         ChildIds: 6090487925691955043
         ChildIds: 8963441515035618999
         UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 1
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -758,16 +756,6 @@ Assets {
               Id: 15874700923123276554
             }
           }
-          Overrides {
-            Name: "cs:total"
-            Int: 5
-          }
-          Overrides {
-            Name: "cs:total_count"
-            ObjectReference {
-              SubObjectId: 12192112514524399596
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -919,6 +907,10 @@ Assets {
         ChildIds: 16798641717647411076
         ChildIds: 3060894541229320470
         UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 1
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1141,12 +1133,6 @@ Assets {
               Id: 9145591431274877603
             }
           }
-          Overrides {
-            Name: "cs:total_count"
-            ObjectReference {
-              SubObjectId: 15567356773293166115
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1298,6 +1284,10 @@ Assets {
         ChildIds: 16142078790642132012
         ChildIds: 436595120919186865
         UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 1
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1518,16 +1508,6 @@ Assets {
             Name: "cs:node"
             AssetReference {
               Id: 3138596828004793381
-            }
-          }
-          Overrides {
-            Name: "cs:total"
-            Int: 1
-          }
-          Overrides {
-            Name: "cs:total_count"
-            ObjectReference {
-              SubObjectId: 5262735458867834928
             }
           }
         }

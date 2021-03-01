@@ -1,15 +1,15 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local red_count = script:GetCustomProperty("red_count"):WaitForObject()
-local green_count = script:GetCustomProperty("green_count"):WaitForObject()
+local square_count = script:GetCustomProperty("square_count"):WaitForObject()
+local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
 
-local red_apple = script:GetCustomProperty("red_apple")
-local green_apple = script:GetCustomProperty("green_apple")
+local square_shape = script:GetCustomProperty("square_shape")
+local circle_shape = script:GetCustomProperty("circle_shape")
 
 local data = {
 	
-	{ condition = "red", count = 10, ui = red_count, asset = red_apple },
-	{ condition = "green", count = 10, ui = green_count, asset = green_apple }
+	{ condition = "square", count = tonumber(square_count.text), ui = square_count, asset = square_shape },
+	{ condition = "circle", count = tonumber(circle_count.text), ui = circle_count, asset = circle_shape }
 
 }
 

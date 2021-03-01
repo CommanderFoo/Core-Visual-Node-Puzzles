@@ -6,10 +6,9 @@ local gold_time = root:GetCustomProperty("gold_time")
 local silver_time = root:GetCustomProperty("silver_time")
 local bronze_time = root:GetCustomProperty("bronze_time")
 
-local tutorial = root:GetCustomProperty("tutorial")
-
 local output_square_complete = false
 local output_circle_complete = false
+local output_triangle_complete = false
 
 local showing_result_ui = false
 local total_puzzle_time = 0
@@ -22,8 +21,12 @@ API.Puzzle_Events.on("output_circle_complete", function(errors)
 	output_circle_complete = true
 end)
 
+API.Puzzle_Events.on("output_triangle_complete", function(errors)
+	output_triangle_complete = true
+end)
+
 function Tick()
-	if(output_square_complete and output_circle_complete) then
+	if(output_square_complete and output_circle_complete and output_triangle_complete) then
 		show_result()
 	end
 end
@@ -41,6 +44,7 @@ end
 Events.Connect("puzzle_edit", function()
 	output_square_complete = false
 	output_circle_complete = false
+	output_triangle_complete = false
 	showing_result_ui = false
 	total_puzzle_time = 0
 end)

@@ -15,12 +15,16 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 13220548841656242973
+        ParentId: 3627026760658224672
         ChildIds: 1344663786493615860
         ChildIds: 2636348733127940164
         ChildIds: 13782930980477283309
         ChildIds: 2141766959939575783
         UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 0
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -237,12 +241,6 @@ Assets {
         }
         ParentId: 13782930980477283309
         UnregisteredParameters {
-          Overrides {
-            Name: "cs:total_count"
-            ObjectReference {
-              SubObjectId: 4634154258023820200
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"

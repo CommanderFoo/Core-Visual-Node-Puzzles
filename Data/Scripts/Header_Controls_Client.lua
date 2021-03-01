@@ -119,7 +119,7 @@ end)
 speed_up_button.hoveredEvent:Connect(API.play_hover_sound)
 
 speed_up_button.clickedEvent:Connect(function()
-	if(speed < 10) then
+	if(speed < 6) then
 		speed = speed + 1
 	end
 

@@ -1,6 +1,6 @@
 Assets {
-  Id: 14890744074768089991
-  Name: "Puzzle_1_Manager"
+  Id: 8641588361758435807
+  Name: "Puzzle_2"
   PlatformAssetType: 3
   TextAsset {
   }

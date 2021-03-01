@@ -1,13 +1,13 @@
 Assets {
-  Id: 9313343399765628902
-  Name: "Red Apple"
+  Id: 17505679986984784485
+  Name: "Triangle Shape"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 6899325833784075728
       Objects {
         Id: 6899325833784075728
-        Name: "Red Apple"
+        Name: "Triangle Shape"
         Transform {
           Scale {
             X: 1
@@ -23,8 +23,8 @@ Assets {
           Value: "mc:evisibilitysetting:inheritfromparent"
         }
         Control {
-          Width: 50
-          Height: 50
+          Width: 40
+          Height: 40
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -32,10 +32,12 @@ Assets {
           }
           Image {
             Brush {
-              Id: 12963408877106328672
+              Id: 4900954416202036311
             }
             Color {
               R: 1
+              G: 1
+              B: 1
               A: 1
             }
             TeamSettings {
@@ -57,12 +59,12 @@ Assets {
       }
     }
     Assets {
-      Id: 12963408877106328672
-      Name: "Icon Apple"
+      Id: 4900954416202036311
+      Name: "Center Tri 001"
       PlatformAssetType: 9
       PrimaryAsset {
         AssetType: "PlatformBrushAssetRef"
-        AssetId: "Icon_Apple"
+        AssetId: "CenterTri_001"
       }
     }
     PrimaryAssetId {

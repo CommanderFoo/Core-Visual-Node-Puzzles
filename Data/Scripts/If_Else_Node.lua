@@ -1,7 +1,5 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local dropdown_event = script.parent.parent.id
-
 local if_node = API.Node_Type.If:new(script.parent.parent, {
 
 	YOOTIL = YOOTIL,
@@ -19,7 +17,7 @@ function Tick(dt)
 	end
 end
 
-Events.Connect("on_" .. dropdown_event .. "_selected", function(index, option, value)
+Events.Connect("on_" .. script.parent.parent.id .. "_selected", function(index, option, value)
 	if_node:set_option("if_condition", string.lower(option.text))
 end)
 

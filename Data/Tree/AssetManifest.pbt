@@ -35,6 +35,24 @@ Assets {
   }
 }
 Assets {
+  Id: 8983376936976210202
+  Name: "Center Circle 001"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "CenterCircle_001"
+  }
+}
+Assets {
+  Id: 4900954416202036311
+  Name: "Center Tri 001"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "CenterTri_001"
+  }
+}
+Assets {
   Id: 1557426602478375544
   Name: "Center Arrow 004 Wedge"
   PlatformAssetType: 9
