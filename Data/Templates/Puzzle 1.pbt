@@ -24,7 +24,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:name"
-            String: "Tutorial 1"
+            String: "Your Journey Begins"
           }
           Overrides {
             Name: "cs:gold_time"
