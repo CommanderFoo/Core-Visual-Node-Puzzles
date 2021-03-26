@@ -1,38 +1,14 @@
 Entries {
   Key {
-    StringVar: "p1t"
-  }
-  SimpleValue {
-    IntVar: 1
-  }
-}
-Entries {
-  Key {
     StringVar: "cs"
   }
   SimpleValue {
-    IntVar: 6
-  }
-}
-Entries {
-  Key {
-    StringVar: "n"
-  }
-  SimpleValue {
-    IntVar: 0
-  }
-}
-Entries {
-  Key {
-    StringVar: "sn"
-  }
-  SimpleValue {
     IntVar: 1
   }
 }
 Entries {
   Key {
-    StringVar: "m"
+    StringVar: "mv"
   }
   SimpleValue {
     IntVar: 0
@@ -43,14 +19,30 @@ Entries {
     StringVar: "cp"
   }
   SimpleValue {
-    IntVar: 2
+    IntVar: 1
   }
 }
 Entries {
   Key {
-    StringVar: "s"
+    StringVar: "sv"
   }
   SimpleValue {
-    IntVar: 100
+    IntVar: 0
+  }
+}
+Entries {
+  Key {
+    StringVar: "sn"
+  }
+  SimpleValue {
+    IntVar: 0
+  }
+}
+Entries {
+  Key {
+    StringVar: "an"
+  }
+  SimpleValue {
+    IntVar: 0
   }
 }

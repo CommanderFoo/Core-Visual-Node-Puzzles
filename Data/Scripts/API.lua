@@ -29,6 +29,8 @@ API.nodes = {}
 API.active_node = nil
 API.can_edit_nodes = true
 
+local local_player = Game.GetLocalPlayer()
+
 function API.register_node(node)
 	table.insert(API.nodes, #API.nodes + 1, node)
 end
@@ -165,7 +167,7 @@ end)
 
 ticking_task.repeatCount = -1
 
-Game.GetLocalPlayer().bindingPressedEvent:Connect(function(obj, binding)
+local_player.bindingPressedEvent:Connect(function(obj, binding)
 	if(binding == "ability_secondary" and API.can_edit_nodes) then
 		if(API.active_node ~= nil) then
 			API.active_node:stop_all_drag()

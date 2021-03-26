@@ -1,100 +1,86 @@
-﻿local data_holder = script:GetCustomProperty("data"):WaitForObject()
+﻿local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+
+local data_holder = script:GetCustomProperty("data"):WaitForObject()
 local clear_player_data = script:GetCustomProperty("clear_player_data")
 
-local tutorial_data = {}
+Events.ConnectForPlayer("init", function(player)
+	Events.BroadcastToPlayer(player, "show_main_menu")
+end)
 
-function init(player)
+function load_game(player)
 	local player_data = Storage.GetPlayerData(player)
 	
-	player_data.cp = player_data.cp or 0
-	player_data.cs = player_data.cs or 1
-	player_data.s = player_data.s or 100
-	player_data.m = player_data.m or 100
-	player_data.n = player_data.n or 1
-	player_data.sn = player_data.sn or 0
-	
-	if(player_data.cp and not clear_player_data) then
-		data = player_data
-
-		local counter = 1
-
-		for k, v in pairs(player_data) do
-			local key = "p" .. counter .. "t"
-			
-			if(k == key) then
-				player:SetResource(k, v)
-
-				tutorial_data[k] = v
-			end
-		end
+	if(clear_player_data) then
+		player_data = {}
 	end
 
-	print("---------")
-	for k, v in pairs(player_data) do
-		print(k, v)
+	if(player_data.cp == nil or player_data.cp < 1) then
+		player_data.cp = 1 -- Current Puzzle
 	end
-	print("---------")
-	
+
+	if(player_data.cs == nil or player_data.cs < 1) then
+		player_data.cs = 1 -- Current Speed
+	end
+
+	player_data.sv = player_data.sv or 100 -- Sound FX Volume
+	player_data.mv = player_data.mv or 100 -- Music Volume
+	player_data.an = player_data.an or 1 -- Nodes Show / Hide
+	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
+
 	player:SetResource("speed", player_data.cs)
-	player:SetResource("sfx_volume", player_data.s)
-	player:SetResource("music_volume", player_data.m)
-	player:SetResource("show_notifications", player_data.n)
+	player:SetResource("sfx_volume", player_data.sv)
+	player:SetResource("music_volume", player_data.mv)
+	player:SetResource("show_notifications", player_data.sn)
+	player:SetResource("show_nodes", player_data.an)
+	player:SetResource("current_puzzle", player_data.cp)
 
-	if(player_data.cp > 0) then
-		player:SetResource("show_nodes", player_data.sn)
-	end
+	--YOOTIL.Utils.dump(player_data)
 
-	load_puzzle(player, player_data.cp)
+	Events.BroadcastToPlayer(player, "load_game", player_data.cp)
 end
 
-function on_player_left(player)
+function save_data(player)
 	local data = {
 
-		cp = player:GetResource("puzzle_id"),
+		cp = player:GetResource("current_puzzle"),
 		cs = player:GetResource("speed"),
-		s = player:GetResource("sfx_volume"),
-		m = player:GetResource("music_volume"),
-		n = player:GetResource("show_notifications"),
-		sn = player:GetResource("show_nodes")
+		sv = player:GetResource("sfx_volume"),
+		mv = player:GetResource("music_volume"),
+		sn = player:GetResource("show_notifications"),
+		an = player:GetResource("show_nodes")
 
 	}
-
-	for k, v in pairs(tutorial_data) do
-		data[k] = v
-	end
 
 	if(clear_player_data) then
 		data = {}
 	end
 
+	--YOOTIL.Utils.dump(data)
+
 	Storage.SetPlayerData(player, data)
 end
 
-function load_puzzle(player, puzzle_id, force_show_nodes)
-	player:SetResource("puzzle_id", puzzle_id)
+Events.ConnectForPlayer("load_game", load_game)
 
-	if(force_show_nodes) then
-		player:SetResource("show_nodes", 1)
-	end
-end
-
-Game.playerLeftEvent:Connect(on_player_left)
+Game.playerLeftEvent:Connect(save_data)
 
 Events.ConnectForPlayer("update_player_prefs", function(player, speed, show_nodes)
 	player:SetResource("speed", speed)
-	player:SetResource("show_nodes", (show_nodes and 1) or (not show_nodes and 0))
+
+	if(not show_nodes) then
+		player:SetResource("show_nodes", 0)
+	else
+		player:SetResource("show_nodes", 1)
+	end
 end)
 
 Events.ConnectForPlayer("update_settings", function(player, sfx_vol, music_vol, notify)
 	player:SetResource("sfx_volume", sfx_vol)
 	player:SetResource("music_volume", music_vol)
-	player:SetResource("show_notifications", (notify and 1) or (not notify and 0))
-end)
 
-Events.ConnectForPlayer("save_puzzle_tutorial_seen", function(player)
-	player:SetResource("p" .. player:GetResource("puzzle_id") .. "t", 1)
-	tutorial_data["p" .. player:GetResource("puzzle_id") .. "t"] = 1
+	if(not notify) then
+		player:SetResource("show_notifications", 0)
+	else
+		player:SetResource("show_notifications", 1)
+	end
 end)
-
-Events.ConnectForPlayer("load_puzzle", load_puzzle)
-Events.ConnectForPlayer("game_ready", init)

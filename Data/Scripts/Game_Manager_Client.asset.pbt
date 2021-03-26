@@ -1,6 +1,6 @@
 Assets {
-  Id: 7760145848058207899
-  Name: "Result_UI"
+  Id: 5597919196133201147
+  Name: "Game_Manager_Client"
   PlatformAssetType: 3
   TextAsset {
   }
