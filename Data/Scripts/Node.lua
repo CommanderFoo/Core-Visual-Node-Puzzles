@@ -720,11 +720,16 @@ function Node:create_tween(line)
 	end
 
 	local t = self.options.YOOTIL.Tween:new(self:get_tween_duration(), {a = 0}, {a = line.width})
-
+	
 	if(self.options.tween_delay) then
 		t:set_delay(self.options.tween_delay / self.options.speed)
 
-		Events.Broadcast("timer", self.options.tween_delay)
+		Events.Broadcast("score", self.options.tween_delay or 0)
+	end
+
+	if(not self.options.added_tween) then
+		Events.Broadcast("score", self.options.tween_duration)
+		self.options.added_tween = true
 	end
 
 	return t
@@ -860,7 +865,7 @@ function Node_If:new(r, options)
 		end
 
 		local queue_func = function()
-			Events.Broadcast("timer", this.options.node_time)
+			Events.Broadcast("score", this.options.node_time or 0)
 
 			if(this:has_top_connection() or this:has_bottom_connection()) then
 				local condition = (data.condition == this.options.if_condition)
@@ -937,6 +942,8 @@ function Node_If:new(r, options)
 	end
 	
 	function this:reset()
+		this.options.added_tween = false
+
 		if(this.options.queue_task ~= nil) then
 			this.options.queue_task:Cancel()
 			this.options.queue_task = nil
@@ -990,6 +997,7 @@ function Node_Data:new(r, options)
 	this.options.total_data_items = 0
 	this.options.index = 1
 	this.options.count = 0
+	this.options.added_tween = false
 
 	function setup_data()
 		this.options.total_data_items = 0
@@ -1009,18 +1017,19 @@ function Node_Data:new(r, options)
 
 		setup_data()
 
+		this.options.added_tween = false
 		this.options.index = 1
 		this.options.count = 0
 		this.tweens = {}
 	end
 
-	this.options.tick = function()	
+	this.options.tick = function()
 		if(this:has_connection()) then
 			if(this.options.count == this.options.total_data_items) then
 				this:stop_ticking()
 				return
 			else
-				Events.Broadcast("timer", (this.options.repeat_interval or 0.1))
+				Events.Broadcast("score", (this.options.repeat_interval or 0.1))
 			end
 			
 			if(this.options.index == (#this.options.data_items + 1)) then

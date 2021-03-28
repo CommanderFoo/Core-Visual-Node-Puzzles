@@ -16,20 +16,20 @@ local bronze_color = bronze_award:GetColor()
 
 local floor = math.floor
 
-Events.Connect("show_result", function(puzzle_time, gold_time, silver_time, bronze_time)
+Events.Connect("show_result", function(puzzle_score, gold_time, silver_time, bronze_time)
 	next_button.isInteractable = true
 
-	program_time.text = string.format("Program Time: %.2f Seconds", puzzle_time)
+	program_time.text = string.format("Program Score: %.0f", 10000 - (puzzle_score + (API.get_total_nodes() * 100)))
 
 	gold_award:GetChildren()[1].text = string.format("%.2f", gold_time)
 	silver_award:GetChildren()[1].text = string.format("%.2f", silver_time)
 	bronze_award:GetChildren()[1].text = string.format("%.2f", bronze_time)
 
-	if(floor(puzzle_time) <= gold_time) then
+	if(floor(puzzle_score) <= gold_time) then
 		API.set_award(gold_award, 1)
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, .1)
-	elseif(floor(puzzle_time) <= silver_time) then
+	elseif(floor(puzzle_score) <= silver_time) then
 		API.set_award(gold_award, .1)
 		API.set_award(silver_award, 1)
 		API.set_award(bronze_award, .1)
@@ -85,9 +85,9 @@ next_button.clickedEvent:Connect(function()
 	next_button.isInteractable = false
 
 	if(active_puzzle and id) then
-		--active_puzzle:Destroy()
+		active_puzzle:Destroy()
 
-		Events.BroadcastToServer("load_puzzle", tonumber(id) + 1)
+		Events.Broadcast("load_puzzle", tonumber(id) + 1)
 	end
 
 	Events.Broadcast("puzzle_edit")

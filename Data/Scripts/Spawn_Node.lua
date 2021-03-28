@@ -53,7 +53,9 @@ button.clickedEvent:Connect(function()
 end)
 
 Events.Connect("disable_available_nodes", function()
-	button.isInteractable = false
+	if(Object.IsValid(button)) then
+		button.isInteractable = false
+	end
 end)
 
 Events.Connect("enable_available_nodes", function()

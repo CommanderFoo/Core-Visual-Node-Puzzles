@@ -1,5 +1,7 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
 
+local is_destroyed = false
+
 local count = script:GetCustomProperty("count"):WaitForObject()
 local condition = script:GetCustomProperty("condition")
 
@@ -32,9 +34,17 @@ local node = API.Node:new(script.parent.parent, {
 API.register_node(node)
 
 Events.Connect("puzzle_edit", function()
+	if(is_destroyed) then
+		return
+	end
+	
 	if(Object.IsValid(count)) then
 		count.text = "0"
 		total = 0
 		node:hide_error_info()
 	end
+end)
+
+script.destroyEvent:Connect(function()
+	is_destroyed = true
 end)

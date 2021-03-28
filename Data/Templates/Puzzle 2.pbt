@@ -570,7 +570,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:total"
-            Int: 2
+            Int: 3
           }
         }
         Collidable_v2 {
@@ -921,7 +921,7 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Text {
-            Label: "1"
+            Label: "3"
             Color {
               R: 0.723055363
               G: 0.67954272

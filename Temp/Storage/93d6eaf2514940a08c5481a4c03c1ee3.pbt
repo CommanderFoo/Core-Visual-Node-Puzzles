@@ -1,13 +1,5 @@
 Entries {
   Key {
-    StringVar: "cs"
-  }
-  SimpleValue {
-    IntVar: 1
-  }
-}
-Entries {
-  Key {
     StringVar: "sn"
   }
   SimpleValue {
@@ -44,5 +36,13 @@ Entries {
   }
   SimpleValue {
     IntVar: 1
+  }
+}
+Entries {
+  Key {
+    StringVar: "cs"
+  }
+  SimpleValue {
+    IntVar: 6
   }
 }
