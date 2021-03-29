@@ -36,6 +36,9 @@ button.clickedEvent:Connect(function()
 	if(total_spawned < total or total == -1) then		
 		local n = World.SpawnAsset(node, { parent = container })
 		
+		n.x = 0
+		n.y = 0
+
 		template_id = n.sourceTemplateId
 		total_spawned = total_spawned + 1
 

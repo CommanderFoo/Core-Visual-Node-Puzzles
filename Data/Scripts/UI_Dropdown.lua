@@ -28,6 +28,7 @@ local selected_option = selected
 local disabled = root:GetCustomProperty("disabled")
 
 local selected_shape = selected:FindChildByName("Shape")
+local selected_text = selected:FindChildByName("Text")
 
 arrow:SetColor(arrow_color)
 
@@ -61,7 +62,7 @@ selected.hoveredEvent:Connect(function()
 	end
 
 	selected:SetButtonColor(hovered_color)
-	selected:SetFontColor(text_hovered_color)
+	--selected:SetFontColor(text_hovered_color)
 end)
 
 selected.unhoveredEvent:Connect(function()
@@ -77,21 +78,21 @@ for i = 1, total_options do
 	options[i].y = offset
 	offset = offset + options[i].height
 	options[i]:SetButtonColor(unhovered_color)
-	options[i]:SetFontColor(text_unhovered_color)
+	--options[i]:SetFontColor(text_unhovered_color)
 
 	options[i].hoveredEvent:Connect(function()
 		options[i]:SetButtonColor(hovered_color)
-		options[i]:SetFontColor(text_hovered_color)
+		--options[i]:SetFontColor(text_hovered_color)
 	end)
 
 	options[i].unhoveredEvent:Connect(function()
 		options[i]:SetButtonColor(unhovered_color)
-		options[i]:SetFontColor(text_unhovered_color)
+		--options[i]:SetFontColor(text_unhovered_color)
 	end)
 
 	options[i].clickedEvent:Connect(function()
 		selected_option = options[i]
-		selected.text = options[i].text
+		selected_text.text = options[i]:FindChildByName("Text").text
 
 		selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
 		selected_shape.visibility = Visibility.FORCE_ON

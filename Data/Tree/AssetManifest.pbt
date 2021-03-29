@@ -1,4 +1,13 @@
 Assets {
+  Id: 18375965876900075365
+  Name: "Teko"
+  PlatformAssetType: 28
+  PrimaryAsset {
+    AssetType: "FontAssetRef"
+    AssetId: "TekoRegular_ref"
+  }
+}
+Assets {
   Id: 17940382598547805671
   Name: "Center Arrow 005 Wedge"
   PlatformAssetType: 9
@@ -41,6 +50,15 @@ Assets {
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "CenterCircle_001"
+  }
+}
+Assets {
+  Id: 7336185804317448730
+  Name: "Teko Bold"
+  PlatformAssetType: 28
+  PrimaryAsset {
+    AssetType: "FontAssetRef"
+    AssetId: "TekoBold_ref"
   }
 }
 Assets {

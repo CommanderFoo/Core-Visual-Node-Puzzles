@@ -29,11 +29,11 @@ function load_puzzle(id)
 
 		puzzle_name.text = current_puzzle:GetCustomProperty("name")
 
-		Events.Broadcast("time_conditions", {
+		Events.Broadcast("score_conditions", {
 
-			gold = current_puzzle:GetCustomProperty("gold_time"),
-			silver = current_puzzle:GetCustomProperty("silver_time"),
-			bronze = current_puzzle:GetCustomProperty("bronze_time")
+			gold = current_puzzle:GetCustomProperty("gold_score"),
+			silver = current_puzzle:GetCustomProperty("silver_score"),
+			bronze = current_puzzle:GetCustomProperty("bronze_score")
 
 		})
 

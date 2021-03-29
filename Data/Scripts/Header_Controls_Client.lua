@@ -28,8 +28,8 @@ local showing_nodes = false
 local tween = nil
 local errors = 0
 
-local total_puzzle_time = 0
-local time_conditions = nil
+local total_puzzle_score = 0
+local score_conditions = nil
 
 local floor = math.floor
 
@@ -38,24 +38,26 @@ function Tick(dt)
 		tween:tween(dt)
 	end
 
-	if(running and time_conditions) then
-		--if(floor(total_puzzle_time) > time_conditions.bronze) then
-		--	print("too long")
-		--else
-			if(floor(total_puzzle_time) <= time_conditions.gold) then
-				API.set_award(gold_award, 1)
-				API.set_award(silver_award, .2)
-				API.set_award(bronze_award, .2)
-			elseif(floor(total_puzzle_time) <= time_conditions.silver) then
-				API.set_award(gold_award, .2)
-				API.set_award(silver_award, 1)
-				API.set_award(bronze_award, .2)
-			else
-				API.set_award(gold_award, .2)
-				API.set_award(silver_award, .2)
-				API.set_award(bronze_award, 1)
-			end
-		--end
+	if(running and score_conditions) then
+		local score = math.max(0, 10000 - (total_puzzle_score + (API.get_total_nodes() * 100)))
+
+		if(score >= score_conditions.gold) then
+			API.set_award(gold_award, 1)
+			API.set_award(silver_award, .2)
+			API.set_award(bronze_award, .2)
+		elseif(score >= score_conditions.silver) then
+			API.set_award(gold_award, .2)
+			API.set_award(silver_award, 1)
+			API.set_award(bronze_award, .2)
+		elseif(score >= score_conditions.bronze) then
+			API.set_award(gold_award, .2)
+			API.set_award(silver_award, .2)
+			API.set_award(bronze_award, 1)
+		else
+			API.set_award(gold_award, .2)
+			API.set_award(silver_award, .2)
+			API.set_award(bronze_award, .2)
+		end
 	end
 end
 
@@ -106,7 +108,6 @@ run_edit_button.clickedEvent:Connect(function()
 	else
 		run_edit_button.text = "Edit Program"
 		running = true
-		timer_run = true
 
 		disable_ui(false)
 
@@ -119,7 +120,7 @@ end)
 speed_up_button.hoveredEvent:Connect(API.play_hover_sound)
 
 speed_up_button.clickedEvent:Connect(function()
-	if(speed < 6) then
+	if(speed < 20) then
 		speed = speed + 1
 	end
 
@@ -218,14 +219,14 @@ Events.Connect("puzzle_edit", function()
 	run_edit_button.text = "Run Program"
 	running = false
 
-	if(time_conditions ~= nil) then
-		total_time_allowed = time_conditions.gold + time_conditions.silver + time_conditions.bronze
+	if(score_conditions ~= nil) then
+		total_score_allowed = score_conditions.gold + score_conditions.silver + score_conditions.bronze
 	else
-		total_time_allowed = 0
+		total_score_allowed = 0
 	end
 
 	errors = 0
-	total_puzzle_time = 0
+	total_puzzle_score = 0
 
 	enable_ui()
 	reset_award()
@@ -235,13 +236,13 @@ Events.Connect("puzzle_complete", function()
 	running = false
 end)
 
-Events.Connect("timer", function(t)
-	total_puzzle_time = total_puzzle_time + t
+Events.Connect("score", function(t)
+	total_puzzle_score = total_puzzle_score + (t * 100)
 end)
 
-Events.Connect("time_conditions", function(c)
-	total_time_allowed = c.gold + c.silver
-	time_conditions = c
+Events.Connect("score_conditions", function(c)
+	total_score_allowed = c.gold + c.silver
+	score_conditions = c
 end)
 
 Events.Connect("show_nodes", function()

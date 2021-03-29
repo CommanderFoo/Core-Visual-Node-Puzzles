@@ -1,18 +1,17 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
 
+local is_destroyed = false
+
 local square_count = script:GetCustomProperty("square_count"):WaitForObject()
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
-local triangle_count = script:GetCustomProperty("triangle_count"):WaitForObject()
 
 local square_shape = script:GetCustomProperty("square_shape")
 local circle_shape = script:GetCustomProperty("circle_shape")
-local triangle_shape = script:GetCustomProperty("triangle_shape")
 
 local data = {
 	
 	{ condition = "square", count = tonumber(square_count.text), ui = square_count, asset = square_shape },
-	{ condition = "circle", count = tonumber(circle_count.text), ui = circle_count, asset = circle_shape },
-	{ condition = "triangle", count = tonumber(triangle_count.text), ui = triangle_count, asset = triangle_shape }
+	{ condition = "circle", count = tonumber(circle_count.text), ui = circle_count, asset = circle_shape }
 
 }
 
@@ -35,6 +34,10 @@ function Tick(dt)
 end
 
 Events.Connect("puzzle_edit", function()
+	if(is_destroyed) then
+		return
+	end
+
 	data_node:reset()
 
 	for _, d in ipairs(data) do
@@ -45,6 +48,14 @@ Events.Connect("puzzle_edit", function()
 end)
 
 Events.Connect("puzzle_run", function(speed)
+	if(is_destroyed) then
+		return
+	end
+
 	data_node:set_speed(speed)
 	data_node:tick()
+end)
+
+script.destroyEvent:Connect(function()
+	is_destroyed = true
 end)

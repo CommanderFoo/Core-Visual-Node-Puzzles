@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 3627026760658224672
+        ParentId: 7410864171820395270
         ChildIds: 9635114758448607551
         ChildIds: 13064002283519166929
         ChildIds: 8929289385585733398
@@ -38,8 +38,6 @@ Assets {
         Control {
           Width: 250
           Height: 60
-          UIX: -10
-          UIY: 25
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -136,6 +134,7 @@ Assets {
           }
         }
         ParentId: 13970098765297739689
+        ChildIds: 7977391458048432803
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -155,14 +154,13 @@ Assets {
           }
           UseParentWidth: true
           Button {
-            Label: "Data"
             FontColor {
               R: 0.723055363
               G: 0.67954272
               B: 0.67954272
               A: 1
             }
-            FontSize: 18
+            FontSize: 30
             ButtonColor {
               R: 1
               G: 1
@@ -195,6 +193,7 @@ Assets {
               Value: "mc:ebuttonclickmode:default"
             }
             Font {
+              Id: 18375965876900075365
             }
           }
           AnchorLayout {
@@ -206,6 +205,70 @@ Assets {
             TargetAnchor {
               Anchor {
                 Value: "mc:euianchor:topleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 7977391458048432803
+        Name: "Text"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 13064002283519166929
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 200
+          Height: 34
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          UseParentWidth: true
+          Text {
+            Label: "Data"
+            Color {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            Size: 25
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            AutoWrapText: true
+            Font {
+              Id: 18375965876900075365
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
               }
             }
           }
@@ -393,12 +456,13 @@ Assets {
               B: 0.67954272
               A: 1
             }
-            Size: 15
+            Size: 18
             Justification {
               Value: "mc:etextjustify:center"
             }
             AutoWrapText: true
             Font {
+              Id: 18375965876900075365
             }
           }
           AnchorLayout {
@@ -423,6 +487,15 @@ Assets {
       PrimaryAsset {
         AssetType: "PlatformBrushAssetRef"
         AssetId: "BackgroundNoOutline_020"
+      }
+    }
+    Assets {
+      Id: 18375965876900075365
+      Name: "Teko"
+      PlatformAssetType: 28
+      PrimaryAsset {
+        AssetType: "FontAssetRef"
+        AssetId: "TekoRegular_ref"
       }
     }
     Assets {

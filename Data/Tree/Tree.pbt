@@ -894,7 +894,7 @@ Objects {
         B: 0.818
         A: 1
       }
-      FontSize: 16
+      FontSize: 20
       ButtonColor {
         G: 0.101041637
         B: 0.0827249438
@@ -923,6 +923,7 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -981,7 +982,7 @@ Objects {
         B: 0.818
         A: 1
       }
-      FontSize: 16
+      FontSize: 20
       ButtonColor {
         G: 0.101041637
         B: 0.0827249438
@@ -1010,6 +1011,7 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -1499,11 +1501,12 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 20
+      Size: 25
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -2107,12 +2110,13 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 18
+      Size: 22
       Justification {
         Value: "mc:etextjustify:center"
       }
       AutoWrapText: true
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -2328,11 +2332,12 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 20
+      Size: 25
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -3026,12 +3031,13 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 18
+      Size: 22
       Justification {
         Value: "mc:etextjustify:center"
       }
       AutoWrapText: true
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -3247,11 +3253,12 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 20
+      Size: 25
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -3308,11 +3315,12 @@ Objects {
         G: 1
         A: 1
       }
-      Size: 46
+      Size: 50
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -4195,7 +4203,7 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:program_time"
+      Name: "cs:program_score"
       ObjectReference {
         SelfId: 9344745075629321891
       }
@@ -4254,8 +4262,8 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 500
-    Height: 418
+    Width: 600
+    Height: 500
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4279,7 +4287,7 @@ Objects {
 }
 Objects {
   Id: 9344745075629321891
-  Name: "Program Time"
+  Name: "Program Score"
   Transform {
     Location {
     }
@@ -4304,25 +4312,26 @@ Objects {
   Control {
     Width: 200
     Height: 60
-    UIY: 115
+    UIY: -105.911209
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
     Text {
-      Label: "Program Time: 14.0 Seconds"
+      Label: "Program Score: 0"
       Color {
         R: 1
         G: 0.802
         B: 0.802
         A: 1
       }
-      Size: 15
+      Size: 20
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 7336185804317448730
       }
     }
     AnchorLayout {
@@ -4381,7 +4390,7 @@ Objects {
         B: 0.818
         A: 1
       }
-      FontSize: 16
+      FontSize: 20
       ButtonColor {
         G: 0.101041637
         B: 0.0827249438
@@ -4410,6 +4419,7 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -4465,7 +4475,7 @@ Objects {
       FontColor {
         A: 1
       }
-      FontSize: 16
+      FontSize: 20
       ButtonColor {
         R: 1
         G: 1
@@ -4495,6 +4505,7 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -4543,7 +4554,7 @@ Objects {
   Control {
     Width: 100
     Height: 120
-    UIY: -15
+    UIY: 37.389904
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4588,9 +4599,9 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 150
-    Height: 150
-    UIX: 125
+    Width: 250
+    Height: 250
+    UIX: 170
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4632,7 +4643,7 @@ Objects {
 }
 Objects {
   Id: 11396877453267992766
-  Name: "Time"
+  Name: "Score"
   Transform {
     Location {
     }
@@ -4655,25 +4666,28 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 50
-    Height: 60
-    UIY: 2
+    Width: 134
+    Height: 50
+    UIX: -1
+    UIY: -38
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
     Text {
+      Label: "10000"
       Color {
         G: 0.23074007
         B: 0.396755308
         A: 1
       }
-      Size: 15
+      Size: 22
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -4712,8 +4726,8 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 150
-    Height: 150
+    Width: 250
+    Height: 250
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4755,7 +4769,7 @@ Objects {
 }
 Objects {
   Id: 9218715853991735830
-  Name: "Time"
+  Name: "Score"
   Transform {
     Location {
     }
@@ -4778,25 +4792,28 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 50
-    Height: 60
-    UIY: 2
+    Width: 134
+    Height: 50
+    UIX: -1
+    UIY: -38
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
     Text {
+      Label: "10000"
       Color {
         G: 0.23074007
         B: 0.396755308
         A: 1
       }
-      Size: 15
+      Size: 22
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -4835,9 +4852,9 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 150
-    Height: 150
-    UIX: -125
+    Width: 250
+    Height: 250
+    UIX: -170
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4878,7 +4895,7 @@ Objects {
 }
 Objects {
   Id: 15832761573421310145
-  Name: "Time"
+  Name: "Score"
   Transform {
     Location {
     }
@@ -4901,25 +4918,28 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 50
-    Height: 60
-    UIY: 2
+    Width: 134
+    Height: 50
+    UIX: -1
+    UIY: -38
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
     Text {
+      Label: "10000"
       Color {
         G: 0.23074007
         B: 0.396755308
         A: 1
       }
-      Size: 15
+      Size: 22
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -4976,11 +4996,12 @@ Objects {
         G: 1
         A: 1
       }
-      Size: 46
+      Size: 50
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -5576,11 +5597,12 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 23
+      Size: 30
       Justification {
         Value: "mc:etextjustify:center"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -5721,7 +5743,7 @@ Objects {
       FontColor {
         A: 1
       }
-      FontSize: 16
+      FontSize: 20
       ButtonColor {
         R: 1
         G: 1
@@ -5750,6 +5772,7 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -5807,7 +5830,7 @@ Objects {
         B: 0.818
         A: 1
       }
-      FontSize: 16
+      FontSize: 20
       ButtonColor {
         G: 0.101041637
         B: 0.0827249438
@@ -5835,6 +5858,7 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {
@@ -6035,11 +6059,12 @@ Objects {
         B: 1
         A: 1
       }
-      Size: 32
+      Size: 40
       Justification {
         Value: "mc:etextjustify:left"
       }
       Font {
+        Id: 18375965876900075365
       }
     }
     AnchorLayout {

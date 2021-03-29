@@ -27,6 +27,7 @@ function load_game(player)
 	player_data.an = player_data.an or 1 -- Nodes Show / Hide
 	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
 
+	-- @TODO: Remove
 	player_data.cp = 1
 
 	player:SetResource("speed", player_data.cs)
