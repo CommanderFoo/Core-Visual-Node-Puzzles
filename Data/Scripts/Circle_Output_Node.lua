@@ -2,7 +2,8 @@
 
 local is_destroyed = false
 
-local count = script:GetCustomProperty("count"):WaitForObject()
+local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
+
 local condition = script:GetCustomProperty("condition")
 
 local total = 0
@@ -14,7 +15,7 @@ local node = API.Node:new(script.parent.parent, {
 
 		if(data ~= nil and data.condition ~= nil and string.lower(data.condition) == condition) then
 			total = total + data.count
-			count.text = tostring(total)
+			circle_count.text = tostring(total)
 
 			if(total == data.total_count) then
 				API.Puzzle_Events.trigger("output_" .. data.condition .. "_complete")
@@ -38,8 +39,8 @@ Events.Connect("puzzle_edit", function()
 		return
 	end
 	
-	if(Object.IsValid(count)) then
-		count.text = "0"
+	if(Object.IsValid(circle_count)) then
+		circle_count.text = "0"
 		total = 0
 		node:hide_error_info()
 	end

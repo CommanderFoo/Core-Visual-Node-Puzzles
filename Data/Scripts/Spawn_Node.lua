@@ -8,6 +8,11 @@ local button = root:FindDescendantByName("Node Handle")
 local total = root:GetCustomProperty("total")
 local total_count = root:FindDescendantByName("Total")
 
+local circle_data_amount = root:GetCustomProperty("circle_data_amount")
+local square_data_amount = root:GetCustomProperty("square_data_amount")
+local triangle_data_amount = root:GetCustomProperty("triangle_data_amount")
+local plus_data_amount = root:GetCustomProperty("plus_data_amount")
+
 local total_spawned = 0
 local template_id = nil
 
@@ -38,6 +43,30 @@ button.clickedEvent:Connect(function()
 		
 		n.x = 0
 		n.y = 0
+
+		local s = n:FindDescendantByType("Script").context;
+		
+		if(s ~= nil and s.init ~= nil) then
+			local data_amounts = {}
+
+			if(circle_data_amount ~= nil) then
+				data_amounts.circle_data_amount = circle_data_amount
+			end
+
+			if(square_data_amount ~= nil) then
+				data_amounts.square_data_amount = square_data_amount
+			end
+
+			if(triangle_data_amount ~= nil) then
+				data_amounts.triangle_data_amount = triangle_data_amount
+			end
+
+			if(plus_data_amount ~= nil) then
+				data_amounts.plus_data_amount = plus_data_amount
+			end
+
+			s.init(data_amounts)
+		end
 
 		template_id = n.sourceTemplateId
 		total_spawned = total_spawned + 1

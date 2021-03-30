@@ -12,7 +12,7 @@ local sfx_slider_updated = false
 local music_slider_updated = false
 
 for p, v in pairs(script:GetCustomProperties()) do
-	if(p ~= "nodes_container") then
+	if(string.find(p, "puzzle_")) then
 		puzzles[p] = v
 	end
 end

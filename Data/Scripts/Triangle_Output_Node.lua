@@ -1,6 +1,9 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local count = script:GetCustomProperty("count"):WaitForObject()
+local is_destroyed = false
+
+local triangle_count = script:GetCustomProperty("triangle_count"):WaitForObject()
+
 local condition = script:GetCustomProperty("condition")
 
 local total = 0
@@ -12,7 +15,7 @@ local node = API.Node:new(script.parent.parent, {
 
 		if(data ~= nil and data.condition ~= nil and string.lower(data.condition) == condition) then
 			total = total + data.count
-			count.text = tostring(total)
+			triangle_count.text = tostring(total)
 
 			if(total == data.total_count) then
 				API.Puzzle_Events.trigger("output_" .. data.condition .. "_complete")
@@ -32,9 +35,17 @@ local node = API.Node:new(script.parent.parent, {
 API.register_node(node)
 
 Events.Connect("puzzle_edit", function()
-	if(Object.IsValid(count)) then
-		count.text = "0"
+	if(is_destroyed) then
+		return
+	end
+	
+	if(Object.IsValid(triangle_count)) then
+		triangle_count.text = "0"
 		total = 0
 		node:hide_error_info()
 	end
+end)
+
+script.destroyEvent:Connect(function()
+	is_destroyed = true
 end)

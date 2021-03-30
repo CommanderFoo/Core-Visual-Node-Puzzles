@@ -1,13 +1,13 @@
 Assets {
-  Id: 3138596828004793381
-  Name: "Puzzle 1 Circle Ouput Node"
+  Id: 1899272290028290013
+  Name: "Circle Output Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 3194892701475606914
       Objects {
         Id: 3194892701475606914
-        Name: "Puzzle 1 Circle Ouput Node"
+        Name: "Circle Output Node"
         Transform {
           Scale {
             X: 1
@@ -41,7 +41,6 @@ Assets {
         Control {
           Width: 250
           Height: 120
-          UIX: 439.038818
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -696,7 +695,7 @@ Assets {
       }
       Objects {
         Id: 15005084936540976255
-        Name: "Count"
+        Name: "Circle Count"
         Transform {
           Location {
           }
@@ -896,8 +895,8 @@ Assets {
           }
         }
         ParentId: 3194892701475606914
-        ChildIds: 359487911083804122
         ChildIds: 13726087260019583704
+        ChildIds: 10241695778129917465
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -969,68 +968,6 @@ Assets {
             TargetAnchor {
               Anchor {
                 Value: "mc:euianchor:topleft"
-              }
-            }
-          }
-        }
-      }
-      Objects {
-        Id: 359487911083804122
-        Name: "Node Name"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 10010147033171873975
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Control {
-          Height: 37
-          RenderTransformPivot {
-            Anchor {
-              Value: "mc:euianchor:middlecenter"
-            }
-          }
-          UseParentWidth: true
-          Text {
-            Label: "Output"
-            Color {
-              R: 1
-              G: 1
-              B: 1
-              A: 1
-            }
-            Size: 25
-            Justification {
-              Value: "mc:etextjustify:center"
-            }
-            Font {
-              Id: 18375965876900075365
-            }
-          }
-          AnchorLayout {
-            SelfAnchor {
-              Anchor {
-                Value: "mc:euianchor:middlecenter"
-              }
-            }
-            TargetAnchor {
-              Anchor {
-                Value: "mc:euianchor:middlecenter"
               }
             }
           }
@@ -1125,6 +1062,68 @@ Assets {
         }
       }
       Objects {
+        Id: 10241695778129917465
+        Name: "Node Name"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 10010147033171873975
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Height: 37
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          UseParentWidth: true
+          Text {
+            Label: "Output"
+            Color {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            Size: 25
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
+              }
+            }
+          }
+        }
+      }
+      Objects {
         Id: 6318443237512754869
         Name: "Client Scripts"
         Transform {
@@ -1154,7 +1153,7 @@ Assets {
       }
       Objects {
         Id: 7335225980380159403
-        Name: "Puzzle_1_Output_Node"
+        Name: "Circle_Output_Node"
         Transform {
           Location {
           }
@@ -1173,7 +1172,7 @@ Assets {
             String: "circle"
           }
           Overrides {
-            Name: "cs:count"
+            Name: "cs:circle_count"
             ObjectReference {
               SubObjectId: 15005084936540976255
             }

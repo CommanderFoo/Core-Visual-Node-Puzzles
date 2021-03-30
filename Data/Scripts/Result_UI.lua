@@ -55,7 +55,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, .1)
 
-		next_button.isInteractable = false
+		--next_button.isInteractable = false
 		title.text = "Try Again"
 	end
 
@@ -79,7 +79,7 @@ function find_active_puzzle()
 	local children = available_nodes:GetChildren()
 
 	for k, v in pairs(children) do
-		local id = string.find(v.name, "Puzzle %d+")
+		local id = string.match(v.name, "Puzzle (%d+)")
 	
 		if(id) then
 			return v, id

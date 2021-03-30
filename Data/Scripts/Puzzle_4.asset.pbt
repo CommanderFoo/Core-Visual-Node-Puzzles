@@ -1,6 +1,6 @@
 Assets {
-  Id: 9654763462713994413
-  Name: "Puzzle_2_Output_Node"
+  Id: 876043397680248866
+  Name: "Puzzle_4"
   PlatformAssetType: 3
   TextAsset {
   }

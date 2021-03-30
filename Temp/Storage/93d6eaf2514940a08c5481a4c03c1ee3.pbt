@@ -8,23 +8,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "cp"
-  }
-  SimpleValue {
-    IntVar: 1
-  }
-}
-Entries {
-  Key {
-    StringVar: "cs"
-  }
-  SimpleValue {
-    IntVar: 20
-  }
-}
-Entries {
-  Key {
-    StringVar: "an"
+    StringVar: "sv"
   }
   SimpleValue {
     IntVar: 0
@@ -40,7 +24,23 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sv"
+    StringVar: "cp"
+  }
+  SimpleValue {
+    IntVar: 4
+  }
+}
+Entries {
+  Key {
+    StringVar: "cs"
+  }
+  SimpleValue {
+    IntVar: 3
+  }
+}
+Entries {
+  Key {
+    StringVar: "an"
   }
   SimpleValue {
     IntVar: 0

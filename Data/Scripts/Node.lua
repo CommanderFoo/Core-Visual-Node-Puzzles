@@ -861,6 +861,8 @@ function Node_If:new(r, options)
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
 			this:monitor_queue(from_node:get_speed())
 		end
 
@@ -1007,7 +1009,7 @@ function Node_Data:new(r, options)
 			this.options.total_data_items = this.options.total_data_items + d.count
 		end
 	end
-
+	
 	setup_data()
 
 	function this:reset()
@@ -1042,54 +1044,57 @@ function Node_Data:new(r, options)
 
 			local item = this.options.data_items[this.options.index]
 
-			item.data_count = item.data_count - 1
-			item.ui.text = tostring(item.data_count)
+			if(item.data_count > 0) then
+				item.data_count = item.data_count - 1
+				item.ui.text = tostring(item.data_count)
 
-			local line = this:get_top_connector_line()
-			local obj = this:spawn_asset(item.asset, line.x, line.y)
-			local tween = this:create_tween(line)
+				local line = this:get_top_connector_line()
+				local obj = this:spawn_asset(item.asset, line.x, line.y)
+				local tween = this:create_tween(line)
 
-			tween:on_start(function()
-				obj.visibility = Visibility.FORCE_ON
-			end)
+				tween:on_start(function()
+					obj.visibility = Visibility.FORCE_ON
+				end)
 
-			tween:on_complete(function()
-				this:send_data({
-					
-					asset = item.asset,
-					condition = item.condition,
-					count = 1,
-					total_count = item.count
+				tween:on_complete(function()
+					this:send_data({
+						
+						asset = item.asset,
+						condition = item.condition,
+						count = 1,
+						total_count = item.count
 
+					})
+
+					if(Object.IsValid(obj)) then
+						obj:Destroy()
+					end
+
+					tween = nil
+				end)
+
+				tween:on_change(function(changed)
+					local x, y = this:get_path(obj, line, changed, -obj.height / 2)
+			
+					if(x == nil or y == nil) then
+						return
+					end
+
+					obj.x = x
+					obj.y = y
+				end)
+
+				this:insert_tween({
+						
+					obj = obj,
+					tween = tween
+				
 				})
 
-				if(Object.IsValid(obj)) then
-					obj:Destroy()
-				end
-
-				tween = nil
-			end)
-
-			tween:on_change(function(changed)
-				local x, y = this:get_path(obj, line, changed, -obj.height / 2)
-		
-				if(x == nil or y == nil) then
-					return
-				end
-
-				obj.x = x
-				obj.y = y
-			end)
-
-			this:insert_tween({
-					
-				obj = obj,
-				tween = tween
-			
-			})
+				this.options.count = this.options.count + 1
+			end
 
 			this.options.index = this.options.index + 1
-			this.options.count = this.options.count + 1
 		end
 	end
 

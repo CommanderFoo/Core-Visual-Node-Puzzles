@@ -28,7 +28,7 @@ function load_game(player)
 	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
 
 	-- @TODO: Remove
-	player_data.cp = 1
+	player_data.cp = 4
 
 	player:SetResource("speed", player_data.cs)
 	player:SetResource("sfx_volume", player_data.sv)
