@@ -695,7 +695,7 @@ Assets {
       }
       Objects {
         Id: 15005084936540976255
-        Name: "Circle Count"
+        Name: "Count"
         Transform {
           Location {
           }

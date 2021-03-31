@@ -13,6 +13,8 @@ local square_data_amount = root:GetCustomProperty("square_data_amount")
 local triangle_data_amount = root:GetCustomProperty("triangle_data_amount")
 local plus_data_amount = root:GetCustomProperty("plus_data_amount")
 
+local required_amount = root:GetCustomProperty("required_amount")
+
 local total_spawned = 0
 local template_id = nil
 
@@ -63,6 +65,10 @@ button.clickedEvent:Connect(function()
 
 			if(plus_data_amount ~= nil) then
 				data_amounts.plus_data_amount = plus_data_amount
+			end
+
+			if(required_amount ~= nil) then
+				data_amounts.required = required_amount
 			end
 
 			s.init(data_amounts)

@@ -695,7 +695,7 @@ Assets {
       }
       Objects {
         Id: 1385913703208155523
-        Name: "Triangle Count"
+        Name: "Count"
         Transform {
           Location {
           }

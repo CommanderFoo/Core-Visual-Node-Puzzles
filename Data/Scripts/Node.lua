@@ -184,6 +184,8 @@ function Node:setup_node(root)
 	self.delete_button = self.root:FindDescendantByName("Delete Node")
 	self.items_container = self.root:FindDescendantByName("Items Container")
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI")
+	self.body = self.root:FindDescendantByName("Body Background")
+	self.bubble = self.body:FindDescendantByName("Bubble")
 	
 	if(self.options.node_time) then
 		local node_time_ui = self.root:FindDescendantByName("Node Time")
@@ -509,6 +511,14 @@ end
 
 function Node:get_root()
 	return self.root
+end
+
+function Node:get_body()
+	return self.body
+end
+
+function Node:get_bubble()
+	return self.bubble
 end
 
 function Node:has_input_connection(ignore_id)
@@ -1103,9 +1113,165 @@ end
 
 -- End Output Node
 
+-- Alternate Node
+
+local Node_Alternate = {}
+
+function Node_Alternate:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.options.queue_task = nil
+
+	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+
+	local switch = true
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local obj = nil
+				local line = this:get_connector_line(switch)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(switch and this:has_top_connection()) then
+					obj = this:spawn_asset(data.asset, line.x, line.y)
+					connection_method = "send_data_top"
+		
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
+						
+						})
+					end
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+
+			if(switch) then
+				switch = false
+			else
+				switch = true
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = this.options.YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Alternate Node
+
 return Node, Node_Events, {
 
 	If = Node_If,
-	Data = Node_Data
+	Data = Node_Data,
+	Alternate = Node_Alternate
 
 }
