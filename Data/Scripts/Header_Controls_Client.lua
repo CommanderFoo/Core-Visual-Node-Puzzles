@@ -74,7 +74,7 @@ available_nodes_button.clickedEvent:Connect(function()
 		available_nodes_button.text = "Show Available Nodes"
 		showing_nodes = false
 	else
-		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -30})
+		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -20})
 		available_nodes_button.text = "Hide Available Nodes"
 		showing_nodes = true
 	end

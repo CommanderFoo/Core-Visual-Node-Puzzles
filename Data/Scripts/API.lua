@@ -75,6 +75,10 @@ API.Node_Events.on("node_connected", function()
 	connect_sound:Play()
 end)
 
+API.Node_Events.on("node_info_clicked", function()
+	API.play_click_sound()
+end)
+
 function API.play_click_sound()
 	API.change_sound_pitch(click_sound)
 

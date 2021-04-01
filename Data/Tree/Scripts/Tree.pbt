@@ -99,6 +99,7 @@ Objects {
   ChildIds: 8975716410678032075
   ChildIds: 2366539210659061100
   ChildIds: 8251904590631658214
+  ChildIds: 2365147788075538306
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -109,6 +110,50 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 2365147788075538306
+  Name: "Node_Information_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+    Overrides {
+      Name: "cs:container"
+      ObjectReference {
+        SelfId: 12322107661146682250
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 17624300616347334191
+    }
   }
 }
 Objects {
