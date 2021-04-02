@@ -2795,6 +2795,7 @@ Assets {
         ParentId: 11245014916100406405
         ChildIds: 8990748040427209614
         ChildIds: 13109729536170783326
+        ChildIds: 15382587749899626075
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -3022,6 +3023,98 @@ Assets {
         }
       }
       Objects {
+        Id: 15382587749899626075
+        Name: "Info"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 14965131636618215999
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 50
+          Height: 50
+          UIX: 7
+          UIY: 1
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Button {
+            Label: "?"
+            FontColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+              A: 1
+            }
+            FontSize: 28
+            ButtonColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+            }
+            HoveredColor {
+              R: 1
+              G: 0.939821124
+              B: 0.939821124
+              A: 1
+            }
+            PressedColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+              A: 1
+            }
+            DisabledColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            Brush {
+              Id: 163119404164711089
+            }
+            IsButtonEnabled: true
+            OnlyUseMainColor: true
+            ClickMode {
+              Value: "mc:ebuttonclickmode:default"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
         Id: 892944325093420271
         Name: "Client Scripts"
         Transform {
@@ -3037,6 +3130,7 @@ Assets {
         }
         ParentId: 11245014916100406405
         ChildIds: 6598498033803388847
+        ChildIds: 11575101569246571526
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -3076,6 +3170,68 @@ Assets {
         Script {
           ScriptAsset {
             Id: 3310641749525467738
+          }
+        }
+      }
+      Objects {
+        Id: 11575101569246571526
+        Name: "Node_Information_Data"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 892944325093420271
+        UnregisteredParameters {
+          Overrides {
+            Name: "cs:info_height"
+            Float: 420
+          }
+          Overrides {
+            Name: "cs:button_offset"
+            Float: 350
+          }
+          Overrides {
+            Name: "cs:title"
+            String: "If Else"
+          }
+          Overrides {
+            Name: "cs:info_1_text"
+            String: "This node will execute the if block statements if the expression is true.  If the expression is false then the statements in the else block will be executed."
+          }
+          Overrides {
+            Name: "cs:info_2_text"
+            String: "The else is optional."
+          }
+          Overrides {
+            Name: "cs:info_2_offset"
+            Float: 285
+          }
+          Overrides {
+            Name: "cs:example_code"
+            AssetReference {
+              Id: 5128182279547617667
+            }
+          }
+        }
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Script {
+          ScriptAsset {
+            Id: 14631171582364972515
           }
         }
       }

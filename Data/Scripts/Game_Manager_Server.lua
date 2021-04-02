@@ -39,7 +39,7 @@ function load_game(player)
 
 	--YOOTIL.Utils.dump(player_data)
 
-	Events.BroadcastToPlayer(player, "load_game")
+	Events.BroadcastToPlayer(player, "load_game", player_data.cp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
 end
 
 function save_data(player)

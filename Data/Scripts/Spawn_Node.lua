@@ -22,6 +22,18 @@ if(total ~= -1) then
 	total_count.text = tostring(total)
 end
 
+function find_node_script(n)
+	local scripts = n:FindDescendantsByType("Script")
+
+	for i, s in ipairs(scripts) do
+		if(string.find(s.name, "_Node")) then
+			return s.context
+		end
+	end
+
+	return nil
+end
+
 API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 	if(tpl_id == template_id) then
 		if(total ~= -1) then
@@ -46,7 +58,7 @@ button.clickedEvent:Connect(function()
 		n.x = 0
 		n.y = 0
 
-		local s = n:FindDescendantByType("Script").context;
+		local s = find_node_script(n)
 		
 		if(s ~= nil and s.init ~= nil) then
 			local data_amounts = {}

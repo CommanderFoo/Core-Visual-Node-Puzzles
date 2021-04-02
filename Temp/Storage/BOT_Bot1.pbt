@@ -1,14 +1,14 @@
 Entries {
   Key {
-    StringVar: "n"
+    StringVar: "mv"
   }
   SimpleValue {
-    IntVar: 1
+    IntVar: 100
   }
 }
 Entries {
   Key {
-    StringVar: "p1t"
+    StringVar: "an"
   }
   SimpleValue {
     IntVar: 1
@@ -32,23 +32,15 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "s"
-  }
-  SimpleValue {
-    IntVar: 100
-  }
-}
-Entries {
-  Key {
     StringVar: "cp"
   }
   SimpleValue {
-    IntVar: 1
+    IntVar: 6
   }
 }
 Entries {
   Key {
-    StringVar: "m"
+    StringVar: "sv"
   }
   SimpleValue {
     IntVar: 100

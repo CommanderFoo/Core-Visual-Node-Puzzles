@@ -8,7 +8,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sv"
+    StringVar: "sn"
   }
   SimpleValue {
     IntVar: 0
@@ -16,7 +16,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sn"
+    StringVar: "sv"
   }
   SimpleValue {
     IntVar: 0

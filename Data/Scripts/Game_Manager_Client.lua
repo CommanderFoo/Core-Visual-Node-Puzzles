@@ -4,21 +4,15 @@ Task.Spawn(function()
 	Events.BroadcastToServer("init")
 end)
 
-Events.Connect("load_game", function()
-	Events.Broadcast("set_speed", local_player:GetResource("speed"))
-	Events.Broadcast("set_sfx_slider_amount", local_player:GetResource("sfx_volume"))
-	Events.Broadcast("set_music_slider_amount", local_player:GetResource("music_volume"))
+Events.Connect("load_game", function(id, speed, sfx_vol, music_vol, show_nodes)
+	Events.Broadcast("set_speed", speed)
+	Events.Broadcast("set_sfx_slider_amount", sfx_vol)
+	Events.Broadcast("set_music_slider_amount", music_vol)
 
-	if(local_player:GetResource("show_notifications") == 1) then
-		Events.Broadcast("show_notifications_toggle_on")
-	else
-		Events.Broadcast("show_notifications_toggle_off")
-	end
-
-	if(local_player:GetResource("show_nodes") == 1) then
+	if(show_nodes == 1) then
 		Events.Broadcast("show_nodes")
 	end
-	
-	Events.Broadcast("load_puzzle", local_player:GetResource("current_puzzle"))
+
+	Events.Broadcast("load_puzzle", id)
 	Events.Broadcast("transition_out")
 end)

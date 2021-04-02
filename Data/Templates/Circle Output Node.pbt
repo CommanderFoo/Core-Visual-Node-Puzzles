@@ -897,6 +897,7 @@ Assets {
         ParentId: 3194892701475606914
         ChildIds: 13726087260019583704
         ChildIds: 10241695778129917465
+        ChildIds: 4525138492549231845
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -1124,6 +1125,98 @@ Assets {
         }
       }
       Objects {
+        Id: 4525138492549231845
+        Name: "Info"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 10010147033171873975
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 50
+          Height: 50
+          UIX: 7
+          UIY: 1
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Button {
+            Label: "?"
+            FontColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            FontSize: 28
+            ButtonColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+            }
+            HoveredColor {
+              R: 1
+              G: 0.939821124
+              B: 0.939821124
+              A: 1
+            }
+            PressedColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+              A: 1
+            }
+            DisabledColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            Brush {
+              Id: 163119404164711089
+            }
+            IsButtonEnabled: true
+            OnlyUseMainColor: true
+            ClickMode {
+              Value: "mc:ebuttonclickmode:default"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
         Id: 6318443237512754869
         Name: "Client Scripts"
         Transform {
@@ -1139,6 +1232,7 @@ Assets {
         }
         ParentId: 3194892701475606914
         ChildIds: 7335225980380159403
+        ChildIds: 5410634021059116728
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -1190,6 +1284,66 @@ Assets {
         Script {
           ScriptAsset {
             Id: 1855864744465018431
+          }
+        }
+      }
+      Objects {
+        Id: 5410634021059116728
+        Name: "Node_Information_Data"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 6318443237512754869
+        UnregisteredParameters {
+          Overrides {
+            Name: "cs:info_height"
+            Float: 400
+          }
+          Overrides {
+            Name: "cs:button_offset"
+            Float: 0
+          }
+          Overrides {
+            Name: "cs:title"
+            String: "Output"
+          }
+          Overrides {
+            Name: "cs:info_1_text"
+            String: "aaaa"
+          }
+          Overrides {
+            Name: "cs:info_2_text"
+            String: "bbb"
+          }
+          Overrides {
+            Name: "cs:info_2_offset"
+            Float: 250
+          }
+          Overrides {
+            Name: "cs:show_code"
+            Bool: false
+          }
+        }
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Script {
+          ScriptAsset {
+            Id: 14631171582364972515
           }
         }
       }

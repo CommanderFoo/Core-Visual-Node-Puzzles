@@ -140,6 +140,72 @@ Objects {
         SelfId: 12322107661146682250
       }
     }
+    Overrides {
+      Name: "cs:title"
+      ObjectReference {
+        SelfId: 18233654196630558248
+      }
+    }
+    Overrides {
+      Name: "cs:info_text_1"
+      ObjectReference {
+        SelfId: 13707085705429800773
+      }
+    }
+    Overrides {
+      Name: "cs:info_text_2"
+      ObjectReference {
+        SelfId: 12994086293267801199
+      }
+    }
+    Overrides {
+      Name: "cs:view_code_button"
+      ObjectReference {
+        SelfId: 3748829169966813720
+      }
+    }
+    Overrides {
+      Name: "cs:close_button"
+      ObjectReference {
+        SelfId: 10395205942807004827
+      }
+    }
+    Overrides {
+      Name: "cs:API"
+      AssetReference {
+        Id: 11355776926042268297
+      }
+    }
+    Overrides {
+      Name: "cs:code_panel"
+      ObjectReference {
+        SelfId: 1240967016595903137
+      }
+    }
+    Overrides {
+      Name: "cs:code_border"
+      ObjectReference {
+        SelfId: 4514313148936373051
+      }
+    }
+    Overrides {
+      Name: "cs:code_background"
+      ObjectReference {
+        SelfId: 14996544896829060685
+      }
+    }
+    Overrides {
+      Name: "cs:code_close"
+      ObjectReference {
+        SelfId: 13247117291462406307
+      }
+    }
+    Overrides {
+      Name: "cs:code_title"
+      ObjectReference {
+        SelfId: 4520630516428714105
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

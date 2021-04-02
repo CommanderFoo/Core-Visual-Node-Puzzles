@@ -97,3 +97,12 @@ Assets {
     AssetId: "UI_Military_Icon_036"
   }
 }
+Assets {
+  Id: 163119404164711089
+  Name: "Crosshair 021"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "Crosshair_021"
+  }
+}

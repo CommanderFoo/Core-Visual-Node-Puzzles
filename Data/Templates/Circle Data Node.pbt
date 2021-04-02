@@ -825,6 +825,7 @@ Assets {
         ParentId: 17664745747525010881
         ChildIds: 13296376002894121672
         ChildIds: 6160519327564954515
+        ChildIds: 2283034791815922184
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -1052,6 +1053,98 @@ Assets {
         }
       }
       Objects {
+        Id: 2283034791815922184
+        Name: "Info"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 5834993269233342687
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 50
+          Height: 50
+          UIX: 7
+          UIY: 1
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Button {
+            Label: "?"
+            FontColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            FontSize: 28
+            ButtonColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+            }
+            HoveredColor {
+              R: 1
+              G: 0.939821124
+              B: 0.939821124
+              A: 1
+            }
+            PressedColor {
+              R: 0.723055363
+              G: 0.67954272
+              B: 0.67954272
+              A: 1
+            }
+            DisabledColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            Brush {
+              Id: 163119404164711089
+            }
+            IsButtonEnabled: true
+            OnlyUseMainColor: true
+            ClickMode {
+              Value: "mc:ebuttonclickmode:default"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
         Id: 16812686923614547561
         Name: "Client Scripts"
         Transform {
@@ -1067,6 +1160,7 @@ Assets {
         }
         ParentId: 17664745747525010881
         ChildIds: 221757810120083967
+        ChildIds: 7670777567888214101
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -1124,6 +1218,66 @@ Assets {
         Script {
           ScriptAsset {
             Id: 14725421192270529592
+          }
+        }
+      }
+      Objects {
+        Id: 7670777567888214101
+        Name: "Node_Information_Data"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 16812686923614547561
+        UnregisteredParameters {
+          Overrides {
+            Name: "cs:info_height"
+            Float: 450
+          }
+          Overrides {
+            Name: "cs:button_offset"
+            Float: 0
+          }
+          Overrides {
+            Name: "cs:title"
+            String: "Data"
+          }
+          Overrides {
+            Name: "cs:info_1_text"
+            String: "This node holds the data for the puzzle that needs to be transferred to the output nodes."
+          }
+          Overrides {
+            Name: "cs:info_2_text"
+            String: "Data can be different things, in the case of this node, the shape is a String and the quantity is a Number (Integer).  The Data node sends the string and number out when requested."
+          }
+          Overrides {
+            Name: "cs:info_2_offset"
+            Float: 212
+          }
+          Overrides {
+            Name: "cs:show_code"
+            Bool: false
+          }
+        }
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Script {
+          ScriptAsset {
+            Id: 14631171582364972515
           }
         }
       }

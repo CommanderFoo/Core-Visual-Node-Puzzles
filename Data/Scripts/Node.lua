@@ -186,7 +186,8 @@ function Node:setup_node(root)
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI")
 	self.body = self.root:FindDescendantByName("Body Background")
 	self.bubble = self.body:FindDescendantByName("Bubble")
-	self.info = self.handle:FindChildByName("Info")
+	self.info_button = self.handle:FindChildByName("Info")
+	self.info_data = self.root:FindDescendantByName("Node_Information_Data")
 
 	if(self.options.node_time) then
 		local node_time_ui = self.root:FindDescendantByName("Node Time")
@@ -243,10 +244,18 @@ function Node:setup_node(root)
 		self:remove()
 	end)
 
-	if(self.info ~= nil) then
-		self.info.clickedEvent:Connect(function()
+	if(self.info_button ~= nil and self.info_data ~= nil) then
+		self.info_button.clickedEvent:Connect(function()
 			Node_Events.trigger("node_info_click")
-			Events.Broadcast("show_node_information", self.info:GetChildren())
+			Events.Broadcast("show_node_information", self.info_data)
+		end)
+
+		self.info_button.hoveredEvent:Connect(function()
+			self.info_button:SetFontColor(self.delete_button:GetHoveredColor())
+		end)
+
+		self.info_button.unhoveredEvent:Connect(function()
+			self.info_button:SetFontColor(self.delete_button:GetButtonColor())
 		end)
 	end
 end
