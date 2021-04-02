@@ -1311,7 +1311,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:info_height"
-            Float: 400
+            Float: 325
           }
           Overrides {
             Name: "cs:button_offset"
@@ -1323,15 +1323,15 @@ Assets {
           }
           Overrides {
             Name: "cs:info_1_text"
-            String: "aaaa"
+            String: "This node is the final place the data is sent too.  Data sent to this node must meet the conditions set.  If any condition fails, then the whole program will fail to complete."
           }
           Overrides {
             Name: "cs:info_2_text"
-            String: "bbb"
+            String: ""
           }
           Overrides {
             Name: "cs:info_2_offset"
-            Float: 250
+            Float: 320
           }
           Overrides {
             Name: "cs:show_code"

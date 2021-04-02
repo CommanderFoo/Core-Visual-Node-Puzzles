@@ -1974,11 +1974,11 @@ Assets {
           }
           Overrides {
             Name: "cs:button_offset"
-            Float: 500
+            Float: 520
           }
           Overrides {
             Name: "cs:info_height"
-            Float: 570
+            Float: 590
           }
           Overrides {
             Name: "cs:info_1_text"
@@ -1990,13 +1990,17 @@ Assets {
           }
           Overrides {
             Name: "cs:info_2_offset"
-            Float: 350
+            Float: 370
           }
           Overrides {
             Name: "cs:example_code"
             AssetReference {
               Id: 176769903754432965
             }
+          }
+          Overrides {
+            Name: "cs:example_height"
+            Float: 470
           }
         }
         Collidable_v2 {

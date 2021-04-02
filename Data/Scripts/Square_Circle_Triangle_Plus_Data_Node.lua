@@ -77,3 +77,5 @@ end)
 script.destroyEvent:Connect(function()
 	is_destroyed = true
 end)
+
+--init({ circle_data_amount = 10, square_data_amount = 10, triangle_data_amount = 10, plus_data_amount = 10 })

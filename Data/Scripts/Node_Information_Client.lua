@@ -51,12 +51,14 @@ function fade_code_out()
 		code_title:SetColor(title_col)
 		code_close:SetButtonColor(close_col)
 
-		for i, t in ipairs(example_code:GetChildren()) do
-			local col = t:GetColor()
+		if(Object.IsValid(example_code)) then
+			for i, t in ipairs(example_code:GetChildren()) do
+				local col = t:GetColor()
 
-			col.a = c.a
+				col.a = c.a
 
-			t:SetColor(col)
+				t:SetColor(col)
+			end
 		end
 	end)
 
@@ -65,8 +67,10 @@ function fade_code_out()
 		showing_code = false
 		code_panel.visibility = Visibility.FORCE_OFF
 
-		example_code:Destroy()
-		example_code = nil
+		if(Object.IsValid(example_code)) then
+			example_code:Destroy()
+			example_code = nil
+		end
 	end)
 end
 
@@ -100,6 +104,8 @@ function show(info_data)
 		if(string.len(txt_2) > 0) then
 			info_text_2.text = txt_2
 			info_text_2.y = info_data:GetCustomProperty("info_2_offset")
+		else
+			info_text_2.text = ""
 		end
 
 		container.height = info_data:GetCustomProperty("info_height")
@@ -109,6 +115,7 @@ function show(info_data)
 			view_code_button.y = info_data:GetCustomProperty("button_offset")
 
 			if(listener and listener.isConnected) then
+				print(1)
 				listener:Disconnect()
 			end
 
@@ -128,6 +135,7 @@ function show(info_data)
 
 					example_code = World.SpawnAsset(info_data:GetCustomProperty("example_code"), { parent = code_panel })
 
+					code_panel.height = info_data:GetCustomProperty("example_height")
 					code_panel.visibility = Visibility.FORCE_ON
 				end)
 
@@ -142,12 +150,14 @@ function show(info_data)
 					code_title:SetColor(title_col)
 					code_close:SetButtonColor(close_col)
 
-					for i, t in ipairs(example_code:GetChildren()) do
-						local col = t:GetColor()
+					if(Object.IsValid(example_code)) then
+						for i, t in ipairs(example_code:GetChildren()) do
+							local col = t:GetColor()
 
-						col.a = c.a
+							col.a = c.a
 
-						t:SetColor(col)
+							t:SetColor(col)
+						end
 					end
 				end)
 

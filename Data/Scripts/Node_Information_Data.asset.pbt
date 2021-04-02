@@ -38,6 +38,10 @@ Assets {
           Id: 841534158063459245
         }
       }
+      Overrides {
+        Name: "cs:example_height"
+        Float: 0
+      }
     }
   }
   SerializationVersion: 78

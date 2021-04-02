@@ -3191,11 +3191,11 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:info_height"
-            Float: 420
+            Float: 445
           }
           Overrides {
             Name: "cs:button_offset"
-            Float: 350
+            Float: 370
           }
           Overrides {
             Name: "cs:title"
@@ -3211,13 +3211,17 @@ Assets {
           }
           Overrides {
             Name: "cs:info_2_offset"
-            Float: 285
+            Float: 310
           }
           Overrides {
             Name: "cs:example_code"
             AssetReference {
               Id: 5128182279547617667
             }
+          }
+          Overrides {
+            Name: "cs:example_height"
+            Float: 340
           }
         }
         Collidable_v2 {

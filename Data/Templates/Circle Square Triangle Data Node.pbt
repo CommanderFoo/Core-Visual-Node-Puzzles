@@ -42,6 +42,8 @@ Assets {
         Control {
           Width: 250
           Height: 120
+          UIX: 250
+          UIY: -200
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1641,7 +1643,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:info_height"
-            Float: 450
+            Float: 470
           }
           Overrides {
             Name: "cs:button_offset"
@@ -1661,7 +1663,7 @@ Assets {
           }
           Overrides {
             Name: "cs:info_2_offset"
-            Float: 212
+            Float: 230
           }
           Overrides {
             Name: "cs:show_code"
