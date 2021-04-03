@@ -115,13 +115,10 @@ function show(info_data)
 			view_code_button.y = info_data:GetCustomProperty("button_offset")
 
 			if(listener and listener.isConnected) then
-				print(1)
 				listener:Disconnect()
 			end
 
 			listener = view_code_button.clickedEvent:Connect(function()
-				print(title_txt)
-
 				if(showing_code) then
 					return
 				end
@@ -136,6 +133,7 @@ function show(info_data)
 					example_code = World.SpawnAsset(info_data:GetCustomProperty("example_code"), { parent = code_panel })
 
 					code_panel.height = info_data:GetCustomProperty("example_height")
+					code_panel.width = info_data:GetCustomProperty("example_width")
 					code_panel.visibility = Visibility.FORCE_ON
 				end)
 

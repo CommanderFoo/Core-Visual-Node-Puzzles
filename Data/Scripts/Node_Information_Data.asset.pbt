@@ -42,6 +42,10 @@ Assets {
         Name: "cs:example_height"
         Float: 0
       }
+      Overrides {
+        Name: "cs:example_width"
+        Float: 440
+      }
     }
   }
   SerializationVersion: 78

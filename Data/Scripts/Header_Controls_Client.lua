@@ -25,6 +25,7 @@ local running = false
 local speed = 1
 
 local showing_nodes = false
+local orig_showing_nodes = false
 local tween = nil
 local errors = 0
 
@@ -63,7 +64,7 @@ end
 
 available_nodes_button.hoveredEvent:Connect(API.play_hover_sound)
 
-available_nodes_button.clickedEvent:Connect(function()
+function show_hide_nodes()
 	if(tween ~= nil) then
 		tween:stop()
 		tween = nil		
@@ -72,6 +73,7 @@ available_nodes_button.clickedEvent:Connect(function()
 	if(showing_nodes) then	
 		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = 400})
 		available_nodes_button.text = "Show Available Nodes"
+		
 		showing_nodes = false
 	else
 		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -20})
@@ -95,7 +97,9 @@ available_nodes_button.clickedEvent:Connect(function()
 
 	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
 	API.play_click_sound()
-end)
+end
+
+available_nodes_button.clickedEvent:Connect(show_hide_nodes)
 
 run_edit_button.hoveredEvent:Connect(API.play_hover_sound)
 
@@ -105,11 +109,21 @@ run_edit_button.clickedEvent:Connect(function()
 		enable_ui()
 
 		Events.Broadcast("puzzle_edit")
+
+		if(orig_showing_nodes) then
+			show_hide_nodes()
+		end
 	else
 		run_edit_button.text = "Edit Program"
 		running = true
 
 		disable_ui(false)
+
+		orig_showing_nodes = showing_nodes
+
+		if(showing_nodes) then
+			show_hide_nodes()
+		end
 
 		Events.Broadcast("puzzle_run", speed)
 	end

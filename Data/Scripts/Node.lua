@@ -1285,10 +1285,204 @@ end
 
 -- End Alternate Node
 
+-- Limiter Node
+
+local Node_Limiter = {}
+
+function Node_Limiter:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.options.queue_task = nil
+
+	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+	local sending = 0
+	local limit_count = this.body:FindDescendantByName("Limit Count")
+	local orig_sending = 0
+	local minus_button = this.body:FindDescendantByName("Minus")
+	local plus_button = this.body:FindDescendantByName("Plus")
+
+	minus_button.clickedEvent:Connect(function()
+		if(sending > 0) then
+			sending = sending - 1
+		end
+
+		limit_count.text = tostring(sending)
+		orig_sending = sending
+	end)
+
+	plus_button.clickedEvent:Connect(function()
+		if(sending < 9999) then
+			sending = sending + 1
+		end
+
+		limit_count.text = tostring(sending)
+		orig_sending = sending
+	end)
+
+	Node_Events.on("edit", function(can_edit)
+		if(Object.IsValid(minus_button)) then
+			if(can_edit) then
+				minus_button.isInteractable = true
+			else
+				minus_button.isInteractable = false
+			end
+		end
+
+		if(Object.IsValid(plus_button)) then
+			if(can_edit) then
+				plus_button.isInteractable = true
+			else
+				plus_button.isInteractable = false
+			end
+		end
+	end)
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local obj = nil
+				local line = this:get_connector_line(sending > 0)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(this:has_top_connection() and sending > 0) then
+					obj = this:spawn_asset(data.asset, line.x, line.y)
+					connection_method = "send_data_top"
+		
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+
+					sending = sending - 1
+					limit_count.text = tostring(sending)
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
+						
+						})
+					end
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = this.options.YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+		sending = orig_sending
+		limit_count.text = tostring(sending)
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Limiter Node
+
 return Node, Node_Events, {
 
 	If = Node_If,
 	Data = Node_Data,
-	Alternate = Node_Alternate
+	Alternate = Node_Alternate,
+	Limiter = Node_Limiter
 
 }
