@@ -9,6 +9,7 @@ local bronze_score = root:GetCustomProperty("bronze_score")
 
 local output_square_complete = false
 local output_circle_complete = 0
+local output_circle_square_complete = false
 
 local showing_result_ui = false
 local total_puzzle_score = 0
@@ -21,8 +22,12 @@ API.Puzzle_Events.on("output_circle_complete", function(errors)
 	output_circle_complete = output_circle_complete + 1
 end)
 
+API.Puzzle_Events.on("output_circle_square_complete", function(errors)
+	output_circle_square_complete = true
+end)
+
 function Tick()
-	if(output_square_complete and output_circle_complete == 2) then
+	if(output_square_complete and output_circle_complete == 2 and output_circle_square_complete) then
 		show_result()
 	end
 end
@@ -44,6 +49,7 @@ Events.Connect("puzzle_edit", function()
 
 	output_square_complete = false
 	output_circle_complete = 0
+	output_circle_square_complete = false
 	
 	showing_result_ui = false
 	total_puzzle_score = 0

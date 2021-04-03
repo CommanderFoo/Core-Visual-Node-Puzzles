@@ -614,7 +614,7 @@ Objects {
     Overrides {
       Name: "cs:puzzle_6"
       AssetReference {
-        Id: 17238237359963627012
+        Id: 4614411313633299915
       }
     }
   }

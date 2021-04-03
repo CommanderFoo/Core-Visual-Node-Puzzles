@@ -22,7 +22,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:name"
-            String: "Journey Begins"
+            String: ""
           }
           Overrides {
             Name: "cs:gold_score"
@@ -639,6 +639,10 @@ Assets {
           Overrides {
             Name: "cs:total"
             Int: 1
+          }
+          Overrides {
+            Name: "cs:circle_data_amount"
+            Int: 30
           }
         }
         Collidable_v2 {

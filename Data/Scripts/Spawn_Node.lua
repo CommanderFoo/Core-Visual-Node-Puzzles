@@ -79,10 +79,6 @@ button.clickedEvent:Connect(function()
 				data_amounts.plus_data_amount = plus_data_amount
 			end
 
-			if(required_amount ~= nil) then
-				data_amounts.required = required_amount
-			end
-
 			s.init(data_amounts)
 		end
 

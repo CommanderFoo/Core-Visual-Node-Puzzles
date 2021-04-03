@@ -162,6 +162,22 @@ function API.clear_graph()
 	API.nodes = {}
 end
 
+function API.set_bubble(type, n, amounts, expand)
+	if(amounts[type .. "_data_amount"] ~= nil and amounts[type .. "_data_amount"] > 0) then
+		local bubble = n["get_" ..  type .. "_bubble"](n)
+
+		if(Object.IsValid(bubble)) then
+			local txt = "0 / " .. tostring(amounts[type .. "_data_amount"])
+
+			bubble:FindChildByName("Count").text = txt
+
+			if(expand and string.len(txt) > 5) then
+				bubble.width = bubble.width + 20
+			end
+		end
+	end
+end
+
 local ticking_task = Task.Spawn(function()
 	if(API.active_node ~= nil and API.can_edit_nodes) then
 		API.active_node:drag_node()

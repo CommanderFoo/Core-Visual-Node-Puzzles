@@ -26,7 +26,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:name"
-            String: "Tutorial 2"
+            String: ""
           }
           Overrides {
             Name: "cs:gold_score"
@@ -164,19 +164,19 @@ Assets {
           }
           Overrides {
             Name: "cs:circle_data_amount"
-            Int: 150
+            Int: 100
           }
           Overrides {
             Name: "cs:square_data_amount"
-            Int: 150
+            Int: 100
           }
           Overrides {
             Name: "cs:triangle_data_amount"
-            Int: 150
+            Int: 100
           }
           Overrides {
             Name: "cs:plus_data_amount"
-            Int: 150
+            Int: 100
           }
         }
         Collidable_v2 {
@@ -1122,6 +1122,10 @@ Assets {
             Name: "cs:total"
             Int: 1
           }
+          Overrides {
+            Name: "cs:square_data_amount"
+            Int: 100
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1589,6 +1593,10 @@ Assets {
           Overrides {
             Name: "cs:total"
             Int: 1
+          }
+          Overrides {
+            Name: "cs:circle_data_amount"
+            Int: 100
           }
         }
         Collidable_v2 {
@@ -2058,6 +2066,10 @@ Assets {
             Name: "cs:total"
             Int: 1
           }
+          Overrides {
+            Name: "cs:triangle_data_amount"
+            Int: 100
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -2525,6 +2537,10 @@ Assets {
           Overrides {
             Name: "cs:total"
             Int: 1
+          }
+          Overrides {
+            Name: "cs:plus_data_amount"
+            Int: 100
           }
         }
         Collidable_v2 {

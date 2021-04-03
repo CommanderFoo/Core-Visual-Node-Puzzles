@@ -7,8 +7,11 @@ local condition = script:GetCustomProperty("condition")
 local is_destroyed = false
 local total = 0
 local node = nil
+local data = {}
 
 function init(data_amounts)
+	data = data_amounts
+	
 	node = API.Node:new(script.parent.parent, {
 
 		on_data_received = function(data, node)
@@ -20,8 +23,8 @@ function init(data_amounts)
 				local total_str = tostring(total)
 				local amount = data.total_count
 
-				if(data_amounts.required ~= nil and data_amounts.required > 0) then
-					amount = data_amounts.required
+				if(data_amounts.triangle_data_amount ~= nil and data_amounts.triangle_data_amount > 0) then
+					amount = data_amounts.triangle_data_amount
 
 					total_str = total_str .. " / " .. tostring(amount)
 				end
@@ -46,17 +49,7 @@ function init(data_amounts)
 
 	})
 
-	if(data_amounts.required ~= nil and data_amounts.required > 0) then
-		local bubble = node:get_bubble()
-		local txt = "0 / " .. tostring(data_amounts.required)
-
-		bubble:FindChildByName("Count").text = txt
-
-		if(string.len(txt) > 5) then
-			bubble.width = bubble.width + 20
-		end
-	end
-
+	API.set_bubble("triangle", node, data, true)
 	API.register_node(node)
 end
 
@@ -68,6 +61,8 @@ Events.Connect("puzzle_edit", function()
 	if(Object.IsValid(triangle_count)) then
 		triangle_count.text = "0"
 		total = 0
+
+		API.set_bubble("triangle", node, data, false)
 		node:hide_error_info()
 	end
 end)

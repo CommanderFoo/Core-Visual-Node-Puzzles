@@ -635,7 +635,7 @@ Assets {
       }
       Objects {
         Id: 6363962789586976049
-        Name: "Bubble"
+        Name: "Plus Bubble"
         Transform {
           Location {
           }

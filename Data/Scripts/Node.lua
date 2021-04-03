@@ -185,7 +185,12 @@ function Node:setup_node(root)
 	self.items_container = self.root:FindDescendantByName("Items Container")
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI")
 	self.body = self.root:FindDescendantByName("Body Background")
-	self.bubble = self.body:FindDescendantByName("Bubble")
+
+	self.circle_bubble = self.body:FindDescendantByName("Circle Bubble")
+	self.square_bubble = self.body:FindDescendantByName("Square Bubble")
+	self.triangle_bubble = self.body:FindDescendantByName("Triangle Bubble")
+	self.plus_bubble = self.body:FindDescendantByName("Plus Bubble")
+
 	self.info_button = self.handle:FindChildByName("Info")
 	self.info_data = self.root:FindDescendantByName("Node_Information_Data")
 
@@ -534,8 +539,20 @@ function Node:get_body()
 	return self.body
 end
 
-function Node:get_bubble()
-	return self.bubble
+function Node:get_circle_bubble()
+	return self.circle_bubble
+end
+
+function Node:get_square_bubble()
+	return self.square_bubble
+end
+
+function Node:get_triangle_bubble()
+	return self.triangle_bubble
+end
+
+function Node:get_plus_bubble()
+	return self.plus_bubble
 end
 
 function Node:has_input_connection(ignore_id)
