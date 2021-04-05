@@ -18,7 +18,9 @@ local required_amount = root:GetCustomProperty("required_amount")
 local total_spawned = 0
 local template_id = nil
 
-if(total ~= -1) then
+if(total == -1) then
+	total_count.text = "∞"
+else
 	total_count.text = tostring(total)
 end
 

@@ -44,12 +44,12 @@ Assets {
   }
 }
 Assets {
-  Id: 13239260661472566277
-  Name: "UI Basic Shape Square"
+  Id: 12125222595592029656
+  Name: "Icon Clock"
   PlatformAssetType: 9
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
-    AssetId: "UI_Basic_Shape_Square"
+    AssetId: "Icon_Clock"
   }
 }
 Assets {

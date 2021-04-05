@@ -1,13 +1,5 @@
 Entries {
   Key {
-    StringVar: "cs"
-  }
-  SimpleValue {
-    IntVar: 5
-  }
-}
-Entries {
-  Key {
     StringVar: "cp"
   }
   SimpleValue {
@@ -16,7 +8,15 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "mv"
+    StringVar: "cs"
+  }
+  SimpleValue {
+    IntVar: 1
+  }
+}
+Entries {
+  Key {
+    StringVar: "an"
   }
   SimpleValue {
     IntVar: 0
@@ -32,7 +32,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "an"
+    StringVar: "sn"
   }
   SimpleValue {
     IntVar: 0
@@ -40,7 +40,7 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sn"
+    StringVar: "mv"
   }
   SimpleValue {
     IntVar: 0

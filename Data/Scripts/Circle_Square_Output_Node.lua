@@ -18,7 +18,7 @@ local data = {}
 function init(data_amounts)
 	data = data_amounts
 
-	node = API.Node:new(script.parent.parent, {
+	node = API.Node_Type.Output:new(script.parent.parent, {
 
 		on_data_received = function(data, node)
 			local error = false

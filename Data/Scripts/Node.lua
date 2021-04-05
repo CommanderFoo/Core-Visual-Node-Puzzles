@@ -405,10 +405,6 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 end
 
 function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection)
-	if(self.input_connected_to[connected_to_connection.id]) then
-		-- TODO break connections if only 1 is allowed
-	end
-
 	if(self.input_connected_to[connected_to_connection.id] == nil) then
 		self.input_connected_to[connected_to_connection.id] = {}
 	end
@@ -420,6 +416,8 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 		connected_to_connection = connected_to_connection
 
 	})
+
+	Node_Events.trigger("input_connected_to", connected_from_node)
 end
 
 function Node:move_connections()
@@ -845,6 +843,10 @@ function Node:get_tween_duration()
 	return self.options.tween_duration / self:get_speed()
 end
 
+function Node:get_type()
+	return self.node_type
+end
+
 function Node:new(r, options)
 	self.__index = self
 
@@ -854,6 +856,8 @@ function Node:new(r, options)
 
 	}, self)
 
+	self.node_type = "Node"
+
 	o:setup(r)
 
 	return o
@@ -862,6 +866,30 @@ end
 function Node:test()
 	return self.options.a
 end
+
+-- Output Node
+
+local Node_Output = {}
+
+function Node_Output:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this.node_type = "Output"
+
+	this:setup(r)
+
+	return this
+end
+
+-- End Output Node
 
 -- If Node
 
@@ -877,6 +905,8 @@ function Node_If:new(r, options)
 	}, self)
 
 	setmetatable(this, {__index = Node})
+
+	this.node_type = "If"
 
 	if(not this.options_if_condition) then
 		this.options.if_condition = nil
@@ -1030,6 +1060,8 @@ function Node_Data:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
+	this.node_type = "Data"
+
 	this:setup(r)
 
 	if(not this.options.repeat_count) then
@@ -1161,6 +1193,8 @@ function Node_Alternate:new(r, options)
 	}, self)
 
 	setmetatable(this, {__index = Node})
+
+	this.node_type = "Alternate"
 
 	this:setup(r)
 
@@ -1316,6 +1350,8 @@ function Node_Limiter:new(r, options)
 	}, self)
 
 	setmetatable(this, {__index = Node})
+
+	this.node_type = "Limiter"
 
 	this:setup(r)
 
@@ -1495,11 +1531,185 @@ end
 
 -- End Limiter Node
 
+-- Halt Node
+
+local Node_Halt = {}
+
+function Node_Halt:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this.node_type = "Halt"
+
+	this:setup(r)
+
+	this.options.queue_task = nil
+
+	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+	local from_speed = nil
+	local order = 1
+
+	local order_num = this.body:FindDescendantByName("Order Num")
+	local minus_button = this.body:FindDescendantByName("Minus")
+	local plus_button = this.body:FindDescendantByName("Plus")
+
+	minus_button.clickedEvent:Connect(function()
+		if(order > 1) then
+			order = order - 1
+			order_num.text = tostring(order)
+		end
+	end)
+
+	plus_button.clickedEvent:Connect(function()
+		if(order < 5) then
+			order = order + 1
+			order_num.text = tostring(order)
+		end
+	end)
+
+	Node_Events.on("edit", function(can_edit)
+		if(Object.IsValid(minus_button)) then
+			if(can_edit) then
+				minus_button.isInteractable = true
+			else
+				minus_button.isInteractable = false
+			end
+		end
+
+		if(Object.IsValid(plus_button)) then
+			if(can_edit) then
+				plus_button.isInteractable = true
+			else
+				plus_button.isInteractable = false
+			end
+		end
+	end)
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	Node_Events.on("halt_" .. this:get_id(), function()
+		if(not monitor_started) then
+			print("go")
+
+			monitor_started = true
+
+			this:set_speed(from_speed)
+			this:monitor_queue(from_speed)
+		end
+	end)
+
+	this.options.on_data_received = function(data, node, from_node)
+		from_speed = from_node:get_speed()
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection()) then
+				local obj = this:spawn_asset(data.asset, line.x, line.y)
+				local line = this:get_connector_line(sending > 0)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+
+				this:insert_tween({
+					
+					obj = obj,
+					tween = tween
+				
+				})
+			
+				if(tween ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this["send_data_top"](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = this.options.YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Halt Node
+
 return Node, Node_Events, {
 
+	Output = Node_Output,
 	If = Node_If,
 	Data = Node_Data,
 	Alternate = Node_Alternate,
-	Limiter = Node_Limiter
+	Limiter = Node_Limiter,
+	Halt = Node_Halt
 
 }
