@@ -1,11 +1,10 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local is_destroyed = false
 
 local halt_node = API.Node_Type.Halt:new(script.parent.parent, {
 
-	YOOTIL = YOOTIL,
-	node_time = 0.05
+	node_time = 0.30
 
 })
 

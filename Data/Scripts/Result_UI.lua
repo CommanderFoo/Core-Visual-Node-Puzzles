@@ -1,4 +1,4 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local title = script:GetCustomProperty("title"):WaitForObject()
 local edit_button = script:GetCustomProperty("edit_button"):WaitForObject()

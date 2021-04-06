@@ -1,4 +1,4 @@
-﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+﻿local API = require(script:GetCustomProperty("API"))
 
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
 

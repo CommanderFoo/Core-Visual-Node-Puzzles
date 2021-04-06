@@ -1,4 +1,6 @@
-﻿local Node_Events = {}
+﻿local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+
+local Node_Events = {}
 
 local floor = math.floor
 local abs = math.abs
@@ -173,6 +175,8 @@ end
 function Node:receive_data(data, from_node)
 	if(self.options.on_data_received ~= nil) then
 		self.options.on_data_received(data, self, from_node)
+
+		Node_Events.trigger("received_data", self)
 	end
 end
 
@@ -293,13 +297,13 @@ function Node:debug()
 	local outputs = 0
 
 	for k, v in pairs(self.input_connected_to) do
-		for i, c in ipairs(v) do
+		for i, c in pairs(v) do
 			inputs = inputs + 1
 		end
 	end
 
 	for k, v in pairs(self.output_connected_to) do
-		for i, c in ipairs(v) do
+		for i, c in pairs(v) do
 			outputs = outputs + 1
 		end
 	end
@@ -331,7 +335,7 @@ function Node:setup_output_connections()
 					return
 				end
 
-				Node_Events.trigger("break_connection", connections[c].id, true)
+				Node_Events.trigger("break_connection", connections[c].id, true, self)
 
 				self.active_connection = self.output_connections[connections[c].id]
 				self.active_connection.moving = true
@@ -351,8 +355,12 @@ function Node:clear_output_connection(id)
 end
 
 function Node:clear_input_connection(id)
-	if(self.input_connected_to[id]) then
-		self.input_connected_to[id] = nil
+	for k, v in pairs(self.input_connected_to) do
+		for i, j in pairs(v) do
+			if(j.connected_from_connection.id == id) then
+				self.input_connected_to[k][i] = nil
+			end
+		end
 	end
 end
 
@@ -402,6 +410,8 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 
 	self.active_connection.moving = false
 	self.active_connection.connector_image:SetColor(self.default_connector_color)
+
+	Node_Events.trigger("output_connected_to", connected_to_node)
 end
 
 function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection)
@@ -417,7 +427,7 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 
 	})
 
-	Node_Events.trigger("input_connected_to", connected_from_node)
+	Node_Events.trigger("input_connected_to", connected_from_node, self)
 end
 
 function Node:move_connections()
@@ -748,6 +758,14 @@ function Node:get_bottom_connector_line()
 	end
 end
 
+function Node:get_input_connections()
+	return self.input_connected_to
+end
+
+function Node:get_output_connections()
+	return self.output_connected_to
+end
+
 function Node:get_connector_line(condition)
 	if(condition) then
 		return self:get_top_connector_line()
@@ -761,7 +779,7 @@ function Node:create_tween(line)
 		return nil
 	end
 
-	local t = self.options.YOOTIL.Tween:new(self:get_tween_duration(), {a = 0}, {a = line.width})
+	local t = YOOTIL.Tween:new(self:get_tween_duration(), {a = 0}, {a = line.width})
 	
 	if(self.options.tween_delay) then
 		t:set_delay(self.options.tween_delay / self.options.speed)
@@ -886,6 +904,78 @@ function Node_Output:new(r, options)
 
 	this:setup(r)
 
+	function this:get_halt_nodes(cur_id)
+		local halt_nodes = {}
+
+		for k, v in pairs(this.input_connected_to) do
+			for a, j in pairs(v) do
+				if(j.connected_from_node:get_type() == "Halt" and j.connected_from_node:get_id() ~= cur_id) then
+					table.insert(halt_nodes, #halt_nodes + 1, j.connected_from_node)
+				end
+			end
+		end
+
+		return halt_nodes
+	end
+
+	function this:check_halting()
+		local use_node = nil
+
+		for k, n in ipairs(this:get_halt_nodes()) do
+			if(use_node == nil) then
+				use_node = n
+			end
+
+			if(n:get_order() < use_node:get_order()) then
+				use_node = n
+			end
+		end
+
+		if(use_node ~= nil) then
+			use_node:unhalt()
+		end
+	end
+
+	function this:get_next_halt_order(cur_id)
+		local total = 0
+		local nums = {}
+
+		for k, n in pairs(this:get_halt_nodes(cur_id)) do
+			if(n:get_type() == "Halt") then
+				table.insert(nums, #nums + 1, n:get_order())
+				total = total + 1
+			end
+		end
+
+		if(total > 0) then
+			local free = {}
+
+			for i = 1, (total + 1) do
+				free[i] = true
+			end
+
+			for i, n in ipairs(nums) do
+				free[n] = false
+			end
+
+			for i, n in ipairs(free) do
+				if(n) then
+					return i
+				end
+			end
+		else
+			return 1
+		end
+	end
+
+	Node_Events.on("input_connected_to", function(n, w)
+		if(n:get_type() == "Halt" and this:get_type() == "Output" and w:get_type() == "Output") then
+			n:set_order(this:get_next_halt_order(n:get_id()))
+		elseif(n:get_type() == "Halt") then
+			n:set_order(0)
+		end
+	end)
+
 	return this
 end
 
@@ -916,7 +1006,7 @@ function Node_If:new(r, options)
 
 	this.options.queue_task = nil
 
-	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 
 	function this:monitor_queue(speed)
@@ -1026,7 +1116,7 @@ function Node_If:new(r, options)
 		end
 
 		monitor_started = false
-		queue = this.options.YOOTIL.Utils.Queue:new()
+		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 
 		this:clear_items_container()
@@ -1200,7 +1290,7 @@ function Node_Alternate:new(r, options)
 
 	this.options.queue_task = nil
 
-	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 
 	local switch = true
@@ -1317,7 +1407,7 @@ function Node_Alternate:new(r, options)
 		end
 
 		monitor_started = false
-		queue = this.options.YOOTIL.Utils.Queue:new()
+		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 
 		this:clear_items_container()
@@ -1336,11 +1426,11 @@ end
 
 -- End Alternate Node
 
--- Limiter Node
+-- Limit Node
 
-local Node_Limiter = {}
+local Node_Limit = {}
 
-function Node_Limiter:new(r, options)
+function Node_Limit:new(r, options)
 	self.__index = self
 	
 	local this = setmetatable({
@@ -1351,13 +1441,13 @@ function Node_Limiter:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this.node_type = "Limiter"
+	this.node_type = "Limit"
 
 	this:setup(r)
 
 	this.options.queue_task = nil
 
-	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 	local sending = 0
 	local limit_count = this.body:FindDescendantByName("Limit Count")
@@ -1510,7 +1600,7 @@ function Node_Limiter:new(r, options)
 		end
 
 		monitor_started = false
-		queue = this.options.YOOTIL.Utils.Queue:new()
+		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 		sending = orig_sending
 		limit_count.text = tostring(sending)
@@ -1529,7 +1619,7 @@ function Node_Limiter:new(r, options)
 	return this
 end
 
--- End Limiter Node
+-- End Limit Node
 
 -- Halt Node
 
@@ -1552,46 +1642,13 @@ function Node_Halt:new(r, options)
 
 	this.options.queue_task = nil
 
-	local queue = this.options.YOOTIL.Utils.Queue:new()
+	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
-	local from_speed = nil
-	local order = 1
-
-	local order_num = this.body:FindDescendantByName("Order Num")
-	local minus_button = this.body:FindDescendantByName("Minus")
-	local plus_button = this.body:FindDescendantByName("Plus")
-
-	minus_button.clickedEvent:Connect(function()
-		if(order > 1) then
-			order = order - 1
-			order_num.text = tostring(order)
-		end
-	end)
-
-	plus_button.clickedEvent:Connect(function()
-		if(order < 5) then
-			order = order + 1
-			order_num.text = tostring(order)
-		end
-	end)
-
-	Node_Events.on("edit", function(can_edit)
-		if(Object.IsValid(minus_button)) then
-			if(can_edit) then
-				minus_button.isInteractable = true
-			else
-				minus_button.isInteractable = false
-			end
-		end
-
-		if(Object.IsValid(plus_button)) then
-			if(can_edit) then
-				plus_button.isInteractable = true
-			else
-				plus_button.isInteractable = false
-			end
-		end
-	end)
+	local from_speed = 1
+	local order = 0
+	local halting_data_type = nil
+	local count = this.body:FindDescendantByName("Count")
+	local active_shape = nil
 
 	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
@@ -1606,29 +1663,43 @@ function Node_Halt:new(r, options)
 		end
 	end
 
-	Node_Events.on("halt_" .. this:get_id(), function()
+	function this:unhalt()
 		if(not monitor_started) then
-			print("go")
-
 			monitor_started = true
 
 			this:set_speed(from_speed)
 			this:monitor_queue(from_speed)
 		end
-	end)
+	end
 
+	Node_Events.on("break_connection", function(id, drag, n)
+		if(n:get_id() == this:get_id()) then
+			order = 0
+		end
+	end)
+	
 	this.options.on_data_received = function(data, node, from_node)
+		if(halting_data_type == nil) then
+			halting_data_type = data.condition
+			active_shape = this.body:FindDescendantByName(data.condition:gsub("^%l", string.upper))
+			active_shape.visibility = Visibility.FORCE_ON
+		elseif(halting_data_type ~= data.condition) then
+			this:has_errors(true)
+
+			return
+		end
+
+		count.text = tostring(tonumber(count.text) + 1)
+		
 		from_speed = from_node:get_speed()
 
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
 			if(this:has_top_connection()) then
+				local line = this:get_connector_line(true)
 				local obj = this:spawn_asset(data.asset, line.x, line.y)
-				local line = this:get_connector_line(sending > 0)
 				local tween = this:create_tween(line)
-				local connection_method = nil
-				local offset = 0
 
 				this:insert_tween({
 					
@@ -1639,6 +1710,7 @@ function Node_Halt:new(r, options)
 			
 				if(tween ~= nil) then
 					tween:on_start(function()
+						count.text = tostring(tonumber(count.text) - 1)
 						obj.visibility = Visibility.FORCE_ON
 					end)
 
@@ -1653,7 +1725,7 @@ function Node_Halt:new(r, options)
 					end)
 		
 					tween:on_change(function(changed)
-						local x, y = this:get_path(obj, line, changed, offset)
+						local x, y = this:get_path(obj, line, changed, 0)
 						
 						if(x == nil or y == nil) then
 							return
@@ -1674,6 +1746,15 @@ function Node_Halt:new(r, options)
 			queue_func()
 		end
 	end
+
+	function this:set_order(ord)
+		this.order = ord
+		this.body:FindDescendantByName("Order").text = tostring(this.order)
+	end
+
+	function this:get_order()
+		return this.order
+	end
 	
 	function this:reset()
 		this.options.added_tween = false
@@ -1684,8 +1765,15 @@ function Node_Halt:new(r, options)
 		end
 
 		monitor_started = false
-		queue = this.options.YOOTIL.Utils.Queue:new()
+		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
+		
+		count.text = "0"
+		halting_data_type = nil
+		
+		if(active_shape ~= nil) then
+			active_shape.visibility = Visibility.FORCE_OFF
+		end
 
 		this:clear_items_container()
 		this:hide_error_info()
@@ -1709,7 +1797,7 @@ return Node, Node_Events, {
 	If = Node_If,
 	Data = Node_Data,
 	Alternate = Node_Alternate,
-	Limiter = Node_Limiter,
+	Limit = Node_Limit,
 	Halt = Node_Halt
 
 }

@@ -1,4 +1,4 @@
-﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+﻿local API = require(script:GetCustomProperty("API"))
 
 local data = {
 	
@@ -12,7 +12,6 @@ API.register_node(API.Node_Type.Data:new(script.parent.parent, {
 
 	tween_items = tween_items,
 	data_items = data,
-	YOOTIL = YOOTIL,
 	repeat_interval = 0.1,
 	tween_duration = .8
 

@@ -1,10 +1,9 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local is_destroyed = false
 
 local node = API.Node_Type.Alternate:new(script.parent.parent, {
 
-	YOOTIL = YOOTIL,
 	node_time = 0.1
 
 })

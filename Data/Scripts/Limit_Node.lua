@@ -1,18 +1,17 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local is_destroyed = false
 
-local limiter_node = API.Node_Type.Limiter:new(script.parent.parent, {
+local limit_node = API.Node_Type.Limit:new(script.parent.parent, {
 
-	YOOTIL = YOOTIL,
 	node_time = 0.4
 
 })
 
-API.register_node(limiter_node)
+API.register_node(limit_node)
 
 function Tick(dt)
-	for _, i in ipairs(limiter_node:get_tweens()) do
+	for _, i in ipairs(limit_node:get_tweens()) do
 		if(i.tween ~= nil) then
 			i.tween:tween(dt)
 		end
@@ -24,7 +23,7 @@ Events.Connect("puzzle_edit", function()
 		return
 	end
 
-	limiter_node:reset()
+	limit_node:reset()
 end)
 
 script.destroyEvent:Connect(function()

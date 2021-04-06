@@ -1,4 +1,4 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local root = script.parent.parent
 
@@ -62,26 +62,28 @@ button.clickedEvent:Connect(function()
 
 		local s = find_node_script(n)
 		
-		if(s ~= nil and s.init ~= nil) then
-			local data_amounts = {}
+		if(s ~= nil) then			
+			if(s.init ~= nil) then
+				local data_amounts = {}
 
-			if(circle_data_amount ~= nil) then
-				data_amounts.circle_data_amount = circle_data_amount
+				if(circle_data_amount ~= nil) then
+					data_amounts.circle_data_amount = circle_data_amount
+				end
+
+				if(square_data_amount ~= nil) then
+					data_amounts.square_data_amount = square_data_amount
+				end
+
+				if(triangle_data_amount ~= nil) then
+					data_amounts.triangle_data_amount = triangle_data_amount
+				end
+
+				if(plus_data_amount ~= nil) then
+					data_amounts.plus_data_amount = plus_data_amount
+				end
+
+				s.init(data_amounts)
 			end
-
-			if(square_data_amount ~= nil) then
-				data_amounts.square_data_amount = square_data_amount
-			end
-
-			if(triangle_data_amount ~= nil) then
-				data_amounts.triangle_data_amount = triangle_data_amount
-			end
-
-			if(plus_data_amount ~= nil) then
-				data_amounts.plus_data_amount = plus_data_amount
-			end
-
-			s.init(data_amounts)
 		end
 
 		template_id = n.sourceTemplateId

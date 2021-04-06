@@ -1,4 +1,4 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local is_destroyed = false
 
@@ -33,7 +33,6 @@ function init(data_amounts)
 	data_node = API.Node_Type.Data:new(script.parent.parent, {
 
 		data_items = data,
-		YOOTIL = YOOTIL,
 		repeat_interval = 0.25
 
 	})

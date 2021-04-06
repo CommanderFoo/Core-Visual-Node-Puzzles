@@ -1,10 +1,9 @@
-﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+﻿local API = require(script:GetCustomProperty("API"))
 
 local is_destroyed = false
 
 local if_node = API.Node_Type.If:new(script.parent.parent, {
 
-	YOOTIL = YOOTIL,
 	node_time = 0.3
 
 })

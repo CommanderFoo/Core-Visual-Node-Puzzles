@@ -65,7 +65,7 @@ API.Node_Events.on("input_connect", function(node_connected, node_connection)
 		API.active_node:output_connect_to(node_connected, node_connection)
 		node_connected:input_connect_to(API.active_node, API.active_node:get_current_connection(), node_connection)
 
-		API.Node_Events.trigger("node_connected", API.active_node)
+		API.Node_Events.trigger("node_connected", API.active_node, node_connected)
 	end
 end)
 

@@ -1,13 +1,13 @@
 Assets {
   Id: 4190027609165026148
-  Name: "Limiter Node"
+  Name: "Limit Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 720176685068782400
       Objects {
         Id: 720176685068782400
-        Name: "Limiter Node"
+        Name: "Limit Node"
         Transform {
           Scale {
             X: 1
@@ -2229,7 +2229,7 @@ Assets {
           }
           UseParentWidth: true
           Text {
-            Label: "Limiter"
+            Label: "Limit"
             Color {
               R: 1
               G: 1
@@ -2374,14 +2374,14 @@ Assets {
           Value: "mc:evisibilitysetting:inheritfromparent"
         }
         CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
+          Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
         }
       }
       Objects {
         Id: 7343800303522006842
-        Name: "Limiter_Node"
+        Name: "Limit_Node"
         Transform {
           Location {
           }
@@ -2443,7 +2443,7 @@ Assets {
           }
           Overrides {
             Name: "cs:title"
-            String: "Limiter"
+            String: "Limit"
           }
           Overrides {
             Name: "cs:info_1_text"
@@ -2569,5 +2569,5 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 78
+  SerializationVersion: 81
 }

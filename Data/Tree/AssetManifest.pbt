@@ -35,42 +35,6 @@ Assets {
   }
 }
 Assets {
-  Id: 15322576452248986664
-  Name: "BG Flat 004"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "BackgroundNoOutline_22"
-  }
-}
-Assets {
-  Id: 12125222595592029656
-  Name: "Icon Clock"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "Icon_Clock"
-  }
-}
-Assets {
-  Id: 11827541898079449513
-  Name: "Alert Triangle"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "UI_Scifi_Icon_029"
-  }
-}
-Assets {
-  Id: 10644292420748989311
-  Name: "BG Flat 006"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "BackgroundNoOutline_015"
-  }
-}
-Assets {
   Id: 9402814787072448834
   Name: "BG Flat 001"
   PlatformAssetType: 9
@@ -107,15 +71,6 @@ Assets {
   }
 }
 Assets {
-  Id: 2010827857625261080
-  Name: "BG Flat 001"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "BackgroundNoOutline_020"
-  }
-}
-Assets {
   Id: 1557426602478375544
   Name: "Center Arrow 004 Wedge"
   PlatformAssetType: 9
@@ -140,15 +95,6 @@ Assets {
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "UI_Military_Icon_036"
-  }
-}
-Assets {
-  Id: 282048513447773438
-  Name: "UI Basic Shape Circle"
-  PlatformAssetType: 9
-  PrimaryAsset {
-    AssetType: "PlatformBrushAssetRef"
-    AssetId: "UI_Basic_Shape_Circle"
   }
 }
 Assets {

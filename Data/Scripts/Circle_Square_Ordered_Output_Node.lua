@@ -1,4 +1,4 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
 local square_count = script:GetCustomProperty("square_count"):WaitForObject()
@@ -18,7 +18,7 @@ local data = {}
 function init(data_amounts)
 	data = data_amounts
 
-	node = API.Node:new(script.parent.parent, {
+	node = API.Node_Type.Output:new(script.parent.parent, {
 
 		on_data_received = function(data, node)
 			local error = false
@@ -42,6 +42,8 @@ function init(data_amounts)
 
 					if(total_circle == amount) then
 						circle_complete = true
+						
+						node:check_halting()
 					elseif(total_circle > amount) then
 						node:has_errors(true)
 						error = true

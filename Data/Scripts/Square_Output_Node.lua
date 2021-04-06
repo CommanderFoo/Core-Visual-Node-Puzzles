@@ -1,4 +1,4 @@
-local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 
 local square_count = script:GetCustomProperty("square_count"):WaitForObject()
 
