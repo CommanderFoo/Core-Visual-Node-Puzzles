@@ -62,6 +62,15 @@ Assets {
   }
 }
 Assets {
+  Id: 6856142566052620077
+  Name: "\"Astral Chill\" Music Construction Kit (Sections) 01"
+  PlatformAssetType: 10
+  PrimaryAsset {
+    AssetType: "AudioBlueprintAssetRef"
+    AssetId: "abp_astral_chill_sections_kit_ref"
+  }
+}
+Assets {
   Id: 4900954416202036311
   Name: "Center Tri 001"
   PlatformAssetType: 9

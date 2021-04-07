@@ -65,6 +65,14 @@ end
 
 Events.ConnectForPlayer("load_game", load_game)
 
+Game.playerJoinedEvent:Connect(function(player)
+	player:SetVisibility(false)
+	player.movementControlMode = MovementControlMode.NONE
+	player.lookControlMode = LookControlMode.NONE
+	player.maxJumpCount = 0
+	player.isCrouchEnabled = false
+end)
+
 Game.playerLeftEvent:Connect(save_data)
 
 Events.ConnectForPlayer("update_player_prefs", function(player, speed, show_nodes)

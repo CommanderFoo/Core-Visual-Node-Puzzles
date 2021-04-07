@@ -1,4 +1,5 @@
 local music_folder = script:GetCustomProperty("music_folder"):WaitForObject()
+local main_menu = script:GetCustomProperty("main_menu"):WaitForObject()
 
 local songs = music_folder:GetChildren()
 
@@ -38,3 +39,11 @@ function play_music()
 end
 
 --Events.Connect("play_music", play_music)
+
+Events.Connect("stop_menu_music", function()
+	main_menu:Stop()
+end)
+
+Events.Connect("play_menu_music", function()
+	main_menu:Play()
+end)

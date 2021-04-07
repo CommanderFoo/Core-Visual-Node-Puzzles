@@ -237,6 +237,26 @@ Objects {
     }
   }
   ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:base_ui"
+      ObjectReference {
+        SelfId: 5361995976725761005
+      }
+    }
+    Overrides {
+      Name: "cs:node_ui"
+      ObjectReference {
+        SelfId: 3627026760658224672
+      }
+    }
+    Overrides {
+      Name: "cs:top_ui"
+      ObjectReference {
+        SelfId: 9651766503307601252
+      }
+    }
+  }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -288,11 +308,11 @@ Objects {
     }
     Overrides {
       Name: "cs:in_time"
-      Float: 0.1
+      Float: 0.5
     }
     Overrides {
       Name: "cs:out_time"
-      Float: 0.1
+      Float: 0.5
     }
     Overrides {
       Name: "cs:color"
@@ -374,6 +394,60 @@ Objects {
         SelfId: 11482603222431002241
       }
     }
+    Overrides {
+      Name: "cs:credits_button"
+      ObjectReference {
+        SelfId: 10350323938109316302
+      }
+    }
+    Overrides {
+      Name: "cs:credits_panel"
+      ObjectReference {
+        SelfId: 14455612488292174611
+      }
+    }
+    Overrides {
+      Name: "cs:trophies_button"
+      ObjectReference {
+        SelfId: 6166162411575875244
+      }
+    }
+    Overrides {
+      Name: "cs:trophies_panel"
+      ObjectReference {
+        SelfId: 2427144955837788352
+      }
+    }
+    Overrides {
+      Name: "cs:leaderboards_button"
+      ObjectReference {
+        SelfId: 10246503101097449340
+      }
+    }
+    Overrides {
+      Name: "cs:leaderboards_panel"
+      ObjectReference {
+        SelfId: 2822459773352246712
+      }
+    }
+    Overrides {
+      Name: "cs:click_sound"
+      ObjectReference {
+        SelfId: 7452552501637593875
+      }
+    }
+    Overrides {
+      Name: "cs:hover_sound"
+      ObjectReference {
+        SelfId: 8328458776128072025
+      }
+    }
+    Overrides {
+      Name: "cs:menu"
+      ObjectReference {
+        SelfId: 3094242208622476276
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -410,6 +484,12 @@ Objects {
       Name: "cs:music_folder"
       ObjectReference {
         SelfId: 17829228507645182166
+      }
+    }
+    Overrides {
+      Name: "cs:main_menu"
+      ObjectReference {
+        SelfId: 2074062803672340080
       }
     }
   }
