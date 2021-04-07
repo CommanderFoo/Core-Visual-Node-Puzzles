@@ -20,7 +20,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 	next_button.isInteractable = true
 	title.text = "Well Done!"
 	
-	local score = math.max(0, 10000 - (puzzle_score + (API.get_total_nodes() * 100)))
+	local score = math.max(0, 10000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25))))
 
 	program_score.text = string.format("Program Score: %.0f", score)
 

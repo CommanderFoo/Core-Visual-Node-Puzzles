@@ -6087,6 +6087,7 @@ Objects {
   ParentId: 9651766503307601252
   ChildIds: 6241024291619969380
   ChildIds: 13409748212166834620
+  ChildIds: 17445252682674287151
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -6099,7 +6100,7 @@ Objects {
   Control {
     Width: 350
     Height: 850
-    UIX: 20
+    UIX: -30
     UIY: 35
     RenderTransformPivot {
       Anchor {
@@ -6119,6 +6120,54 @@ Objects {
           Value: "mc:euianchor:middleright"
         }
       }
+    }
+  }
+}
+Objects {
+  Id: 17445252682674287151
+  Name: "Puzzle 11"
+  Transform {
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 7410864171820395270
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  TemplateInstance {
+    ParameterOverrideMap {
+      key: 7005779094784104153
+      value {
+        Overrides {
+          Name: "Name"
+          String: "Puzzle 11"
+        }
+        Overrides {
+          Name: "Scale"
+          Vector {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        Overrides {
+          Name: "cs:gold_score"
+          Float: 6098
+        }
+        Overrides {
+          Name: "cs:silver_score"
+          Float: 5828
+        }
+      }
+    }
+    TemplateAsset {
+      Id: 2988422183788330915
     }
   }
 }

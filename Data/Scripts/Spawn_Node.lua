@@ -6,7 +6,6 @@ local node = script:GetCustomProperty("node")
 local container = script:GetCustomProperty("container"):WaitForObject()
 local button = root:FindDescendantByName("Node Handle")
 local total = root:GetCustomProperty("total")
-local total_count = root:FindDescendantByName("Total")
 
 local circle_data_amount = root:GetCustomProperty("circle_data_amount")
 local square_data_amount = root:GetCustomProperty("square_data_amount")
@@ -17,12 +16,6 @@ local required_amount = root:GetCustomProperty("required_amount")
 
 local total_spawned = 0
 local template_id = nil
-
-if(total == -1) then
-	total_count.text = "∞"
-else
-	total_count.text = tostring(total)
-end
 
 function find_node_script(n)
 	local scripts = n:FindDescendantsByType("Script")
@@ -40,7 +33,6 @@ API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 	if(tpl_id == template_id) then
 		if(total ~= -1) then
 			total_spawned = total_spawned - 1
-			total_count.text = tostring(total - total_spawned)
 
 			if(total_spawned < total) then
 				button.isInteractable = true
@@ -88,10 +80,6 @@ button.clickedEvent:Connect(function()
 
 		template_id = n.sourceTemplateId
 		total_spawned = total_spawned + 1
-
-		if(total ~= -1) then
-			total_count.text = tostring(total - total_spawned)
-		end
 
 		if(total_spawned == total) then
 			button.isInteractable = false

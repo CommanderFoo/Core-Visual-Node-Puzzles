@@ -4,7 +4,7 @@ local is_destroyed = false
 
 local node = API.Node_Type.Alternate:new(script.parent.parent, {
 
-	node_time = 0.1
+	node_time = 0.18
 
 })
 

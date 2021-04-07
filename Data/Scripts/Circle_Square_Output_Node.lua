@@ -96,8 +96,12 @@ Events.Connect("puzzle_edit", function()
 	if(Object.IsValid(circle_count) and Object.IsValid(square_count)) then
 		circle_count.text = "0"
 		square_count.text = "0"
+
 		total_circle = 0
 		total_square = 0
+		
+		circle_complete = false
+		square_complete = false
 
 		API.set_bubble("circle", node, data, false)
 		API.set_bubble("square", node, data, false)

@@ -40,7 +40,7 @@ function Tick(dt)
 	end
 
 	if(running and score_conditions) then
-		local score = math.max(0, 10000 - (total_puzzle_score + (API.get_total_nodes() * 100)))
+		local score = math.max(0, 10000 - math.floor(((total_puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25))))
 
 		if(score >= score_conditions.gold) then
 			API.set_award(gold_award, 1)

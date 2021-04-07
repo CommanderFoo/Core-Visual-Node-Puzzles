@@ -596,25 +596,55 @@ Objects {
     Overrides {
       Name: "cs:puzzle_3"
       AssetReference {
-        Id: 8569935964693698988
+        Id: 16365751596071063277
       }
     }
     Overrides {
       Name: "cs:puzzle_4"
       AssetReference {
-        Id: 11790256369116056485
+        Id: 293936147606257495
       }
     }
     Overrides {
       Name: "cs:puzzle_5"
       AssetReference {
-        Id: 11279968305445163649
+        Id: 7150822721345186990
       }
     }
     Overrides {
       Name: "cs:puzzle_6"
       AssetReference {
-        Id: 4614411313633299915
+        Id: 14293804084765077926
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_7"
+      AssetReference {
+        Id: 2278261616103010719
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_8"
+      AssetReference {
+        Id: 14882294843583922401
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_9"
+      AssetReference {
+        Id: 3757752652709371920
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_10"
+      AssetReference {
+        Id: 5798020608501261929
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_11"
+      AssetReference {
+        Id: 2988422183788330915
       }
     }
   }

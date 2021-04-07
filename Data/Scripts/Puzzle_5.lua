@@ -7,22 +7,17 @@ local gold_score = root:GetCustomProperty("gold_score")
 local silver_score = root:GetCustomProperty("silver_score")
 local bronze_score = root:GetCustomProperty("bronze_score")
 
-local output_square_complete = false
-local output_circle_complete = false
+local output_circle_complete = 0
 
 local showing_result_ui = false
 local total_puzzle_score = 0
 
-API.Puzzle_Events.on("output_square_complete", function(errors)
-	output_square_complete = true
-end)
-
 API.Puzzle_Events.on("output_circle_complete", function(errors)
-	output_circle_complete = true
+	output_circle_complete = output_circle_complete + 1
 end)
 
 function Tick()
-	if(output_square_complete and output_circle_complete) then
+	if(output_circle_complete == 2) then
 		show_result()
 	end
 end
@@ -42,8 +37,7 @@ Events.Connect("puzzle_edit", function()
 		return
 	end
 
-	output_square_complete = false
-	output_circle_complete = false
+	output_circle_complete = 0
 	showing_result_ui = false
 	total_puzzle_score = 0
 end)
