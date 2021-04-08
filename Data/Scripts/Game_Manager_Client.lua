@@ -1,3 +1,5 @@
+local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+
 local base_ui = script:GetCustomProperty("base_ui"):WaitForObject()
 local node_ui = script:GetCustomProperty("node_ui"):WaitForObject()
 local top_ui = script:GetCustomProperty("top_ui"):WaitForObject()
@@ -5,7 +7,7 @@ local top_ui = script:GetCustomProperty("top_ui"):WaitForObject()
 local local_player = Game.GetLocalPlayer()
 
 Task.Spawn(function()
-	Events.BroadcastToServer("init")
+	YOOTIL.Events.broadcast_to_server("init")
 end)
 
 Events.Connect("load_game", function(id, speed, sfx_vol, music_vol, show_nodes)
@@ -24,5 +26,9 @@ Events.Connect("load_game", function(id, speed, sfx_vol, music_vol, show_nodes)
 	Events.Broadcast("stop_menu_music")
 	
 	Events.Broadcast("load_puzzle", id)
-	Events.Broadcast("transition_out")
+	Events.Broadcast("load_saved_nodes")
+	
+	Events.Broadcast("transition_out", function()
+		Events.Broadcast("start_auto_save")
+	end)
 end)

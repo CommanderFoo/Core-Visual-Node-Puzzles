@@ -5,31 +5,33 @@ local is_destroyed = false
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
 local circle_shape = script:GetCustomProperty("circle_shape")
 
-local data_node = nil
+local node = nil
 local data = nil
 
-function init(data_amounts)
-	circle_count.text = tostring(data_amounts.circle_data_amount)
+function init(node_data)
+	circle_count.text = tostring(node_data.circle_data_amount)
 
 	data = {
 	
-		{ condition = "circle", count = data_amounts.circle_data_amount, ui = circle_count, asset = circle_shape }
+		{ condition = "circle", count = node_data.circle_data_amount, ui = circle_count, asset = circle_shape }
 	
 	}
 
-	data_node = API.Node_Type.Data:new(script.parent.parent, {
+	node = API.Node_Type.Data:new(script.parent.parent, {
 
 		data_items = data,
 		repeat_interval = 0.25
 	
 	})
 	
-	API.register_node(data_node)
+	node:set_internal_id(node_data.id)
+	
+	API.register_node(node)
 end
 
 function Tick(dt)
-	if(data_node ~= nil) then
-		for _, i in ipairs(data_node:get_tweens()) do
+	if(node ~= nil) then
+		for _, i in ipairs(node:get_tweens()) do
 			if(i.tween ~= nil) then
 				i.tween:tween(dt)
 			end
@@ -38,11 +40,11 @@ function Tick(dt)
 end
 
 Events.Connect("puzzle_edit", function()
-	if(is_destroyed or data_node == nil) then
+	if(is_destroyed or node == nil) then
 		return
 	end
 
-	data_node:reset()
+	node:reset()
 
 	for _, d in ipairs(data) do
 		if(Object.IsValid(d.ui)) then
@@ -52,12 +54,12 @@ Events.Connect("puzzle_edit", function()
 end)
 
 Events.Connect("puzzle_run", function(speed)
-	if(is_destroyed or data_node == nil) then
+	if(is_destroyed or node == nil) then
 		return
 	end
 
-	data_node:set_speed(speed)
-	data_node:tick()
+	node:set_speed(speed)
+	node:tick()
 end)
 
 script.destroyEvent:Connect(function()

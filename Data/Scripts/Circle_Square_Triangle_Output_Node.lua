@@ -19,8 +19,8 @@ local square_complete = false
 local triangle_complete = false
 local data = {}
 
-function init(data_amounts)
-	data = data_amounts
+function init(node_data)
+	data = node_data
 
 	node = API.Node_Type.Output:new(script.parent.parent, {
 
@@ -36,8 +36,8 @@ function init(data_amounts)
 					local total_str = tostring(total_circle)
 					local amount = data.total_count
 
-					if(data_amounts.circle_data_amount ~= nil and data_amounts.circle_data_amount > 0) then
-						amount = data_amounts.circle_data_amount
+					if(node_data.circle_data_amount ~= nil and node_data.circle_data_amount > 0) then
+						amount = node_data.circle_data_amount
 
 						total_str = total_str .. " / " .. tostring(amount)
 					end
@@ -56,8 +56,8 @@ function init(data_amounts)
 					local total_str = tostring(total_square)
 					local amount = data.total_count
 
-					if(data_amounts.square_data_amount ~= nil and data_amounts.square_data_amount > 0) then
-						amount = data_amounts.square_data_amount
+					if(node_data.square_data_amount ~= nil and node_data.square_data_amount > 0) then
+						amount = node_data.square_data_amount
 
 						total_str = total_str .. " / " .. tostring(amount)
 					end
@@ -76,8 +76,8 @@ function init(data_amounts)
 					local total_str = tostring(total_triangle)
 					local amount = data.total_count
 
-					if(data_amounts.triangle_data_amount ~= nil and data_amounts.triangle_data_amount > 0) then
-						amount = data_amounts.triangle_data_amount
+					if(node_data.triangle_data_amount ~= nil and node_data.triangle_data_amount > 0) then
+						amount = node_data.triangle_data_amount
 
 						total_str = total_str .. " / " .. tostring(amount)
 					end
@@ -107,6 +107,8 @@ function init(data_amounts)
 		end
 
 	})
+
+	node:set_internal_id(node_data.id)
 
 	API.set_bubble("circle", node, data, true)
 	API.set_bubble("square", node, data, true)

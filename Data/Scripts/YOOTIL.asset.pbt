@@ -34,6 +34,12 @@ Assets {
           Id: 12362369972949462592
         }
       }
+      Overrides {
+        Name: "cs:YOOTIL_Events"
+        AssetReference {
+          Id: 12596908998463037342
+        }
+      }
     }
   }
   Marketplace {

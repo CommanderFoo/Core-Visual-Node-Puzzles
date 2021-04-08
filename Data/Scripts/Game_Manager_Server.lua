@@ -4,8 +4,29 @@ local data_holder = script:GetCustomProperty("data"):WaitForObject()
 local clear_player_data = script:GetCustomProperty("clear_player_data")
 
 Events.ConnectForPlayer("init", function(player)
-	Events.BroadcastToPlayer(player, "show_main_menu")
+	YOOTIL.Events.broadcast_to_player(player, "show_main_menu")
 end)
+
+-- Prefetch node data and send early.
+
+function on_join(player)
+	player.serverUserData.node_data = {}
+
+	local player_data = Storage.GetPlayerData(player)
+	local data = player_data.nd
+
+	if(clear_player_data or (data == nil or string.len(data) < 3)) then
+		data = "--"
+	else
+		local parts = {CoreString.Split(data, ":")}
+
+		for i, p in ipairs(parts) do
+			player.serverUserData.node_data[i] = p
+		end
+	end
+
+	Events.Broadcast("set_node_data", data)
+end
 
 function load_game(player)
 	local player_data = Storage.GetPlayerData(player)
@@ -17,7 +38,7 @@ function load_game(player)
 	if(player_data.cp == nil or player_data.cp < 1) then
 		player_data.cp = 1 -- Current Puzzle
 	end
-
+	
 	if(player_data.cs == nil or player_data.cs < 1) then
 		player_data.cs = 1 -- Current Speed
 	end
@@ -28,7 +49,7 @@ function load_game(player)
 	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
 
 	-- @TODO: Remove
-	player_data.cp = 11
+	--player_data.cp = 1
 
 	player:SetResource("speed", player_data.cs)
 	player:SetResource("sfx_volume", player_data.sv)
@@ -39,7 +60,7 @@ function load_game(player)
 
 	--YOOTIL.Utils.dump(player_data)
 
-	Events.BroadcastToPlayer(player, "load_game", player_data.cp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
+	YOOTIL.Events.broadcast_to_player(player, "load_game", player_data.cp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
 end
 
 function save_data(player)
@@ -53,6 +74,10 @@ function save_data(player)
 		an = player:GetResource("show_nodes")
 
 	}
+
+	if(player.serverUserData.node_data) then
+		data.nd = table.concat(player.serverUserData.node_data, ":")
+	end
 
 	if(clear_player_data) then
 		data = {}
@@ -74,6 +99,7 @@ Game.playerJoinedEvent:Connect(function(player)
 end)
 
 Game.playerLeftEvent:Connect(save_data)
+Game.playerJoinedEvent:Connect(on_join)
 
 Events.ConnectForPlayer("update_player_prefs", function(player, speed, show_nodes)
 	player:SetResource("speed", speed)

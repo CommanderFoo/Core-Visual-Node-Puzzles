@@ -3,6 +3,7 @@ local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 local menu = script:GetCustomProperty("menu"):WaitForObject()
 local menu_container = script:GetCustomProperty("menu_container"):WaitForObject()
 local play_button = script:GetCustomProperty("play_button"):WaitForObject()
+local bg_effect = script:GetCustomProperty("bg_effect"):WaitForObject()
 
 local trophies_button = script:GetCustomProperty("trophies_button"):WaitForObject()
 local trophies_panel = script:GetCustomProperty("trophies_panel"):WaitForObject()
@@ -56,7 +57,7 @@ play_button.clickedEvent:Connect(function()
 
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
-		Events.BroadcastToServer("load_game")
+		YOOTIL.Events.broadcast_to_server("load_game")
 	end)
 
 end)
@@ -172,6 +173,7 @@ function Tick(dt)
 end
 
 Events.Connect("show_main_menu", function()
+	bg_effect.visibility = Visibility.FORCE_ON
 	menu_container.visibility = Visibility.FORCE_ON
 	Events.Broadcast("transition_out")
 

@@ -15,6 +15,8 @@ local bronze_award = script:GetCustomProperty("bronze_award"):WaitForObject()
 local settings_button = script:GetCustomProperty("settings_button"):WaitForObject()
 local settings = script:GetCustomProperty("settings"):WaitForObject()
 
+local save_button = script:GetCustomProperty("save_button"):WaitForObject()
+
 local settings_open = false
 
 local gold_color = gold_award:GetColor()
@@ -31,6 +33,8 @@ local errors = 0
 
 local total_puzzle_score = 0
 local score_conditions = nil
+
+local ui_is_disabled = false
 
 local floor = math.floor
 
@@ -95,11 +99,14 @@ function show_hide_nodes()
 		available_nodes_container.x = changed.v
 	end)
 
-	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
+	YOOTIL.Events.broadcast_to_server("update_player_prefs", speed, showing_nodes)
+
 	API.play_click_sound()
 end
 
 available_nodes_button.clickedEvent:Connect(show_hide_nodes)
+
+-- Run Edit
 
 run_edit_button.hoveredEvent:Connect(API.play_hover_sound)
 
@@ -113,6 +120,8 @@ run_edit_button.clickedEvent:Connect(function()
 		if(orig_showing_nodes) then
 			show_hide_nodes()
 		end
+
+		Events.Broadcast("start_auto_save")
 	else
 		run_edit_button.text = "Edit Program"
 		running = true
@@ -126,6 +135,7 @@ run_edit_button.clickedEvent:Connect(function()
 		end
 
 		Events.Broadcast("puzzle_run", speed)
+		Events.Broadcast("stop_auto_save")
 	end
 
 	API.play_click_sound()
@@ -140,7 +150,8 @@ speed_up_button.clickedEvent:Connect(function()
 
 	current_speed.text = tostring(speed)
 
-	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
+	YOOTIL.Events.broadcast_to_server("update_player_prefs", speed, showing_nodes)
+
 	API.play_click_sound()
 end)
 
@@ -153,7 +164,8 @@ slow_down_button.clickedEvent:Connect(function()
 
 	current_speed.text = tostring(speed)
 
-	Events.BroadcastToServer("update_player_prefs", speed, showing_nodes)
+	YOOTIL.Events.broadcast_to_server("update_player_prefs", speed, showing_nodes)
+	
 	API.play_click_sound()
 end)
 
@@ -167,6 +179,7 @@ function disable_ui(disable_run_edit, ignore_settings)
 	slow_down_button.isInteractable = false
 	speed_up_button.isInteractable = false
 	available_nodes_button.isInteractable = false
+	save_button.isInteractable = false
 
 	if(disable_run_edit) then
 		run_edit_button.isInteractable = false
@@ -177,6 +190,8 @@ function disable_ui(disable_run_edit, ignore_settings)
 	end
 
 	Events.Broadcast("disable_available_nodes")
+
+	ui_is_disabled = true
 end
 
 function enable_ui()
@@ -185,9 +200,14 @@ function enable_ui()
 	available_nodes_button.isInteractable = true
 	run_edit_button.isInteractable = true
 	settings_button.isInteractable = true
-
+	save_button.isInteractable = true
+	
 	Events.Broadcast("enable_available_nodes")
+
+	ui_is_disabled = false
 end
+
+-- Settings
 
 settings_button.hoveredEvent:Connect(function()
 	settings_button:GetChildren()[1]:SetColor(settings_button:GetHoveredColor())
@@ -224,6 +244,32 @@ settings_button.clickedEvent:Connect(function()
 	end
 
 	API.play_click_sound()
+end)
+
+-- Save
+
+save_button.hoveredEvent:Connect(API.play_hover_sound)
+
+save_button.clickedEvent:Connect(function()
+	save_button.isInteractable = false
+	save_button.text = "Saving..."
+	Events.Broadcast("save")
+
+	API.play_click_sound()
+end)
+
+Events.Connect("saving", function()
+	save_button.isInteractable = false
+	save_button.text = "Saving..."
+end)
+
+Events.Connect("saved", function()
+	Task.Wait(2)
+	if(not ui_is_disabled) then
+		save_button.isInteractable = true
+	end
+
+	save_button.text = "Save"
 end)
 
 Events.Connect("disable_header_ui", disable_ui)

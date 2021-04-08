@@ -2,36 +2,59 @@
 
 local is_destroyed = false
 
-local if_node = API.Node_Type.If:new(script.parent.parent, {
+local node = nil
 
-	node_time = 0.3
+function init(node_data)
+	
+	node = API.Node_Type.If:new(script.parent.parent, {
 
-})
+		node_time = 0.3
+	
+	})
 
-API.register_node(if_node)
+	node:set_internal_id(node_data.id)
+
+	if(node_data.condition) then
+		if(node_data.condition == "s") then
+			node:set_option("if_condition", "square")
+		elseif(node_data.condition == "c") then
+			node:set_option("if_condition", "circle")
+		elseif(node_data.condition == "t") then
+			node:set_option("if_condition", "triangle")
+		elseif(node_data.condition == "p") then
+			node:set_option("if_condition", "plus")
+		end
+
+		Events.Broadcast("on_set_" .. script.parent.parent.id .. "_selected", node_data.condition)
+	end
+
+	API.register_node(node)
+end
 
 function Tick(dt)
-	for _, i in ipairs(if_node:get_tweens()) do
-		if(i.tween ~= nil) then
-			i.tween:tween(dt)
+	if(node ~= nil) then
+		for _, i in ipairs(node:get_tweens()) do
+			if(i.tween ~= nil) then
+				i.tween:tween(dt)
+			end
 		end
 	end
 end
 
 Events.Connect("on_" .. script.parent.parent.id .. "_selected", function(index, option, value)
-	if(is_destroyed) then
+	if(is_destroyed or node == nil) then
 		return
 	end
 	
-	if_node:set_option("if_condition", string.lower(option:FindChildByName("Text").text))
+	node:set_option("if_condition", string.lower(option:FindChildByName("Text").text))
 end)
 
 Events.Connect("puzzle_edit", function()
-	if(is_destroyed) then
+	if(is_destroyed or node == nil) then
 		return
 	end
 
-	if_node:reset()
+	node:reset()
 end)
 
 script.destroyEvent:Connect(function()

@@ -33,5 +33,6 @@ API.Tween = API.require("Tween")
 API.Vector3 = API.require("Vector3")
 API.Vector2 = API.require("Vector2")
 API.Input = API.require("Input")
+API.Events = API.require("Events")
 
 return API

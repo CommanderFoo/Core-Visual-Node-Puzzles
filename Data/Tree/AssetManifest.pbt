@@ -35,6 +35,15 @@ Assets {
   }
 }
 Assets {
+  Id: 11304211983960048976
+  Name: "Energy Shield Panel"
+  PlatformAssetType: 8
+  PrimaryAsset {
+    AssetType: "VfxBlueprintAssetRef"
+    AssetId: "fxbp_forceField"
+  }
+}
+Assets {
   Id: 9402814787072448834
   Name: "BG Flat 001"
   PlatformAssetType: 9

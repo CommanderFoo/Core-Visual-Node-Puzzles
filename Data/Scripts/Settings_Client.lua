@@ -26,7 +26,7 @@ save_button.clickedEvent:Connect(function()
 	update_sfx_volume()
 	update_music_volume()
 
-	Events.BroadcastToServer("update_settings", sfx_amount, music_amount, notify_toggle)
+	YOOTIL.Events.broadcast_to_server("update_settings", sfx_amount, music_amount, notify_toggle)
 	Events.Broadcast("slider_release_handle")
 
 	API.play_click_sound()

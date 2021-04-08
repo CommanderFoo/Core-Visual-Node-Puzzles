@@ -16,6 +16,13 @@ local required_amount = root:GetCustomProperty("required_amount")
 
 local total_spawned = 0
 local template_id = nil
+local index = 1
+
+for i, c in ipairs(root.parent:GetChildren()) do
+	if(c == root) then
+		index = i
+	end
+end
 
 function find_node_script(n)
 	local scripts = n:FindDescendantsByType("Script")
@@ -43,49 +50,57 @@ API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 	end
 end)
 
+function spawn_node(x, y, condition)
+	local n = World.SpawnAsset(node, { parent = container })
+		
+	n.x = x
+	n.y = y
+
+	local s = find_node_script(n)
+	
+	if(s ~= nil) then			
+		if(s.init ~= nil) then
+			local data = {}
+
+			if(circle_data_amount ~= nil) then
+				data.circle_data_amount = circle_data_amount
+			end
+
+			if(square_data_amount ~= nil) then
+				data.square_data_amount = square_data_amount
+			end
+
+			if(triangle_data_amount ~= nil) then
+				data.triangle_data_amount = triangle_data_amount
+			end
+
+			if(plus_data_amount ~= nil) then
+				data.plus_data_amount = plus_data_amount
+			end
+
+			data.id = index
+			data.condition = condition
+
+			s.init(data)
+		end
+	end
+
+	template_id = n.sourceTemplateId
+	total_spawned = total_spawned + 1
+
+	if(total_spawned == total) then
+		button.isInteractable = false
+	end
+
+	API.Puzzle_Events.trigger("node_total_change")
+end
+
 button.hoveredEvent:Connect(API.play_hover_sound)
 
 button.clickedEvent:Connect(function()
 	if(total_spawned < total or total == -1) then		
-		local n = World.SpawnAsset(node, { parent = container })
-		
-		n.x = 0
-		n.y = 0
+		spawn_node(0, 0, nil)
 
-		local s = find_node_script(n)
-		
-		if(s ~= nil) then			
-			if(s.init ~= nil) then
-				local data_amounts = {}
-
-				if(circle_data_amount ~= nil) then
-					data_amounts.circle_data_amount = circle_data_amount
-				end
-
-				if(square_data_amount ~= nil) then
-					data_amounts.square_data_amount = square_data_amount
-				end
-
-				if(triangle_data_amount ~= nil) then
-					data_amounts.triangle_data_amount = triangle_data_amount
-				end
-
-				if(plus_data_amount ~= nil) then
-					data_amounts.plus_data_amount = plus_data_amount
-				end
-
-				s.init(data_amounts)
-			end
-		end
-
-		template_id = n.sourceTemplateId
-		total_spawned = total_spawned + 1
-
-		if(total_spawned == total) then
-			button.isInteractable = false
-		end
-
-		API.Puzzle_Events.trigger("node_total_change")
 		API.play_click_sound()
 	end
 end)
@@ -97,7 +112,17 @@ Events.Connect("disable_available_nodes", function()
 end)
 
 Events.Connect("enable_available_nodes", function()
-	if(total_spawned < total and Object.IsValid(button) or total == -1) then
+	if(not Object.IsValid(button)) then
+		return
+	end
+	
+	if(total_spawned < total or total == -1) then
 		button.isInteractable = true
+	end
+end)
+
+Events.Connect("spawn_node", function(i, x, y, condition)
+	if(index == i) then
+		spawn_node(x, y, condition)
 	end
 end)

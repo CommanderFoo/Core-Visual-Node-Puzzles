@@ -16,6 +16,7 @@ Objects {
   }
   ParentId: 5021637449606560396
   ChildIds: 1419306634217875590
+  ChildIds: 15294849702650267166
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -27,6 +28,50 @@ Objects {
   }
   NetworkContext {
     Type: Server
+  }
+}
+Objects {
+  Id: 15294849702650267166
+  Name: "Save_Data_Server"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 917384028508757458
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_data"
+      ObjectReference {
+        SelfId: 3720954960903579450
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 14589166436730816444
+    }
   }
 }
 Objects {
@@ -59,6 +104,12 @@ Objects {
       Name: "cs:YOOTIL"
       AssetReference {
         Id: 16622261663679835299
+      }
+    }
+    Overrides {
+      Name: "cs:NodeUI"
+      ObjectReference {
+        SelfId: 3627026760658224672
       }
     }
   }
@@ -100,6 +151,8 @@ Objects {
   ChildIds: 2366539210659061100
   ChildIds: 8251904590631658214
   ChildIds: 2365147788075538306
+  ChildIds: 15163209075878739494
+  ChildIds: 6068750308711967726
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -110,6 +163,112 @@ Objects {
     Value: "mc:ecollisionsetting:forceoff"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 6068750308711967726
+  Name: "Save_Data_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:API"
+      AssetReference {
+        Id: 11355776926042268297
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_data"
+      ObjectReference {
+        SelfId: 3720954960903579450
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 17326225549286146051
+    }
+  }
+}
+Objects {
+  Id: 15163209075878739494
+  Name: "Notification_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+    Overrides {
+      Name: "cs:notification"
+      ObjectReference {
+        SelfId: 12406843943296698370
+      }
+    }
+    Overrides {
+      Name: "cs:notify_text"
+      ObjectReference {
+        SelfId: 10726210978389988053
+      }
+    }
+    Overrides {
+      Name: "cs:trophy_notification"
+      ObjectReference {
+        SelfId: 8649801573269615484
+      }
+    }
+    Overrides {
+      Name: "cs:trophy_text"
+      ObjectReference {
+        SelfId: 4677442487658515326
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 11966403431604522903
+    }
   }
 }
 Objects {
@@ -256,6 +415,12 @@ Objects {
         SelfId: 9651766503307601252
       }
     }
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -308,11 +473,11 @@ Objects {
     }
     Overrides {
       Name: "cs:in_time"
-      Float: 0.5
+      Float: 1
     }
     Overrides {
       Name: "cs:out_time"
-      Float: 0.5
+      Float: 1
     }
     Overrides {
       Name: "cs:color"
@@ -446,6 +611,12 @@ Objects {
       Name: "cs:menu"
       ObjectReference {
         SelfId: 3094242208622476276
+      }
+    }
+    Overrides {
+      Name: "cs:bg_effect"
+      ObjectReference {
+        SelfId: 14198457608431680772
       }
     }
   }
@@ -599,6 +770,12 @@ Objects {
         SelfId: 14116838315011425361
       }
     }
+    Overrides {
+      Name: "cs:save_button"
+      ObjectReference {
+        SelfId: 2323963055041167086
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -652,7 +829,7 @@ Objects {
     Overrides {
       Name: "cs:tutorial_container"
       ObjectReference {
-        SelfId: 6452927242494604331
+        SelfId: 841534158063459245
       }
     }
     Overrides {

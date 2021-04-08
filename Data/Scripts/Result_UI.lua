@@ -1,4 +1,4 @@
-local API = require(script:GetCustomProperty("API"))
+local API, YOOTIL = require(script:GetCustomProperty("API"))
 
 local title = script:GetCustomProperty("title"):WaitForObject()
 local edit_button = script:GetCustomProperty("edit_button"):WaitForObject()
@@ -17,6 +17,8 @@ local bronze_color = bronze_award:GetColor()
 local floor = math.floor
 
 Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score)
+	Events.Broadcast("stop_auto_save")
+
 	next_button.isInteractable = true
 	title.text = "Well Done!"
 	
@@ -104,6 +106,9 @@ next_button.clickedEvent:Connect(function()
 	if(active_puzzle and id) then
 		active_puzzle:Destroy()
 
+		YOOTIL.Events.broadcast_to_server("save_puzzle_progress", tonumber(id) + 1)
+		
+		Events.Broadcast("start_auto_save")
 		Events.Broadcast("load_puzzle", tonumber(id) + 1)
 	end
 

@@ -149,6 +149,19 @@ end
 
 local_player.bindingPressedEvent:Connect(close_select)
 
+Events.Connect("on_set_" .. event .. "selected", function(s)
+	for i = 1, total_options do
+		if(string.lower(options[i]:FindChildByName("Text").text):sub(1, 1) == s) then
+			selected_option = options[i]
+			selected_text.text = options[i]:FindChildByName("Text").text
+
+			selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
+			selected_shape.visibility = Visibility.FORCE_ON
+			selected_shape:SetColor(options[i]:FindChildByName("Shape"):GetColor())
+		end
+	end
+end)
+
 Events.Connect("on_" .. event .. "disable", disable_select)
 Events.Connect("on_" .. event .. "enable", enable_select)
 

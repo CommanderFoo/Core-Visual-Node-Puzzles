@@ -67,6 +67,8 @@ function Node:setup(r)
 	self.tweens = {}
 	self.can_edit_nodes = true
 
+	self.internal_node_id = 0
+
 	self.options.tween_duration = self.options.tween_duration or 1.5
 	self.options.speed = self.options.speed or 1
 
@@ -141,6 +143,18 @@ function Node:setup(r)
 			end
 		end
 	end)
+end
+
+function Node:get_position_as_string()
+	return string.format("%.2f,%.2f", self.root.x, self.root.y)
+end
+
+function Node:get_internal_id()
+	return self.internal_node_id
+end
+
+function Node:set_internal_id(id)
+	self.internal_node_id = id
 end
 
 function Node:tick()
@@ -865,6 +879,10 @@ function Node:get_type()
 	return self.node_type
 end
 
+function Node:get_condition()
+	return ""
+end
+
 function Node:new(r, options)
 	self.__index = self
 
@@ -880,260 +898,6 @@ function Node:new(r, options)
 
 	return o
 end
-
-function Node:test()
-	return self.options.a
-end
-
--- Output Node
-
-local Node_Output = {}
-
-function Node_Output:new(r, options)
-	self.__index = self
-	
-	local this = setmetatable({
-
-		options = options or {}
-
-	}, self)
-
-	setmetatable(this, {__index = Node})
-
-	this.node_type = "Output"
-
-	this:setup(r)
-
-	function this:get_halt_nodes(cur_id)
-		local halt_nodes = {}
-
-		for k, v in pairs(this.input_connected_to) do
-			for a, j in pairs(v) do
-				if(j.connected_from_node:get_type() == "Halt" and j.connected_from_node:get_id() ~= cur_id) then
-					table.insert(halt_nodes, #halt_nodes + 1, j.connected_from_node)
-				end
-			end
-		end
-
-		return halt_nodes
-	end
-
-	function this:check_halting()
-		local use_node = nil
-
-		for k, n in ipairs(this:get_halt_nodes()) do
-			if(use_node == nil) then
-				use_node = n
-			end
-
-			if(n:get_order() < use_node:get_order()) then
-				use_node = n
-			end
-		end
-
-		if(use_node ~= nil) then
-			use_node:unhalt()
-		end
-	end
-
-	function this:get_next_halt_order(cur_id)
-		local total = 0
-		local nums = {}
-
-		for k, n in pairs(this:get_halt_nodes(cur_id)) do
-			if(n:get_type() == "Halt") then
-				table.insert(nums, #nums + 1, n:get_order())
-				total = total + 1
-			end
-		end
-
-		if(total > 0) then
-			local free = {}
-
-			for i = 1, (total + 1) do
-				free[i] = true
-			end
-
-			for i, n in ipairs(nums) do
-				free[n] = false
-			end
-
-			for i, n in ipairs(free) do
-				if(n) then
-					return i
-				end
-			end
-		else
-			return 1
-		end
-	end
-
-	Node_Events.on("input_connected_to", function(n, w)
-		if(n:get_type() == "Halt" and this:get_type() == "Output" and w:get_type() == "Output") then
-			n:set_order(this:get_next_halt_order(n:get_id()))
-		elseif(n:get_type() == "Halt") then
-			n:set_order(0)
-		end
-	end)
-
-	return this
-end
-
--- End Output Node
-
--- If Node
-
-local Node_If = {}
-
-function Node_If:new(r, options)
-	self.__index = self
-	
-	local this = setmetatable({
-
-		options = options or {}
-
-	}, self)
-
-	setmetatable(this, {__index = Node})
-
-	this.node_type = "If"
-
-	if(not this.options_if_condition) then
-		this.options.if_condition = nil
-	end
-
-	this:setup(r)
-
-	this.options.queue_task = nil
-
-	local queue = YOOTIL.Utils.Queue:new()
-	local monitor_started = false
-
-	function this:monitor_queue(speed)
-		if(this.options.node_time ~= nil and this.options.node_time > 0) then
-			this.options.queue_task = Task.Spawn(function()
-				if(not queue:is_empty()) then										
-					queue:pop()()
-				end
-			end, this.options.node_time / speed)
-			
-			this.options.queue_task.repeatCount = -1
-			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
-		end
-	end
-
-	this.options.on_data_received = function(data, node, from_node)
-		if(not monitor_started) then
-			monitor_started = true
-
-			this:set_speed(from_node:get_speed())
-			this:monitor_queue(from_node:get_speed())
-		end
-
-		local queue_func = function()
-			Events.Broadcast("score", this.options.node_time or 0)
-
-			if(this:has_top_connection() or this:has_bottom_connection()) then
-				local condition = (data.condition == this.options.if_condition)
-				local obj = nil
-				local line = this:get_connector_line(condition)
-				local tween = this:create_tween(line)
-				local connection_method = nil
-				local offset = 0
-		
-				if(condition and this:has_top_connection()) then
-					obj = this:spawn_asset(data.asset, line.x, line.y)
-					connection_method = "send_data_top"
-		
-					this:insert_tween({
-						
-						obj = obj,
-						tween = tween
-					
-					})
-				elseif(this:has_bottom_connection()) then
-					offset = this:get_bottom_offset()
-
-					if(Object.IsValid(line)) then
-						obj = this:spawn_asset(data.asset, line.x, line.y)
-						connection_method = "send_data_bottom"
-			
-						this:insert_tween({
-							
-							obj = obj,
-							tween = tween
-						
-						})
-					end
-				else
-					this:has_errors(true)
-				end
-		
-				if(tween ~= nil and connection_method ~= nil) then
-					tween:on_start(function()
-						obj.visibility = Visibility.FORCE_ON
-					end)
-
-					tween:on_complete(function()
-						this[connection_method](this, data)
-
-						if(Object.IsValid(obj)) then
-							obj:Destroy()
-						end
-
-						tween = nil
-					end)
-		
-					tween:on_change(function(changed)
-						local x, y = this:get_path(obj, line, changed, offset)
-						
-						if(x == nil or y == nil) then
-							return
-						end
-
-						obj.x = x
-						obj.y = y
-					end)
-				end
-			else
-				this:has_errors(true)
-			end
-		end
-
-		if(this.options.node_time ~= nil and this.options.node_time > 0) then
-			queue:push(queue_func)
-		else
-			queue_func()
-		end
-	end
-	
-	function this:reset()
-		this.options.added_tween = false
-
-		if(this.options.queue_task ~= nil) then
-			this.options.queue_task:Cancel()
-			this.options.queue_task = nil
-		end
-
-		monitor_started = false
-		queue = YOOTIL.Utils.Queue:new()
-		this.tweens = {}
-
-		this:clear_items_container()
-		this:hide_error_info()
-	end
-
-	Node_Events.on("node_destroyed", function()
-		if(this.options.queue_task ~= nil) then
-			this.options.queue_task:Cancel()
-			this.options.queue_task = nil
-		end
-	end)
-
-	return this
-end
-
--- End If Node
 
 -- Data Node
 
@@ -1267,7 +1031,265 @@ function Node_Data:new(r, options)
 	return this
 end
 
+-- End Data Node
+
+-- Output Node
+
+local Node_Output = {}
+
+function Node_Output:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Output"
+
+	function this:get_halt_nodes(cur_id)
+		local halt_nodes = {}
+
+		for k, v in pairs(this.input_connected_to) do
+			for a, j in pairs(v) do
+				if(j.connected_from_node:get_type() == "Halt" and j.connected_from_node:get_id() ~= cur_id) then
+					table.insert(halt_nodes, #halt_nodes + 1, j.connected_from_node)
+				end
+			end
+		end
+
+		return halt_nodes
+	end
+
+	function this:check_halting()
+		local use_node = nil
+
+		for k, n in ipairs(this:get_halt_nodes()) do
+			if(use_node == nil) then
+				use_node = n
+			end
+
+			if(n:get_order() < use_node:get_order()) then
+				use_node = n
+			end
+		end
+
+		if(use_node ~= nil) then
+			use_node:unhalt()
+		end
+	end
+
+	function this:get_next_halt_order(cur_id)
+		local total = 0
+		local nums = {}
+
+		for k, n in pairs(this:get_halt_nodes(cur_id)) do
+			if(n:get_type() == "Halt") then
+				table.insert(nums, #nums + 1, n:get_order())
+				total = total + 1
+			end
+		end
+
+		if(total > 0) then
+			local free = {}
+
+			for i = 1, (total + 1) do
+				free[i] = true
+			end
+
+			for i, n in ipairs(nums) do
+				free[n] = false
+			end
+
+			for i, n in ipairs(free) do
+				if(n) then
+					return i
+				end
+			end
+		else
+			return 1
+		end
+	end
+
+	Node_Events.on("input_connected_to", function(n, w)
+		if(n:get_type() == "Halt" and this:get_type() == "Output" and w:get_type() == "Output") then
+			n:set_order(this:get_next_halt_order(n:get_id()))
+		elseif(n:get_type() == "Halt") then
+			n:set_order(0)
+		end
+	end)
+
+	return this
+end
+
 -- End Output Node
+
+-- If Node
+
+local Node_If = {}
+
+function Node_If:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	if(not this.options_if_condition) then
+		this.options.if_condition = nil
+	end
+
+	this:setup(r)
+
+	this.node_type = "If"
+
+	this.options.queue_task = nil
+
+	local queue = YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local condition = (data.condition == this.options.if_condition)
+				local obj = nil
+				local line = this:get_connector_line(condition)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(condition and this:has_top_connection()) then
+					obj = this:spawn_asset(data.asset, line.x, line.y)
+					connection_method = "send_data_top"
+		
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
+						
+						})
+					end
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	function this:get_condition()
+		if(this.options.if_condition ~= nil) then
+			return this.options.if_condition:sub(1, 1)
+		end
+
+		return ""
+	end
+
+	Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End If Node
 
 -- Alternate Node
 
@@ -1284,9 +1306,9 @@ function Node_Alternate:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this.node_type = "Alternate"
-
 	this:setup(r)
+
+	this.node_type = "Alternate"
 
 	this.options.queue_task = nil
 
@@ -1441,9 +1463,9 @@ function Node_Limit:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this.node_type = "Limit"
-
 	this:setup(r)
+
+	this.node_type = "Limit"
 
 	this.options.queue_task = nil
 
@@ -1636,9 +1658,9 @@ function Node_Halt:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this.node_type = "Halt"
-
 	this:setup(r)
+	
+	this.node_type = "Halt"
 
 	this.options.queue_task = nil
 

@@ -12,37 +12,39 @@ local circle_shape = script:GetCustomProperty("circle_shape")
 local triangle_shape = script:GetCustomProperty("triangle_shape")
 local plus_shape = script:GetCustomProperty("plus_shape")
 
-local data_node = nil
+local node = nil
 local data = nil
 
-function init(data_amounts)
-	circle_count.text = tostring(data_amounts.circle_data_amount)
-	square_count.text = tostring(data_amounts.square_data_amount)
-	triangle_count.text = tostring(data_amounts.triangle_data_amount)
-	plus_count.text = tostring(data_amounts.plus_data_amount)
+function init(node_data)
+	circle_count.text = tostring(node_data.circle_data_amount)
+	square_count.text = tostring(node_data.square_data_amount)
+	triangle_count.text = tostring(node_data.triangle_data_amount)
+	plus_count.text = tostring(node_data.plus_data_amount)
 
 	data = {
 		
-		{ condition = "square", count = data_amounts.square_data_amount, ui = square_count, asset = square_shape },
-		{ condition = "circle", count = data_amounts.circle_data_amount, ui = circle_count, asset = circle_shape },
-		{ condition = "triangle", count = data_amounts.triangle_data_amount, ui = triangle_count, asset = triangle_shape },
-		{ condition = "plus", count = data_amounts.plus_data_amount, ui = plus_count, asset = plus_shape }
+		{ condition = "square", count = node_data.square_data_amount, ui = square_count, asset = square_shape },
+		{ condition = "circle", count = node_data.circle_data_amount, ui = circle_count, asset = circle_shape },
+		{ condition = "triangle", count = node_data.triangle_data_amount, ui = triangle_count, asset = triangle_shape },
+		{ condition = "plus", count = node_data.plus_data_amount, ui = plus_count, asset = plus_shape }
 
 	}
 
-	data_node = API.Node_Type.Data:new(script.parent.parent, {
+	node = API.Node_Type.Data:new(script.parent.parent, {
 
 		data_items = data,
 		repeat_interval = 0.25
 
 	})
 
-	API.register_node(data_node)
+	node:set_internal_id(node_data.id)
+	
+	API.register_node(node)
 end
 
 function Tick(dt)
-	if(data_node ~= nil) then
-		for _, i in ipairs(data_node:get_tweens()) do
+	if(node ~= nil) then
+		for _, i in ipairs(node:get_tweens()) do
 			if(i.tween ~= nil) then
 				i.tween:tween(dt)
 			end
@@ -51,11 +53,11 @@ function Tick(dt)
 end
 
 Events.Connect("puzzle_edit", function()
-	if(is_destroyed or data_node == nil) then
+	if(is_destroyed or node == nil) then
 		return
 	end
 
-	data_node:reset()
+	node:reset()
 
 	for _, d in ipairs(data) do
 		if(Object.IsValid(d.ui)) then
@@ -65,12 +67,12 @@ Events.Connect("puzzle_edit", function()
 end)
 
 Events.Connect("puzzle_run", function(speed)
-	if(is_destroyed or data_node == nil) then
+	if(is_destroyed or node == nil) then
 		return
 	end
 
-	data_node:set_speed(speed)
-	data_node:tick()
+	node:set_speed(speed)
+	node:tick()
 end)
 
 script.destroyEvent:Connect(function()

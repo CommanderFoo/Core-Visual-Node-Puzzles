@@ -8,5 +8,5 @@ end)
 ready.clickedEvent:Connect(function()
 	welcome.visibility = Visibility.FORCE_OFF
 
-	Events.BroadcastToServer("load_puzzle", 1, true)
+	YOOTIL.Events.broadcast_to_server("load_puzzle", 1, true)
 end)

@@ -119,6 +119,10 @@ function Utils.Queue.pop(self)
 	return table.remove(self.list, 1)
 end
 
+function Utils.Queue.front(self)
+	return self.list[1]
+end
+
 function Utils.Queue.is_empty(self)
 	return #self.list == 0
 end
