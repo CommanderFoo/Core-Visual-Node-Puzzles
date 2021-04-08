@@ -113,4 +113,5 @@ next_button.clickedEvent:Connect(function()
 	end
 
 	Events.Broadcast("puzzle_edit")
+	Events.Broadcast("show_nodes")
 end)

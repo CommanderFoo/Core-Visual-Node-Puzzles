@@ -22,7 +22,7 @@ function save()
 		if(n:get_internal_id() > 0) then
 			had_data = true
 
-			YOOTIL.Events.broadcast_to_server("save_node", i, n:get_internal_id(), n:get_position_as_string(), n:get_condition())
+			YOOTIL.Events.broadcast_to_server("save_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_limit())
 		end
 	end
 
@@ -58,18 +58,16 @@ puzzle_data.networkedPropertyChangedEvent:Connect(function(obj, prop)
 	end
 end)
 
--- 1|-474.93,-2.08:2|385.36,-97.90
-
 Events.Connect("load_saved_nodes", function()
 	if(loaded_node_data ~= nil and loaded_node_data ~= "--") then
 		local node_strs = {}
 		local split_nodes = {CoreString.Split(loaded_node_data, ":")}
 
 		for i, s in ipairs(split_nodes) do
-			local index, pos_str, condition = CoreString.Split(s, "|")
+			local index, uid, pos_str, condition, limit = CoreString.Split(s, "|")
 			local x, y = CoreString.Split(pos_str, ",")
 
-			Events.Broadcast("spawn_node", tonumber(index), tonumber(x), tonumber(y), condition)
+			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), tonumber(x), tonumber(y), condition, tonumber(limit))
 		end
 	end
 end)

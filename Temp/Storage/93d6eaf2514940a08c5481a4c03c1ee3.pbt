@@ -1,6 +1,6 @@
 Entries {
   Key {
-    StringVar: "mv"
+    StringVar: "cs"
   }
   SimpleValue {
     IntVar: 0
@@ -19,23 +19,7 @@ Entries {
     StringVar: "cp"
   }
   SimpleValue {
-    IntVar: 9
-  }
-}
-Entries {
-  Key {
-    StringVar: "an"
-  }
-  SimpleValue {
-    IntVar: 1
-  }
-}
-Entries {
-  Key {
-    StringVar: "nd"
-  }
-  SimpleValue {
-    StringVar: "1|-741.85,3.43|:2|-51.40,-42.83|:3|603.08,-154.20|:4|592.80,70.24|"
+    IntVar: 0
   }
 }
 Entries {
@@ -48,9 +32,25 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "cs"
+    StringVar: "mv"
   }
   SimpleValue {
-    IntVar: 20
+    IntVar: 0
+  }
+}
+Entries {
+  Key {
+    StringVar: "nd"
+  }
+  SimpleValue {
+    StringVar: "1|1|0.00,0.00||:2|2|443.74,-13.71||"
+  }
+}
+Entries {
+  Key {
+    StringVar: "an"
+  }
+  SimpleValue {
+    IntVar: 0
   }
 }

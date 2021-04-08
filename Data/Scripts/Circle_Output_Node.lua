@@ -49,7 +49,7 @@ function init(node_data)
 
 	})
 
-	node:set_internal_id(node_data.id)
+	node:set_from_saved_data(node_data)
 	
 	API.set_bubble("circle", node, data, true)
 	API.register_node(node)

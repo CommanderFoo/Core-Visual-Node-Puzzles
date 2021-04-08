@@ -68,6 +68,7 @@ function Node:setup(r)
 	self.can_edit_nodes = true
 
 	self.internal_node_id = 0
+	self.unique_id = 0
 
 	self.options.tween_duration = self.options.tween_duration or 1.5
 	self.options.speed = self.options.speed or 1
@@ -883,6 +884,32 @@ function Node:get_condition()
 	return ""
 end
 
+function Node:get_limit()
+	return ""
+end
+
+function Node:get_order()
+	return ""
+end
+
+function Node:set_unique_id(id)
+	self.unique_id = id
+end
+
+function Node:get_unique_id()
+	return self.unique_id
+end
+
+function Node:set_from_saved_data(data)
+	if(data.id ~= nil) then
+		self:set_internal_id(data.id)
+	end
+	
+	if(data.uid ~= nil) then
+		self:set_unique_id(data.uid)
+	end
+end
+
 function Node:new(r, options)
 	self.__index = self
 
@@ -1629,6 +1656,17 @@ function Node_Limit:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+	end
+
+	function this:get_limit()
+		return sending
+	end
+
+	function this:set_limit(l)
+		if(l ~= nil and l > 0 and l < 100) then
+			sending = l
+			limit_count.text = tostring(l)
+		end
 	end
 
 	Node_Events.on("node_destroyed", function()

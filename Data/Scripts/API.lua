@@ -28,10 +28,15 @@ API.ticking_nodes = {}
 API.nodes = {}
 API.active_node = nil
 API.can_edit_nodes = true
+API.unique_id = 0
 
 local local_player = Game.GetLocalPlayer()
 
 function API.register_node(node)
+	if(node:get_unique_id() == 0) then
+		node:set_unique_id(API.get_next_unique_id())
+	end
+	
 	table.insert(API.nodes, #API.nodes + 1, node)
 end
 
@@ -78,6 +83,12 @@ end)
 API.Node_Events.on("node_info_click", function()
 	API.play_click_sound()
 end)
+
+function API.get_next_unique_id()
+	API.unique_id = API.unique_id + 1
+
+	return API.unique_id
+end
 
 function API.play_click_sound()
 	API.change_sound_pitch(click_sound)

@@ -2,8 +2,8 @@ local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
 local puzzle_data = script:GetCustomProperty("puzzle_data"):WaitForObject()
 
-Events.ConnectForPlayer("save_node", function(player, index, id, pos, condition)
-	player.serverUserData.node_data[index] = tostring(id) .. "|" .. pos .. "|" .. (condition or "")
+Events.ConnectForPlayer("save_node", function(player, index, id, uid, pos, condition, limit)
+	player.serverUserData.node_data[index] = tostring(id) .. "|" .. tostring(uid) .. "|" .. pos .. "|" .. (condition or "") .. "|" .. (limit or "")
 end)
 
 Events.Connect("set_node_data", function(data)
