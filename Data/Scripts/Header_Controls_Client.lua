@@ -17,6 +17,8 @@ local settings = script:GetCustomProperty("settings"):WaitForObject()
 
 local save_button = script:GetCustomProperty("save_button"):WaitForObject()
 
+local main_menu_button = script:GetCustomProperty("main_menu_button"):WaitForObject()
+
 local settings_open = false
 
 local gold_color = gold_award:GetColor()
@@ -65,6 +67,23 @@ function Tick(dt)
 		end
 	end
 end
+
+-- Main Menu
+
+main_menu_button.clickedEvent:Connect(function()
+	disable_ui(true)
+	API.disable_nodes()
+
+	Events.Broadcast("on_disable_all_dropdowns")
+	Events.Broadcast("stop_auto_save")
+	
+	Events.Broadcast("transition_in", function()
+		Events.Broadcast("clear_puzzle")
+		Events.Broadcast("show_main_menu")
+	end)
+end)
+
+-- Nodes
 
 available_nodes_button.hoveredEvent:Connect(API.play_hover_sound)
 
@@ -180,6 +199,7 @@ function disable_ui(disable_run_edit, ignore_settings)
 	speed_up_button.isInteractable = false
 	available_nodes_button.isInteractable = false
 	save_button.isInteractable = false
+	main_menu_button.isInteractable = false
 
 	if(disable_run_edit) then
 		run_edit_button.isInteractable = false
@@ -201,6 +221,7 @@ function enable_ui()
 	run_edit_button.isInteractable = true
 	settings_button.isInteractable = true
 	save_button.isInteractable = true
+	main_menu_button.isInteractable = true
 	
 	Events.Broadcast("enable_available_nodes")
 

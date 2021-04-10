@@ -776,6 +776,12 @@ Objects {
         SelfId: 2323963055041167086
       }
     }
+    Overrides {
+      Name: "cs:main_menu_button"
+      ObjectReference {
+        SelfId: 1788394385922609731
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -829,13 +835,18 @@ Objects {
     Overrides {
       Name: "cs:tutorial_container"
       ObjectReference {
-        SelfId: 841534158063459245
       }
     }
     Overrides {
       Name: "cs:loading"
       ObjectReference {
         SelfId: 16860121657648772684
+      }
+    }
+    Overrides {
+      Name: "cs:API"
+      AssetReference {
+        Id: 11355776926042268297
       }
     }
     Overrides {

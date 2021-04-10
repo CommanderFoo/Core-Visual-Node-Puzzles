@@ -1,4 +1,6 @@
-﻿local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
+﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+
+local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 local data = script:GetCustomProperty("data"):WaitForObject()
 local tutorial_container = script:GetCustomProperty("tutorial_container"):WaitForObject()
@@ -43,4 +45,12 @@ function load_puzzle(id)
 	end
 end
 
+function clear_puzzle()
+	if(current_puzzle ~= nil) then
+		API.clear_graph()
+		current_puzzle:Destroy()
+	end
+end
+
 Events.Connect("load_puzzle", load_puzzle)
+Events.Connect("clear_puzzle", clear_puzzle)

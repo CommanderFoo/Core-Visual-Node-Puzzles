@@ -30,8 +30,6 @@ end
 function play_music()
 	if(local_player:GetResource("sfx_volume") > 0 and can_change_song) then
 		current = get_random_song()
-		
-		print(current.name)
 
 		current.volume = local_player:GetResource("sfx_volume") / 10
 		current:Play()

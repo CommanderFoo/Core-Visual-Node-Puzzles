@@ -7,25 +7,13 @@ Events.ConnectForPlayer("init", function(player)
 	YOOTIL.Events.broadcast_to_player(player, "show_main_menu")
 end)
 
+--@TODO: REMOVE
+local force_load_puzzle = 11
+
 -- Prefetch node data and send early.
 
 function on_join(player)
-	player.serverUserData.node_data = {}
-
-	local player_data = Storage.GetPlayerData(player)
-	local data = player_data.nd
-
-	if(clear_player_data or (data == nil or string.len(data) < 3)) then
-		data = "--"
-	else
-		local parts = {CoreString.Split(data, ":")}
-
-		for i, p in ipairs(parts) do
-			player.serverUserData.node_data[i] = p
-		end
-	end
-
-	Events.Broadcast("set_node_data", data)
+	Events.Broadcast("set_networked_data", player)
 end
 
 function load_game(player)
@@ -48,8 +36,9 @@ function load_game(player)
 	player_data.an = player_data.an or 1 -- Nodes Show / Hide
 	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
 
-	-- @TODO: Remove
-	player_data.cp = 2
+	if(force_load_puzzle) then
+		player_data.cp = force_load_puzzle
+	end
 
 	player:SetResource("speed", player_data.cs)
 	player:SetResource("sfx_volume", player_data.sv)
@@ -58,34 +47,7 @@ function load_game(player)
 	player:SetResource("show_nodes", player_data.an)
 	player:SetResource("current_puzzle", player_data.cp)
 
-	--YOOTIL.Utils.dump(player_data)
-
 	YOOTIL.Events.broadcast_to_player(player, "load_game", player_data.cp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
-end
-
-function save_data(player)
-	local data = {
-
-		cp = player:GetResource("current_puzzle"),
-		cs = player:GetResource("speed"),
-		sv = player:GetResource("sfx_volume"),
-		mv = player:GetResource("music_volume"),
-		sn = player:GetResource("show_notifications"),
-		an = player:GetResource("show_nodes")
-
-	}
-
-	if(player.serverUserData.node_data) then
-		data.nd = table.concat(player.serverUserData.node_data, ":")
-	end
-
-	if(clear_player_data) then
-		data = {}
-	end
-
-	--YOOTIL.Utils.dump(data)
-
-	Storage.SetPlayerData(player, data)
 end
 
 Events.ConnectForPlayer("load_game", load_game)
@@ -98,7 +60,10 @@ Game.playerJoinedEvent:Connect(function(player)
 	player.isCrouchEnabled = false
 end)
 
-Game.playerLeftEvent:Connect(save_data)
+Game.playerLeftEvent:Connect(function(p)
+	Events.Broadcast("save_data", p)
+end)
+
 Game.playerJoinedEvent:Connect(on_join)
 
 Events.ConnectForPlayer("update_player_prefs", function(player, speed, show_nodes)

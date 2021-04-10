@@ -93,7 +93,6 @@ function init(node_data)
 				end
 
 				if(circle_complete and square_complete and triangle_complete) then
-					print("ok 3")
 					API.Puzzle_Events.trigger("output_" .. event .. "_complete")
 				end
 			else

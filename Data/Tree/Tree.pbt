@@ -128,7 +128,7 @@ Objects {
     }
     Overrides {
       Name: "cs:node_data"
-      String: ""
+      String: "--"
     }
     Overrides {
       Name: "cs:puzzle_data:isrep"
@@ -1674,7 +1674,7 @@ Objects {
     }
     UseParentWidth: true
     Text {
-      Label: "LEADERBOARDS"
+      Label: "????"
       Color {
         R: 1
         G: 0.898
@@ -1825,7 +1825,7 @@ Objects {
     }
     UseParentWidth: true
     Text {
-      Label: "TROPHIES"
+      Label: "????"
       Color {
         R: 1
         G: 0.898
@@ -2220,7 +2220,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceon"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -7431,7 +7431,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceon"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -7439,7 +7439,7 @@ Objects {
   Control {
     Width: 350
     Height: 850
-    UIX: -30
+    UIX: 400
     UIY: 35
     RenderTransformPivot {
       Anchor {
@@ -7601,6 +7601,7 @@ Objects {
   ChildIds: 16498719261319731661
   ChildIds: 8014293986482026159
   ChildIds: 9334895272256840930
+  ChildIds: 1788394385922609731
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -7630,6 +7631,93 @@ Objects {
       TargetAnchor {
         Anchor {
           Value: "mc:euianchor:topleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 1788394385922609731
+  Name: "Main Menu"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 4760197880751552993
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 125
+    Height: 40
+    UIX: 30
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Button {
+      Label: "Main Menu"
+      FontColor {
+        R: 1
+        G: 0.818
+        B: 0.818
+        A: 1
+      }
+      FontSize: 20
+      ButtonColor {
+        G: 0.101041637
+        B: 0.0827249438
+        A: 1
+      }
+      HoveredColor {
+        G: 0.159375027
+        B: 0.130483732
+        A: 1
+      }
+      PressedColor {
+        G: 0.101041637
+        B: 0.0827249438
+        A: 1
+      }
+      DisabledColor {
+        G: 0.101041637
+        B: 0.0827249438
+        A: 0.2
+      }
+      Brush {
+        Id: 841534158063459245
+      }
+      IsButtonEnabled: true
+      ClickMode {
+        Value: "mc:ebuttonclickmode:default"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
         }
       }
     }
@@ -8350,7 +8438,7 @@ Objects {
   Control {
     Width: 200
     Height: 60
-    UIX: 200
+    UIX: 354.207886
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8416,7 +8504,7 @@ Objects {
   Control {
     Width: 100
     Height: 100
-    UIX: 50
+    UIX: 205.709915
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8796,7 +8884,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceon"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -8843,7 +8931,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceon"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"

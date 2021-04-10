@@ -16,6 +16,8 @@ local bronze_color = bronze_award:GetColor()
 
 local floor = math.floor
 
+local local_player = Game.GetLocalPlayer()
+
 Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score)
 	Events.Broadcast("stop_auto_save")
 
@@ -77,41 +79,23 @@ edit_button.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
-function find_active_puzzle()
-	local children = available_nodes:GetChildren()
-
-	for k, v in pairs(children) do
-		local id = string.match(v.name, "Puzzle (%d+)")
-	
-		if(id) then
-			return v, id
-		end
-	end
-
-	return nil
-end
-
 next_button.hoveredEvent:Connect(API.play_hover_sound)
 
 next_button.clickedEvent:Connect(function()
 	API.clear_graph()
-
-	local active_puzzle, id = find_active_puzzle()
-
 	API.play_click_sound()
 
 	script.parent.parent.visibility = Visibility.FORCE_OFF
 	next_button.isInteractable = false
 
-	if(active_puzzle and id) then
-		active_puzzle:Destroy()
-
-		YOOTIL.Events.broadcast_to_server("save_puzzle_progress", tonumber(id) + 1)
+	Events.Broadcast("clear_puzzle")
+	
+	local current_puzzle = local_player:GetResource("current_puzzle")
+	
+	YOOTIL.Events.broadcast_to_server("save_puzzle_progress", current_puzzle + 1)
 		
-		Events.Broadcast("start_auto_save")
-		Events.Broadcast("load_puzzle", tonumber(id) + 1)
-	end
-
+	Events.Broadcast("start_auto_save")
+	Events.Broadcast("load_puzzle", current_puzzle + 1)
 	Events.Broadcast("puzzle_edit")
 	Events.Broadcast("show_nodes")
 end)

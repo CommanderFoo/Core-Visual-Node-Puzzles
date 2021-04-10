@@ -173,11 +173,18 @@ function Tick(dt)
 end
 
 Events.Connect("show_main_menu", function()
-	bg_effect.visibility = Visibility.FORCE_ON
+	Events.Broadcast("hide_ui")
+	Events.Broadcast("close_settings")
+	Events.Broadcast("play_menu_music")
+	
+	menu.x = -350
 	menu_container.visibility = Visibility.FORCE_ON
+	bg_effect.visibility = Visibility.FORCE_ON
+
 	Events.Broadcast("transition_out")
 
 	tween = YOOTIL.Tween:new(.8, { x = -350 }, { x = 250 })
+
 	tween:set_easing("outBack")
 	tween:on_change(function(c)
 		menu.x = c.x

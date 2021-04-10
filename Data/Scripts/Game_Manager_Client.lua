@@ -32,3 +32,15 @@ Events.Connect("load_game", function(id, speed, sfx_vol, music_vol, show_nodes)
 		Events.Broadcast("start_auto_save")
 	end)
 end)
+
+Events.Connect("show_ui", function()
+	base_ui.visibility = Visibility.FORCE_ON
+	node_ui.visibility = Visibility.FORCE_ON
+	top_ui.visibility = Visibility.FORCE_ON
+end)
+
+Events.Connect("hide_ui", function()
+	base_ui.visibility = Visibility.FORCE_OFF
+	node_ui.visibility = Visibility.FORCE_OFF
+	top_ui.visibility = Visibility.FORCE_OFF
+end)

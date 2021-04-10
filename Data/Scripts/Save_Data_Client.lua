@@ -22,7 +22,6 @@ function save()
 		if(n:get_internal_id() > 0) then
 			had_data = true
 
-			--@TODO Look at get_output_connections_as_string
 			YOOTIL.Events.broadcast_to_server("save_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_limit(), n:get_output_connections_as_string())
 		end
 	end
@@ -40,8 +39,8 @@ Events.Connect("save", save)
 
 Events.Connect("start_auto_save", function()
 	if(save_task == nil) then
-		save_task = Task.Spawn(save, 45)
-		save_task.repeatInterval = 45
+		save_task = Task.Spawn(save, 30)
+		save_task.repeatInterval = 30
 		save_task.repeatCount = -1
 	end
 end)
@@ -60,15 +59,35 @@ puzzle_data.networkedPropertyChangedEvent:Connect(function(obj, prop)
 end)
 
 Events.Connect("load_saved_nodes", function()
-	if(loaded_node_data ~= nil and loaded_node_data ~= "--") then
-		local split_nodes = {CoreString.Split(loaded_node_data, ":")}
+	local loaded_data = loaded_node_data
+
+	if(loaded_node_data == nil or loaded_node_data == "--") then
+		local already_loaded_data = puzzle_data:GetCustomProperty("node_data")
+
+		if(already_loaded_data ~= nil and already_loaded_data ~= "--") then
+			loaded_data = already_loaded_data
+		end
+	end
+
+	if(loaded_data ~= nil and loaded_data ~= "--") then
+		local puzzle_id, node_data = CoreString.Split(loaded_data, "@")
+
+		if(tonumber(puzzle_id) ~= local_player:GetResource("current_puzzle") or string.len(node_data) < 3) then
+			return
+		end
+
+		local split_nodes = {CoreString.Split(node_data, ":")}
 		local output_connections = {}
 		local has_connections = false
 		local last_uid = 0
+		local screen = UI.GetScreenSize()
 
 		for i, s in ipairs(split_nodes) do
 			local index, uid, pos_str, condition, limit, connections = CoreString.Split(s, "|")
 			local x, y = CoreString.Split(pos_str, ",")
+
+			x = tonumber(x)
+			y = tonumber(y)
 
 			if(connections ~= nil and string.len(connections) > 0) then
 				output_connections[uid] = {CoreString.Split(connections, ",")}
@@ -77,7 +96,19 @@ Events.Connect("load_saved_nodes", function()
 
 			last_uid = tonumber(uid)
 
-			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), tonumber(x), tonumber(y), condition, tonumber(limit))
+			if(x < -(screen.x / 2)) then
+				x = 250	
+			elseif(x > screen.x) then
+				x = (screen.x / 2) - 300
+			end
+
+			if(y < -(screen.y / 2)) then
+				y = 150	
+			elseif(y > screen.y) then
+				y = (screen.y / 2) - 150
+			end
+
+			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit))
 		end
 		
 		API.unique_id = last_uid
@@ -95,7 +126,7 @@ Events.Connect("load_saved_nodes", function()
 						if(connecting_to_node) then
 							local the_node_connection = the_node:get_top_connector(true)
 
-							if(handle_index == 2) then
+							if(tonumber(handle_index) == 2) then
 								the_node_connection = the_node:get_bottom_connector(true)
 							end
 

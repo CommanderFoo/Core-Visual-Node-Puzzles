@@ -407,6 +407,10 @@ function Node:setup_input_connections()
 end
 
 function Node:do_output_connect(connected_to_node, connected_to_connection, the_connection)
+	if(not the_connection) then
+		return
+	end
+
 	if(self.output_connected_to[the_connection.id] == nil) then
 		self.output_connected_to[the_connection.id] = {}
 	end
@@ -1714,6 +1718,7 @@ function Node_Limit:new(r, options)
 		if(l ~= nil and l > 0 and l < 100) then
 			sending = l
 			limit_count.text = tostring(l)
+			orig_sending = sending
 		end
 	end
 

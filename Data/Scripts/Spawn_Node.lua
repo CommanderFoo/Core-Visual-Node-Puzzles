@@ -18,6 +18,8 @@ local total_spawned = 0
 local template_id = nil
 local index = 1
 
+local is_destroyed = false
+
 for i, c in ipairs(root.parent:GetChildren()) do
 	if(c == root) then
 		index = i
@@ -41,7 +43,7 @@ API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 		if(total ~= -1) then
 			total_spawned = total_spawned - 1
 
-			if(total_spawned < total) then
+			if(total_spawned < total and Object.IsValid(button)) then
 				button.isInteractable = true
 			end
 		end
@@ -100,6 +102,10 @@ end
 button.hoveredEvent:Connect(API.play_hover_sound)
 
 button.clickedEvent:Connect(function()
+	if(is_destroyed) then
+		return
+	end
+	
 	if(total_spawned < total or total == -1) then		
 		spawn_node(0, 0, nil)
 
@@ -108,12 +114,20 @@ button.clickedEvent:Connect(function()
 end)
 
 Events.Connect("disable_available_nodes", function()
+	if(is_destroyed) then
+		return
+	end
+
 	if(Object.IsValid(button)) then
 		button.isInteractable = false
 	end
 end)
 
 Events.Connect("enable_available_nodes", function()
+	if(is_destroyed) then
+		return
+	end
+
 	if(not Object.IsValid(button)) then
 		return
 	end
@@ -124,7 +138,15 @@ Events.Connect("enable_available_nodes", function()
 end)
 
 Events.Connect("spawn_node", function(i, uid, x, y, condition, limit)
+	if(is_destroyed) then
+		return
+	end
+
 	if(index == i) then
 		spawn_node(x, y, uid, condition, limit)
 	end
+end)
+
+script.destroyEvent:Connect(function()
+	is_destroyed = true
 end)
