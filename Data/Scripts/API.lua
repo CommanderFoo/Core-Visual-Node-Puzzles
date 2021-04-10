@@ -29,6 +29,7 @@ API.nodes = {}
 API.active_node = nil
 API.can_edit_nodes = true
 API.unique_id = 0
+API.auto_set_order = true
 
 local local_player = Game.GetLocalPlayer()
 
@@ -68,7 +69,7 @@ end)
 API.Node_Events.on("input_connect", function(node_connected, node_connection)
 	if(API.active_node ~= nil and API.active_node:get_id() ~= node_connected:get_id() and API.active_node:is_moving_connection()) then
 		API.active_node:output_connect_to(node_connected, node_connection)
-		node_connected:input_connect_to(API.active_node, API.active_node:get_current_connection(), node_connection)
+		node_connected:input_connect_to(API.active_node, API.active_node:get_current_connection(), node_connection, API.auto_set_order)
 
 		API.Node_Events.trigger("node_connected", API.active_node, node_connected)
 	end

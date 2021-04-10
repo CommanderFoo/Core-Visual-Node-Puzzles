@@ -52,7 +52,7 @@ API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
 	end
 end)
 
-function spawn_node(x, y, uid, condition, limit)
+function spawn_node(x, y, uid, condition, limit, order)
 	local n = World.SpawnAsset(node, { parent = container })
 		
 	n.x = x
@@ -84,7 +84,8 @@ function spawn_node(x, y, uid, condition, limit)
 			data.condition = condition
 			data.limit = limit
 			data.uid = uid
-
+			data.order = order
+			
 			s.init(data)
 		end
 	end
@@ -137,13 +138,13 @@ Events.Connect("enable_available_nodes", function()
 	end
 end)
 
-Events.Connect("spawn_node", function(i, uid, x, y, condition, limit)
+Events.Connect("spawn_node", function(i, uid, x, y, condition, limit, order)
 	if(is_destroyed) then
 		return
 	end
 
 	if(index == i) then
-		spawn_node(x, y, uid, condition, limit)
+		spawn_node(x, y, uid, condition, limit, order)
 	end
 end)
 

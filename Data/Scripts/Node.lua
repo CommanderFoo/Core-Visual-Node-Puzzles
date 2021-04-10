@@ -437,7 +437,21 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 	Node_Events.trigger("output_connected_to", connected_to_node)
 end
 
-function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection)
+function Node:do_input_connect(connected_from_node, connected_from_connection, connected_to_connection)
+	if(self.input_connected_to[connected_to_connection.id] == nil) then
+		self.input_connected_to[connected_to_connection.id] = {}
+	end
+
+	table.insert(self.input_connected_to[connected_to_connection.id], #self.input_connected_to[connected_to_connection.id] + 1, {
+
+		connected_from_node = connected_from_node,
+		connected_from_connection = connected_from_connection,
+		connected_to_connection = connected_to_connection
+
+	})
+end
+
+function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection, set_order)
 	if(self.input_connected_to[connected_to_connection.id] == nil) then
 		self.input_connected_to[connected_to_connection.id] = {}
 	end
@@ -450,7 +464,7 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 
 	})
 
-	Node_Events.trigger("input_connected_to", connected_from_node, self)
+	Node_Events.trigger("input_connected_to", connected_from_node, self, set_order)
 end
 
 function Node:move_connections()
@@ -942,6 +956,10 @@ function Node:set_from_saved_data(data)
 	if(data.uid ~= nil) then
 		self:set_unique_id(data.uid)
 	end
+
+	if(data.order ~= nil and data.order > 0) then
+		self:set_order(data.order)
+	end
 end
 
 function Node:get_output_connections_as_string()
@@ -1195,7 +1213,11 @@ function Node_Output:new(r, options)
 		end
 	end
 
-	Node_Events.on("input_connected_to", function(n, w)
+	Node_Events.on("input_connected_to", function(n, w, set_order)
+		if(not set_order) then
+			return
+		end
+
 		if(n:get_type() == "Halt" and this:get_type() == "Output" and w:get_type() == "Output") then
 			n:set_order(this:get_next_halt_order(n:get_id()))
 		elseif(n:get_type() == "Halt") then
@@ -1788,6 +1810,7 @@ function Node_Halt:new(r, options)
 	Node_Events.on("break_connection", function(id, drag, n)
 		if(n:get_id() == this:get_id()) then
 			order = 0
+			this:set_order(0)
 		end
 	end)
 	

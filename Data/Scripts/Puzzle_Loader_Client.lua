@@ -3,7 +3,6 @@
 local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 local data = script:GetCustomProperty("data"):WaitForObject()
-local tutorial_container = script:GetCustomProperty("tutorial_container"):WaitForObject()
 local loading = script:GetCustomProperty("loading"):WaitForObject()
 
 local local_player = Game.GetLocalPlayer()

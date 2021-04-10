@@ -41,8 +41,8 @@ Assets {
         Control {
           Width: 290
           Height: 120
-          UIX: 100
-          UIY: -250
+          UIX: 621.959595
+          UIY: 44.1591797
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -488,9 +488,9 @@ Assets {
               Id: 15322576452248986664
             }
             Color {
-              R: 0.198069349
-              G: 0.0231533684
-              B: 0.0307134502
+              R: 0.51875
+              G: 0.0606394149
+              B: 0.080439195
               A: 1
             }
             TeamSettings {

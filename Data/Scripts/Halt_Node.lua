@@ -4,7 +4,6 @@ local is_destroyed = false
 local node = nil
 
 function init(node_data)
-	
 	node = API.Node_Type.Halt:new(script.parent.parent, {
 
 		node_time = 0.30

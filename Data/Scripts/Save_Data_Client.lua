@@ -22,7 +22,7 @@ function save()
 		if(n:get_internal_id() > 0) then
 			had_data = true
 
-			YOOTIL.Events.broadcast_to_server("save_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_limit(), n:get_output_connections_as_string())
+			YOOTIL.Events.broadcast_to_server("save_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_limit(), n:get_output_connections_as_string(), n:get_order())
 		end
 	end
 
@@ -83,7 +83,7 @@ Events.Connect("load_saved_nodes", function()
 		local screen = UI.GetScreenSize()
 
 		for i, s in ipairs(split_nodes) do
-			local index, uid, pos_str, condition, limit, connections = CoreString.Split(s, "|")
+			local index, uid, pos_str, condition, limit, connections, order = CoreString.Split(s, "|")
 			local x, y = CoreString.Split(pos_str, ",")
 
 			x = tonumber(x)
@@ -108,12 +108,14 @@ Events.Connect("load_saved_nodes", function()
 				y = (screen.y / 2) - 150
 			end
 
-			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit))
+			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit), tonumber(order))
 		end
 		
 		API.unique_id = last_uid
 
 		if(has_connections) then
+			API.auto_set_order = false
+
 			for i, c in pairs(output_connections) do
 				local the_node = API.get_node_by_unique_id(i)
 
@@ -131,12 +133,15 @@ Events.Connect("load_saved_nodes", function()
 							end
 
 							the_node:do_output_connect(connecting_to_node, connecting_to_node:get_input_connector(), the_node_connection)
+							connecting_to_node:do_input_connect(the_node, the_node_connection, connecting_to_node:get_input_connector())
 
 							the_node:move_connections()
 						end
 					end
 				end
 			end
+
+			API.auto_set_order = true
 		end
 	end
 end)

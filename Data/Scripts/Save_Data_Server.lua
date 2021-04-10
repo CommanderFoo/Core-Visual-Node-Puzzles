@@ -54,8 +54,8 @@ function set_networked_data(player)
 	puzzle_data:SetNetworkedCustomProperty("node_data", data)
 end
 
-Events.ConnectForPlayer("save_node", function(player, index, id, uid, pos, condition, limit, connections)
-	player.serverUserData.node_data[index] = tostring(id) .. "|" .. tostring(uid) .. "|" .. pos .. "|" .. (condition or "") .. "|" .. (limit or "") .. "|" .. (connections or "")
+Events.ConnectForPlayer("save_node", function(player, index, id, uid, pos, condition, limit, connections, order)
+	player.serverUserData.node_data[index] = tostring(id) .. "|" .. tostring(uid) .. "|" .. pos .. "|" .. (condition or "") .. "|" .. (limit or "") .. "|" .. (connections or "") .. "|" .. (order or "")
 end)
 
 Events.ConnectForPlayer("save_puzzle_progress", function(player, id)

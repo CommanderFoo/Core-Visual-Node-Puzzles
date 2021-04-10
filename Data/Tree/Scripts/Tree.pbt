@@ -833,11 +833,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:tutorial_container"
-      ObjectReference {
-      }
-    }
-    Overrides {
       Name: "cs:loading"
       ObjectReference {
         SelfId: 16860121657648772684
@@ -913,6 +908,12 @@ Objects {
       Name: "cs:puzzle_11"
       AssetReference {
         Id: 2988422183788330915
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_12"
+      AssetReference {
+        Id: 15521811672383938905
       }
     }
   }

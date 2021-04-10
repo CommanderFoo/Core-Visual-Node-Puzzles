@@ -2220,7 +2220,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceoff"
+    Value: "mc:evisibilitysetting:forceon"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -7701,7 +7701,6 @@ Objects {
       Brush {
         Id: 841534158063459245
       }
-      IsButtonEnabled: true
       ClickMode {
         Value: "mc:ebuttonclickmode:default"
       }
@@ -8246,7 +8245,6 @@ Objects {
       Brush {
         Id: 841534158063459245
       }
-      IsButtonEnabled: true
       ClickMode {
         Value: "mc:ebuttonclickmode:default"
       }
@@ -8884,7 +8882,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceoff"
+    Value: "mc:evisibilitysetting:forceon"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -8931,7 +8929,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceoff"
+    Value: "mc:evisibilitysetting:forceon"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
