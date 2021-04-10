@@ -105,7 +105,7 @@ function in_tween(fn, delay)
 		container.visibility = Visibility.FORCE_ON
 		Events.Broadcast("transition_start")
 
-		play_loading_animations()
+		--play_loading_animations()
 	end)
 
 	tween:on_change(change)
@@ -150,4 +150,4 @@ end
 Events.Connect("transition_out", out_tween)
 Events.Connect("transition_in", in_tween)
 
-play_loading_animations()
+--play_loading_animations()

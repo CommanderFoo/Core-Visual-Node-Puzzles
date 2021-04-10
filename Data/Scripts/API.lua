@@ -173,6 +173,16 @@ function API.clear_graph()
 	API.nodes = {}
 end
 
+function API.get_node_by_unique_id(id)
+	for i, n in ipairs(API.nodes) do
+		if(n:get_unique_id() == tonumber(id)) then
+			return n
+		end
+	end
+
+	return nil
+end
+
 function API.set_bubble(type, n, amounts, expand)
 	if(amounts[type .. "_data_amount"] ~= nil and amounts[type .. "_data_amount"] > 0) then
 		local bubble = n["get_" ..  type .. "_bubble"](n)

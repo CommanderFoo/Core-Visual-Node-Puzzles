@@ -459,7 +459,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:total"
-            Int: -1
+            Int: 5
           }
         }
         Collidable_v2 {

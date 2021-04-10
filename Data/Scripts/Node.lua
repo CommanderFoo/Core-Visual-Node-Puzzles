@@ -406,22 +406,26 @@ function Node:setup_input_connections()
 	end
 end
 
+function Node:do_output_connect(connected_to_node, connected_to_connection, the_connection)
+	if(self.output_connected_to[the_connection.id] == nil) then
+		self.output_connected_to[the_connection.id] = {}
+	end
+
+	table.insert(self.output_connected_to[the_connection.id], #self.output_connected_to[the_connection.id] + 1, {
+
+		connected_to_node = connected_to_node,
+		connected_to_connection = connected_to_connection,
+		connection = the_connection
+
+	})
+end
+
 function Node:output_connect_to(connected_to_node, connected_to_connection)
 	if(not self.active_connection) then
 		return
 	end
 
-	if(self.output_connected_to[self.active_connection.id] == nil) then
-		self.output_connected_to[self.active_connection.id] = {}
-	end
-
-	table.insert(self.output_connected_to[self.active_connection.id], #self.output_connected_to[self.active_connection.id] + 1, {
-
-		connected_to_node = connected_to_node,
-		connected_to_connection = connected_to_connection,
-		connection = self.active_connection
-
-	})
+	self:do_output_connect(connected_to_node, connected_to_connection, self.active_connection)
 
 	self.active_connection.moving = false
 	self.active_connection.connector_image:SetColor(self.default_connector_color)
@@ -547,6 +551,20 @@ function Node:stop_all_drag()
 
 	if(Object.IsValid(self.highlight)) then
 		self.highlight.visibility = Visibility.FORCE_OFF
+	end
+end
+
+function Node:get_output_connector_by_index(index)
+	if(index == 2) then
+		return self:get_bottom_connector()
+	end
+
+	return self:get_top_connector()
+end
+
+function Node:get_input_connector()
+	for i, c in pairs(self.input_connections) do
+		return c
 	end
 end
 
@@ -719,26 +737,38 @@ function Node:on_connection(func)
 	self.on_connection_func = func
 end
 
-function Node:get_top_connector()
+function Node:get_top_connector(ret_table)
 	for _, c in pairs(self.output_connections) do
 		if(c.connector.name == "Connection Handle Top") then
-			return c.connector
+			if(ret_table) then
+				return c
+			else
+				return c.connector
+			end
 		end
 	end
 end
 
-function Node:get_middle_connector()
+function Node:get_middle_connector(ret_table)
 	for _, c in pairs(self.output_connections) do
 		if(c.connector.name == "Connection Handle Middle") then
-			return c.connector
+			if(ret_table) then
+				return c
+			else
+				return c.connector
+			end
 		end
 	end
 end
 
-function Node:get_bottom_connector()
+function Node:get_bottom_connector(ret_table)
 	for _, c in pairs(self.output_connections) do
 		if(c.connector.name == "Connection Handle Bottom") then
-			return c.connector
+			if(ret_table) then
+				return c
+			else
+				return c.connector
+			end
 		end
 	end
 end
@@ -908,6 +938,24 @@ function Node:set_from_saved_data(data)
 	if(data.uid ~= nil) then
 		self:set_unique_id(data.uid)
 	end
+end
+
+function Node:get_output_connections_as_string()
+	local out_connections = {}
+
+	for k, c in pairs(self.output_connected_to) do
+		for i, n in ipairs(c) do
+			local index = 1
+			
+			if(string.find(n.connection.id, "Bottom")) then
+				index = 2
+			end
+
+			table.insert(out_connections, tostring(index) .. ";" .. tostring(n.connected_to_node:get_unique_id()))
+		end
+	end
+
+	return table.concat(out_connections, ",")
 end
 
 function Node:new(r, options)
