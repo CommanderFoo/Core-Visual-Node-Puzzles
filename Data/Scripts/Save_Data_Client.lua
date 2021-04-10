@@ -18,7 +18,7 @@ function save()
 
 	YOOTIL.Events.broadcast_to_server("save_init")
 
-	for i, n in ipairs(API.nodes) do
+	for i, n in pairs(API.nodes) do
 		if(n:get_internal_id() > 0) then
 			had_data = true
 
@@ -83,32 +83,34 @@ Events.Connect("load_saved_nodes", function()
 		local screen = UI.GetScreenSize()
 
 		for i, s in ipairs(split_nodes) do
-			local index, uid, pos_str, condition, limit, connections, order = CoreString.Split(s, "|")
-			local x, y = CoreString.Split(pos_str, ",")
+			if(string.len(s) > 0) then
+				local index, uid, pos_str, condition, limit, connections, order = CoreString.Split(s, "|")
+				local x, y = CoreString.Split(pos_str, ",")
 
-			x = tonumber(x)
-			y = tonumber(y)
+				x = tonumber(x)
+				y = tonumber(y)
 
-			if(connections ~= nil and string.len(connections) > 0) then
-				output_connections[uid] = {CoreString.Split(connections, ",")}
-				has_connections = true
+				if(connections ~= nil and string.len(connections) > 0) then
+					output_connections[uid] = {CoreString.Split(connections, ",")}
+					has_connections = true
+				end
+
+				last_uid = tonumber(uid)
+
+				if(x < -(screen.x / 2)) then
+					x = 250	
+				elseif(x > screen.x) then
+					x = (screen.x / 2) - 300
+				end
+
+				if(y < -(screen.y / 2)) then
+					y = 150	
+				elseif(y > screen.y) then
+					y = (screen.y / 2) - 150
+				end
+
+				Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit), tonumber(order))
 			end
-
-			last_uid = tonumber(uid)
-
-			if(x < -(screen.x / 2)) then
-				x = 250	
-			elseif(x > screen.x) then
-				x = (screen.x / 2) - 300
-			end
-
-			if(y < -(screen.y / 2)) then
-				y = 150	
-			elseif(y > screen.y) then
-				y = (screen.y / 2) - 150
-			end
-
-			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit), tonumber(order))
 		end
 		
 		API.unique_id = last_uid

@@ -38,7 +38,7 @@ function API.register_node(node)
 		node:set_unique_id(API.get_next_unique_id())
 	end
 	
-	table.insert(API.nodes, #API.nodes + 1, node)
+	table.insert(API.nodes, node)
 end
 
 API.Node_Events.on("begin_drag_node", function(node)
@@ -175,7 +175,7 @@ function API.clear_graph()
 end
 
 function API.get_node_by_unique_id(id)
-	for i, n in ipairs(API.nodes) do
+	for i, n in pairs(API.nodes) do
 		if(n:get_unique_id() == tonumber(id)) then
 			return n
 		end

@@ -15,7 +15,11 @@ function save_data(player)
 	}
 
 	if(player.serverUserData.node_data) then
-		data.nd = tostring(data.cp) .. "@" .. table.concat(player.serverUserData.node_data, ":")
+		data.nd = tostring(data.cp) .. "@"
+		
+		for k, v in pairs(player.serverUserData.node_data) do
+			data.nd = data.nd .. v .. ":"
+		end
 	end
 
 	if(clear_player_data) then
@@ -26,7 +30,9 @@ function save_data(player)
 end
 
 function set_networked_data(player)
-	player.serverUserData.node_data = {}
+	if(player.serverUserData.node_data == nil) then
+		player.serverUserData.node_data = {}
+	end
 
 	local player_data = Storage.GetPlayerData(player)
 	local data = player_data.nd
