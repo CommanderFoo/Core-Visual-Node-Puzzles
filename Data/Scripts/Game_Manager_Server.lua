@@ -8,7 +8,7 @@ Events.ConnectForPlayer("init", function(player)
 end)
 
 --@TODO: REMOVE
-local force_load_puzzle = 12
+local force_load_puzzle = 14
 
 -- Prefetch node data and send early.
 

@@ -916,6 +916,18 @@ Objects {
         Id: 15521811672383938905
       }
     }
+    Overrides {
+      Name: "cs:puzzle_13"
+      AssetReference {
+        Id: 7751948122425846108
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_14"
+      AssetReference {
+        Id: 8404719466416715901
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

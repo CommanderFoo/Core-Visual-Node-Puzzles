@@ -49,7 +49,7 @@ local Node = {
 }
 
 function Node:setup(r)
-	self.debug_node = false
+	self.debug_node = true
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil
@@ -306,6 +306,12 @@ end
 function Node:debug()
 	if(not self.debug_node) then
 		return
+	end
+
+	local handle_text = self.handle:FindChildByName("Node Name")
+
+	if(not string.find(handle_text.text, "%[")) then
+		handle_text.text = handle_text.text .. "[" .. tostring(self.unique_id) .. "]"
 	end
 
 	local inputs = 0
@@ -1148,6 +1154,7 @@ function Node_Output:new(r, options)
 	this:setup(r)
 
 	this.node_type = "Output"
+	this.halt_order = 1
 
 	function this:get_halt_nodes(cur_id)
 		local halt_nodes = {}
@@ -1167,17 +1174,14 @@ function Node_Output:new(r, options)
 		local use_node = nil
 
 		for k, n in ipairs(this:get_halt_nodes()) do
-			if(use_node == nil) then
-				use_node = n
-			end
-
-			if(n:get_order() < use_node:get_order()) then
+			if(n:get_order() == self.halt_order) then
 				use_node = n
 			end
 		end
 
 		if(use_node ~= nil) then
 			use_node:unhalt()
+			this.halt_order = this.halt_order + 1
 		end
 	end
 
@@ -1211,6 +1215,10 @@ function Node_Output:new(r, options)
 		else
 			return 1
 		end
+	end
+
+	function this:reset()
+		this.halt_order = 1
 	end
 
 	Node_Events.on("input_connected_to", function(n, w, set_order)
