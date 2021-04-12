@@ -8,23 +8,30 @@ Events.ConnectForPlayer("init", function(player)
 end)
 
 --@TODO: REMOVE
-local force_load_puzzle = 14
+
+--local force_load_logic_puzzle = 1
+--local force_load_math_puzzle = 1
 
 -- Prefetch node data and send early.
 
 function on_join(player)
-	Events.Broadcast("set_networked_data", player)
+	Events.Broadcast("set_networked_data", player, true)
+	Events.Broadcast("set_networked_data", player, false)
 end
 
-function load_game(player)
+function load_game(player, math)
 	local player_data = Storage.GetPlayerData(player)
 	
 	if(clear_player_data) then
 		player_data = {}
 	end
 
-	if(player_data.cp == nil or player_data.cp < 1) then
-		player_data.cp = 1 -- Current Puzzle
+	if(player_data.clp == nil or player_data.clp < 1) then
+		player_data.clp = 1 -- Current Logic Puzzle
+	end
+
+	if(player_data.cmp == nil or player_data.cmp < 1) then
+		player_data.cmp = 1 -- Current Math Puzzle
 	end
 	
 	if(player_data.cs == nil or player_data.cs < 1) then
@@ -36,8 +43,12 @@ function load_game(player)
 	player_data.an = player_data.an or 1 -- Nodes Show / Hide
 	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
 
-	if(force_load_puzzle) then
-		player_data.cp = force_load_puzzle
+	if(force_load_logic_puzzle) then
+		player_data.clp = force_load_logic_puzzle
+	end
+
+	if(force_load_math_puzzle) then
+		player_data.cmp = force_load_math_puzzle
 	end
 
 	player:SetResource("speed", player_data.cs)
@@ -45,9 +56,10 @@ function load_game(player)
 	player:SetResource("music_volume", player_data.mv)
 	player:SetResource("show_notifications", player_data.sn)
 	player:SetResource("show_nodes", player_data.an)
-	player:SetResource("current_puzzle", player_data.cp)
+	player:SetResource("current_logic_puzzle", player_data.clp)
+	player:SetResource("current_math_puzzle", player_data.cmp)
 
-	YOOTIL.Events.broadcast_to_player(player, "load_game", player_data.cp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
+	YOOTIL.Events.broadcast_to_player(player, "load_game", math, player_data.clp, player_data.cmp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
 end
 
 Events.ConnectForPlayer("load_game", load_game)

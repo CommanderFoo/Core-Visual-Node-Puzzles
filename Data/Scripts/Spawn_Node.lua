@@ -12,6 +12,10 @@ local square_data_amount = root:GetCustomProperty("square_data_amount")
 local triangle_data_amount = root:GetCustomProperty("triangle_data_amount")
 local plus_data_amount = root:GetCustomProperty("plus_data_amount")
 
+local first = root:GetCustomProperty("first")
+local first_data_amount = root:GetCustomProperty("first_data_amount")
+local first_final_total = root:GetCustomProperty("first_final_total")
+
 local required_amount = root:GetCustomProperty("required_amount")
 
 local total_spawned = 0
@@ -78,6 +82,18 @@ function spawn_node(x, y, uid, condition, limit, order)
 
 			if(plus_data_amount ~= nil) then
 				data.plus_data_amount = plus_data_amount
+			end
+
+			if(first ~= nil) then
+				data.first = first
+			end
+
+			if(first_data_amount ~= nil) then
+				data.first_data_amount =  first_data_amount
+			end
+
+			if(first_final_total ~= nil) then
+				data.first_final_total =  first_final_total
 			end
 
 			data.id = index

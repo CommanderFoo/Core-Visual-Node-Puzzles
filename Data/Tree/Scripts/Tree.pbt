@@ -548,7 +548,7 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:play_button"
+      Name: "cs:logic_button"
       ObjectReference {
         SelfId: 7420985129170304630
       }
@@ -584,18 +584,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:leaderboards_button"
-      ObjectReference {
-        SelfId: 10246503101097449340
-      }
-    }
-    Overrides {
-      Name: "cs:leaderboards_panel"
-      ObjectReference {
-        SelfId: 2822459773352246712
-      }
-    }
-    Overrides {
       Name: "cs:click_sound"
       ObjectReference {
         SelfId: 7452552501637593875
@@ -617,6 +605,12 @@ Objects {
       Name: "cs:bg_effect"
       ObjectReference {
         SelfId: 14198457608431680772
+      }
+    }
+    Overrides {
+      Name: "cs:math_button"
+      ObjectReference {
+        SelfId: 10140829487112207987
       }
     }
   }
@@ -845,87 +839,15 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:puzzle_1"
-      AssetReference {
-        Id: 2907093068677695656
+      Name: "cs:logic_puzzles_data"
+      ObjectReference {
+        SelfId: 12859574990951913593
       }
     }
     Overrides {
-      Name: "cs:puzzle_2"
-      AssetReference {
-        Id: 2264408178530052537
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_3"
-      AssetReference {
-        Id: 16365751596071063277
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_4"
-      AssetReference {
-        Id: 293936147606257495
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_5"
-      AssetReference {
-        Id: 7150822721345186990
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_6"
-      AssetReference {
-        Id: 14293804084765077926
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_7"
-      AssetReference {
-        Id: 2278261616103010719
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_8"
-      AssetReference {
-        Id: 14882294843583922401
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_9"
-      AssetReference {
-        Id: 3757752652709371920
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_10"
-      AssetReference {
-        Id: 5798020608501261929
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_11"
-      AssetReference {
-        Id: 2988422183788330915
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_12"
-      AssetReference {
-        Id: 15521811672383938905
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_13"
-      AssetReference {
-        Id: 7751948122425846108
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_14"
-      AssetReference {
-        Id: 8404719466416715901
+      Name: "cs:math_puzzles_data"
+      ObjectReference {
+        SelfId: 720670617962651731
       }
     }
   }

@@ -90,12 +90,25 @@ next_button.clickedEvent:Connect(function()
 
 	Events.Broadcast("clear_puzzle")
 	
-	local current_puzzle = local_player:GetResource("current_puzzle")
+	local current_puzzle = 1
+	local is_logic = local_player.clientUserData.logic
+
+	if(is_logic) then
+		current_puzzle = local_player:GetResource("current_logic_puzzle")
+	else
+		current_puzzle = local_player:GetResource("current_math_puzzle")
+	end
 	
-	YOOTIL.Events.broadcast_to_server("save_puzzle_progress", current_puzzle + 1)
+	YOOTIL.Events.broadcast_to_server("save_puzzle_progress", current_puzzle + 1, is_logic)
 		
 	Events.Broadcast("start_auto_save")
-	Events.Broadcast("load_puzzle", current_puzzle + 1)
+
+	if(is_logic) then
+		Events.Broadcast("load_logic_puzzle", current_puzzle + 1)
+	else
+		Events.Broadcast("load_math_puzzle", current_puzzle + 1)
+	end
+
 	Events.Broadcast("puzzle_edit")
 	Events.Broadcast("show_nodes")
 end)

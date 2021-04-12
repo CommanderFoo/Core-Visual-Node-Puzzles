@@ -15,6 +15,7 @@ Objects {
     }
   }
   ChildIds: 15880377359197611427
+  ChildIds: 8834746141853364758
   ChildIds: 5021637449606560396
   ChildIds: 8001455622970484507
   ChildIds: 11544835888898176273
@@ -123,19 +124,19 @@ Objects {
   ParentId: 4781671109827199097
   UnregisteredParameters {
     Overrides {
-      Name: "cs:puzzle_data"
-      String: ""
-    }
-    Overrides {
-      Name: "cs:node_data"
+      Name: "cs:logic_node_data"
       String: "--"
     }
     Overrides {
-      Name: "cs:puzzle_data:isrep"
+      Name: "cs:math_node_data"
+      String: "--"
+    }
+    Overrides {
+      Name: "cs:logic_node_data:isrep"
       Bool: true
     }
     Overrides {
-      Name: "cs:node_data:isrep"
+      Name: "cs:math_node_data:isrep"
       Bool: true
     }
   }
@@ -1368,8 +1369,8 @@ Objects {
   }
   ParentId: 11482603222431002241
   ChildIds: 7420985129170304630
+  ChildIds: 10140829487112207987
   ChildIds: 6166162411575875244
-  ChildIds: 10246503101097449340
   ChildIds: 10350323938109316302
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1557,157 +1558,6 @@ Objects {
   }
 }
 Objects {
-  Id: 10246503101097449340
-  Name: "Leaderboards"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 3094242208622476276
-  ChildIds: 2890648809479172773
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Control {
-    Width: 280
-    Height: 80
-    UIY: 180
-    RenderTransformPivot {
-      Anchor {
-        Value: "mc:euianchor:middlecenter"
-      }
-    }
-    Button {
-      FontColor {
-        A: 1
-      }
-      FontSize: 27
-      ButtonColor {
-        G: 0.109375156
-        B: 0.0895477682
-        A: 0.4
-      }
-      HoveredColor {
-        G: 0.234375
-        B: 0.191887796
-        A: 1
-      }
-      PressedColor {
-        G: 0.109375156
-        B: 0.0895477682
-        A: 0.4
-      }
-      DisabledColor {
-        G: 0.109375156
-        B: 0.0895477682
-        A: 1
-      }
-      Brush {
-        Id: 9402814787072448834
-      }
-      IsButtonEnabled: true
-      ClickMode {
-        Value: "mc:ebuttonclickmode:default"
-      }
-      Font {
-        Id: 18375965876900075365
-      }
-    }
-    AnchorLayout {
-      SelfAnchor {
-        Anchor {
-          Value: "mc:euianchor:topcenter"
-        }
-      }
-      TargetAnchor {
-        Anchor {
-          Value: "mc:euianchor:topcenter"
-        }
-      }
-    }
-  }
-}
-Objects {
-  Id: 2890648809479172773
-  Name: "UI Text Box"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 10246503101097449340
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Control {
-    Width: 200
-    Height: 42
-    RenderTransformPivot {
-      Anchor {
-        Value: "mc:euianchor:middlecenter"
-      }
-    }
-    UseParentWidth: true
-    Text {
-      Label: "????"
-      Color {
-        R: 1
-        G: 0.898
-        B: 0.898
-        A: 1
-      }
-      Size: 24
-      Justification {
-        Value: "mc:etextjustify:center"
-      }
-      AutoWrapText: true
-      Font {
-        Id: 18375965876900075365
-      }
-      VerticalJustification {
-        Value: "mc:everticaljustification:center"
-      }
-    }
-    AnchorLayout {
-      SelfAnchor {
-        Anchor {
-          Value: "mc:euianchor:middlecenter"
-        }
-      }
-      TargetAnchor {
-        Anchor {
-          Value: "mc:euianchor:middlecenter"
-        }
-      }
-    }
-  }
-}
-Objects {
   Id: 6166162411575875244
   Name: "Trophies"
   Transform {
@@ -1735,7 +1585,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIY: 90
+    UIY: 180
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -1825,7 +1675,158 @@ Objects {
     }
     UseParentWidth: true
     Text {
-      Label: "????"
+      Label: "TROPHIES"
+      Color {
+        R: 1
+        G: 0.898
+        B: 0.898
+        A: 1
+      }
+      Size: 24
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      AutoWrapText: true
+      Font {
+        Id: 18375965876900075365
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 10140829487112207987
+  Name: "Math Puzzles"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 3094242208622476276
+  ChildIds: 10481828728157149581
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 280
+    Height: 80
+    UIY: 90
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Button {
+      FontColor {
+        A: 1
+      }
+      FontSize: 27
+      ButtonColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.4
+      }
+      HoveredColor {
+        G: 0.234375
+        B: 0.191887796
+        A: 1
+      }
+      PressedColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.4
+      }
+      DisabledColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 1
+      }
+      Brush {
+        Id: 9402814787072448834
+      }
+      IsButtonEnabled: true
+      ClickMode {
+        Value: "mc:ebuttonclickmode:default"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:topcenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:topcenter"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 10481828728157149581
+  Name: "UI Text Box"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 10140829487112207987
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 200
+    Height: 42
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    UseParentWidth: true
+    Text {
+      Label: "MATH"
       Color {
         R: 1
         G: 0.898
@@ -1860,7 +1861,7 @@ Objects {
 }
 Objects {
   Id: 7420985129170304630
-  Name: "Play"
+  Name: "Logic Puzzles"
   Transform {
     Location {
     }
@@ -1975,7 +1976,7 @@ Objects {
     }
     UseParentWidth: true
     Text {
-      Label: "PLAY"
+      Label: "LOGIC"
       Color {
         R: 1
         G: 0.898
@@ -8878,6 +8879,7 @@ Objects {
     }
   }
   ParentId: 8001455622970484507
+  ChildIds: 15135788142499243183
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -8906,6 +8908,48 @@ Objects {
           Value: "mc:euianchor:topleft"
         }
       }
+    }
+  }
+}
+Objects {
+  Id: 15135788142499243183
+  Name: "Math Value"
+  Transform {
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 3627026760658224672
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  TemplateInstance {
+    ParameterOverrideMap {
+      key: 322795253947605114
+      value {
+        Overrides {
+          Name: "Name"
+          String: "Math Value"
+        }
+        Overrides {
+          Name: "Position"
+          Vector {
+          }
+        }
+        Overrides {
+          Name: "Rotation"
+          Rotator {
+          }
+        }
+      }
+    }
+    TemplateAsset {
+      Id: 5494694631359844252
     }
   }
 }
@@ -9040,6 +9084,187 @@ Objects {
   Folder {
     IsFilePartition: true
     FilePartitionName: "Scripts"
+  }
+}
+Objects {
+  Id: 8834746141853364758
+  Name: "Puzzles"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 4781671109827199097
+  ChildIds: 12859574990951913593
+  ChildIds: 720670617962651731
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:forceoff"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  NetworkContext {
+  }
+}
+Objects {
+  Id: 720670617962651731
+  Name: "Math Puzzles"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8834746141853364758
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:MathPuzzle01"
+      AssetReference {
+        Id: 3129102561979030192
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Folder {
+    IsFilePartition: true
+    FilePartitionName: "Math Puzzles"
+  }
+}
+Objects {
+  Id: 12859574990951913593
+  Name: "Logic Puzzles"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8834746141853364758
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:LogicPuzzle01"
+      AssetReference {
+        Id: 2907093068677695656
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle02"
+      AssetReference {
+        Id: 2264408178530052537
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle03"
+      AssetReference {
+        Id: 16365751596071063277
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle04"
+      AssetReference {
+        Id: 293936147606257495
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle05"
+      AssetReference {
+        Id: 7150822721345186990
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle06"
+      AssetReference {
+        Id: 14293804084765077926
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle07"
+      AssetReference {
+        Id: 2278261616103010719
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle08"
+      AssetReference {
+        Id: 14882294843583922401
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle09"
+      AssetReference {
+        Id: 3757752652709371920
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle10"
+      AssetReference {
+        Id: 5798020608501261929
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle11"
+      AssetReference {
+        Id: 2988422183788330915
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle12"
+      AssetReference {
+        Id: 15521811672383938905
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle13"
+      AssetReference {
+        Id: 7751948122425846108
+      }
+    }
+    Overrides {
+      Name: "cs:LogicPuzzle14"
+      AssetReference {
+        Id: 8404719466416715901
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Folder {
+    IsFilePartition: true
+    FilePartitionName: "Logic Puzzles"
   }
 }
 Objects {

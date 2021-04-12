@@ -31,6 +31,13 @@ API.can_edit_nodes = true
 API.unique_id = 0
 API.auto_set_order = true
 
+API.Puzzle_Type = {
+
+	LOGIC = 1,
+	MATH = 2
+
+}
+
 local local_player = Game.GetLocalPlayer()
 
 function API.register_node(node)

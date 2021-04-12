@@ -11,6 +11,13 @@ local deg = math.deg
 local pi = math.pi
 local atan = math.atan
 
+local Puzzle_Type = {
+
+	LOGIC = 1,
+	MATH = 2
+
+}
+
 function Node_Events.on(event, fn)
 	if(Node_Events[event] == nil) then
 		Node_Events[event] = {}
@@ -66,6 +73,7 @@ function Node:setup(r)
 	self.on_connection_func = nil
 	self.tweens = {}
 	self.can_edit_nodes = true
+	self.puzzle_type = Puzzle_Type.LOGIC
 
 	self.internal_node_id = 0
 	self.unique_id = 0
@@ -891,8 +899,12 @@ function Node:set_option(opt, val)
 	self.options[opt] = val
 end
 
-function Node:spawn_asset(asset, x, y)
+function Node:spawn_asset(asset, x, y, value)
 	local obj = World.SpawnAsset(asset, {parent = self.items_container})
+
+	if(self.puzzle_type == Puzzle_Type.MATH) then
+		obj.text = tostring(value)
+	end
 
 	obj.x = x
 	obj.y = y
@@ -900,6 +912,10 @@ function Node:spawn_asset(asset, x, y)
 	obj.visibility = Visibility.FORCE_OFF
 
 	return obj
+end
+
+function Node:set_puzzle_type(type)
+	self.puzzle_type = type
 end
 
 function Node:clear_items_container()
@@ -1086,7 +1102,7 @@ function Node_Data:new(r, options)
 				item.ui.text = tostring(item.data_count)
 
 				local line = this:get_top_connector_line()
-				local obj = this:spawn_asset(item.asset, line.x, line.y)
+				local obj = this:spawn_asset(item.asset, line.x, line.y, item.value)
 				local tween = this:create_tween(line)
 
 				tween:on_start(function()
@@ -1097,9 +1113,11 @@ function Node_Data:new(r, options)
 					this:send_data({
 						
 						asset = item.asset,
-						condition = item.condition,
+						condition = item.condition or nil,
 						count = 1,
-						total_count = item.count
+						total_count = item.count,
+						value = item.value or nil,
+						final_total = item.final_total or nil
 
 					})
 

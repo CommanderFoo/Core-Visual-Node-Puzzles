@@ -1,8 +1,0 @@
-Assets {
-  Id: 11072879958805420377
-  Name: "Puzzle_11"
-  PlatformAssetType: 3
-  TextAsset {
-  }
-  SerializationVersion: 81
-}
