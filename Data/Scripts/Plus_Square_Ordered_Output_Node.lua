@@ -112,7 +112,9 @@ Events.Connect("puzzle_edit", function()
 
 		API.set_bubble("plus", node, data, false)
 		API.set_bubble("square", node, data, false)
+		
 		node:hide_error_info()
+		node:reset()
 	end
 end)
 

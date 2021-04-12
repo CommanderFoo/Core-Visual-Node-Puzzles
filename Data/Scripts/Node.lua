@@ -49,7 +49,7 @@ local Node = {
 }
 
 function Node:setup(r)
-	self.debug_node = true
+	self.debug_node = false
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil
@@ -261,9 +261,13 @@ function Node:setup_node(root)
 
 		self:clear_active_connection()
 
-		Node_Events.trigger("node_input_update", self:get_id())
-		Node_Events.trigger("node_output_update", self:get_id())
+		Node_Events.trigger("node_input_update", self:get_id(), self:get_type(), self:get_unique_id())
+		Node_Events.trigger("node_output_update", self:get_id(), self:get_type(), self:get_unique_id())
+
 		Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
+
+		Node_Events.trigger("late_node_input_update", self:get_id(), self:get_type(), self:get_unique_id())
+		Node_Events.trigger("late_node_output_update", self:get_id(), self:get_type(), self:get_unique_id())
 
 		self:remove()
 	end)
@@ -440,7 +444,7 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 	self.active_connection.moving = false
 	self.active_connection.connector_image:SetColor(self.default_connector_color)
 
-	Node_Events.trigger("output_connected_to", connected_to_node)
+	Node_Events.trigger("output_connected_to", connected_to_node, self)
 end
 
 function Node:do_input_connect(connected_from_node, connected_from_connection, connected_to_connection)
@@ -1161,7 +1165,7 @@ function Node_Output:new(r, options)
 
 		for k, v in pairs(this.input_connected_to) do
 			for a, j in pairs(v) do
-				if(j.connected_from_node:get_type() == "Halt" and j.connected_from_node:get_id() ~= cur_id) then
+				if(j.connected_from_node:get_type() == "Halt" and j.connected_from_node:get_unique_id() ~= cur_id) then
 					table.insert(halt_nodes, #halt_nodes + 1, j.connected_from_node)
 				end
 			end
@@ -1189,11 +1193,9 @@ function Node_Output:new(r, options)
 		local total = 0
 		local nums = {}
 
-		for k, n in pairs(this:get_halt_nodes(cur_id)) do
-			if(n:get_type() == "Halt") then
-				table.insert(nums, #nums + 1, n:get_order())
-				total = total + 1
-			end
+		for k, n in ipairs(this:get_halt_nodes(cur_id)) do
+			table.insert(nums, #nums + 1, n:get_order())
+			total = total + 1
 		end
 
 		if(total > 0) then
@@ -1220,18 +1222,6 @@ function Node_Output:new(r, options)
 	function this:reset()
 		this.halt_order = 1
 	end
-
-	Node_Events.on("input_connected_to", function(n, w, set_order)
-		if(not set_order) then
-			return
-		end
-
-		if(n:get_type() == "Halt" and this:get_type() == "Output" and w:get_type() == "Output") then
-			n:set_order(this:get_next_halt_order(n:get_id()))
-		elseif(n:get_type() == "Halt") then
-			n:set_order(0)
-		end
-	end)
 
 	return this
 end
@@ -1815,10 +1805,28 @@ function Node_Halt:new(r, options)
 		end
 	end
 
-	Node_Events.on("break_connection", function(id, drag, n)
-		if(n:get_id() == this:get_id()) then
+	Node_Events.on("late_node_output_update", function(id, type, uid)
+		if(type ~= "Output") then
+			return
+		end
+
+		local has_output = true
+
+		for k, v in pairs(this.output_connected_to) do
+			if(#v == 0) then
+				has_output = false
+			end
+		end
+
+		if(not has_output) then
 			order = 0
 			this:set_order(0)
+		end
+	end)
+
+	Node_Events.on("output_connected_to", function(to_node, from_node)
+		if(from_node:get_unique_id() == this:get_unique_id() and to_node:get_type() == "Output") then
+			this:set_order(to_node:get_next_halt_order(this:get_unique_id()))
 		end
 	end)
 	
@@ -1827,6 +1835,7 @@ function Node_Halt:new(r, options)
 			halting_data_type = data.condition
 			active_shape = this.body:FindDescendantByName(data.condition:gsub("^%l", string.upper))
 			active_shape.visibility = Visibility.FORCE_ON
+			this.body:FindDescendantByName("None").visibility = Visibility.FORCE_OFF
 		elseif(halting_data_type ~= data.condition) then
 			this:has_errors(true)
 
@@ -1892,6 +1901,10 @@ function Node_Halt:new(r, options)
 	end
 
 	function this:set_order(ord)
+		if(not Object.IsValid(this.body)) then
+			return
+		end
+
 		this.order = ord
 		this.body:FindDescendantByName("Order").text = tostring(this.order)
 	end
@@ -1918,6 +1931,8 @@ function Node_Halt:new(r, options)
 		if(active_shape ~= nil) then
 			active_shape.visibility = Visibility.FORCE_OFF
 		end
+
+		this.body:FindDescendantByName("None").visibility = Visibility.FORCE_ON
 
 		this:clear_items_container()
 		this:hide_error_info()
