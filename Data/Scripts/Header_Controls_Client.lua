@@ -19,6 +19,8 @@ local save_button = script:GetCustomProperty("save_button"):WaitForObject()
 
 local main_menu_button = script:GetCustomProperty("main_menu_button"):WaitForObject()
 
+local clear_button = script:GetCustomProperty("clear_button"):WaitForObject()
+
 local settings_open = false
 
 local gold_color = gold_award:GetColor()
@@ -68,7 +70,17 @@ function Tick(dt)
 	end
 end
 
+-- Clear
+
+clear_button.hoveredEvent:Connect(API.play_hover_sound)
+
+clear_button.clickedEvent:Connect(function()
+	API.clear_graph()
+end)
+
 -- Main Menu
+
+main_menu_button.hoveredEvent:Connect(API.play_hover_sound)
 
 main_menu_button.clickedEvent:Connect(function()
 	disable_ui(true)
@@ -160,6 +172,8 @@ run_edit_button.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
+-- Speed
+
 speed_up_button.hoveredEvent:Connect(API.play_hover_sound)
 
 speed_up_button.clickedEvent:Connect(function()
@@ -200,6 +214,7 @@ function disable_ui(disable_run_edit, ignore_settings)
 	available_nodes_button.isInteractable = false
 	save_button.isInteractable = false
 	main_menu_button.isInteractable = false
+	clear_button.isInteractable = false
 
 	if(disable_run_edit) then
 		run_edit_button.isInteractable = false
@@ -222,6 +237,7 @@ function enable_ui()
 	settings_button.isInteractable = true
 	save_button.isInteractable = true
 	main_menu_button.isInteractable = true
+	clear_button.isInteractable = true
 	
 	Events.Broadcast("enable_available_nodes")
 

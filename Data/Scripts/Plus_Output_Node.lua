@@ -52,6 +52,7 @@ function init(node_data)
 	node:set_from_saved_data(node_data)
 	
 	API.set_bubble("plus", node, data, true)
+	
 	API.register_node(node)
 end
 
@@ -65,6 +66,8 @@ Events.Connect("puzzle_edit", function()
 		total = 0
 
 		API.set_bubble("plus", node, data, false)
+
+		node:reset()
 		node:hide_error_info()
 	end
 end)

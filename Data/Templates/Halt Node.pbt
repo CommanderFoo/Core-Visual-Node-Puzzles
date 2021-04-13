@@ -2238,7 +2238,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:title"
-            String: "Alternate"
+            String: "Halt"
           }
           Overrides {
             Name: "cs:button_offset"
@@ -2246,29 +2246,27 @@ Assets {
           }
           Overrides {
             Name: "cs:info_height"
-            Float: 590
+            Float: 680
           }
           Overrides {
             Name: "cs:info_1_text"
-            String: "This node will switch between the top and bottom connection on each data received.  Think of this as an On and Off switch.  When it is On, the data will go through the top, when it is Off the data will go through the bottom."
+            String: "This node plays an important role in making sure that the data is sent to the output in the correct order.  Each Halt node will be assigned an order number based on the order you connect it to the Output Node."
           }
           Overrides {
             Name: "cs:info_2_text"
-            String: "This is useful when you need to split up the same data type so that it goes into 2 different inputs."
+            String: "It is important to remember that Halt Nodes must be directly connected to Output Nodes, otherwise your program will fail.  It makes no sense halting data early in your program, you should process data then set the order at the end to improve performance."
           }
           Overrides {
             Name: "cs:info_2_offset"
-            Float: 370
-          }
-          Overrides {
-            Name: "cs:example_code"
-            AssetReference {
-              Id: 176769903754432965
-            }
+            Float: 365
           }
           Overrides {
             Name: "cs:example_height"
             Float: 470
+          }
+          Overrides {
+            Name: "cs:show_code"
+            Bool: false
           }
         }
         Collidable_v2 {

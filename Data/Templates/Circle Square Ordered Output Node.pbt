@@ -1762,7 +1762,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:info_height"
-            Float: 325
+            Float: 395
           }
           Overrides {
             Name: "cs:button_offset"
@@ -1774,15 +1774,15 @@ Assets {
           }
           Overrides {
             Name: "cs:info_1_text"
-            String: "aaaa"
+            String: "This node requires data to be received in a specific order and meet the conditions."
           }
           Overrides {
             Name: "cs:info_2_text"
-            String: ""
+            String: "Use Halt Nodes to order the data.  When connecting a Halt Node, it will receive an order based on how many Halt Nodes are currently connected to this node."
           }
           Overrides {
             Name: "cs:info_2_offset"
-            Float: 320
+            Float: 200
           }
           Overrides {
             Name: "cs:show_code"

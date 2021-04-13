@@ -776,6 +776,12 @@ Objects {
         SelfId: 1788394385922609731
       }
     }
+    Overrides {
+      Name: "cs:clear_button"
+      ObjectReference {
+        SelfId: 17291627843593195179
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

@@ -87,6 +87,7 @@ function init(node_data)
 
 	API.set_bubble("circle", node, data, true)
 	API.set_bubble("square", node, data, true)
+
 	API.register_node(node)
 end
 
@@ -107,6 +108,8 @@ Events.Connect("puzzle_edit", function()
 
 		API.set_bubble("circle", node, data, false)
 		API.set_bubble("square", node, data, false)
+
+		node:reset()
 		node:hide_error_info()
 	end
 end)

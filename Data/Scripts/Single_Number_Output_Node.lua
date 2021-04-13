@@ -55,6 +55,7 @@ Events.Connect("puzzle_edit", function()
 		first_total.text = "0"
 		first_total_value = 0
 
+		node:reset()
 		node:hide_error_info()
 	end
 end)

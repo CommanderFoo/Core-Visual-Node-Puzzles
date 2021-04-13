@@ -44,7 +44,15 @@ function load_puzzle(id, logic)
 	if(the_puzzles[id]) then
 		current_puzzle = World.SpawnAsset(the_puzzles[id], { parent = nodes_container })
 
-		puzzle_name.text = current_puzzle:GetCustomProperty("name")
+		local name = current_puzzle:GetCustomProperty("name")
+
+		if(logic) then
+			name = "Logic - " .. name
+		else
+			name = "Math - " .. name
+		end
+
+		puzzle_name.text = name
 
 		Events.Broadcast("score_conditions", {
 

@@ -29,8 +29,6 @@ function init(node_data)
 
 			if(data ~= nil and data.condition ~= nil) then
 				local c = string.lower(data.condition)
-				
-				--print(c, circle_complete, plus_complete, triangle_complete)
 
 				if(c == condition_circle) then
 					total_circle = total_circle + data.count

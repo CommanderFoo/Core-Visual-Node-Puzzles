@@ -107,6 +107,8 @@ Events.Connect("puzzle_edit", function()
 		
 		API.set_bubble("triangle", node, data, false)
 		API.set_bubble("square", node, data, false)
+
+		node:reset()
 		node:hide_error_info()
 	end
 end)

@@ -115,7 +115,7 @@ Events.ConnectForPlayer("save_puzzle_progress", function(player, id, logic_savin
 	save_data(player, logic_saving)
 end)
 
-Events.ConnectForPlayer("has_saved", function(p, had_data, logic_saving)
+Events.ConnectForPlayer("has_saved", function(player, had_data, logic_saving)
 	if(not had_data) then
 		if(logic_saving) then
 			player.serverUserData.logic_node_data = {}
@@ -124,10 +124,10 @@ Events.ConnectForPlayer("has_saved", function(p, had_data, logic_saving)
 		end
 	end
 
-	save_data(p, logic_saving)
-	set_networked_data(p, logic_saving)
+	save_data(player, logic_saving)
+	set_networked_data(player, logic_saving)
 
-	YOOTIL.Events.broadcast_to_player(p, "save_complete")
+	YOOTIL.Events.broadcast_to_player(player, "save_complete")
 end)
 
 Events.ConnectForPlayer("save_init", function(player, logic_saving)

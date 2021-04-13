@@ -272,8 +272,6 @@ function Node:setup_node(root)
 		Node_Events.trigger("node_input_update", self:get_id(), self:get_type(), self:get_unique_id())
 		Node_Events.trigger("node_output_update", self:get_id(), self:get_type(), self:get_unique_id())
 
-		Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
-
 		Node_Events.trigger("late_node_input_update", self:get_id(), self:get_type(), self:get_unique_id())
 		Node_Events.trigger("late_node_output_update", self:get_id(), self:get_type(), self:get_unique_id())
 
@@ -311,6 +309,8 @@ function Node:remove()
 		self.options.queue_task:Cancel()
 		self.options.queue_task = nil
 	end
+
+	Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
 
 	self.root:Destroy()
 end
