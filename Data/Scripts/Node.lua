@@ -456,6 +456,10 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 end
 
 function Node:do_input_connect(connected_from_node, connected_from_connection, connected_to_connection)
+	if(connected_to_connection == nil) then
+		return
+	end
+
 	if(self.input_connected_to[connected_to_connection.id] == nil) then
 		self.input_connected_to[connected_to_connection.id] = {}
 	end
@@ -488,7 +492,7 @@ end
 function Node:move_connections()
 	for _, c in pairs(self.output_connected_to) do
 		for i, e in ipairs(c) do
-			if(Object.IsValid(e.connected_to_connection.connection) and Object.IsValid(e.connection.connector)) then
+			if(e.connected_to_connection and Object.IsValid(e.connected_to_connection.connection) and Object.IsValid(e.connection.connector)) then
 				local from_handle_y = e.connected_to_connection.connection.y + 30
 				local to_handle_y = e.connection.connector.y + 30
 
