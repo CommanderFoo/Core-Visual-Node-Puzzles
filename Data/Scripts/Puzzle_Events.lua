@@ -1,9 +1,12 @@
-local Puzzle_Events = {}
+local Puzzle_Events = {
 
-Puzzle_Events.id = 1
+	events = {},
+	id = 1
+
+}
 
 function Puzzle_Events.on(evt, fn)
-	table.insert(Puzzle_Events, #Puzzle_Events + 1, {
+	table.insert(Puzzle_Events.events, #Puzzle_Events.events + 1, {
 		
 		event = evt,
 		func = fn,
@@ -17,9 +20,9 @@ function Puzzle_Events.on(evt, fn)
 end
 
 function Puzzle_Events.off(event_id)
-	for i, e in ipairs(Puzzle_Events) do
+	for i, e in pairs(Puzzle_Events.events) do
 		if(event_id == e.id) then
-			Puzzle_Events[i] = nil
+			Puzzle_Events.events[i] = nil
 		end
 	end
 end
@@ -27,7 +30,7 @@ end
 function Puzzle_Events.trigger(...)
 	local args = {...}
 
-	for i, e in ipairs(Puzzle_Events) do
+	for i, e in ipairs(Puzzle_Events.events) do
 		if(e.event == args[1]) then
 			e.func(args[2], args[3], args[4], args[5])
 		end

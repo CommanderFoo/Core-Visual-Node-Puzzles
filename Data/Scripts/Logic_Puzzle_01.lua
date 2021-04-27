@@ -14,7 +14,6 @@ local showing_result_ui = false
 local total_puzzle_score = 0
 
 p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_circle_complete", function(errors)
-	print("complete from puzzle 1")
 	output_circle_complete = true
 end)
 
