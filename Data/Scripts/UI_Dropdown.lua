@@ -1,6 +1,8 @@
 ﻿local root = script.parent.parent
 local node_root = root.parent.parent
 
+local evts = {}
+
 local options_panel = root:FindDescendantByName("Options Panel")
 local options_container = root:FindDescendantByName("Options")
 local selected = root:FindDescendantByName("Selected")
@@ -56,7 +58,7 @@ if(disabled) then
 	selected:SetButtonColor(disabled_color)
 end
 
-selected.hoveredEvent:Connect(function()
+evts[#evts + 1] = selected.hoveredEvent:Connect(function()
 	if(disabled) then
 		return
 	end
@@ -65,7 +67,7 @@ selected.hoveredEvent:Connect(function()
 	--selected:SetFontColor(text_hovered_color)
 end)
 
-selected.unhoveredEvent:Connect(function()
+evts[#evts + 1] = selected.unhoveredEvent:Connect(function()
 	if(disabled) then
 		return
 	end
@@ -80,17 +82,17 @@ for i = 1, total_options do
 	options[i]:SetButtonColor(unhovered_color)
 	--options[i]:SetFontColor(text_unhovered_color)
 
-	options[i].hoveredEvent:Connect(function()
+	evts[#evts + 1] = options[i].hoveredEvent:Connect(function()
 		options[i]:SetButtonColor(hovered_color)
 		--options[i]:SetFontColor(text_hovered_color)
 	end)
 
-	options[i].unhoveredEvent:Connect(function()
+	evts[#evts + 1] = options[i].unhoveredEvent:Connect(function()
 		options[i]:SetButtonColor(unhovered_color)
 		--options[i]:SetFontColor(text_unhovered_color)
 	end)
 
-	options[i].clickedEvent:Connect(function()
+	evts[#evts + 1] = options[i].clickedEvent:Connect(function()
 		selected_option = options[i]
 		selected_text.text = options[i]:FindChildByName("Text").text
 
@@ -147,9 +149,9 @@ function enable_select()
 	end
 end
 
-local_player.bindingPressedEvent:Connect(close_select)
+evts[#evts + 1] = local_player.bindingPressedEvent:Connect(close_select)
 
-Events.Connect("on_set_" .. event .. "selected", function(s)
+evts[#evts + 1] = Events.Connect("on_set_" .. event .. "selected", function(s)
 	for i = 1, total_options do
 		if(string.lower(options[i]:FindChildByName("Text").text):sub(1, 1) == s) then
 			selected_option = options[i]
@@ -162,8 +164,18 @@ Events.Connect("on_set_" .. event .. "selected", function(s)
 	end
 end)
 
-Events.Connect("on_" .. event .. "disable", disable_select)
-Events.Connect("on_" .. event .. "enable", enable_select)
+evts[#evts + 1] = Events.Connect("on_" .. event .. "disable", disable_select)
+evts[#evts + 1] = Events.Connect("on_" .. event .. "enable", enable_select)
 
-Events.Connect("on_disable_all_dropdowns", disable_select)
-Events.Connect("on_enable_all_dropdowns", enable_select)
+evts[#evts + 1] = Events.Connect("on_disable_all_dropdowns", disable_select)
+evts[#evts + 1] = Events.Connect("on_enable_all_dropdowns", enable_select)
+
+script.destroyEvent:Connect(function()
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
+
+	evts = nil
+end)

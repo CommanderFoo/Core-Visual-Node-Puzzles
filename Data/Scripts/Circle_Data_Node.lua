@@ -1,6 +1,6 @@
 ﻿local API = require(script:GetCustomProperty("API"))
 
-local is_destroyed = false
+local evts = {}
 
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
 local circle_shape = script:GetCustomProperty("circle_shape")
@@ -39,8 +39,8 @@ function Tick(dt)
 	end
 end
 
-Events.Connect("puzzle_edit", function()
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("puzzle_edit", function()
+	if(node == nil) then
 		return
 	end
 
@@ -53,8 +53,8 @@ Events.Connect("puzzle_edit", function()
 	end
 end)
 
-Events.Connect("puzzle_run", function(speed)
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("puzzle_run", function(speed)
+	if(node == nil) then
 		return
 	end
 
@@ -63,7 +63,11 @@ Events.Connect("puzzle_run", function(speed)
 end)
 
 script.destroyEvent:Connect(function()
-	is_destroyed = true
-end)
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
 
---init({ circle_data_amount = 10 })
+	evts = nil
+end)

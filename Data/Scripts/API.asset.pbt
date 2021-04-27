@@ -11,12 +11,6 @@ Assets {
         }
       }
       Overrides {
-        Name: "cs:Node_Events"
-        AssetReference {
-          Id: 15124423120957362221
-        }
-      }
-      Overrides {
         Name: "cs:Node"
         AssetReference {
           Id: 12963190350601996938

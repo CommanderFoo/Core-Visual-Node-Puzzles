@@ -48,6 +48,16 @@ function hide_active(fn)
 	end
 end
 
+function reset_active()
+	if(active_panel ~= nil) then
+		active_panel.visibility = Visibility.FORCE_OFF
+	end
+
+	if(active_button ~= nil) then
+		active_button:SetButtonColor(active_button:GetPressedColor())
+	end
+end
+
 -- Play
 
 logic_button.clickedEvent:Connect(function()
@@ -55,6 +65,9 @@ logic_button.clickedEvent:Connect(function()
 
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
+		
+		reset_active()
+
 		YOOTIL.Events.broadcast_to_server("load_game", false)
 	end)
 
@@ -71,6 +84,9 @@ math_button.clickedEvent:Connect(function()
 
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
+
+		reset_active()
+
 		YOOTIL.Events.broadcast_to_server("load_game", true)
 	end)
 

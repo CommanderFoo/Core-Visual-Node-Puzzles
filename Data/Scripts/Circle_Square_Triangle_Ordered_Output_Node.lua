@@ -8,7 +8,7 @@ local condition_circle = script:GetCustomProperty("condition_circle")
 local condition_square = script:GetCustomProperty("condition_square")
 local condition_triangle = script:GetCustomProperty("condition_triangle")
 
-local is_destroyed = false
+local evts = {}
 local total_circle = 0
 local total_square = 0
 local total_triangle = 0
@@ -123,8 +123,8 @@ function init(node_data)
 	API.register_node(node)
 end
 
-Events.Connect("puzzle_edit", function()
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("puzzle_edit", function()
+	if(node == nil) then
 		return
 	end
 	
@@ -151,5 +151,11 @@ Events.Connect("puzzle_edit", function()
 end)
 
 script.destroyEvent:Connect(function()
-	is_destroyed = true
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
+
+	evts = nil
 end)

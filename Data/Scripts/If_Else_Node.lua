@@ -1,6 +1,6 @@
 ﻿local API = require(script:GetCustomProperty("API"))
 
-local is_destroyed = false
+local evts = {}
 
 local node = nil
 
@@ -41,16 +41,16 @@ function Tick(dt)
 	end
 end
 
-Events.Connect("on_" .. script.parent.parent.id .. "_selected", function(index, option, value)
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("on_" .. script.parent.parent.id .. "_selected", function(index, option, value)
+	if(node == nil) then
 		return
 	end
 	
 	node:set_option("if_condition", string.lower(option:FindChildByName("Text").text))
 end)
 
-Events.Connect("puzzle_edit", function()
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("puzzle_edit", function()
+	if(node == nil) then
 		return
 	end
 
@@ -58,5 +58,11 @@ Events.Connect("puzzle_edit", function()
 end)
 
 script.destroyEvent:Connect(function()
-	is_destroyed = true
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
+
+	evts = nil
 end)

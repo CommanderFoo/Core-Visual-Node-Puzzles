@@ -18,23 +18,45 @@ local Puzzle_Type = {
 
 }
 
-function Node_Events.on(event, fn)
-	if(Node_Events[event] == nil) then
-		Node_Events[event] = {}
-	end
+-- Node Events
 
-	table.insert(Node_Events[event], #Node_Events[event] + 1, fn)
+local Node_Events = {}
+
+Node_Events.id = 1
+
+function Node_Events.on(evt, fn)
+	table.insert(Node_Events, #Node_Events + 1, {
+		
+		event = evt,
+		func = fn,
+		id = Node_Events.id
+	
+	})
+
+	Node_Events.id = Node_Events.id + 1
+
+	return Node_Events.id - 1	
+end
+
+function Node_Events.off(event_id)
+	for i, e in ipairs(Node_Events) do
+		if(event_id == e.id) then
+			Node_Events[i] = nil
+		end
+	end
 end
 
 function Node_Events.trigger(...)
 	local args = {...}
 
-	if(Node_Events[args[1]] ~= nil) then
-		for _, f in ipairs(Node_Events[args[1]]) do
-			f(args[2], args[3], args[4], args[5])
+	for i, e in ipairs(Node_Events) do
+		if(e.event == args[1]) then
+			e.func(args[2], args[3], args[4], args[5])
 		end
 	end
 end
+
+-- Node class
 
 local Node = {
 
@@ -75,6 +97,8 @@ function Node:setup(r)
 	self.can_edit_nodes = true
 	self.puzzle_type = Puzzle_Type.LOGIC
 
+	self.evts = {}
+
 	self.internal_node_id = 0
 	self.unique_id = 0
 
@@ -94,17 +118,17 @@ function Node:setup(r)
 	self:setup_output_connections()
 	self:setup_input_connections()
 
-	Node_Events.on("begin_drag_node", function(node)
+	self.evts[#self.evts + 1] = Node_Events.on("begin_drag_node", function(node)
 		if(node.id ~= self.id) then
 			self:stop_all_drag()
 		end
 	end)
 
-	Node_Events.on("dragging_node", function()
+	self.evts[#self.evts + 1] = Node_Events.on("dragging_node", function()
 		self:move_connections()
 	end)
 
-	Node_Events.on("break_connection", function(connection_id, stop_drag)
+	self.evts[#self.evts + 1] = Node_Events.on("break_connection", function(connection_id, stop_drag)
 		self:clear_input_connection(connection_id)
 		self:clear_output_connection(connection_id)
 
@@ -113,7 +137,7 @@ function Node:setup(r)
 		end
 	end)
 
-	Node_Events.on("edit", function(can_edit)
+	self.evts[#self.evts + 1] = Node_Events.on("edit", function(can_edit)
 		self.can_edit_nodes = can_edit
 
 		if(Object.IsValid(self.delete_button)) then
@@ -125,7 +149,7 @@ function Node:setup(r)
 		end
 	end)
 
-	Node_Events.on("node_input_update", function(node_id)
+	self.evts[#self.evts + 1] = Node_Events.on("node_input_update", function(node_id)
 		if(node_id ~= self:get_id()) then
 			for k, v in pairs(self.input_connected_to) do
 				for i, c in ipairs(v) do
@@ -137,7 +161,7 @@ function Node:setup(r)
 		end
 	end)
 
-	Node_Events.on("node_output_update", function(node_id)
+	self.evts[#self.evts + 1] = Node_Events.on("node_output_update", function(node_id)
 		if(node_id ~= self:get_id()) then
 			for k, v in pairs(self.output_connected_to) do
 				for i, c in ipairs(v) do
@@ -311,6 +335,10 @@ function Node:remove()
 	end
 
 	Node_Events.trigger("node_destroyed", self:get_id(), self.root.sourceTemplateId)
+
+	for k, e in ipairs(self.evts) do
+		Node_Events.off(e)
+	end
 
 	self.root:Destroy()
 end
@@ -1400,7 +1428,7 @@ function Node_If:new(r, options)
 		return ""
 	end
 
-	Node_Events.on("node_destroyed", function()
+	this.evts[#this.evts + 1] = Node_Events.on("node_destroyed", function()
 		if(this.options.queue_task ~= nil) then
 			this.options.queue_task:Cancel()
 			this.options.queue_task = nil
@@ -1557,7 +1585,7 @@ function Node_Alternate:new(r, options)
 		this:hide_error_info()
 	end
 
-	Node_Events.on("node_destroyed", function()
+	this.evts[#this.evts + 1] = Node_Events.on("node_destroyed", function()
 		if(this.options.queue_task ~= nil) then
 			this.options.queue_task:Cancel()
 			this.options.queue_task = nil
@@ -1616,7 +1644,7 @@ function Node_Limit:new(r, options)
 		orig_sending = sending
 	end)
 
-	Node_Events.on("edit", function(can_edit)
+	this.evts[#this.evts + 1] = Node_Events.on("edit", function(can_edit)
 		if(Object.IsValid(minus_button)) then
 			if(can_edit) then
 				minus_button.isInteractable = true
@@ -1764,7 +1792,7 @@ function Node_Limit:new(r, options)
 		end
 	end
 
-	Node_Events.on("node_destroyed", function()
+	this.evts[#this.evts + 1] = Node_Events.on("node_destroyed", function()
 		if(this.options.queue_task ~= nil) then
 			this.options.queue_task:Cancel()
 			this.options.queue_task = nil
@@ -1827,7 +1855,7 @@ function Node_Halt:new(r, options)
 		end
 	end
 
-	Node_Events.on("late_node_output_update", function(id, type, uid)
+	this.evts[#this.evts + 1] = Node_Events.on("late_node_output_update", function(id, type, uid)
 		if(type ~= "Output") then
 			return
 		end
@@ -1846,7 +1874,7 @@ function Node_Halt:new(r, options)
 		end
 	end)
 
-	Node_Events.on("output_connected_to", function(to_node, from_node)
+	this.evts[#this.evts + 1] = Node_Events.on("output_connected_to", function(to_node, from_node)
 		if(from_node:get_unique_id() == this:get_unique_id() and to_node:get_type() == "Output") then
 			this:set_order(to_node:get_next_halt_order(this:get_unique_id()))
 		end
@@ -1960,7 +1988,7 @@ function Node_Halt:new(r, options)
 		this:hide_error_info()
 	end
 
-	Node_Events.on("node_destroyed", function()
+	this.evts[#this.evts + 1] = Node_Events.on("node_destroyed", function()
 		if(this.options.queue_task ~= nil) then
 			this.options.queue_task:Cancel()
 			this.options.queue_task = nil

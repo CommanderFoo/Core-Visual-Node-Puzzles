@@ -1,6 +1,7 @@
 local API = require(script:GetCustomProperty("API"))
 
 local root = script.parent.parent
+local evts = {}
 
 local node = script:GetCustomProperty("node")
 local container = script:GetCustomProperty("container"):WaitForObject()
@@ -21,8 +22,6 @@ local required_amount = root:GetCustomProperty("required_amount")
 local total_spawned = 0
 local template_id = nil
 local index = 1
-
-local is_destroyed = false
 
 for i, c in ipairs(root.parent:GetChildren()) do
 	if(c == root) then
@@ -116,13 +115,9 @@ function spawn_node(x, y, uid, condition, limit, order)
 	API.Puzzle_Events.trigger("node_total_change")
 end
 
-button.hoveredEvent:Connect(API.play_hover_sound)
+evts[#evts + 1] = button.hoveredEvent:Connect(API.play_hover_sound)
 
-button.clickedEvent:Connect(function()
-	if(is_destroyed) then
-		return
-	end
-	
+evts[#evts + 1] = button.clickedEvent:Connect(function()
 	if(total_spawned < total or total == -1) then		
 		spawn_node(0, 0, nil)
 
@@ -130,21 +125,13 @@ button.clickedEvent:Connect(function()
 	end
 end)
 
-Events.Connect("disable_available_nodes", function()
-	if(is_destroyed) then
-		return
-	end
-
+evts[#evts + 1] = Events.Connect("disable_available_nodes", function()
 	if(Object.IsValid(button)) then
 		button.isInteractable = false
 	end
 end)
 
-Events.Connect("enable_available_nodes", function()
-	if(is_destroyed) then
-		return
-	end
-
+evts[#evts + 1] = Events.Connect("enable_available_nodes", function()
 	if(not Object.IsValid(button)) then
 		return
 	end
@@ -154,16 +141,18 @@ Events.Connect("enable_available_nodes", function()
 	end
 end)
 
-Events.Connect("spawn_node", function(i, uid, x, y, condition, limit, order)
-	if(is_destroyed) then
-		return
-	end
-
+evts[#evts + 1] = Events.Connect("spawn_node", function(i, uid, x, y, condition, limit, order)
 	if(index == i) then
 		spawn_node(x, y, uid, condition, limit, order)
 	end
 end)
 
 script.destroyEvent:Connect(function()
-	is_destroyed = true
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
+
+	evts = nil
 end)

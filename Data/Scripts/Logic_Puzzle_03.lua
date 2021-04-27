@@ -1,7 +1,8 @@
 local API = require(script:GetCustomProperty("API"))
 
 local root = script.parent.parent
-local is_destroyed = false
+local evts = {}
+local p_evts = {}
 
 local gold_score = root:GetCustomProperty("gold_score")
 local silver_score = root:GetCustomProperty("silver_score")
@@ -14,15 +15,15 @@ local output_triangle_complete = false
 local showing_result_ui = false
 local total_puzzle_score = 0
 
-API.Puzzle_Events.on("output_square_complete", function(errors)
+p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_square_complete", function(errors)
 	output_square_complete = true
 end)
 
-API.Puzzle_Events.on("output_circle_complete", function(errors)
+p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_circle_complete", function(errors)
 	output_circle_complete = true
 end)
 
-API.Puzzle_Events.on("output_triangle_complete", function(errors)
+p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_triangle_complete", function(errors)
 	output_triangle_complete = true
 end)
 
@@ -42,11 +43,7 @@ function show_result()
 	end
 end
 
-Events.Connect("puzzle_edit", function()
-	if(is_destroyed) then
-		return
-	end
-
+evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 	output_square_complete = false
 	output_circle_complete = false
 	output_triangle_complete = false
@@ -54,14 +51,20 @@ Events.Connect("puzzle_edit", function()
 	total_puzzle_score = 0
 end)
 
-Events.Connect("score", function(t)
-	if(is_destroyed) then
-		return
-	end
-
+evts[#evts + 1] = Events.Connect("score", function(t)
 	total_puzzle_score = total_puzzle_score + (t * 100)
 end)
 
 script.destroyEvent:Connect(function()
-	is_destroyed = true
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
+
+	evts = nil
+	
+	for k, e in ipairs(p_evts) do
+		API.Puzzle_Events.off(e)
+	end
 end)

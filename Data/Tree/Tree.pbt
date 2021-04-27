@@ -9314,6 +9314,12 @@ Objects {
         Id: 8512212396964126305
       }
     }
+    Overrides {
+      Name: "cs:LogicPuzzle18"
+      AssetReference {
+        Id: 579749232747685235
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

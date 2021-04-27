@@ -1,6 +1,6 @@
 local API = require(script:GetCustomProperty("API"))
 
-local is_destroyed = false
+local evts = {}
 
 local first = script:GetCustomProperty("first"):WaitForObject()
 local first_data_amount = script:GetCustomProperty("first_data_amount"):WaitForObject()
@@ -43,16 +43,16 @@ function Tick(dt)
 	end
 end
 
-Events.Connect("puzzle_edit", function()
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("puzzle_edit", function()
+	if(node == nil) then
 		return
 	end
 
 	node:reset()
 end)
 
-Events.Connect("puzzle_run", function(speed)
-	if(is_destroyed or node == nil) then
+evts[#evts + 1] = Events.Connect("puzzle_run", function(speed)
+	if(node == nil) then
 		return
 	end
 
@@ -61,5 +61,11 @@ Events.Connect("puzzle_run", function(speed)
 end)
 
 script.destroyEvent:Connect(function()
-	is_destroyed = true
+	for k, e in ipairs(evts) do
+		if(e.isConnected) then
+			e:Disconnect()
+		end
+	end
+
+	evts = nil
 end)
