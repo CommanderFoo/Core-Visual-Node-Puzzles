@@ -42,9 +42,11 @@ function Node_Events.on(evt, fn)
 end
 
 function Node_Events.off(event_id)
-	for i, e in pairs(Node_Events.events) do
-		if(event_id == e.id) then
-			Node_Events.events[i] = nil
+	local to_remove = {}
+	
+	for i, e in ipairs(Node_Events.events) do
+		if(e.id ~= nil and event_id == e.id) then
+			Node_Events.events[i] = ""
 		end
 	end
 end
@@ -1628,7 +1630,7 @@ function Node_Limit:new(r, options)
 	this.node_type = "Limit"
 
 	this.options.queue_task = nil
-
+	
 	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 	local sending = 0

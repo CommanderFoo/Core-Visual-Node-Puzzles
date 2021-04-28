@@ -20,9 +20,9 @@ function Puzzle_Events.on(evt, fn)
 end
 
 function Puzzle_Events.off(event_id)
-	for i, e in pairs(Puzzle_Events.events) do
+	for i, e in ipairs(Puzzle_Events.events) do
 		if(event_id == e.id) then
-			Puzzle_Events.events[i] = nil
+			Puzzle_Events.events[i] = ""
 		end
 	end
 end
