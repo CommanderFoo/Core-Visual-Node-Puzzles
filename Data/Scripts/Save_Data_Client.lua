@@ -22,8 +22,8 @@ function save()
 
 	YOOTIL.Events.broadcast_to_server("save_init", logic_saving)
 
-	for i, n in pairs(API.nodes) do
-		if(n:get_internal_id() > 0) then
+	for i, n in ipairs(API.nodes) do
+		if(n ~= nil and n:get_internal_id() > 0) then
 			had_data = true
 
 			if(logic_saving) then

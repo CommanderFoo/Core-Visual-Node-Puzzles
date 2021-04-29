@@ -64,7 +64,7 @@ end)
 
 API.Node_Events.on("node_destroyed", function(node_id)
 	for k, v in pairs(API.nodes) do
-		if(v:get_id() == node_id) then
+		if(v ~= nil and v:get_id() == node_id) then
 			API.nodes[k] = nil
 			API.play_delete_sound()
 
@@ -152,7 +152,15 @@ function API.insert(obj, t)
 end
 
 function API.get_total_nodes()
-	return #API.nodes
+	local count = 0
+
+	for k, v in pairs(API.nodes) do
+		if(v ~= nil) then
+			count = count + 1
+		end
+	end
+
+	return count
 end
 
 function API.set_award(award, alpha)

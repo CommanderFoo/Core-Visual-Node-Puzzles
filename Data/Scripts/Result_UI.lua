@@ -21,18 +21,19 @@ local local_player = Game.GetLocalPlayer()
 Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score, finished)
 	Events.Broadcast("stop_auto_save")
 
+	title.text = "Well Done!"
+
 	if(not finished) then
 		next_button.isInteractable = true
+	else
+		next_button.isInteractable = false
+		title.text = "Well Done, All Puzzles Complete"	
 	end
-	
-	title.text = "Well Done!"
-	
-	local score = math.max(0, 20000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25))))
+
+	local score = 20000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25)))
 
 	program_score.text = string.format("Program Score: %.0f", score)
 
-	print(score)
-	
 	gold_award:GetChildren()[1].text = string.format("%.0f", gold_score)
 
 	if(silver_score == -1) then
@@ -64,7 +65,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, .1)
 
-		--next_button.isInteractable = false
+		next_button.isInteractable = false
 		title.text = "Try Again"
 	end
 

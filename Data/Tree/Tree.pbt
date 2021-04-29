@@ -5604,8 +5604,8 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 600
-    Height: 500
+    Width: 700
+    Height: 540
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -5654,7 +5654,7 @@ Objects {
   Control {
     Width: 200
     Height: 60
-    UIY: -105.911209
+    UIY: -111.615196
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -6338,7 +6338,7 @@ Objects {
         G: 1
         A: 1
       }
-      Size: 50
+      Size: 46
       Justification {
         Value: "mc:etextjustify:center"
       }

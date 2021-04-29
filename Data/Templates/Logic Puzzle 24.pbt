@@ -25,15 +25,15 @@ Assets {
           }
           Overrides {
             Name: "cs:gold_score"
-            Float: 6073
+            Float: 14278
           }
           Overrides {
             Name: "cs:silver_score"
-            Float: 5778
+            Float: 13833
           }
           Overrides {
             Name: "cs:bronze_score"
-            Float: 1450
+            Float: 13808
           }
         }
         Collidable_v2 {
