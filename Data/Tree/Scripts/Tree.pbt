@@ -58,6 +58,18 @@ Objects {
         SelfId: 3720954960903579450
       }
     }
+    Overrides {
+      Name: "cs:logic_puzzle_solutions"
+      AssetReference {
+        Id: 18057690391871807445
+      }
+    }
+    Overrides {
+      Name: "cs:math_puzzle_solutions"
+      AssetReference {
+        Id: 13151491769305644377
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

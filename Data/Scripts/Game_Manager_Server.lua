@@ -9,14 +9,15 @@ end)
 
 --@TODO: REMOVE
 
-local force_load_logic_puzzle = 22
+local load_solutions = true
+--local force_load_logic_puzzle = 1
 --local force_load_math_puzzle = 1
 
 -- Prefetch node data and send early.
 
 function on_join(player)
-	Events.Broadcast("set_networked_data", player, true)
-	Events.Broadcast("set_networked_data", player, false)
+	Events.Broadcast("set_networked_data", player, true, load_solutions)
+	Events.Broadcast("set_networked_data", player, false, load_solutions)
 end
 
 function load_game(player, math)

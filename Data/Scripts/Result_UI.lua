@@ -18,16 +18,21 @@ local floor = math.floor
 
 local local_player = Game.GetLocalPlayer()
 
-Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score)
+Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score, finished)
 	Events.Broadcast("stop_auto_save")
 
-	next_button.isInteractable = true
+	if(not finished) then
+		next_button.isInteractable = true
+	end
+	
 	title.text = "Well Done!"
 	
-	local score = math.max(0, 10000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25))))
+	local score = math.max(0, 20000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25))))
 
 	program_score.text = string.format("Program Score: %.0f", score)
 
+	print(score)
+	
 	gold_award:GetChildren()[1].text = string.format("%.0f", gold_score)
 
 	if(silver_score == -1) then

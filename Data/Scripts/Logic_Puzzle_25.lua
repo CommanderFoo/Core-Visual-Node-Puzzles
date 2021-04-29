@@ -10,7 +10,7 @@ local bronze_score = root:GetCustomProperty("bronze_score")
 
 local output_circle_square_complete = false
 local output_circle_square_triangle_complete = false
-local output_ordered_circle_square_triangle_complete = false
+local output_ordered_circle_square_triangle_plus_complete = false
 local output_ordered_plus_square_complete = false
 
 local showing_result_ui = false
@@ -24,8 +24,8 @@ p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_circle_square_triangle_comple
 	output_circle_square_triangle_complete = true
 end)
 
-p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_ordered_circle_square_triangle_complete", function(errors)
-	output_ordered_circle_square_triangle_complete = true
+p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_ordered_circle_square_triangle_plus_complete", function(errors)
+	output_ordered_circle_square_triangle_plus_complete = true
 end)
 
 p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_ordered_plus_square_complete", function(errors)
@@ -33,7 +33,7 @@ p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_ordered_plus_square_complete"
 end)
 
 function Tick()
-	if(output_circle_square_complete and output_circle_square_triangle_complete and output_ordered_circle_square_triangle_complete and output_ordered_plus_square_complete) then
+	if(output_circle_square_complete and output_circle_square_triangle_complete and output_ordered_circle_square_triangle_plus_complete and output_ordered_plus_square_complete) then
 		show_result()
 	end
 end
@@ -44,14 +44,14 @@ function show_result()
 
 		Events.Broadcast("disable_header_ui", true)
 		Events.Broadcast("puzzle_complete")
-		Events.Broadcast("show_result", total_puzzle_score, gold_score, silver_score, bronze_score)
+		Events.Broadcast("show_result", total_puzzle_score, gold_score, silver_score, bronze_score, true)
 	end
 end
 
 evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 	output_circle_square_complete = false
 	output_circle_square_triangle_complete = false
-	output_ordered_circle_square_triangle_complete = false
+	output_ordered_circle_square_triangle_plus_complete = false
 	output_ordered_plus_square_complete = false
 
 	showing_result_ui = false
