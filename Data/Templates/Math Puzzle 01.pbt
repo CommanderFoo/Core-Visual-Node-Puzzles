@@ -25,7 +25,7 @@ Assets {
           }
           Overrides {
             Name: "cs:gold_score"
-            Float: 9775
+            Float: 19838
           }
           Overrides {
             Name: "cs:silver_score"
@@ -262,11 +262,11 @@ Assets {
           }
           Overrides {
             Name: "cs:first_data_amount"
-            Int: 10
+            Int: 40
           }
           Overrides {
             Name: "cs:first_final_total"
-            Int: 50
+            Int: 200
           }
         }
         Collidable_v2 {
@@ -475,7 +475,7 @@ Assets {
           }
           Overrides {
             Name: "cs:first_final_total"
-            Int: 50
+            Int: 100
           }
         }
         Collidable_v2 {

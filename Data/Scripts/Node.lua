@@ -691,7 +691,7 @@ function Node:has_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, e in ipairs(c) do
 			if(self.id ~= e.connected_to_node.id) then
-				return true
+				return e.connected_to_connection.id
 			end
 		end
 	end
@@ -744,7 +744,7 @@ function Node:has_top_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
 			if(cs.connection.connector.name == "Connection Handle Top") then
-				return true
+				return cs.connected_to_connection.id
 			end
 		end
 	end
@@ -756,7 +756,7 @@ function Node:has_middle_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
 			if(cs.connection.connector.name == "Connection Handle Middle") then
-				return true
+				return cs.connected_to_connection.id
 			end
 		end
 	end
@@ -768,7 +768,7 @@ function Node:has_bottom_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
 			if(cs.connection.connector.name == "Connection Handle Bottom") then
-				return true
+				return cs.connected_to_connection.id
 			end
 		end
 	end
@@ -1051,6 +1051,30 @@ function Node:get_output_connections_as_string()
 	return table.concat(out_connections, ",")
 end
 
+function Node:is_receiving_top(id)
+	if(string.find(id, "Top")) then
+		return true
+	end
+
+	return false
+end
+
+function Node:is_receiving_middle(id)
+	if(string.find(id, "Middle")) then
+		return true
+	end
+
+	return false
+end
+
+function Node:is_receiving_bottom(id)
+	if(string.find(id, "Bottom")) then
+		return true
+	end
+
+	return false
+end
+
 function Node:new(r, options)
 	self.__index = self
 
@@ -1124,7 +1148,9 @@ function Node_Data:new(r, options)
 	end
 
 	this.options.tick = function()
-		if(this:has_connection()) then
+		local connection_to_id = this:has_connection()
+
+		if(connection_to_id) then
 			if(this.options.count == this.options.total_data_items) then
 				this:stop_ticking()
 				return
@@ -1162,7 +1188,8 @@ function Node_Data:new(r, options)
 						count = 1,
 						total_count = item.count,
 						value = item.value or nil,
-						final_total = item.final_total or nil
+						final_total = item.final_total or nil,
+						connection_to_id = connection_to_id
 
 					})
 
@@ -2013,6 +2040,182 @@ end
 
 -- End Halt Node
 
+-- Add Node
+
+local Node_Add = {}
+
+function Node_Add:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Add"
+
+	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
+	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
+	local top_number = this.body:FindChildByName("Top Number")
+	local bottom_number = this.body:FindChildByName("Bottom Number")
+
+	local top_queue = YOOTIL.Utils.Queue:new()
+	local bottom_queue = YOOTIL.Utils.Queue:new()
+
+	local queue = YOOTIL.Utils.Queue:new()
+
+	local top_item = nil
+	local bottom_item = nil
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(top_item == nil and not top_queue:is_empty()) then
+					top_item = top_queue:pop()
+					top_queue_count.text = tostring(top_queue:length())
+					top_number.text = tostring(top_item)
+				end
+
+				if(bottom_item == nil and not bottom_queue:is_empty()) then
+					bottom_item = bottom_queue:pop()
+					bottom_queue_count.text = tostring(bottom_queue:length())
+					bottom_number.text = tostring(bottom_item)
+				end
+
+				if(top_item ~= nil and bottom_item ~= nil) then
+					if(not queue:is_empty()) then
+						queue:pop()(top_item, bottom_item)
+						
+						top_item = nil
+						bottom_item = nil
+
+						top_number.text = "-"
+						bottom_number.text = "-"
+					end
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		if(this:is_receiving_top(data.connection_to_id)) then
+			top_queue:push(data.value)
+			top_queue_count.text = tostring(top_queue:length())
+
+			local queue_func = function(top_value, bottom_value)
+				Events.Broadcast("score", this.options.node_time or 0)
+	
+				local connected_to_id = this:has_top_connection()
+	
+				if(connected_to_id) then
+					data.connected_to_id = connected_to_id
+					data.value = top_value + bottom_value
+
+					local line = this:get_connector_line(true)
+					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					local tween = this:create_tween(line)
+	
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				
+					if(tween ~= nil) then
+						tween:on_start(function()
+							obj.visibility = Visibility.FORCE_ON
+						end)
+	
+						tween:on_complete(function()
+							this["send_data_top"](this, data)
+	
+							if(Object.IsValid(obj)) then
+								obj:Destroy()
+							end
+	
+							tween = nil
+						end)
+			
+						tween:on_change(function(changed)
+							local x, y = this:get_path(obj, line, changed, 0)
+							
+							if(x == nil or y == nil) then
+								return
+							end
+	
+							obj.x = x
+							obj.y = y
+						end)
+					end
+				else
+					this:has_errors(true)
+				end
+			end
+	
+			if(this.options.node_time ~= nil and this.options.node_time > 0) then
+				queue:push(queue_func)
+			else
+				queue_func()
+			end
+		else
+			bottom_queue:push(data.value)
+			bottom_queue_count.text = tostring(bottom_queue:length())
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		this.tweens = {}
+		
+		top_queue = YOOTIL.Utils.Queue:new()
+		bottom_queue = YOOTIL.Utils.Queue:new()
+
+		queue = YOOTIL.Utils.Queue:new()
+
+		top_item = nil
+		bottom_item = nil
+		
+		top_queue_count.text = "0"
+		bottom_queue_count.text = "0"
+		top_number.text = "-"
+		bottom_number.text = "-"
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		
+	end)
+
+	return this
+end
+
+-- End Add Node
+
 return Node, Node_Events, {
 
 	Output = Node_Output,
@@ -2020,6 +2223,7 @@ return Node, Node_Events, {
 	Data = Node_Data,
 	Alternate = Node_Alternate,
 	Limit = Node_Limit,
-	Halt = Node_Halt
+	Halt = Node_Halt,
+	Add = Node_Add
 
 }
