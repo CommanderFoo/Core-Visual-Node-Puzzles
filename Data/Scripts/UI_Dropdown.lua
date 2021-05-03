@@ -96,9 +96,11 @@ for i = 1, total_options do
 		selected_option = options[i]
 		selected_text.text = options[i]:FindChildByName("Text").text
 
-		selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
-		selected_shape.visibility = Visibility.FORCE_ON
-		selected_shape:SetColor(options[i]:FindChildByName("Shape"):GetColor())
+		if(selected_shape ~= nil) then
+			selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
+			selected_shape.visibility = Visibility.FORCE_ON
+			selected_shape:SetColor(options[i]:FindChildByName("Shape"):GetColor())
+		end
 
 		close_select()
 
@@ -157,9 +159,11 @@ evts[#evts + 1] = Events.Connect("on_set_" .. event .. "selected", function(s)
 			selected_option = options[i]
 			selected_text.text = options[i]:FindChildByName("Text").text
 
-			selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
-			selected_shape.visibility = Visibility.FORCE_ON
-			selected_shape:SetColor(options[i]:FindChildByName("Shape"):GetColor())
+			if(selected_shape ~= nil) then
+				selected_shape:SetImage(options[i]:FindChildByName("Shape"):GetImage())
+				selected_shape.visibility = Visibility.FORCE_ON
+				selected_shape:SetColor(options[i]:FindChildByName("Shape"):GetColor())
+			end
 		end
 	end
 end)

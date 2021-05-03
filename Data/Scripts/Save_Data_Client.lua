@@ -29,7 +29,7 @@ function save()
 			if(logic_saving) then
 				YOOTIL.Events.broadcast_to_server("save_logic_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_limit(), n:get_output_connections_as_string(), n:get_order())
 			else
-				YOOTIL.Events.broadcast_to_server("save_math_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_limit(), n:get_output_connections_as_string(), n:get_order())
+				YOOTIL.Events.broadcast_to_server("save_math_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_amount(), n:get_output_connections_as_string(), n:get_order())
 			end
 		end
 	end
@@ -100,9 +100,10 @@ function set_connections(output_connections)
 		local the_node = API.get_node_by_unique_id(i)
 
 		for hi, h in ipairs(c) do
-			local handle_index, node_id = CoreString.Split(h, ";")
+			local handle_index, connected_to = CoreString.Split(h, ";")
 
-			if(handle_index and node_id) then
+			if(handle_index and connected_to) then
+				local node_id, to_index = CoreString.Split(connected_to, "~")
 				local connecting_to_node = API.get_node_by_unique_id(node_id)
 
 				if(connecting_to_node) then
@@ -112,8 +113,16 @@ function set_connections(output_connections)
 						the_node_connection = the_node:get_bottom_connector(true)
 					end
 
-					the_node:do_output_connect(connecting_to_node, connecting_to_node:get_input_connector(), the_node_connection)
-					connecting_to_node:do_input_connect(the_node, the_node_connection, connecting_to_node:get_input_connector())
+					local input_connector = nil
+					
+					if(tonumber(to_index) == 1) then
+						input_connector = connecting_to_node:get_top_input_connector()	
+					elseif(tonumber(to_index) == 2) then
+						input_connector = connecting_to_node:get_bottom_input_connector()	
+					end
+					
+					the_node:do_output_connect(connecting_to_node, input_connector, the_node_connection)
+					connecting_to_node:do_input_connect(the_node, the_node_connection, input_connector)
 
 					the_node:move_connections()
 				end

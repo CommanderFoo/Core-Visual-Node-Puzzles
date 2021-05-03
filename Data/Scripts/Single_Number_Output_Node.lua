@@ -1,30 +1,50 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local first_total = script:GetCustomProperty("first_total"):WaitForObject()
-local first_final_total = script:GetCustomProperty("first_final_total"):WaitForObject()
+local first_number = script:GetCustomProperty("first_number"):WaitForObject()
+local first_required = script:GetCustomProperty("first_required"):WaitForObject()
+
+local conditions = {}
 
 local evts = {}
 
 local node = nil
 local data = {}
 
-local first_total_value = 0
+local first_received = 0
 
 function init(node_data)
 	data = node_data
 	
+	conditions[data.first_number] = {
+
+		required = data.first_required,
+		required_txt = first_required,
+		received = 0,
+		
+	}
+
 	node = API.Node_Type.Output:new(script.parent.parent, {
 
 		on_data_received = function(data, node)
 			local error = false
 
 			if(data ~= nil) then
-				first_total_value = first_total_value + data.value
-				first_total.text = tostring(first_total_value)
+				local has_match = false
 
-				if(first_total_value == data.final_total) then
-					API.Puzzle_Events.trigger("output_first_complete")
-				elseif(first_total_value > data.final_total) then
+				for n, o in pairs(conditions) do
+					if(n == data.value and o.required ~= o.received) then
+						has_match = true
+
+						o.received = o.received + 1
+						o.required_txt.text = tostring(math.max(0, o.required - o.received))
+
+						if(o.received == o.required) then
+							API.Puzzle_Events.trigger("output_first_complete")
+						end
+					end
+				end
+
+				if(not has_match) then
 					node:has_errors(true)
 					error = true
 				end
@@ -40,7 +60,8 @@ function init(node_data)
 
 	})
 
-	first_final_total.text = tostring(node_data.first_final_total)
+	first_number.text = string.format("%.02f", data.first_number)
+	first_required.text = tostring(data.first_required)
 
 	node:set_from_saved_data(node_data)
 	API.register_node(node)
@@ -51,9 +72,11 @@ evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 		return
 	end
 	
-	if(Object.IsValid(first_total)) then
-		first_total.text = "0"
-		first_total_value = 0
+	if(Object.IsValid(first_number)) then
+		for n, o in pairs(conditions) do
+			o.received = 0
+			o.required_txt.text = tostring(o.required)
+		end
 
 		node:reset()
 		node:hide_error_info()

@@ -1,4 +1,4 @@
-local API = require(script:GetCustomProperty("API"))
+local API, YOOTIL = require(script:GetCustomProperty("API"))
 
 local evts = {}
 
@@ -9,14 +9,15 @@ local text_asset = script:GetCustomProperty("text_asset")
 
 local node = nil
 local data = nil
+local paused = false
 
 function init(node_data)
-	first.text = tostring(node_data.first)
+	first.text = string.format("%.02f", node_data.first_number)
 	first_data_amount.text = tostring(node_data.first_data_amount)
 
 	data = {
 	
-		{ value = node_data.first, count = node_data.first_data_amount, final_total = node_data.first_final_total, ui = first_data_amount, asset = text_asset }
+		{ value = node_data.first_number, count = node_data.first_data_amount, ui = first_data_amount, asset = text_asset }
 	
 	}
 
@@ -34,7 +35,7 @@ function init(node_data)
 end
 
 function Tick(dt)
-	if(node ~= nil) then
+	if(node ~= nil and not paused) then
 		for _, i in ipairs(node:get_tweens()) do
 			if(i.tween ~= nil) then
 				i.tween:tween(dt)
@@ -43,11 +44,25 @@ function Tick(dt)
 	end
 end
 
+Events.Connect("pause", function()
+	paused = true
+end)
+
+Events.Connect("unpause", function()
+	paused = false
+end)
+
 evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 	if(node == nil) then
 		return
 	end
 
+	for _, d in ipairs(data) do
+		if(Object.IsValid(d.ui)) then
+			d.ui.text = tostring(d.count)
+		end
+	end
+	
 	node:reset()
 end)
 

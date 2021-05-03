@@ -101,6 +101,7 @@ function Node:setup(r)
 	self.tweens = {}
 	self.can_edit_nodes = true
 	self.puzzle_type = Puzzle_Type.LOGIC
+	self.paused = false
 
 	self.n_evts = {}
 	self.evts = {}
@@ -123,6 +124,24 @@ function Node:setup(r)
 	self:setup_node()
 	self:setup_output_connections()
 	self:setup_input_connections()
+
+	self.shift_pressed = false
+	
+	self.n_evts[#self.n_evts + 1] = Node_Events.on("key_shift_pressed", function()
+		self.shift_pressed = true
+	end)
+
+	self.n_evts[#self.n_evts + 1] = Node_Events.on("key_shift_released", function()
+		self.shift_pressed = false
+	end)
+
+	self.n_evts[#self.n_evts + 1] = Node_Events.on("pause", function()
+		self.paused = true
+	end)
+
+	self.n_evts[#self.n_evts + 1] = Node_Events.on("unpause", function()
+		self.paused = false
+	end)
 
 	self.n_evts[#self.n_evts + 1] = Node_Events.on("begin_drag_node", function(node)
 		if(node.id ~= self.id) then
@@ -649,6 +668,30 @@ function Node:get_input_connector()
 	end
 end
 
+function Node:get_top_input_connector()
+	for i, c in pairs(self.input_connections) do
+		if(string.find(i, "Top") or string.match(i, "Handle$")) then
+			return c
+		end
+	end
+end
+
+function Node:get_middle_input_connector()
+	for i, c in pairs(self.input_connections) do
+		if(string.find(i, "Middle")) then
+			return c
+		end
+	end
+end
+
+function Node:get_bottom_input_connector()
+	for i, c in pairs(self.input_connections) do
+		if(string.find(i, "Bottom")) then
+			return c
+		end
+	end
+end
+
 function Node:get_id()
 	return self.id
 end
@@ -690,7 +733,7 @@ end
 function Node:has_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, e in ipairs(c) do
-			if(self.id ~= e.connected_to_node.id) then
+			if(e.connected_to_connection and self.id ~= e.connected_to_node.id) then
 				return e.connected_to_connection.id
 			end
 		end
@@ -743,7 +786,7 @@ end
 function Node:has_top_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
-			if(cs.connection.connector.name == "Connection Handle Top") then
+			if(cs.connected_to_connection and cs.connection.connector.name == "Connection Handle Top") then
 				return cs.connected_to_connection.id
 			end
 		end
@@ -755,7 +798,7 @@ end
 function Node:has_middle_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
-			if(cs.connection.connector.name == "Connection Handle Middle") then
+			if(cs.connected_to_connection and cs.connection.connector.name == "Connection Handle Middle") then
 				return cs.connected_to_connection.id
 			end
 		end
@@ -767,7 +810,7 @@ end
 function Node:has_bottom_connection()
 	for _, c in pairs(self.output_connected_to) do
 		for i, cs in pairs(c) do
-			if(cs.connection.connector.name == "Connection Handle Bottom") then
+			if(cs.connected_to_connection and cs.connection.connector.name == "Connection Handle Bottom") then
 				return cs.connected_to_connection.id
 			end
 		end
@@ -972,6 +1015,10 @@ function Node:clear_items_container()
 end
 
 function Node:get_tweens()
+	if(self.paused) then
+		return {}
+	end
+
 	return self.tweens
 end
 
@@ -1004,6 +1051,10 @@ function Node:get_condition()
 end
 
 function Node:get_limit()
+	return ""
+end
+
+function Node:get_amount()
 	return ""
 end
 
@@ -1044,10 +1095,22 @@ function Node:get_output_connections_as_string()
 				index = 2
 			end
 
-			table.insert(out_connections, tostring(index) .. ";" .. tostring(n.connected_to_node:get_unique_id()))
+			local to_index = 0
+			
+			if(n.connected_to_connection ~= nil) then
+				if(string.find(n.connected_to_connection.id, "Top") or string.match(n.connected_to_connection.id, "Handle$")) then
+					to_index = 1
+				elseif(string.find(n.connected_to_connection.id, "Bottom")) then
+					to_index = 2
+				end
+			end
+
+			table.insert(out_connections, tostring(index) .. ";" .. tostring(n.connected_to_node:get_unique_id() .. "~" .. tostring(to_index)))
 		end
 	end
 
+	--print(self:get_type(), table.concat(out_connections, ","))
+	
 	return table.concat(out_connections, ",")
 end
 
@@ -1148,6 +1211,10 @@ function Node_Data:new(r, options)
 	end
 
 	this.options.tick = function()
+		if(this.paused) then
+			return
+		end
+		
 		local connection_to_id = this:has_connection()
 
 		if(connection_to_id) then
@@ -1188,7 +1255,6 @@ function Node_Data:new(r, options)
 						count = 1,
 						total_count = item.count,
 						value = item.value or nil,
-						final_total = item.final_total or nil,
 						connection_to_id = connection_to_id
 
 					})
@@ -1379,7 +1445,7 @@ function Node_If:new(r, options)
 				local offset = 0
 		
 				if(condition and this:has_top_connection()) then
-					obj = this:spawn_asset(data.asset, line.x, line.y)
+					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 		
 					this:insert_tween({
@@ -1392,7 +1458,7 @@ function Node_If:new(r, options)
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
-						obj = this:spawn_asset(data.asset, line.x, line.y)
+						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 						connection_method = "send_data_bottom"
 			
 						this:insert_tween({
@@ -1536,24 +1602,29 @@ function Node_Alternate:new(r, options)
 				local tween = this:create_tween(line)
 				local connection_method = nil
 				local offset = 0
-		
-				if(switch and this:has_top_connection()) then
-					obj = this:spawn_asset(data.asset, line.x, line.y)
+				local connection_to_top_id = this:has_top_connection()
+				local connection_to_bottom_id = this:has_bottom_connection()
+				local connection_to_id = nil
+
+				if(switch and connection_to_top_id) then
+					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
-		
+					connection_to_id = connection_to_top_id
+
 					this:insert_tween({
 						
 						obj = obj,
 						tween = tween
 					
 					})
-				elseif(this:has_bottom_connection()) then
+				elseif(connection_to_bottom_id) then
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
-						obj = this:spawn_asset(data.asset, line.x, line.y)
+						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 						connection_method = "send_data_bottom"
-			
+						connection_to_id = connection_to_bottom_id
+
 						this:insert_tween({
 							
 							obj = obj,
@@ -1564,6 +1635,8 @@ function Node_Alternate:new(r, options)
 				else
 					this:has_errors(true)
 				end
+
+				data.connection_to_id = connection_to_id
 		
 				if(tween ~= nil and connection_method ~= nil) then
 					tween:on_start(function()
@@ -1734,7 +1807,7 @@ function Node_Limit:new(r, options)
 				local offset = 0
 		
 				if(this:has_top_connection() and sending > 0) then
-					obj = this:spawn_asset(data.asset, line.x, line.y)
+					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 		
 					this:insert_tween({
@@ -1750,7 +1823,7 @@ function Node_Limit:new(r, options)
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
-						obj = this:spawn_asset(data.asset, line.x, line.y)
+						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 						connection_method = "send_data_bottom"
 			
 						this:insert_tween({
@@ -1941,7 +2014,7 @@ function Node_Halt:new(r, options)
 
 			if(this:has_top_connection()) then
 				local line = this:get_connector_line(true)
-				local obj = this:spawn_asset(data.asset, line.x, line.y)
+				local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 				local tween = this:create_tween(line)
 
 				this:insert_tween({
@@ -2088,7 +2161,7 @@ function Node_Add:new(r, options)
 				end
 
 				if(top_item ~= nil and bottom_item ~= nil) then
-					if(not queue:is_empty()) then
+					if(not queue:is_empty() and this:has_connection()) then
 						queue:pop()(top_item, bottom_item)
 						
 						top_item = nil
@@ -2124,7 +2197,7 @@ function Node_Add:new(r, options)
 	
 				if(connected_to_id) then
 					data.connected_to_id = connected_to_id
-					data.value = top_value + bottom_value
+					data.value = tonumber(string.format("%.02f", top_value + bottom_value))
 
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
@@ -2208,13 +2281,1329 @@ function Node_Add:new(r, options)
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
-		
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
 	end)
 
 	return this
 end
 
 -- End Add Node
+
+-- Substract Node
+
+local Node_Substract = {}
+
+function Node_Substract:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Substract"
+
+	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
+	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
+	local top_number = this.body:FindChildByName("Top Number")
+	local bottom_number = this.body:FindChildByName("Bottom Number")
+
+	local top_queue = YOOTIL.Utils.Queue:new()
+	local bottom_queue = YOOTIL.Utils.Queue:new()
+
+	local queue = YOOTIL.Utils.Queue:new()
+
+	local top_item = nil
+	local bottom_item = nil
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(top_item == nil and not top_queue:is_empty()) then
+					top_item = top_queue:pop()
+					top_queue_count.text = tostring(top_queue:length())
+					top_number.text = tostring(top_item)
+				end
+
+				if(bottom_item == nil and not bottom_queue:is_empty()) then
+					bottom_item = bottom_queue:pop()
+					bottom_queue_count.text = tostring(bottom_queue:length())
+					bottom_number.text = tostring(bottom_item)
+				end
+
+				if(top_item ~= nil and bottom_item ~= nil) then
+					if(not queue:is_empty() and this:has_connection()) then
+						queue:pop()(top_item, bottom_item)
+						
+						top_item = nil
+						bottom_item = nil
+
+						top_number.text = "-"
+						bottom_number.text = "-"
+					end
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		if(this:is_receiving_top(data.connection_to_id)) then
+			top_queue:push(data.value)
+			top_queue_count.text = tostring(top_queue:length())
+
+			local queue_func = function(top_value, bottom_value)
+				Events.Broadcast("score", this.options.node_time or 0)
+	
+				local connected_to_id = this:has_top_connection()
+	
+				if(connected_to_id) then
+					data.connected_to_id = connected_to_id
+					data.value = tonumber(string.format("%.02f", top_value - bottom_value))
+
+					local line = this:get_connector_line(true)
+					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					local tween = this:create_tween(line)
+	
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				
+					if(tween ~= nil) then
+						tween:on_start(function()
+							obj.visibility = Visibility.FORCE_ON
+						end)
+	
+						tween:on_complete(function()
+							this["send_data_top"](this, data)
+	
+							if(Object.IsValid(obj)) then
+								obj:Destroy()
+							end
+	
+							tween = nil
+						end)
+			
+						tween:on_change(function(changed)
+							local x, y = this:get_path(obj, line, changed, 0)
+							
+							if(x == nil or y == nil) then
+								return
+							end
+	
+							obj.x = x
+							obj.y = y
+						end)
+					end
+				else
+					this:has_errors(true)
+				end
+			end
+	
+			if(this.options.node_time ~= nil and this.options.node_time > 0) then
+				queue:push(queue_func)
+			else
+				queue_func()
+			end
+		else
+			bottom_queue:push(data.value)
+			bottom_queue_count.text = tostring(bottom_queue:length())
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		this.tweens = {}
+		
+		top_queue = YOOTIL.Utils.Queue:new()
+		bottom_queue = YOOTIL.Utils.Queue:new()
+
+		queue = YOOTIL.Utils.Queue:new()
+
+		top_item = nil
+		bottom_item = nil
+		
+		top_queue_count.text = "0"
+		bottom_queue_count.text = "0"
+		top_number.text = "-"
+		bottom_number.text = "-"
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Substract Node
+
+-- Multiply Node
+
+local Node_Multiply = {}
+
+function Node_Multiply:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Multiply"
+
+	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
+	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
+	local top_number = this.body:FindChildByName("Top Number")
+	local bottom_number = this.body:FindChildByName("Bottom Number")
+
+	local top_queue = YOOTIL.Utils.Queue:new()
+	local bottom_queue = YOOTIL.Utils.Queue:new()
+
+	local queue = YOOTIL.Utils.Queue:new()
+
+	local top_item = nil
+	local bottom_item = nil
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(top_item == nil and not top_queue:is_empty()) then
+					top_item = top_queue:pop()
+					top_queue_count.text = tostring(top_queue:length())
+					top_number.text = tostring(top_item)
+				end
+
+				if(bottom_item == nil and not bottom_queue:is_empty()) then
+					bottom_item = bottom_queue:pop()
+					bottom_queue_count.text = tostring(bottom_queue:length())
+					bottom_number.text = tostring(bottom_item)
+				end
+
+				if(top_item ~= nil and bottom_item ~= nil) then
+					if(not queue:is_empty() and this:has_connection()) then
+						queue:pop()(top_item, bottom_item)
+						
+						top_item = nil
+						bottom_item = nil
+
+						top_number.text = "-"
+						bottom_number.text = "-"
+					end
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		if(this:is_receiving_top(data.connection_to_id)) then
+			top_queue:push(data.value)
+			top_queue_count.text = tostring(top_queue:length())
+
+			local queue_func = function(top_value, bottom_value)
+				Events.Broadcast("score", this.options.node_time or 0)
+	
+				local connected_to_id = this:has_top_connection()
+	
+				if(connected_to_id) then
+					data.connected_to_id = connected_to_id
+					data.value = tonumber(string.format("%.02f", top_value * bottom_value))
+
+					local line = this:get_connector_line(true)
+					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					local tween = this:create_tween(line)
+	
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				
+					if(tween ~= nil) then
+						tween:on_start(function()
+							obj.visibility = Visibility.FORCE_ON
+						end)
+	
+						tween:on_complete(function()
+							this["send_data_top"](this, data)
+	
+							if(Object.IsValid(obj)) then
+								obj:Destroy()
+							end
+	
+							tween = nil
+						end)
+			
+						tween:on_change(function(changed)
+							local x, y = this:get_path(obj, line, changed, 0)
+							
+							if(x == nil or y == nil) then
+								return
+							end
+	
+							obj.x = x
+							obj.y = y
+						end)
+					end
+				else
+					this:has_errors(true)
+				end
+			end
+	
+			if(this.options.node_time ~= nil and this.options.node_time > 0) then
+				queue:push(queue_func)
+			else
+				queue_func()
+			end
+		else
+			bottom_queue:push(data.value)
+			bottom_queue_count.text = tostring(bottom_queue:length())
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		this.tweens = {}
+		
+		top_queue = YOOTIL.Utils.Queue:new()
+		bottom_queue = YOOTIL.Utils.Queue:new()
+
+		queue = YOOTIL.Utils.Queue:new()
+
+		top_item = nil
+		bottom_item = nil
+		
+		top_queue_count.text = "0"
+		bottom_queue_count.text = "0"
+		top_number.text = "-"
+		bottom_number.text = "-"
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Multiply Node
+
+-- Divide Node
+
+local Node_Divide = {}
+
+function Node_Divide:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Divide"
+
+	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
+	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
+	local top_number = this.body:FindChildByName("Top Number")
+	local bottom_number = this.body:FindChildByName("Bottom Number")
+
+	local top_queue = YOOTIL.Utils.Queue:new()
+	local bottom_queue = YOOTIL.Utils.Queue:new()
+
+	local queue = YOOTIL.Utils.Queue:new()
+
+	local top_item = nil
+	local bottom_item = nil
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(top_item == nil and not top_queue:is_empty()) then
+					top_item = top_queue:pop()
+					top_queue_count.text = tostring(top_queue:length())
+					top_number.text = tostring(top_item)
+				end
+
+				if(bottom_item == nil and not bottom_queue:is_empty()) then
+					bottom_item = bottom_queue:pop()
+					bottom_queue_count.text = tostring(bottom_queue:length())
+					bottom_number.text = tostring(bottom_item)
+				end
+
+				if(top_item ~= nil and bottom_item ~= nil) then
+					if(not queue:is_empty() and this:has_connection()) then
+						queue:pop()(top_item, bottom_item)
+						
+						top_item = nil
+						bottom_item = nil
+
+						top_number.text = "-"
+						bottom_number.text = "-"
+					end
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		if(this:is_receiving_top(data.connection_to_id)) then
+			top_queue:push(data.value)
+			top_queue_count.text = tostring(top_queue:length())
+
+			local queue_func = function(top_value, bottom_value)
+				Events.Broadcast("score", this.options.node_time or 0)
+	
+				local connected_to_id = this:has_top_connection()
+	
+				if(connected_to_id) then
+					data.connected_to_id = connected_to_id
+					data.value = tonumber(string.format("%.02f", top_value / bottom_value))
+
+					local line = this:get_connector_line(true)
+					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					local tween = this:create_tween(line)
+	
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				
+					if(tween ~= nil) then
+						tween:on_start(function()
+							obj.visibility = Visibility.FORCE_ON
+						end)
+	
+						tween:on_complete(function()
+							this["send_data_top"](this, data)
+	
+							if(Object.IsValid(obj)) then
+								obj:Destroy()
+							end
+	
+							tween = nil
+						end)
+			
+						tween:on_change(function(changed)
+							local x, y = this:get_path(obj, line, changed, 0)
+							
+							if(x == nil or y == nil) then
+								return
+							end
+	
+							obj.x = x
+							obj.y = y
+						end)
+					end
+				else
+					this:has_errors(true)
+				end
+			end
+	
+			if(this.options.node_time ~= nil and this.options.node_time > 0) then
+				queue:push(queue_func)
+			else
+				queue_func()
+			end
+		else
+			bottom_queue:push(data.value)
+			bottom_queue_count.text = tostring(bottom_queue:length())
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		this.tweens = {}
+		
+		top_queue = YOOTIL.Utils.Queue:new()
+		bottom_queue = YOOTIL.Utils.Queue:new()
+
+		queue = YOOTIL.Utils.Queue:new()
+
+		top_item = nil
+		bottom_item = nil
+		
+		top_queue_count.text = "0"
+		bottom_queue_count.text = "0"
+		top_number.text = "-"
+		bottom_number.text = "-"
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Divide Node
+
+-- Greater Than Node
+
+local Node_Greater_Than = {}
+
+function Node_Greater_Than:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Greater_Than"
+
+	this.options.queue_task = nil
+	
+	local queue = YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+	local amount = 0
+	local orig_amount = 0
+	local amount_txt = this.body:FindDescendantByName("Amount")
+	local minus_button = this.body:FindDescendantByName("Minus")
+	local plus_button = this.body:FindDescendantByName("Plus")
+
+	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
+		if(amount > -99.9) then
+			local val = 0.05
+
+			if(this.shift_pressed) then
+				val = 0.5
+			end
+
+			amount = amount - val
+		end
+
+		amount_txt.text = string.format("%0.2f", amount)
+		orig_amount = amount
+	end)
+
+	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
+		if(amount > -99.9) then
+			local val = 0.05
+
+			if(this.shift_pressed) then
+				val = 0.5
+			end
+
+			amount = amount + val
+		end
+
+		amount_txt.text = string.format("%0.2f", amount)
+		orig_amount = amount
+	end)
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("edit", function(can_edit)
+		if(Object.IsValid(minus_button)) then
+			if(can_edit) then
+				minus_button.isInteractable = true
+			else
+				minus_button.isInteractable = false
+			end
+		end
+
+		if(Object.IsValid(plus_button)) then
+			if(can_edit) then
+				plus_button.isInteractable = true
+			else
+				plus_button.isInteractable = false
+			end
+		end
+	end)
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local obj = nil
+				local line = this:get_connector_line(data.value > amount)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(this:has_top_connection() and data.value > amount) then
+					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					connection_method = "send_data_top"
+		
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
+						
+						})
+					end
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+		amount = orig_amount
+		amount_txt.text = string.format("%.02f", amount)
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	function this:get_amount()
+		return amount
+	end
+
+	function this:set_amount(a)
+		if(a ~= nil and a > -99.9 and a < 99.9) then
+			amount = a
+			amount_txt.text = string.format("%.02f", amount)
+			orig_amount = amount
+		end
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Greater Than Node
+
+-- Less Than Node
+
+local Node_Less_Than = {}
+
+function Node_Less_Than:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Less_Than"
+
+	this.options.queue_task = nil
+	
+	local queue = YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+	local amount = 0
+	local orig_amount = 0
+	local amount_txt = this.body:FindDescendantByName("Amount")
+	local minus_button = this.body:FindDescendantByName("Minus")
+	local plus_button = this.body:FindDescendantByName("Plus")
+
+	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
+		if(amount > -99.9) then
+			local val = 0.05
+
+			if(this.shift_pressed) then
+				val = 0.5
+			end
+
+			amount = amount - val
+		end
+
+		amount_txt.text = string.format("%0.2f", amount)
+		orig_amount = amount
+	end)
+
+	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
+		if(amount > -99.9) then
+			local val = 0.05
+
+			if(this.shift_pressed) then
+				val = 0.5
+			end
+
+			amount = amount + val
+		end
+
+		amount_txt.text = string.format("%0.2f", amount)
+		orig_amount = amount
+	end)
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("edit", function(can_edit)
+		if(Object.IsValid(minus_button)) then
+			if(can_edit) then
+				minus_button.isInteractable = true
+			else
+				minus_button.isInteractable = false
+			end
+		end
+
+		if(Object.IsValid(plus_button)) then
+			if(can_edit) then
+				plus_button.isInteractable = true
+			else
+				plus_button.isInteractable = false
+			end
+		end
+	end)
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local obj = nil
+				local line = this:get_connector_line(data.value < amount)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(this:has_top_connection() and data.value < amount) then
+					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					connection_method = "send_data_top"
+		
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
+						
+						})
+					end
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+		amount = orig_amount
+		amount_txt.text = string.format("%.02f", amount)
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	function this:get_amount()
+		return amount
+	end
+
+	function this:set_amount(a)
+		if(a ~= nil and a > -99.9 and a < 99.9) then
+			amount = a
+			amount_txt.text = string.format("%.02f", amount)
+			orig_amount = amount
+		end
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Less Than Node
+
+-- Equal Node
+
+local Node_Equal = {}
+
+function Node_Equal:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Equal"
+
+	this.options.queue_task = nil
+	
+	local queue = YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+	local amount = 0
+	local orig_amount = 0
+	local amount_txt = this.body:FindDescendantByName("Amount")
+	local minus_button = this.body:FindDescendantByName("Minus")
+	local plus_button = this.body:FindDescendantByName("Plus")
+
+	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
+		if(amount > -99.9) then
+			local val = 0.05
+
+			if(this.shift_pressed) then
+				val = 0.5
+			end
+
+			amount = amount - val
+		end
+
+		amount_txt.text = string.format("%0.2f", amount)
+		orig_amount = amount
+	end)
+
+	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
+		if(amount < 99.9) then
+			local val = 0.05
+
+			if(this.shift_pressed) then
+				val = 0.5
+			end
+
+			amount = amount + val
+		end
+
+		amount_txt.text = string.format("%0.2f", amount)
+		orig_amount = amount
+	end)
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("edit", function(can_edit)
+		if(Object.IsValid(minus_button)) then
+			if(can_edit) then
+				minus_button.isInteractable = true
+			else
+				minus_button.isInteractable = false
+			end
+		end
+
+		if(Object.IsValid(plus_button)) then
+			if(can_edit) then
+				plus_button.isInteractable = true
+			else
+				plus_button.isInteractable = false
+			end
+		end
+	end)
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection() or this:has_bottom_connection()) then
+				local obj = nil
+				local line = this:get_connector_line(data.value == amount)
+				local tween = this:create_tween(line)
+				local connection_method = nil
+				local offset = 0
+		
+				if(this:has_top_connection() and data.value == amount) then
+					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+					connection_method = "send_data_top"
+		
+					this:insert_tween({
+						
+						obj = obj,
+						tween = tween
+					
+					})
+				elseif(this:has_bottom_connection()) then
+					offset = this:get_bottom_offset()
+
+					if(Object.IsValid(line)) then
+						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+						connection_method = "send_data_bottom"
+			
+						this:insert_tween({
+							
+							obj = obj,
+							tween = tween
+						
+						})
+					end
+				else
+					this:has_errors(true)
+				end
+		
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+		amount = orig_amount
+		amount_txt.text = string.format("%.02f", amount)
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	function this:get_amount()
+		return amount
+	end
+
+	function this:set_amount(a)
+		if(a ~= nil and a > -99.9 and a < 99.9) then
+			amount = a
+			amount_txt.text = string.format("%.02f", amount)
+			orig_amount = amount
+		end
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Equal Node
+
+-- Absolute Node
+
+local Node_Absolute = {}
+
+function Node_Absolute:new(r, options)
+	self.__index = self
+	
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Absolute"
+
+	this.options.queue_task = nil
+	
+	local queue = YOOTIL.Utils.Queue:new()
+	local monitor_started = false
+
+	function this:monitor_queue(speed)
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			this.options.queue_task = Task.Spawn(function()
+				if(not queue:is_empty()) then										
+					queue:pop()()
+				end
+			end, this.options.node_time / speed)
+			
+			this.options.queue_task.repeatCount = -1
+			this.options.queue_task.repeatInterval = (this.options.node_time / speed)
+		end
+	end
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(not monitor_started) then
+			monitor_started = true
+
+			this:set_speed(from_node:get_speed())
+			this:monitor_queue(from_node:get_speed())
+		end
+
+		local queue_func = function()
+			Events.Broadcast("score", this.options.node_time or 0)
+
+			if(this:has_top_connection()) then
+				local line = this:get_connector_line(true)
+				local tween = this:create_tween(line)
+				local connection_method = "send_data_top"
+				local offset = 0
+				local obj = this:spawn_asset(data.asset, line.x, line.y, math.abs(data.value))
+		
+				this:insert_tween({
+					
+					obj = obj,
+					tween = tween
+				
+				})
+
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+		
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+						
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		if(this.options.node_time ~= nil and this.options.node_time > 0) then
+			queue:push(queue_func)
+		else
+			queue_func()
+		end
+	end
+	
+	function this:reset()
+		this.options.added_tween = false
+
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+
+		monitor_started = false
+		queue = YOOTIL.Utils.Queue:new()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
+		if(this.options.queue_task ~= nil) then
+			this.options.queue_task:Cancel()
+			this.options.queue_task = nil
+		end
+	end)
+
+	return this
+end
+
+-- End Absolute Node
 
 return Node, Node_Events, {
 
@@ -2224,6 +3613,13 @@ return Node, Node_Events, {
 	Alternate = Node_Alternate,
 	Limit = Node_Limit,
 	Halt = Node_Halt,
-	Add = Node_Add
+	Add = Node_Add,
+	Substract = Node_Substract,
+	Multiply = Node_Multiply,
+	Divide = Node_Divide,
+	Greater_Than = Node_Greater_Than,
+	Less_Than = Node_Less_Than,
+	Equal = Node_Equal,
+	Absolute = Node_Absolute
 
 }

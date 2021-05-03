@@ -4,6 +4,8 @@ local Math_Solutions = require(script:GetCustomProperty("math_puzzle_solutions")
 
 local puzzle_data = script:GetCustomProperty("puzzle_data"):WaitForObject()
 
+-- Internal ID | Unique ID | Position | Condition | Limit | Output Connections | Order
+
 function save_data(player)
 	local data = {
 

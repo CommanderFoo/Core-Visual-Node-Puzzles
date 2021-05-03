@@ -19,6 +19,7 @@ local floor = math.floor
 local local_player = Game.GetLocalPlayer()
 
 Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score, finished)
+	Events.Broadcast("pause")
 	Events.Broadcast("stop_auto_save")
 
 	title.text = "Well Done!"
@@ -79,6 +80,7 @@ end)
 edit_button.hoveredEvent:Connect(API.play_hover_sound)
 
 edit_button.clickedEvent:Connect(function()
+	Events.Broadcast("unpause")
 	Events.Broadcast("puzzle_edit")
 	script.parent.parent.visibility = Visibility.FORCE_OFF
 

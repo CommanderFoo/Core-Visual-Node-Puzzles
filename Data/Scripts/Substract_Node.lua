@@ -1,21 +1,16 @@
 local API = require(script:GetCustomProperty("API"))
 
-local is_math = script.parent.parent:GetCustomProperty("is_math")
-
 local evts = {}
 local node = nil
 
 function init(node_data)
-	node = API.Node_Type.Alternate:new(script.parent.parent, {
+	node = API.Node_Type.Substract:new(script.parent.parent, {
 
-		node_time = 0.18
+		node_time = 0.40
 
 	})
 
-	if(is_math) then
-		node:set_puzzle_type(API.Puzzle_Type.MATH)
-	end
-
+	node:set_puzzle_type(API.Puzzle_Type.MATH)
 	node:set_from_saved_data(node_data)
 	
 	API.register_node(node)

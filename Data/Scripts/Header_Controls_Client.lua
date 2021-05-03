@@ -153,6 +153,7 @@ run_edit_button.clickedEvent:Connect(function()
 		end
 
 		Events.Broadcast("start_auto_save")
+		Events.Broadcast("unpause") -- Make sure we aren't paused for some reason.
 	else
 		run_edit_button.text = "Edit Program"
 		running = true

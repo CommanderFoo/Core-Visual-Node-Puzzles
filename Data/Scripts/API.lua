@@ -225,11 +225,19 @@ end)
 ticking_task.repeatCount = -1
 
 local_player.bindingPressedEvent:Connect(function(obj, binding)
-	if(binding == "ability_secondary" and API.can_edit_nodes) then
+	if(binding == YOOTIL.Input.right_button and API.can_edit_nodes) then
 		if(API.active_node ~= nil) then
 			API.active_node:stop_all_drag()
 			API.active_node = nil
 		end
+	elseif(binding == YOOTIL.Input.left_shift or binding == YOOTIL.Input.right_shift) then
+		API.Node_Events.trigger("key_shift_pressed")
+	end
+end)
+
+local_player.bindingReleasedEvent:Connect(function(obj, binding)
+	if(binding == YOOTIL.Input.left_shift or binding == YOOTIL.Input.right_shift) then
+		API.Node_Events.trigger("key_shift_released")
 	end
 end)
 
@@ -243,6 +251,14 @@ Events.Connect("puzzle_edit", function()
 	API.enable_nodes()
 
 	Events.Broadcast("on_enable_all_dropdowns")
+end)
+
+Events.Connect("pause", function()
+	API.Node_Events.trigger("pause")
+end)
+
+Events.Connect("unpause", function()
+	API.Node_Events.trigger("unpause")
 end)
 
 return API, YOOTIL
