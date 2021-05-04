@@ -38,6 +38,7 @@ Objects {
         Mass: 100
         LinearDamping: 0.01
       }
+      BoundsScale: 1
     }
   }
 }

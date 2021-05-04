@@ -1,5 +1,13 @@
 Entries {
   Key {
+    StringVar: "lnd"
+  }
+  SimpleValue {
+    StringVar: "5@5|3|0.00,0.00||||:4|4|367.09,-174.37||||::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+  }
+}
+Entries {
+  Key {
     StringVar: "mv"
   }
   SimpleValue {
@@ -8,10 +16,10 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sv"
+    StringVar: "clp"
   }
   SimpleValue {
-    IntVar: 0
+    IntVar: 5
   }
 }
 Entries {
@@ -24,10 +32,10 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "lnd"
+    StringVar: "sv"
   }
   SimpleValue {
-    StringVar: "5@5|3|0.00,0.00||||:4|4|367.09,-174.37||||:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    IntVar: 0
   }
 }
 Entries {
@@ -48,14 +56,6 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "mnd"
-  }
-  SimpleValue {
-    StringVar: "6@1|7|-549.35,296.66|||1;11~1|:4|8|468.00,-214.00||||:5|9|460.00,163.00||||:2|10|-247.00,236.00|||1;13~1,2;9~1|:2|11|-439.00,-136.00|||1;12~1,2;10~1|:3|12|80.00,-225.00|||1;8~1|:3|13|131.00,43.00|||1;9~1|:::"
-  }
-}
-Entries {
-  Key {
     StringVar: "sn"
   }
   SimpleValue {
@@ -64,9 +64,9 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "clp"
+    StringVar: "mnd"
   }
   SimpleValue {
-    IntVar: 5
+    StringVar: "6@1|7|-549.35,296.66|||1;11~1|:4|8|468.00,-214.00||||:5|9|460.00,163.00||||:2|10|-247.00,236.00|||1;13~1,2;9~1|:2|11|-439.00,-136.00|||1;12~1,2;10~1|:3|12|80.00,-225.00|||1;8~1|:3|13|131.00,43.00|||1;9~1|::::::::"
   }
 }

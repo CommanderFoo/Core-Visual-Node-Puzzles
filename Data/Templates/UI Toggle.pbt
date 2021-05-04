@@ -285,6 +285,12 @@ Assets {
             }
             Font {
             }
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            VerticalJustification {
+              Value: "mc:everticaljustification:center"
+            }
           }
           AnchorLayout {
             SelfAnchor {
@@ -417,6 +423,6 @@ Assets {
   Marketplace {
     Description: "A UI toggle component.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Toggle-Docs/"
   }
-  SerializationVersion: 81
+  SerializationVersion: 84
   DirectlyPublished: true
 }

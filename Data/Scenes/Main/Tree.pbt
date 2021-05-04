@@ -1475,6 +1475,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -1625,6 +1631,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -1777,6 +1789,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -1926,6 +1944,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -2859,6 +2883,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -2946,6 +2976,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -3243,6 +3279,12 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -3632,6 +3674,12 @@ Objects {
       }
       Font {
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -3913,6 +3961,12 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -4553,6 +4607,12 @@ Objects {
       }
       Font {
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -4834,6 +4894,12 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -5763,6 +5829,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -5848,6 +5920,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -6720,6 +6798,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -6989,6 +7073,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -7209,6 +7299,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -7708,6 +7804,12 @@ Objects {
       }
       Font {
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -7852,6 +7954,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -7937,6 +8045,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -8024,6 +8138,12 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
     }
     AnchorLayout {
       SelfAnchor {
@@ -8107,6 +8227,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -8246,6 +8372,12 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -8395,6 +8527,12 @@ Objects {
         Value: "mc:ebuttonclickmode:default"
       }
       Font {
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
@@ -8818,6 +8956,12 @@ Objects {
       }
       Font {
         Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
       }
     }
     AnchorLayout {
