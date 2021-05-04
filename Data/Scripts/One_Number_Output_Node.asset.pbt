@@ -1,6 +1,6 @@
 Assets {
-  Id: 8926410479600204330
-  Name: "Single_Number_Data_Node"
+  Id: 6064889176892653680
+  Name: "One_Number_Output_Node"
   PlatformAssetType: 3
   TextAsset {
   }

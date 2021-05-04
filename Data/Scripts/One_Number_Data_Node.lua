@@ -2,8 +2,8 @@ local API, YOOTIL = require(script:GetCustomProperty("API"))
 
 local evts = {}
 
-local first = script:GetCustomProperty("first"):WaitForObject()
-local first_data_amount = script:GetCustomProperty("first_data_amount"):WaitForObject()
+local first_number = script:GetCustomProperty("first_number"):WaitForObject()
+local first_count = script:GetCustomProperty("first_count"):WaitForObject()
 
 local text_asset = script:GetCustomProperty("text_asset")
 
@@ -12,12 +12,12 @@ local data = nil
 local paused = false
 
 function init(node_data)
-	first.text = string.format("%.02f", node_data.first_number)
-	first_data_amount.text = tostring(node_data.first_data_amount)
+	first_number.text = string.format("%.02f", node_data.first_number)
+	first_count.text = tostring(node_data.first_count)
 
 	data = {
 	
-		{ value = node_data.first_number, count = node_data.first_data_amount, ui = first_data_amount, asset = text_asset }
+		{ value = node_data.first_number, count = node_data.first_count, ui = first_count, asset = text_asset }
 	
 	}
 

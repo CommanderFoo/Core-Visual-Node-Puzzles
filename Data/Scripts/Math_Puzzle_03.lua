@@ -18,7 +18,7 @@ p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_one_number_complete", functio
 end)
 
 function Tick()
-	if(output_one_number_complete == 2) then
+	if(output_one_number_complete == 4) then
 		show_result()
 	end
 end

@@ -6,7 +6,7 @@ local node = nil
 function init(node_data)
 	node = API.Node_Type.Add:new(script.parent.parent, {
 
-		node_time = 0.40
+		node_time = 0.30
 
 	})
 

@@ -14,8 +14,20 @@ local triangle_data_amount = root:GetCustomProperty("triangle_data_amount")
 local plus_data_amount = root:GetCustomProperty("plus_data_amount")
 
 local first_number = root:GetCustomProperty("first_number")
-local first_data_amount = root:GetCustomProperty("first_data_amount")
+local first_count = root:GetCustomProperty("first_count")
 local first_required = root:GetCustomProperty("first_required")
+
+local second_number = root:GetCustomProperty("second_number")
+local second_count = root:GetCustomProperty("second_count")
+local second_required = root:GetCustomProperty("second_required")
+
+local third_number = root:GetCustomProperty("third_number")
+local third_count = root:GetCustomProperty("third_count")
+local third_required = root:GetCustomProperty("third_required")
+
+local fourth_number = root:GetCustomProperty("fourth_number")
+local fourth_count = root:GetCustomProperty("fourth_count")
+local fourth_required = root:GetCustomProperty("fourth_required")
 
 local total_spawned = 0
 local template_id = nil
@@ -39,8 +51,8 @@ function find_node_script(n)
 	return nil
 end
 
-API.Node_Events.on("node_destroyed", function(node_id, tpl_id)
-	if(tpl_id == template_id) then
+API.Node_Events.on("node_destroyed", function(node_id, tpl_id, internal_id)
+	if(index == internal_id) then
 		if(total ~= -1) then
 			total_spawned = total_spawned - 1
 
@@ -81,16 +93,60 @@ function spawn_node(x, y, uid, condition, limit, order)
 				data.plus_data_amount = plus_data_amount
 			end
 
+			-- 1
+
 			if(first_number ~= nil) then
 				data.first_number = first_number
 			end
 
-			if(first_data_amount ~= nil) then
-				data.first_data_amount = first_data_amount
+			if(first_count ~= nil) then
+				data.first_count = first_count
 			end
 
 			if(first_required ~= nil) then
 				data.first_required = first_required
+			end
+
+			-- 2
+
+			if(second_number ~= nil) then
+				data.second_number = second_number
+			end
+
+			if(second_count ~= nil) then
+				data.second_count = second_count
+			end
+
+			if(second_required ~= nil) then
+				data.second_required = second_required
+			end
+
+			-- 3
+			
+			if(third_number ~= nil) then
+				data.third_number = third_number
+			end
+
+			if(third_count ~= nil) then
+				data.third_count = third_count
+			end
+
+			if(third_required ~= nil) then
+				data.third_required = third_required
+			end
+
+			-- 4
+			
+			if(fourth_number ~= nil) then
+				data.fourth_number = fourth_number
+			end
+
+			if(fourth_count ~= nil) then
+				data.fourth_count = fourth_count
+			end
+
+			if(fourth_required ~= nil) then
+				data.fourth_required = fourth_required
 			end
 
 			data.id = index
@@ -104,7 +160,6 @@ function spawn_node(x, y, uid, condition, limit, order)
 		end
 	end
 
-	template_id = n.sourceTemplateId
 	total_spawned = total_spawned + 1
 
 	if(total_spawned == total) then
