@@ -82,6 +82,7 @@ end
 
 function change(c)
 	color.a = c.a
+
 	transition:SetColor(color)
 end
 

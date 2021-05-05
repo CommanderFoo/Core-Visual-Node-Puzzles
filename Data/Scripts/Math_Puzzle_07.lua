@@ -9,7 +9,6 @@ local silver_score = root:GetCustomProperty("silver_score")
 local bronze_score = root:GetCustomProperty("bronze_score")
 
 local output_one_number_complete = 0
-local output_two_number_complete = 0
 
 local showing_result_ui = false
 local total_puzzle_score = 0
@@ -18,12 +17,8 @@ p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_one_number_complete", functio
 	output_one_number_complete = output_one_number_complete + 1
 end)
 
-p_evts[#p_evts + 1] = API.Puzzle_Events.on("output_two_number_complete", function(errors)
-	output_two_number_complete = output_two_number_complete + 1
-end)
-
 function Tick()
-	if(output_one_number_complete == 1 and output_two_number_complete == 2) then
+	if(output_one_number_complete == 2) then
 		show_result()
 	end
 end
@@ -40,7 +35,6 @@ end
 
 evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 	output_one_number_complete = 0
-	output_two_number_complete = 0
 	showing_result_ui = false
 	total_puzzle_score = 0
 end)
