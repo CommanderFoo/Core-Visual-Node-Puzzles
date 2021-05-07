@@ -9367,6 +9367,24 @@ Objects {
         Id: 12973530790732264329
       }
     }
+    Overrides {
+      Name: "cs:MathPuzzle09"
+      AssetReference {
+        Id: 5155142862390355576
+      }
+    }
+    Overrides {
+      Name: "cs:MathPuzzle10"
+      AssetReference {
+        Id: 15971050680513733304
+      }
+    }
+    Overrides {
+      Name: "cs:MathPuzzle11"
+      AssetReference {
+        Id: 3037894995112338946
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

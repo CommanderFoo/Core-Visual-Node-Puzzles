@@ -83,7 +83,7 @@ local Node = {
 }
 
 function Node:setup(r)
-	self.debug_node = false
+	self.debug_node = true
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil
@@ -1250,6 +1250,7 @@ function Node_Data:new(r, options)
 				local line = this:get_top_connector_line()
 				local obj = this:spawn_asset(item.asset, line.x, line.y, item.value)
 				local tween = this:create_tween(line)
+				local offset = this:get_top_offset()
 
 				tween:on_start(function()
 					obj.visibility = Visibility.FORCE_ON
@@ -1275,7 +1276,7 @@ function Node_Data:new(r, options)
 				end)
 
 				tween:on_change(function(changed)
-					local x, y = this:get_path(obj, line, changed, -obj.height / 2)
+					local x, y = this:get_path(obj, line, changed, offset)
 			
 					if(x == nil or y == nil) then
 						return
@@ -1444,7 +1445,10 @@ function Node_If:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection() or this:has_bottom_connection()) then
+			local top_connection = this:has_top_connection()
+			local bottom_connection = this:has_bottom_connection()
+
+			if(top_connection or bottom_connection) then
 				local condition = (data.condition == this.options.if_condition)
 				local obj = nil
 				local line = this:get_connector_line(condition)
@@ -1452,7 +1456,8 @@ function Node_If:new(r, options)
 				local connection_method = nil
 				local offset = this:get_top_offset()
 		
-				if(condition and this:has_top_connection()) then
+				if(condition and top_connection) then
+					data.connection_to_id = top_connection
 					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 		
@@ -1462,7 +1467,8 @@ function Node_If:new(r, options)
 						tween = tween
 					
 					})
-				elseif(this:has_bottom_connection()) then
+				elseif(bottom_connection) then
+					data.connection_to_id = bottom_connection
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
@@ -1604,7 +1610,10 @@ function Node_Alternate:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection() or this:has_bottom_connection()) then
+			local top_connection = this:has_top_connection()
+			local bottom_connection = this:has_bottom_connection()
+
+			if(top_connection or bottom_connection) then
 				local obj = nil
 				local line = this:get_connector_line(switch)
 				local tween = this:create_tween(line)
@@ -1614,7 +1623,8 @@ function Node_Alternate:new(r, options)
 				local connection_to_bottom_id = this:has_bottom_connection()
 				local connection_to_id = nil
 
-				if(switch and connection_to_top_id) then
+				if(switch and top_connection) then
+					data.connection_to_id = top_connection
 					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 					connection_to_id = connection_to_top_id
@@ -1625,13 +1635,13 @@ function Node_Alternate:new(r, options)
 						tween = tween
 					
 					})
-				elseif(connection_to_bottom_id) then
+				elseif(bottom_connection) then
+					data.connection_to_id = bottom_connection
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
 						obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 						connection_method = "send_data_bottom"
-						connection_to_id = connection_to_bottom_id
 
 						this:insert_tween({
 							
@@ -1643,8 +1653,6 @@ function Node_Alternate:new(r, options)
 				else
 					this:has_errors(true)
 				end
-
-				data.connection_to_id = connection_to_id
 		
 				if(tween ~= nil and connection_method ~= nil) then
 					tween:on_start(function()
@@ -1807,14 +1815,18 @@ function Node_Limit:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection() or this:has_bottom_connection()) then
+			local top_connection = this:has_top_connection()
+			local bottom_connection = this:has_bottom_connection()
+
+			if(top_connection or bottom_connection) then
 				local obj = nil
 				local line = this:get_connector_line(sending > 0)
 				local tween = this:create_tween(line)
 				local connection_method = nil
 				local offset = this:get_top_offset()
 		
-				if(this:has_top_connection() and sending > 0) then
+				if(top_connection and sending > 0) then
+					data.connection_to_id = top_connection
 					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 		
@@ -1827,7 +1839,8 @@ function Node_Limit:new(r, options)
 
 					sending = sending - 1
 					limit_count.text = tostring(sending)
-				elseif(this:has_bottom_connection()) then
+				elseif(bottom_connection) then
+					data.connection_to_id = bottom_connection
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
@@ -2020,10 +2033,15 @@ function Node_Halt:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection()) then
+			local top_connection = this:has_top_connection()
+
+			if(top_connection) then
+				data.connection_to_id = top_connection
+
 				local line = this:get_connector_line(true)
 				local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 				local tween = this:create_tween(line)
+				local offset = this:get_top_offset()
 
 				this:insert_tween({
 					
@@ -2049,7 +2067,7 @@ function Node_Halt:new(r, options)
 					end)
 		
 					tween:on_change(function(changed)
-						local x, y = this:get_path(obj, line, changed, 0)
+						local x, y = this:get_path(obj, line, changed, offset)
 						
 						if(x == nil or y == nil) then
 							return
@@ -2149,7 +2167,8 @@ function Node_Add:new(r, options)
 	local bottom_queue = YOOTIL.Utils.Queue:new()
 
 	local queue = YOOTIL.Utils.Queue:new()
-
+	local monitor_started = false
+	
 	local top_item = nil
 	local bottom_item = nil
 
@@ -2202,7 +2221,7 @@ function Node_Add:new(r, options)
 				Events.Broadcast("score", this.options.node_time or 0)
 	
 				local connected_to_id = this:has_top_connection()
-	
+
 				if(connected_to_id) then
 					data.connected_to_id = connected_to_id
 					data.value = tonumber(string.format("%.02f", top_value + bottom_value))
@@ -2210,7 +2229,8 @@ function Node_Add:new(r, options)
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					local tween = this:create_tween(line)
-	
+					local offset = this:get_top_offset()
+
 					this:insert_tween({
 						
 						obj = obj,
@@ -2234,7 +2254,7 @@ function Node_Add:new(r, options)
 						end)
 			
 						tween:on_change(function(changed)
-							local x, y = this:get_path(obj, line, changed, 0)
+							local x, y = this:get_path(obj, line, changed, offset)
 							
 							if(x == nil or y == nil) then
 								return
@@ -2328,7 +2348,8 @@ function Node_Substract:new(r, options)
 	local bottom_queue = YOOTIL.Utils.Queue:new()
 
 	local queue = YOOTIL.Utils.Queue:new()
-
+	local monitor_started = false
+	
 	local top_item = nil
 	local bottom_item = nil
 
@@ -2389,7 +2410,8 @@ function Node_Substract:new(r, options)
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					local tween = this:create_tween(line)
-	
+					local offset = this:get_top_offset()
+
 					this:insert_tween({
 						
 						obj = obj,
@@ -2413,7 +2435,7 @@ function Node_Substract:new(r, options)
 						end)
 			
 						tween:on_change(function(changed)
-							local x, y = this:get_path(obj, line, changed, 0)
+							local x, y = this:get_path(obj, line, changed, offset)
 							
 							if(x == nil or y == nil) then
 								return
@@ -2507,7 +2529,8 @@ function Node_Multiply:new(r, options)
 	local bottom_queue = YOOTIL.Utils.Queue:new()
 
 	local queue = YOOTIL.Utils.Queue:new()
-
+	local monitor_started = false
+	
 	local top_item = nil
 	local bottom_item = nil
 
@@ -2568,7 +2591,8 @@ function Node_Multiply:new(r, options)
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					local tween = this:create_tween(line)
-	
+					local offset = this:get_top_offset()
+
 					this:insert_tween({
 						
 						obj = obj,
@@ -2592,7 +2616,7 @@ function Node_Multiply:new(r, options)
 						end)
 			
 						tween:on_change(function(changed)
-							local x, y = this:get_path(obj, line, changed, 0)
+							local x, y = this:get_path(obj, line, changed, offset)
 							
 							if(x == nil or y == nil) then
 								return
@@ -2686,7 +2710,8 @@ function Node_Divide:new(r, options)
 	local bottom_queue = YOOTIL.Utils.Queue:new()
 
 	local queue = YOOTIL.Utils.Queue:new()
-
+	local monitor_started = false
+	
 	local top_item = nil
 	local bottom_item = nil
 
@@ -2747,7 +2772,8 @@ function Node_Divide:new(r, options)
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					local tween = this:create_tween(line)
-	
+					local offset = this:get_top_offset()
+
 					this:insert_tween({
 						
 						obj = obj,
@@ -2771,7 +2797,7 @@ function Node_Divide:new(r, options)
 						end)
 			
 						tween:on_change(function(changed)
-							local x, y = this:get_path(obj, line, changed, 0)
+							local x, y = this:get_path(obj, line, changed, offset)
 							
 							if(x == nil or y == nil) then
 								return
@@ -2938,7 +2964,10 @@ function Node_Greater_Than:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection() or this:has_bottom_connection()) then
+			local top_connection = this:has_top_connection()
+			local bottom_connection = this:has_bottom_connection()
+			
+			if(top_connection or bottom_connection) then
 				local obj = nil
 
 				local line = this:get_connector_line(data.value > amount)
@@ -2946,7 +2975,9 @@ function Node_Greater_Than:new(r, options)
 				local connection_method = nil
 				local offset = this:get_top_offset()
 		
-				if(this:has_top_connection() and data.value > amount) then
+				if(top_connection and data.value > amount) then
+					data.connection_to_id = top_connection
+
 					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 		
@@ -2956,7 +2987,9 @@ function Node_Greater_Than:new(r, options)
 						tween = tween
 					
 					})
-				elseif(this:has_bottom_connection()) then
+				elseif(bottom_connection) then
+					data.connection_to_id = bottom_connection
+
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
@@ -3371,14 +3404,18 @@ function Node_Equal:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection() or this:has_bottom_connection()) then
+			local top_connection = this:has_top_connection()
+			local bottom_connection = this:has_bottom_connection()
+			
+			if(top_connection or bottom_connection) then
 				local obj = nil
 				local line = this:get_connector_line(data.value == amount)
 				local tween = this:create_tween(line)
 				local connection_method = nil
 				local offset = this:get_top_offset()
 		
-				if(this:has_top_connection() and data.value == amount) then
+				if(top_connection and data.value == amount) then
+					data.connection_to_id = top_connection
 					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 		
@@ -3388,7 +3425,8 @@ function Node_Equal:new(r, options)
 						tween = tween
 					
 					})
-				elseif(this:has_bottom_connection()) then
+				elseif(bottom_connection) then
+					data.connection_to_id = bottom_connection
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
@@ -3534,8 +3572,11 @@ function Node_Absolute:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection()) then
+			local top_connection = this:has_top_connection()
+
+			if(top_connection) then
 				data.value = math.abs(data.value)
+				data.connection_to_id = top_connection
 				
 				local line = this:get_connector_line(true)
 				local tween = this:create_tween(line)
