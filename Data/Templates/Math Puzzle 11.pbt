@@ -270,7 +270,7 @@ Assets {
           }
           Overrides {
             Name: "cs:first_count"
-            Int: 50
+            Int: 60
           }
           Overrides {
             Name: "cs:second_number"
@@ -278,7 +278,7 @@ Assets {
           }
           Overrides {
             Name: "cs:second_count"
-            Int: 40
+            Int: 60
           }
         }
         Collidable_v2 {
@@ -1363,7 +1363,7 @@ Assets {
           }
           Overrides {
             Name: "cs:first_required"
-            Int: 25
+            Int: 15
           }
         }
         Collidable_v2 {
@@ -1591,7 +1591,7 @@ Assets {
           }
           Overrides {
             Name: "cs:first_required"
-            Int: 25
+            Int: 15
           }
           Overrides {
             Name: "cs:second_number"
@@ -1599,7 +1599,7 @@ Assets {
           }
           Overrides {
             Name: "cs:second_required"
-            Int: 20
+            Int: 30
           }
         }
         Collidable_v2 {
@@ -1823,5 +1823,5 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 84
+  SerializationVersion: 85
 }

@@ -25,7 +25,7 @@ Assets {
           }
           Overrides {
             Name: "cs:gold_score"
-            Float: 100
+            Float: 19173
           }
           Overrides {
             Name: "cs:silver_score"
@@ -705,5 +705,5 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 84
+  SerializationVersion: 85
 }

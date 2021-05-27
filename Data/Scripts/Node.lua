@@ -83,7 +83,7 @@ local Node = {
 }
 
 function Node:setup(r)
-	self.debug_node = true
+	self.debug_node = false
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil

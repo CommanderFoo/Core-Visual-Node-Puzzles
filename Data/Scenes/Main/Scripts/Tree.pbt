@@ -159,12 +159,12 @@ Objects {
   ChildIds: 16099356608972045403
   ChildIds: 12262875492945277035
   ChildIds: 225476450877697714
-  ChildIds: 8975716410678032075
   ChildIds: 2366539210659061100
   ChildIds: 8251904590631658214
   ChildIds: 2365147788075538306
   ChildIds: 15163209075878739494
   ChildIds: 6068750308711967726
+  ChildIds: 3385943649788916117
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -175,6 +175,128 @@ Objects {
     Value: "mc:ecollisionsetting:forceoff"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 3385943649788916117
+  Name: "Main_Menu_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+    Overrides {
+      Name: "cs:menu_container"
+      ObjectReference {
+        SelfId: 3560492653544681397
+      }
+    }
+    Overrides {
+      Name: "cs:click_sound"
+      ObjectReference {
+        SelfId: 7452552501637593875
+      }
+    }
+    Overrides {
+      Name: "cs:hover_sound"
+      ObjectReference {
+        SelfId: 8328458776128072025
+      }
+    }
+    Overrides {
+      Name: "cs:bg_effect"
+      ObjectReference {
+        SelfId: 501076735454029765
+      }
+    }
+    Overrides {
+      Name: "cs:math_button"
+      ObjectReference {
+        SelfId: 10162472854146894300
+      }
+    }
+    Overrides {
+      Name: "cs:logic_button"
+      ObjectReference {
+        SelfId: 3922638577498897365
+      }
+    }
+    Overrides {
+      Name: "cs:community_button"
+      ObjectReference {
+        SelfId: 3379794466900953135
+      }
+    }
+    Overrides {
+      Name: "cs:donate_button"
+      ObjectReference {
+        SelfId: 14844984461882649663
+      }
+    }
+    Overrides {
+      Name: "cs:leaderboards_button"
+      ObjectReference {
+        SelfId: 15976286168113499114
+      }
+    }
+    Overrides {
+      Name: "cs:tutorial_button"
+      ObjectReference {
+        SelfId: 240980488697631517
+      }
+    }
+    Overrides {
+      Name: "cs:community_panel"
+      ObjectReference {
+        SelfId: 3312355021415285066
+      }
+    }
+    Overrides {
+      Name: "cs:donate_panel"
+      ObjectReference {
+        SelfId: 9384503764268272933
+      }
+    }
+    Overrides {
+      Name: "cs:leaderboards_panel"
+      ObjectReference {
+        SelfId: 1284222172028452821
+      }
+    }
+    Overrides {
+      Name: "cs:tutorial_panel"
+      ObjectReference {
+        SelfId: 6540510692168221284
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 5687259373558289114
+    }
   }
 }
 Objects {
@@ -534,110 +656,6 @@ Objects {
   Script {
     ScriptAsset {
       Id: 6027153021280345616
-    }
-  }
-}
-Objects {
-  Id: 8975716410678032075
-  Name: "Main_Menu_Client"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 2456857752610234367
-  UnregisteredParameters {
-    Overrides {
-      Name: "cs:YOOTIL"
-      AssetReference {
-        Id: 16622261663679835299
-      }
-    }
-    Overrides {
-      Name: "cs:logic_button"
-      ObjectReference {
-        SelfId: 7420985129170304630
-      }
-    }
-    Overrides {
-      Name: "cs:menu_container"
-      ObjectReference {
-        SelfId: 11482603222431002241
-      }
-    }
-    Overrides {
-      Name: "cs:credits_button"
-      ObjectReference {
-        SelfId: 10350323938109316302
-      }
-    }
-    Overrides {
-      Name: "cs:credits_panel"
-      ObjectReference {
-        SelfId: 14455612488292174611
-      }
-    }
-    Overrides {
-      Name: "cs:trophies_button"
-      ObjectReference {
-        SelfId: 6166162411575875244
-      }
-    }
-    Overrides {
-      Name: "cs:trophies_panel"
-      ObjectReference {
-        SelfId: 2427144955837788352
-      }
-    }
-    Overrides {
-      Name: "cs:click_sound"
-      ObjectReference {
-        SelfId: 7452552501637593875
-      }
-    }
-    Overrides {
-      Name: "cs:hover_sound"
-      ObjectReference {
-        SelfId: 8328458776128072025
-      }
-    }
-    Overrides {
-      Name: "cs:menu"
-      ObjectReference {
-        SelfId: 3094242208622476276
-      }
-    }
-    Overrides {
-      Name: "cs:bg_effect"
-      ObjectReference {
-        SelfId: 14198457608431680772
-      }
-    }
-    Overrides {
-      Name: "cs:math_button"
-      ObjectReference {
-        SelfId: 10140829487112207987
-      }
-    }
-  }
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Script {
-    ScriptAsset {
-      Id: 5687259373558289114
     }
   }
 }

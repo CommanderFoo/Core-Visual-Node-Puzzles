@@ -1,64 +1,50 @@
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
-local menu = script:GetCustomProperty("menu"):WaitForObject()
 local menu_container = script:GetCustomProperty("menu_container"):WaitForObject()
-local logic_button = script:GetCustomProperty("logic_button"):WaitForObject()
-local math_button = script:GetCustomProperty("math_button"):WaitForObject()
 local bg_effect = script:GetCustomProperty("bg_effect"):WaitForObject()
-
-local trophies_button = script:GetCustomProperty("trophies_button"):WaitForObject()
-local trophies_panel = script:GetCustomProperty("trophies_panel"):WaitForObject()
-
-local credits_button = script:GetCustomProperty("credits_button"):WaitForObject()
-local credits_panel = script:GetCustomProperty("credits_panel"):WaitForObject()
 
 local click_sound = script:GetCustomProperty("click_sound"):WaitForObject()
 local hover_sound = script:GetCustomProperty("hover_sound"):WaitForObject()
 
-local active_panel = nil
-local active_button = nil
+local math_button = script:GetCustomProperty("math_button"):WaitForObject()
+local logic_button = script:GetCustomProperty("logic_button"):WaitForObject()
+
+local buttons_panels = {
+
+	{ 
+
+		button = script:GetCustomProperty("community_button"):WaitForObject(),
+		panel = script:GetCustomProperty("community_panel"):WaitForObject(),
+
+	},
+
+	{
+
+		button = script:GetCustomProperty("donate_button"):WaitForObject(),
+		panel = script:GetCustomProperty("donate_panel"):WaitForObject(),
+
+	},
+
+	{
+		
+		button = script:GetCustomProperty("leaderboards_button"):WaitForObject(),
+		panel = script:GetCustomProperty("leaderboards_panel"):WaitForObject(),
+
+	},
+
+	{
+		
+		button = script:GetCustomProperty("tutorial_button"):WaitForObject(),
+		panel = script:GetCustomProperty("tutorial_panel"):WaitForObject(),
+
+	}
+
+}
+
+local last_active = nil
 local tween = nil
 
-function start()
-	active_panel.visibility = Visibility.FORCE_ON
-end
-
-function change(c)
-	active_panel.y = c.y
-end
-
-function complete()
-	tween = nil
-end
-
-function hide_active(fn)
-	if(active_panel == nil) then
-		fn()
-		return
-	end
-
-	tween = YOOTIL.Tween:new(.5, { y = active_panel.y }, { y = 900 })
-
-	tween:on_complete(fn)
-	tween:on_change(change)
-	tween:set_easing("outBack")
-
-	if(active_button ~= nil) then
-		active_button:SetButtonColor(active_button:GetPressedColor())
-	end
-end
-
-function reset_active()
-	if(active_panel ~= nil) then
-		active_panel.visibility = Visibility.FORCE_OFF
-	end
-
-	if(active_button ~= nil) then
-		active_button:SetButtonColor(active_button:GetPressedColor())
-	end
-end
-
--- Play
+-- Logic
 
 logic_button.clickedEvent:Connect(function()
 	click_sound:Play()
@@ -66,7 +52,7 @@ logic_button.clickedEvent:Connect(function()
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
 		
-		reset_active()
+		hide_last()
 
 		YOOTIL.Events.broadcast_to_server("load_game", false)
 	end)
@@ -85,7 +71,7 @@ math_button.clickedEvent:Connect(function()
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
 
-		reset_active()
+		hide_last()
 
 		YOOTIL.Events.broadcast_to_server("load_game", true)
 	end)
@@ -96,71 +82,66 @@ math_button.hoveredEvent:Connect(function()
 	hover_sound:Play()
 end)
 
--- Trophies
-
-trophies_button.clickedEvent:Connect(function()
-	click_sound:Play()
-
-	if(tween ~= nil or active_panel == trophies_panel) then
+function hide_last()
+	if(last_active == nil) then
 		return
 	end
 
-	hide_active(function()
+	last_active.button:SetButtonColor(last_active.button:GetDisabledColor())
+
+	tween = YOOTIL.Tween:new(.3, { y = 0 }, { y = -900 })
+	tween:set_easing("outBack")
+	tween:on_change(function(c)
+		last_active.panel.y = c.y
+	end)
+
+	tween:on_complete(function()
 		tween = nil
+		last_active.panel.visibility = Visibility.FORCE_OFF
+	end)
+end
 
-		if(active_panel ~= nil) then
-			active_panel.visibility = Visibility.FORCE_OFF
-		end
+function display(o)
+	tween = YOOTIL.Tween:new(.3, { y = -900 }, { y = 0 })
+	tween:set_easing("outBack")
 
-		active_panel = trophies_panel
-		active_button = trophies_button
-
-		tween = YOOTIL.Tween:new(.5, { y = 900 }, { y = 0 })
-
-		tween:on_change(change)
-		tween:on_start(start)
-		tween:set_easing("outBack")
-		tween:on_complete(complete)
+	tween:on_start(function()
+		last_active = o
+		o.panel.visibility = Visibility.FORCE_ON
 	end)
 
-	trophies_button:SetButtonColor(trophies_button:GetHoveredColor())
-end)
+	tween:on_change(function(c)
+		o.panel.y = c.y
+	end)
 
-trophies_button.hoveredEvent:Connect(function()
-	hover_sound:Play()
-end)
+	tween:on_complete(function()
+		tween = nil
+	end)
+end
 
--- Credits
-
-credits_button.clickedEvent:Connect(function()
-	click_sound:Play()
-
-	if(tween ~= nil or active_panel == credits_panel) then
-		return
+function show_panel(o)
+	if(last_active ~= nil) then
+		if(last_active ~= o) then
+			hide_last()
+			Task.Wait(.35)
+			display(o)
+		end
+	else
+		display(o)
 	end
+end
 
-	hide_active(function()
-		if(active_panel ~= nil) then
-			active_panel.visibility = Visibility.FORCE_OFF
-		end
-
-		active_panel = credits_panel
-		active_button = credits_button
-
-		tween = YOOTIL.Tween:new(.3, { y = 850 }, { y = 0 })
-
-		tween:on_change(change)
-		tween:on_start(start)
-		tween:set_easing("outBack")
-		tween:on_complete(complete)
+for _, o in pairs(buttons_panels) do
+	o.button.clickedEvent:Connect(function()
+		click_sound:Play()
+		o.button:SetButtonColor(o.button:GetPressedColor())
+		show_panel(o)
 	end)
 
-	credits_button:SetButtonColor(credits_button:GetHoveredColor())
-end)
-
-credits_button.hoveredEvent:Connect(function()
-	hover_sound:Play()
-end)
+	o.button.hoveredEvent:Connect(function()
+		hover_sound:Play()
+	end)
+end
 
 function Tick(dt)
 	if(tween ~= nil) then
@@ -172,23 +153,9 @@ Events.Connect("show_main_menu", function()
 	Events.Broadcast("hide_ui")
 	Events.Broadcast("close_settings")
 	Events.Broadcast("play_menu_music")
-	
-	menu.x = -350
+
 	menu_container.visibility = Visibility.FORCE_ON
 	bg_effect.visibility = Visibility.FORCE_ON
 
 	Events.Broadcast("transition_out")
-
-	tween = YOOTIL.Tween:new(.8, { x = -350 }, { x = 250 })
-
-	tween:set_easing("outBack")
-	tween:on_change(function(c)
-		menu.x = c.x
-	end)
-	
-	tween:on_complete(function()
-		tween = nil
-	end)
-
-	tween:set_delay(1)
 end)

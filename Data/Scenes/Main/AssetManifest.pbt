@@ -80,12 +80,51 @@ Assets {
   }
 }
 Assets {
+  Id: 5951666917392454283
+  Name: "Tip 50"
+  PlatformAssetType: 24
+  NetReferenceAsset {
+    NetReference {
+      Key: "6cc87457effb47f7912495d341ef5acb"
+      Type {
+        Value: "mc:enetreferencetype:creatorperk"
+      }
+    }
+  }
+}
+Assets {
   Id: 4900954416202036311
   Name: "Center Tri 001"
   PlatformAssetType: 9
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "CenterTri_001"
+  }
+}
+Assets {
+  Id: 2620458082996281893
+  Name: "Tip 100"
+  PlatformAssetType: 24
+  NetReferenceAsset {
+    NetReference {
+      Key: "29d0f303806343cba4cf4b58f67ffb68"
+      Type {
+        Value: "mc:enetreferencetype:creatorperk"
+      }
+    }
+  }
+}
+Assets {
+  Id: 2289610749017511367
+  Name: "Tip 200"
+  PlatformAssetType: 24
+  NetReferenceAsset {
+    NetReference {
+      Key: "bbb42b57ba724005a5e779de2f6da700"
+      Type {
+        Value: "mc:enetreferencetype:creatorperk"
+      }
+    }
   }
 }
 Assets {

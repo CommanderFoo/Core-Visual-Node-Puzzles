@@ -8,14 +8,6 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "cs"
-  }
-  SimpleValue {
-    IntVar: 5
-  }
-}
-Entries {
-  Key {
     StringVar: "mv"
   }
   SimpleValue {
@@ -24,10 +16,26 @@ Entries {
 }
 Entries {
   Key {
+    StringVar: "lnd"
+  }
+  SimpleValue {
+    StringVar: "0@"
+  }
+}
+Entries {
+  Key {
     StringVar: "mnd"
   }
   SimpleValue {
-    StringVar: "1@"
+    StringVar: "0@"
+  }
+}
+Entries {
+  Key {
+    StringVar: "clp"
+  }
+  SimpleValue {
+    IntVar: 0
   }
 }
 Entries {
@@ -40,14 +48,6 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "lnd"
-  }
-  SimpleValue {
-    StringVar: "2@"
-  }
-}
-Entries {
-  Key {
     StringVar: "an"
   }
   SimpleValue {
@@ -56,10 +56,10 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "clp"
+    StringVar: "cs"
   }
   SimpleValue {
-    IntVar: 2
+    IntVar: 0
   }
 }
 Entries {
@@ -67,6 +67,6 @@ Entries {
     StringVar: "cmp"
   }
   SimpleValue {
-    IntVar: 1
+    IntVar: 0
   }
 }
