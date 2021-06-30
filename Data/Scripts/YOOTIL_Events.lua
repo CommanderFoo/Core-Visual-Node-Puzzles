@@ -28,10 +28,6 @@ local _Events = {}
 _Events.queue = Utils.Queue:new()
 
 function _Events.try_again()
-	if(_Events.queue:length() > 20) then
-		warn("Event queue is above 20.")
-	end
-
 	while(_Events.queue:length() > 0) do
 		local data = _Events.queue:front()
         local result = data.method(table.unpack(data.args))
@@ -66,7 +62,7 @@ function _Events.broadcast_to_player(...)
 		local evt_data = {
 			
 			method = Events.BroadcastToPlayer,
-			args = ...
+			args = {...}
 		
 		}
         
@@ -81,7 +77,7 @@ function _Events.broadcast_to_all_players(...)
 		local evt_data = {
 			
 			method = Events.BroadcastToAllPlayers,
-			args = ...
+			args = {...}
 		
 		}
         

@@ -1224,6 +1224,7 @@ ObjectSettings {
     key: 3560492653544681397
     value {
       IsLocked: true
+      IsHidden: true
     }
   }
   ObjectStates {
@@ -6329,3 +6330,4 @@ ObjectSettings {
 }
 DebugPerks {
 }
+LastSavedScene: "Main"

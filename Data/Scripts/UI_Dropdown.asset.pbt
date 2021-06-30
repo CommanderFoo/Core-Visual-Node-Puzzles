@@ -7,6 +7,6 @@ Assets {
   Marketplace {
     Description: "A UI dropdown component where you can select an option from the list.  Easy to setup and use.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Dropdown-Docs/"
   }
-  SerializationVersion: 85
+  SerializationVersion: 91
   DirectlyPublished: true
 }
