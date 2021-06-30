@@ -236,21 +236,9 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:community_button"
-      ObjectReference {
-        SelfId: 3379794466900953135
-      }
-    }
-    Overrides {
       Name: "cs:donate_button"
       ObjectReference {
-        SelfId: 14844984461882649663
-      }
-    }
-    Overrides {
-      Name: "cs:leaderboards_button"
-      ObjectReference {
-        SelfId: 15976286168113499114
+        SelfId: 16320969655512262863
       }
     }
     Overrides {
@@ -260,19 +248,13 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:community_panel"
-      ObjectReference {
-        SelfId: 3312355021415285066
-      }
-    }
-    Overrides {
       Name: "cs:donate_panel"
       ObjectReference {
         SelfId: 9384503764268272933
       }
     }
     Overrides {
-      Name: "cs:leaderboards_panel"
+      Name: "cs:my_games_panel"
       ObjectReference {
         SelfId: 1284222172028452821
       }
@@ -281,6 +263,30 @@ Objects {
       Name: "cs:tutorial_panel"
       ObjectReference {
         SelfId: 6540510692168221284
+      }
+    }
+    Overrides {
+      Name: "cs:my_games_button"
+      ObjectReference {
+        SelfId: 14844984461882649663
+      }
+    }
+    Overrides {
+      Name: "cs:overrun_button"
+      ObjectReference {
+        SelfId: 16535097290882388630
+      }
+    }
+    Overrides {
+      Name: "cs:stonehenge_button"
+      ObjectReference {
+        SelfId: 6430374109958776374
+      }
+    }
+    Overrides {
+      Name: "cs:kooky_button"
+      ObjectReference {
+        SelfId: 8502755276440792793
       }
     }
   }

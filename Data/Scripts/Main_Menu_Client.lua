@@ -9,12 +9,16 @@ local hover_sound = script:GetCustomProperty("hover_sound"):WaitForObject()
 local math_button = script:GetCustomProperty("math_button"):WaitForObject()
 local logic_button = script:GetCustomProperty("logic_button"):WaitForObject()
 
+local overrun_button = script:GetCustomProperty("overrun_button"):WaitForObject()
+local stonehenge_button = script:GetCustomProperty("stonehenge_button"):WaitForObject()
+local kooky_button = script:GetCustomProperty("kooky_button"):WaitForObject()
+
 local buttons_panels = {
 
 	{ 
 
-		button = script:GetCustomProperty("community_button"):WaitForObject(),
-		panel = script:GetCustomProperty("community_panel"):WaitForObject(),
+		button = script:GetCustomProperty("my_games_button"):WaitForObject(),
+		panel = script:GetCustomProperty("my_games_panel"):WaitForObject(),
 
 	},
 
@@ -22,13 +26,6 @@ local buttons_panels = {
 
 		button = script:GetCustomProperty("donate_button"):WaitForObject(),
 		panel = script:GetCustomProperty("donate_panel"):WaitForObject(),
-
-	},
-
-	{
-		
-		button = script:GetCustomProperty("leaderboards_button"):WaitForObject(),
-		panel = script:GetCustomProperty("leaderboards_panel"):WaitForObject(),
 
 	},
 
@@ -43,6 +40,7 @@ local buttons_panels = {
 
 local last_active = nil
 local tween = nil
+local local_player = Game.GetLocalPlayer()
 
 -- Logic
 
@@ -158,4 +156,16 @@ Events.Connect("show_main_menu", function()
 	bg_effect.visibility = Visibility.FORCE_ON
 
 	Events.Broadcast("transition_out")
+end)
+
+overrun_button.clickedEvent:Connect(function()
+	local_player:TransferToGame("bf87a8/overrun")
+end)
+
+stonehenge_button.clickedEvent:Connect(function()
+	local_player:TransferToGame("923e7b/stonehenge")
+end)
+
+kooky_button.clickedEvent:Connect(function()
+	local_player:TransferToGame("3be43c/kooky-racer")
 end)
