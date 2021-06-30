@@ -25,4 +25,5 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Nodes"
 }

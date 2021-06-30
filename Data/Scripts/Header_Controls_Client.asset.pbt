@@ -13,4 +13,5 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Client"
 }

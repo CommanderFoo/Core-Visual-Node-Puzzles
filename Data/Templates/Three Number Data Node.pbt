@@ -1277,7 +1277,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:default"
+              Value: "mc:ebuttonclickmode:preciseclick"
             }
             Font {
               Id: 18375965876900075365
@@ -1778,4 +1778,6 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Data Nodes"
 }

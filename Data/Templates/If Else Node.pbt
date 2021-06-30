@@ -7,7 +7,7 @@ Assets {
       RootId: 15858698794496386356
       Objects {
         Id: 15858698794496386356
-        Name: "Square Circle Triangle Plus If Else Node"
+        Name: "If Else Node"
         Transform {
           Scale {
             X: 1
@@ -3333,7 +3333,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:default"
+              Value: "mc:ebuttonclickmode:preciseclick"
             }
             Font {
               Id: 18375965876900075365
@@ -3844,4 +3844,6 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Logic Nodes"
 }

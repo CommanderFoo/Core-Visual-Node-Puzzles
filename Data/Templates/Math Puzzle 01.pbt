@@ -710,4 +710,5 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Math Puzzles"
 }

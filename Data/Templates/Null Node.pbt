@@ -835,7 +835,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:default"
+              Value: "mc:ebuttonclickmode:preciseclick"
             }
             Font {
             }
@@ -1152,4 +1152,5 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Nodes"
 }

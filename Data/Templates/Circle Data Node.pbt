@@ -42,8 +42,8 @@ Assets {
         Control {
           Width: 250
           Height: 120
-          UIX: -668.690063
-          UIY: 24.7834167
+          UIX: -900
+          UIY: 150
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -889,7 +889,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:default"
+              Value: "mc:ebuttonclickmode:preciseclick"
             }
             Font {
               Id: 18375965876900075365
@@ -1367,4 +1367,6 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Data Nodes"
 }

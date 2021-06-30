@@ -391,4 +391,5 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Misc"
 }

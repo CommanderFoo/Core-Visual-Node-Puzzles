@@ -1,17 +1,25 @@
 Entries {
   Key {
-    StringVar: "mv"
+    StringVar: "cs"
   }
   SimpleValue {
-    IntVar: 100
+    IntVar: 10
   }
 }
 Entries {
   Key {
-    StringVar: "an"
+    StringVar: "clp"
   }
   SimpleValue {
-    IntVar: 0
+    IntVar: 25
+  }
+}
+Entries {
+  Key {
+    StringVar: "sv"
+  }
+  SimpleValue {
+    IntVar: 87
   }
 }
 Entries {
@@ -32,10 +40,10 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "sv"
+    StringVar: "an"
   }
   SimpleValue {
-    IntVar: 87
+    IntVar: 0
   }
 }
 Entries {
@@ -48,25 +56,17 @@ Entries {
 }
 Entries {
   Key {
+    StringVar: "mv"
+  }
+  SimpleValue {
+    IntVar: 100
+  }
+}
+Entries {
+  Key {
     StringVar: "sn"
   }
   SimpleValue {
     IntVar: 1
-  }
-}
-Entries {
-  Key {
-    StringVar: "cs"
-  }
-  SimpleValue {
-    IntVar: 10
-  }
-}
-Entries {
-  Key {
-    StringVar: "clp"
-  }
-  SimpleValue {
-    IntVar: 25
   }
 }

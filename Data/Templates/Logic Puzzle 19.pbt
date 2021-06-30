@@ -1806,4 +1806,5 @@ Assets {
     }
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Logic Puzzles"
 }

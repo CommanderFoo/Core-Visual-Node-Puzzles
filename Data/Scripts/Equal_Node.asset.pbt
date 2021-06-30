@@ -5,4 +5,6 @@ Assets {
   TextAsset {
   }
   SerializationVersion: 91
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Math Nodes"
 }
