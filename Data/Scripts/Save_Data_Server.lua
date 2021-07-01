@@ -164,3 +164,6 @@ end)
 
 Events.Connect("save_data", save_data)
 Events.Connect("set_networked_data", set_networked_data)
+Events.Connect("save_puzzle_completed", function(award, score, is_logic, puzzle_id)
+	print(award, score, is_logic, puzzle_id)
+end)

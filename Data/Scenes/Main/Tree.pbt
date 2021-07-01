@@ -132,11 +132,27 @@ Objects {
       String: "--"
     }
     Overrides {
+      Name: "cs:logic_progress"
+      String: ""
+    }
+    Overrides {
+      Name: "cs:math_progress"
+      String: ""
+    }
+    Overrides {
       Name: "cs:logic_node_data:isrep"
       Bool: true
     }
     Overrides {
       Name: "cs:math_node_data:isrep"
+      Bool: true
+    }
+    Overrides {
+      Name: "cs:logic_progress:isrep"
+      Bool: true
+    }
+    Overrides {
+      Name: "cs:math_progress:isrep"
       Bool: true
     }
   }

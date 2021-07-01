@@ -49,18 +49,26 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		bronze_award:GetChildren()[1].text = string.format("%.0f", bronze_score)
 	end
 
+	local award = 0
+
 	if(score >= gold_score) then
 		API.set_award(gold_award, 1)
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, .1)
+
+		award = 3
 	elseif(score >= silver_score) then
 		API.set_award(gold_award, .1)
 		API.set_award(silver_award, 1)
 		API.set_award(bronze_award, .1)
+		
+		award = 2
 	elseif(score >= bronze_score) then
 		API.set_award(gold_award, .1)
 		API.set_award(silver_award, .1)
 		API.set_award(bronze_award, 1)
+
+		award = 1
 	else
 		API.set_award(gold_award, .1)
 		API.set_award(silver_award, .1)
@@ -68,6 +76,19 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 
 		next_button.isInteractable = false
 		title.text = "Try Again"
+	end
+
+	if(award > 0) then
+		local current_puzzle = 1
+		local is_logic = local_player.clientUserData.logic
+
+		if(is_logic) then
+			current_puzzle = local_player:GetResource("current_logic_puzzle")
+		else
+			current_puzzle = local_player:GetResource("current_math_puzzle")
+		end
+
+		YOOTIL.Events.broadcast_to_server("save_puzzle_completed", award, score, is_logic, current_puzzle)
 	end
 
 	script.parent.parent.visibility = Visibility.FORCE_ON

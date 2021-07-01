@@ -283,11 +283,11 @@ Assets {
           }
           Overrides {
             Name: "cs:third_number"
-            Float: 5
+            Float: 40
           }
           Overrides {
             Name: "cs:third_count"
-            Int: 8
+            Int: 1
           }
         }
         Collidable_v2 {
@@ -400,7 +400,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {
@@ -617,7 +617,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {
@@ -834,7 +834,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {
@@ -1051,7 +1051,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {
@@ -1268,7 +1268,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {
@@ -1493,7 +1493,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {

@@ -377,7 +377,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {
@@ -602,7 +602,7 @@ Assets {
               Value: "mc:etextjustify:center"
             }
             VerticalJustification {
-              Value: "mc:everticaljustification:center"
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {

@@ -52,7 +52,7 @@ logic_button.clickedEvent:Connect(function()
 		
 		hide_last()
 
-		YOOTIL.Events.broadcast_to_server("load_game", true)
+		YOOTIL.Events.broadcast_to_server("load_game", false)
 	end)
 
 end)
