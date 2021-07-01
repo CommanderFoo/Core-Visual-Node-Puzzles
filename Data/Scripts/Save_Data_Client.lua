@@ -1,7 +1,5 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
 
-local puzzle_data = script:GetCustomProperty("puzzle_data"):WaitForObject()
-
 local save_task = nil
 local local_player = Game.GetLocalPlayer()
 local saving = false
@@ -39,16 +37,6 @@ function save()
 	Events.Broadcast("saving")
 	YOOTIL.Events.broadcast_to_server("has_saved", had_data, logic_saving)
 end
-
-puzzle_data.networkedPropertyChangedEvent:Connect(function(obj, prop)
-	if(prop == "logic_node_data") then
-		loaded_logic_node_data = puzzle_data:GetCustomProperty("logic_node_data")
-	end
-
-	if(prop == "math_node_data") then
-		loaded_math_node_data = puzzle_data:GetCustomProperty("math_node_data")
-	end
-end)
 
 function create_nodes(node_data)
 	local split_nodes = {CoreString.Split(node_data, ":")}
@@ -135,21 +123,11 @@ function set_connections(output_connections)
 	API.auto_set_order = true
 end
 
-Events.Connect("load_saved_logic_nodes", function()
-	local loaded_data = loaded_logic_node_data
+Events.Connect("load_saved_logic_nodes", function(logic_id)
+	if(loaded_logic_node_data ~= nil and loaded_logic_node_data ~= "--") then
+		local puzzle_id, node_data = CoreString.Split(loaded_logic_node_data, "@")
 
-	if(loaded_logic_node_data == nil or loaded_logic_node_data == "--") then
-		local already_loaded_data = puzzle_data:GetCustomProperty("logic_node_data")
-
-		if(already_loaded_data ~= nil and already_loaded_data ~= "--") then
-			loaded_data = already_loaded_data
-		end
-	end
-
-	if(loaded_data ~= nil and loaded_data ~= "--") then
-		local puzzle_id, node_data = CoreString.Split(loaded_data, "@")
-
-		if(tonumber(puzzle_id) ~= local_player:GetResource("current_logic_puzzle") or string.len(node_data) < 3) then
+		if(tonumber(puzzle_id) ~= logic_id or string.len(node_data) < 3) then
 			return
 		end
 
@@ -157,21 +135,11 @@ Events.Connect("load_saved_logic_nodes", function()
 	end
 end)
 
-Events.Connect("load_saved_math_nodes", function()
-	local loaded_data = loaded_math_node_data
+Events.Connect("load_saved_math_nodes", function(math_id)
+	if(loaded_math_node_data ~= nil and loaded_math_node_data ~= "--") then
+		local puzzle_id, node_data = CoreString.Split(loaded_math_node_data, "@")
 
-	if(loaded_math_node_data == nil or loaded_math_node_data == "--") then
-		local already_loaded_data = puzzle_data:GetCustomProperty("math_node_data")
-
-		if(already_loaded_data ~= nil and already_loaded_data ~= "--") then
-			loaded_data = already_loaded_data
-		end
-	end
-
-	if(loaded_data ~= nil and loaded_data ~= "--") then
-		local puzzle_id, node_data = CoreString.Split(loaded_data, "@")
-
-		if(tonumber(puzzle_id) ~= local_player:GetResource("current_math_puzzle") or string.len(node_data) < 3) then
+		if(tonumber(puzzle_id) ~= math_id or string.len(node_data) < 3) then
 			return
 		end
 
@@ -200,3 +168,23 @@ Events.Connect("stop_auto_save", function()
 		save_task = nil
 	end
 end)
+
+function set_data(player, key)
+	local data = local_player:GetPrivateNetworkedData(key)
+
+	if(key == "logic_node_data") then
+		loaded_logic_node_data = data
+	elseif(key == "math_node_data") then
+		loaded_math_node_data = data
+	elseif(key == "logic_progress") then
+		Events.Broadcast("update_logic_list", data)
+	elseif(key == "math_progress") then
+		Events.Broadcast("update_math_list", data)
+	end
+end
+
+local_player.privateNetworkedDataChangedEvent:Connect(set_data)
+
+for i, key in ipairs(local_player:GetPrivateNetworkedDataKeys()) do
+    set_data(local_player, key)
+end

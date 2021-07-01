@@ -10,12 +10,19 @@ end)
 --@TODO: REMOVE
 
 local load_solutions = false
-local force_load_logic_puzzle = 25
-local force_load_math_puzzle = 12
+local force_load_logic_puzzle = 1
+local force_load_math_puzzle = 1
 
 -- Prefetch node data and send early.
 
 function on_join(player)
+	player.isVisible = false
+	player.movementControlMode = MovementControlMode.NONE
+	player.lookControlMode = LookControlMode.NONE
+	player.maxJumpCount = 0
+	player.isCrouchEnabled = false
+
+	Task.Wait()
 	Events.Broadcast("set_networked_data", player, true, load_solutions)
 	Events.Broadcast("set_networked_data", player, false, load_solutions)
 end
@@ -44,13 +51,13 @@ function load_game(player, math)
 	player_data.an = player_data.an or 1 -- Nodes Show / Hide
 	player_data.sn = player_data.sn or 0 -- Show / Hide Notifications
 
-	if(force_load_logic_puzzle) then
-		player_data.clp = force_load_logic_puzzle
-	end
+	-- if(force_load_logic_puzzle) then
+	-- 	player_data.clp = force_load_logic_puzzle
+	-- end
 
-	if(force_load_math_puzzle) then
-		player_data.cmp = force_load_math_puzzle
-	end
+	-- if(force_load_math_puzzle) then
+	-- 	player_data.cmp = force_load_math_puzzle
+	-- end
 
 	player:SetResource("speed", player_data.cs)
 	player:SetResource("sfx_volume", player_data.sv)
@@ -65,19 +72,11 @@ end
 
 Events.ConnectForPlayer("load_game", load_game)
 
-Game.playerJoinedEvent:Connect(function(player)
-	player.isVisible = false
-	player.movementControlMode = MovementControlMode.NONE
-	player.lookControlMode = LookControlMode.NONE
-	player.maxJumpCount = 0
-	player.isCrouchEnabled = false
-end)
+Game.playerJoinedEvent:Connect(on_join)
 
 Game.playerLeftEvent:Connect(function(p)
 	Events.Broadcast("save_data", p)
 end)
-
-Game.playerJoinedEvent:Connect(on_join)
 
 Events.ConnectForPlayer("update_player_prefs", function(player, speed, show_nodes)
 	player:SetResource("speed", speed)
@@ -98,4 +97,14 @@ Events.ConnectForPlayer("update_settings", function(player, sfx_vol, music_vol, 
 	else
 		player:SetResource("show_notifications", 1)
 	end
+end)
+
+Events.ConnectForPlayer("load_puzzle_id", function(player, id, is_math)
+	if(not is_math) then
+		player:SetResource("current_logic_puzzle", id)
+	else
+		player:SetResource("current_math_puzzle", id)
+	end
+
+	YOOTIL.Events.broadcast_to_player(player, "load_game", is_math, player:GetResource("current_logic_puzzle"), player:GetResource("current_math_puzzle"), player:GetResource("speed"), player:GetResource("speed"), player:GetResource("sfx_volume"), player:GetResource("show_nodes"))
 end)

@@ -6,12 +6,21 @@ local bg_effect = script:GetCustomProperty("bg_effect"):WaitForObject()
 local click_sound = script:GetCustomProperty("click_sound"):WaitForObject()
 local hover_sound = script:GetCustomProperty("hover_sound"):WaitForObject()
 
-local math_button = script:GetCustomProperty("math_button"):WaitForObject()
-local logic_button = script:GetCustomProperty("logic_button"):WaitForObject()
+local math_play = script:GetCustomProperty("math_play"):WaitForObject()
+local logic_play = script:GetCustomProperty("logic_play"):WaitForObject()
 
 local overrun_button = script:GetCustomProperty("overrun_button"):WaitForObject()
 local stonehenge_button = script:GetCustomProperty("stonehenge_button"):WaitForObject()
 local kooky_button = script:GetCustomProperty("kooky_button"):WaitForObject()
+
+local logic_list = script:GetCustomProperty("logic_list"):WaitForObject()
+local math_list = script:GetCustomProperty("math_list"):WaitForObject()
+
+local logic_list_button = script:GetCustomProperty("logic_list_button"):WaitForObject()
+local math_list_button = script:GetCustomProperty("math_list_button"):WaitForObject()
+
+local puzzle_list_entry = script:GetCustomProperty("puzzle_list_entry")
+local logic_list_scroll = script:GetCustomProperty("logic_list_scroll"):WaitForObject()
 
 local buttons_panels = {
 
@@ -34,6 +43,36 @@ local buttons_panels = {
 		button = script:GetCustomProperty("tutorial_button"):WaitForObject(),
 		panel = script:GetCustomProperty("tutorial_panel"):WaitForObject(),
 
+	},
+
+	{
+		
+		button = script:GetCustomProperty("logic_button"):WaitForObject(),
+		panel = script:GetCustomProperty("logic_panel"):WaitForObject(),
+		just_show = true
+
+	},
+
+	{
+		
+		button = script:GetCustomProperty("math_button"):WaitForObject(),
+		panel = script:GetCustomProperty("math_panel"):WaitForObject(),
+		just_show = true
+
+	},
+
+	{
+		
+		button = script:GetCustomProperty("logic_list_button"):WaitForObject(),
+		panel = script:GetCustomProperty("logic_list"):WaitForObject()
+
+	},
+
+	{
+		
+		button = script:GetCustomProperty("math_list_button"):WaitForObject(),
+		panel = script:GetCustomProperty("math_list"):WaitForObject()
+
 	}
 
 }
@@ -42,43 +81,44 @@ local last_active = nil
 local tween = nil
 local local_player = Game.GetLocalPlayer()
 
+function play_hover()
+	hover_sound:Play()
+end
+
 -- Logic
 
-logic_button.clickedEvent:Connect(function()
+logic_play.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
 		
 		hide_last()
+		last_active = nil
 
 		YOOTIL.Events.broadcast_to_server("load_game", false)
 	end)
-
 end)
 
-logic_button.hoveredEvent:Connect(function()
-	hover_sound:Play()
-end)
+logic_play.hoveredEvent:Connect(play_hover)
 
 -- Math
 
-math_button.clickedEvent:Connect(function()
+math_play.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
 
 		hide_last()
+		last_active = nil
 
 		YOOTIL.Events.broadcast_to_server("load_game", true)
 	end)
 
 end)
 
-math_button.hoveredEvent:Connect(function()
-	hover_sound:Play()
-end)
+math_play.hoveredEvent:Connect(play_hover)
 
 function hide_last()
 	if(last_active == nil) then
@@ -87,41 +127,54 @@ function hide_last()
 
 	last_active.button:SetButtonColor(last_active.button:GetDisabledColor())
 
-	tween = YOOTIL.Tween:new(.3, { y = 0 }, { y = -900 })
-	tween:set_easing("outBack")
-	tween:on_change(function(c)
-		last_active.panel.y = c.y
-	end)
-
-	tween:on_complete(function()
-		tween = nil
+	if(last_active.just_show) then
 		last_active.panel.visibility = Visibility.FORCE_OFF
-	end)
+	else
+		tween = YOOTIL.Tween:new(.3, { y = 0 }, { y = -900 })
+		tween:set_easing("outBack")
+		tween:on_change(function(c)
+			last_active.panel.y = c.y
+		end)
+
+		tween:on_complete(function()
+			tween = nil
+			last_active.panel.visibility = Visibility.FORCE_OFF
+		end)
+	end
 end
 
 function display(o)
-	tween = YOOTIL.Tween:new(.3, { y = -900 }, { y = 0 })
-	tween:set_easing("outBack")
-
-	tween:on_start(function()
+	if(o.just_show) then
 		last_active = o
 		o.panel.visibility = Visibility.FORCE_ON
-	end)
+	else
+		tween = YOOTIL.Tween:new(.3, { y = -900 }, { y = 0 })
+		tween:set_easing("outBack")
 
-	tween:on_change(function(c)
-		o.panel.y = c.y
-	end)
+		tween:on_start(function()
+			last_active = o
+			o.panel.visibility = Visibility.FORCE_ON
+		end)
 
-	tween:on_complete(function()
-		tween = nil
-	end)
+		tween:on_change(function(c)
+			o.panel.y = c.y
+		end)
+
+		tween:on_complete(function()
+			tween = nil
+		end)
+	end
 end
 
 function show_panel(o)
 	if(last_active ~= nil) then
 		if(last_active ~= o) then
 			hide_last()
-			Task.Wait(.35)
+
+			if(not last_active.just_show) then
+				Task.Wait(.35)
+			end
+
 			display(o)
 		end
 	else
@@ -136,9 +189,7 @@ for _, o in pairs(buttons_panels) do
 		show_panel(o)
 	end)
 
-	o.button.hoveredEvent:Connect(function()
-		hover_sound:Play()
-	end)
+	o.button.hoveredEvent:Connect(play_hover)
 end
 
 function Tick(dt)
@@ -169,3 +220,101 @@ end)
 kooky_button.clickedEvent:Connect(function()
 	local_player:TransferToGame("3be43c/kooky-racer")
 end)
+
+function open_up_logic_puzzle(id)
+	local entry = logic_list_scroll:FindChildByName("Puzzle " .. tostring(id))
+
+	entry.isInteractable = true
+	entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
+	entry:GetCustomProperty("name_txt"):GetObject().x = 15
+end
+
+Events.Connect("update_logic_list", function(data)
+	if(data ~= nil) then
+		local last_id = 1
+
+		for i, p in ipairs(data) do
+			local entry = logic_list_scroll:FindChildByName("Puzzle " .. tostring(p[1]))
+
+			if(entry ~= nil) then
+				if(p[2] > 0) then
+					last_id = p[1] + 1
+
+					entry.isInteractable = true
+					entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
+					entry:GetCustomProperty("name_txt"):GetObject().x = 15
+
+					if(p[2] == 3) then
+						local gold = entry:GetCustomProperty("gold"):GetObject()
+						local col = gold:GetColor()
+
+						col.a = 1
+						
+						gold:SetColor(col)
+					elseif(p[2] == 2) then
+						local silver = entry:GetCustomProperty("silver"):GetObject()
+						local col = silver:GetColor()
+
+						col.a = 1
+						
+						silver:SetColor(col)
+					elseif(p[2] == 1) then
+						local bronze = entry:GetCustomProperty("bronze"):GetObject()
+						local col = bronze:GetColor()
+
+						col.a = 1
+						
+						bronze:SetColor(col)
+					end
+				end
+			end
+		end
+
+		if(last_id <= 25) then
+			open_up_logic_puzzle(last_id)
+		end
+	end
+end)
+
+Events.Connect("update_math_list", function(data)
+	--print(data)
+end)
+
+local offset = 0
+local clicked = false
+
+for i = 1, 25 do
+	local entry = World.SpawnAsset(puzzle_list_entry, { parent = logic_list_scroll })
+
+	entry:GetCustomProperty("name_txt"):GetObject().text = "PUZZLE #" .. tostring(i)
+
+	if(i == 1) then
+		entry.isInteractable = true
+		entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
+		entry:GetCustomProperty("name_txt"):GetObject().x = 15
+	end
+
+	entry.clickedEvent:Connect(function()
+		if(clicked) then
+			return
+		end
+
+		clicked = true
+
+		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
+			Events.Broadcast("transition_in", function()
+				menu_container.visibility = Visibility.FORCE_OFF
+				
+				
+				last_active = nil
+		
+				YOOTIL.Events.broadcast_to_server("load_game", false)
+				clicked = false
+			end)
+		end
+	end)
+
+	entry.name = "Puzzle " .. tostring(i)
+	entry.y = offset
+	offset = offset + 60
+end

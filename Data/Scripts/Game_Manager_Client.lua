@@ -38,9 +38,9 @@ Events.Connect("load_game", function(math, logic_id, math_id, speed, sfx_vol, mu
 	end
 
 	if(math) then
-		Events.Broadcast("load_saved_math_nodes")
+		Events.Broadcast("load_saved_math_nodes", logic_id)
 	else
-		Events.Broadcast("load_saved_logic_nodes")
+		Events.Broadcast("load_saved_logic_nodes", math_id)
 	end
 	
 	Events.Broadcast("transition_out", function()

@@ -2,8 +2,6 @@ local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 local Logic_Solutions = require(script:GetCustomProperty("logic_puzzle_solutions"))
 local Math_Solutions = require(script:GetCustomProperty("math_puzzle_solutions"))
 
-local puzzle_data = script:GetCustomProperty("puzzle_data"):WaitForObject()
-
 -- Internal ID | Unique ID | Position | Condition | Limit | Output Connections | Order
 
 function save_data(player)
@@ -39,6 +37,9 @@ function save_data(player)
 		data = {}
 	end
 	
+	data.lp_p = player.serverUserData.logic_progress or {}
+	data.mp_p = player.serverUserData.math_progress or {}
+
 	--YOOTIL.Utils.dump(data)
 
 	Storage.SetPlayerData(player, data)
@@ -58,6 +59,9 @@ function set_networked_data(player, logic_saving, load_solutions)
 	local player_data = Storage.GetPlayerData(player)
 	local data = ""
 	
+	player.serverUserData.logic_progress = player_data.lp_p or {}
+	player.serverUserData.math_progress = player_data.mp_p or {}
+
 	if(load_solutions) then
 		local player_data = Storage.GetPlayerData(player)
 		local clp = 1
@@ -113,9 +117,15 @@ function set_networked_data(player, logic_saving, load_solutions)
 	end
 
 	if(logic_saving) then
-		puzzle_data:SetNetworkedCustomProperty("logic_node_data", data)
+		player:SetPrivateNetworkedData("logic_node_data", data)
+		player:SetPrivateNetworkedData("logic_progress", player.serverUserData.logic_progress)
+		--puzzle_data:SetNetworkedCustomProperty("logic_node_data", data)
+		--puzzle_data:SetNetworkedCustomProperty("logic_progress", YOOTIL.JSON.encode(player.serverUserData.logic_progress))
 	else
-		puzzle_data:SetNetworkedCustomProperty("math_node_data", data)
+		player:SetPrivateNetworkedData("math_node_data", data)
+		player:SetPrivateNetworkedData("math_progress", player.serverUserData.math_progress)
+		--puzzle_data:SetNetworkedCustomProperty("math_node_data", data)
+		--puzzle_data:SetNetworkedCustomProperty("math_progress", YOOTIL.JSON.encode(player.serverUserData.math_progress))
 	end
 end
 
@@ -162,8 +172,70 @@ Events.ConnectForPlayer("save_init", function(player, logic_saving)
 	end
 end)
 
+function has_logic_progress_entry(player, id)
+	for i, d in ipairs(player.serverUserData.logic_progress) do
+		if(d[1] == id) then
+			return d
+		end
+	end
+
+	return nil
+end
+
+function has_math_progress_entry(player, id)
+	for i, d in ipairs(player.serverUserData.math_progress) do
+		if(d[1] == id) then
+			return d
+		end
+	end
+
+	return nil
+end
+
 Events.Connect("save_data", save_data)
 Events.Connect("set_networked_data", set_networked_data)
-Events.Connect("save_puzzle_completed", function(award, score, is_logic, puzzle_id)
-	print(award, score, is_logic, puzzle_id)
+Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, is_logic, puzzle_id)
+	if(is_logic) then
+		local entry = has_logic_progress_entry(player, puzzle_id)
+
+		if(entry ~= nil) then
+			if(award > entry[2]) then
+				entry[2] = award
+			end
+
+			if(score > entry[3]) then
+				entry[3] = score
+				entry[4] = time()
+			end
+		else
+			player.serverUserData.logic_progress[#player.serverUserData.logic_progress + 1] = {
+
+				puzzle_id, award, score, time()
+
+			}
+		end
+
+		player:SetPrivateNetworkedData("logic_progress", player.serverUserData.logic_progress)
+	else
+		local entry = has_math_progress_entry(player, puzzle_id)
+
+		if(entry ~= nil) then
+			if(award > entry[2]) then
+				entry[2] = award
+			end
+
+			if(score > entry[3]) then
+				entry[3] = score
+				entry[4] = time()
+			end
+		else
+			player.serverUserData.math_progress[#player.serverUserData.math_progress + 1] = {
+
+				puzzle_id, award, score, time()
+
+			}
+		end
+
+		player:SetPrivateNetworkedData("math_progress", player.serverUserData.math_progress)
+	end
 end)

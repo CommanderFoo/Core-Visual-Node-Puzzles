@@ -40,6 +40,12 @@ Assets {
           Id: 12596908998463037342
         }
       }
+      Overrides {
+        Name: "cs:YOOTIL_JSON"
+        AssetReference {
+          Id: 10662634911606700621
+        }
+      }
     }
   }
   Marketplace {

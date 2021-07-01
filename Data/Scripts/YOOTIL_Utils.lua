@@ -170,4 +170,40 @@ function Utils.uuid()
 	end)
 end
 
+function Utils.first_to_upper(str)
+    return (str:gsub("^%l", string.upper))
+end
+
+function Utils.copy_table(t)
+	local tmp = {}
+
+	for k, v in pairs(t) do
+		tmp[k] = v
+	end
+
+	return tmp
+end
+
+function Utils.table_concat(t1, t2)
+	for i = 1, #t2 do
+		t1[#t1 + 1] = t2[i]
+	end
+
+	return t1
+end
+
+function Utils.table_unique(t1)
+	local hash = {}
+	local res = {}
+
+	for _, v in ipairs(t1) do
+		if(not hash[v]) then
+			res[#res + 1] = v
+			hash[v] = true
+		end
+	end
+	
+	return res
+end
+
 return Utils

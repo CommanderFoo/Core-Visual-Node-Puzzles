@@ -53,12 +53,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:puzzle_data"
-      ObjectReference {
-        SelfId: 3720954960903579450
-      }
-    }
-    Overrides {
       Name: "cs:logic_puzzle_solutions"
       AssetReference {
         Id: 18057690391871807445
@@ -105,7 +99,7 @@ Objects {
     Overrides {
       Name: "cs:data"
       ObjectReference {
-        SelfId: 3720954960903579450
+        SelfId: 841534158063459245
       }
     }
     Overrides {
@@ -224,18 +218,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:math_button"
-      ObjectReference {
-        SelfId: 10162472854146894300
-      }
-    }
-    Overrides {
-      Name: "cs:logic_button"
-      ObjectReference {
-        SelfId: 3922638577498897365
-      }
-    }
-    Overrides {
       Name: "cs:donate_button"
       ObjectReference {
         SelfId: 16320969655512262863
@@ -289,6 +271,78 @@ Objects {
         SelfId: 8502755276440792793
       }
     }
+    Overrides {
+      Name: "cs:logic_button"
+      ObjectReference {
+        SelfId: 3922638577498897365
+      }
+    }
+    Overrides {
+      Name: "cs:logic_panel"
+      ObjectReference {
+        SelfId: 5780150087674612895
+      }
+    }
+    Overrides {
+      Name: "cs:math_button"
+      ObjectReference {
+        SelfId: 10162472854146894300
+      }
+    }
+    Overrides {
+      Name: "cs:math_panel"
+      ObjectReference {
+        SelfId: 17340309450090995398
+      }
+    }
+    Overrides {
+      Name: "cs:logic_play"
+      ObjectReference {
+        SelfId: 267037278439045037
+      }
+    }
+    Overrides {
+      Name: "cs:math_play"
+      ObjectReference {
+        SelfId: 11298080228596788631
+      }
+    }
+    Overrides {
+      Name: "cs:logic_list"
+      ObjectReference {
+        SelfId: 3248366722252660780
+      }
+    }
+    Overrides {
+      Name: "cs:math_list"
+      ObjectReference {
+        SelfId: 12120350464795933351
+      }
+    }
+    Overrides {
+      Name: "cs:logic_list_button"
+      ObjectReference {
+        SelfId: 15860248540404834328
+      }
+    }
+    Overrides {
+      Name: "cs:math_list_button"
+      ObjectReference {
+        SelfId: 15868026784496972201
+      }
+    }
+    Overrides {
+      Name: "cs:puzzle_list_entry"
+      AssetReference {
+        Id: 1647465547331546921
+      }
+    }
+    Overrides {
+      Name: "cs:logic_list_scroll"
+      ObjectReference {
+        SelfId: 6404696242457048192
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -325,12 +379,6 @@ Objects {
       Name: "cs:API"
       AssetReference {
         Id: 11355776926042268297
-      }
-    }
-    Overrides {
-      Name: "cs:puzzle_data"
-      ObjectReference {
-        SelfId: 3720954960903579450
       }
     }
   }
@@ -865,7 +913,7 @@ Objects {
     Overrides {
       Name: "cs:data"
       ObjectReference {
-        SelfId: 3720954960903579450
+        SelfId: 841534158063459245
       }
     }
     Overrides {
