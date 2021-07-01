@@ -14,5 +14,5 @@ Assets {
   }
   SerializationVersion: 91
   VirtualFolderPath: "Nodes"
-  VirtualFolderPath: "Data Nodes"
+  VirtualFolderPath: "Logic Nodes"
 }

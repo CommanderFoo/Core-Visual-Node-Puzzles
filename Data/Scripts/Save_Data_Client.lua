@@ -31,6 +31,8 @@ function save()
 			else
 				YOOTIL.Events.broadcast_to_server("save_math_node", i, n:get_internal_id(), n:get_unique_id(), n:get_position_as_string(), n:get_condition(), n:get_amount(), n:get_output_connections_as_string(), n:get_order())
 			end
+
+			Task.Wait(.1)
 		end
 	end
 

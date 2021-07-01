@@ -2219,17 +2219,26 @@ function Node_Add:new(r, options)
 			this:monitor_queue(from_node:get_speed())
 		end
 
+		local has_connection = false
+
 		if(this:is_receiving_top(data.connection_to_id)) then
 			top_queue:push(data.value)
 			top_queue_count.text = tostring(top_queue:length())
+			has_connection = true
+		else
+			bottom_queue:push(data.value)
+			bottom_queue_count.text = tostring(bottom_queue:length())
+			has_connection = true
+		end
 
+		if(has_connection) then
 			local queue_func = function(top_value, bottom_value)
 				Events.Broadcast("score", this.options.node_time or 0)
 
-				local connected_to_id = this:has_top_connection()
+				local connection_to_id = this:has_top_connection()
 
-				if(connected_to_id) then
-					data.connected_to_id = connected_to_id
+				if(connection_to_id) then
+					data.connection_to_id = connection_to_id
 					data.value = tonumber(string.format("%.02f", top_value + bottom_value))
 
 					local line = this:get_connector_line(true)
@@ -2280,9 +2289,6 @@ function Node_Add:new(r, options)
 			else
 				queue_func()
 			end
-		else
-			bottom_queue:push(data.value)
-			bottom_queue_count.text = tostring(bottom_queue:length())
 		end
 	end
 
@@ -2407,10 +2413,10 @@ function Node_Substract:new(r, options)
 			local queue_func = function(top_value, bottom_value)
 				Events.Broadcast("score", this.options.node_time or 0)
 
-				local connected_to_id = this:has_top_connection()
+				local connection_to_id = this:has_top_connection()
 
-				if(connected_to_id) then
-					data.connected_to_id = connected_to_id
+				if(connection_to_id) then
+					data.connection_to_id = connection_to_id
 					data.value = tonumber(string.format("%.02f", top_value - bottom_value))
 
 					local line = this:get_connector_line(true)
@@ -2588,10 +2594,10 @@ function Node_Multiply:new(r, options)
 			local queue_func = function(top_value, bottom_value)
 				Events.Broadcast("score", this.options.node_time or 0)
 
-				local connected_to_id = this:has_top_connection()
+				local connection_to_id = this:has_top_connection()
 
-				if(connected_to_id) then
-					data.connected_to_id = connected_to_id
+				if(connection_to_id) then
+					data.connection_to_id = connection_to_id
 					data.value = tonumber(string.format("%.02f", top_value * bottom_value))
 
 					local line = this:get_connector_line(true)
@@ -2769,10 +2775,10 @@ function Node_Divide:new(r, options)
 			local queue_func = function(top_value, bottom_value)
 				Events.Broadcast("score", this.options.node_time or 0)
 
-				local connected_to_id = this:has_top_connection()
+				local connection_to_id = this:has_top_connection()
 
-				if(connected_to_id) then
-					data.connected_to_id = connected_to_id
+				if(connection_to_id) then
+					data.connection_to_id = connection_to_id
 					data.value = tonumber(string.format("%.02f", top_value / bottom_value))
 
 					local line = this:get_connector_line(true)

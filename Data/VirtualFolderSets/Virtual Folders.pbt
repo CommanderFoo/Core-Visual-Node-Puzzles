@@ -26,11 +26,6 @@ Assets {
     }
     Folders {
       VirtualFolderPath: "Nodes"
-      VirtualFolderPath: "Data Nodes"
-      PlatformAssetType: 3
-    }
-    Folders {
-      VirtualFolderPath: "Nodes"
       VirtualFolderPath: "Output Nodes"
       PlatformAssetType: 3
     }
@@ -46,11 +41,6 @@ Assets {
     Folders {
       VirtualFolderPath: "Nodes"
       VirtualFolderPath: "Output Nodes"
-      PlatformAssetType: 5
-    }
-    Folders {
-      VirtualFolderPath: "Nodes"
-      VirtualFolderPath: "Data Nodes"
       PlatformAssetType: 5
     }
     Folders {

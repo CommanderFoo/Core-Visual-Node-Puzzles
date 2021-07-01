@@ -7104,7 +7104,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceoff"
+    Value: "mc:evisibilitysetting:forceon"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -7112,7 +7112,6 @@ Objects {
   Control {
     Width: 350
     Height: 850
-    UIX: 400
     UIY: 35
     RenderTransformPivot {
       Anchor {
@@ -8965,6 +8964,12 @@ Objects {
       Name: "cs:MathPuzzle11"
       AssetReference {
         Id: 3037894995112338946
+      }
+    }
+    Overrides {
+      Name: "cs:MathPuzzle12"
+      AssetReference {
+        Id: 7870247685276809878
       }
     }
   }
