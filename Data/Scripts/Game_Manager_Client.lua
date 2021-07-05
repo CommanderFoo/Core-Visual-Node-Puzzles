@@ -48,6 +48,10 @@ Events.Connect("load_game", function(math, logic_id, math_id, speed, sfx_vol, mu
 	end)
 end)
 
+Events.Connect("show_base_ui", function()
+	base_ui.visibility = Visibility.FORCE_ON
+end)
+
 Events.Connect("show_ui", function()
 	base_ui.visibility = Visibility.FORCE_ON
 	node_ui.visibility = Visibility.FORCE_ON

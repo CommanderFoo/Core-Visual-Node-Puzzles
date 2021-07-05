@@ -23,6 +23,8 @@ local puzzle_list_entry = script:GetCustomProperty("puzzle_list_entry")
 local logic_list_scroll = script:GetCustomProperty("logic_list_scroll"):WaitForObject()
 local math_list_scroll = script:GetCustomProperty("math_list_scroll"):WaitForObject()
 
+local tutorial_button = script:GetCustomProperty("tutorial_button"):WaitForObject()
+
 local buttons_panels = {
 
 	{ 
@@ -36,13 +38,6 @@ local buttons_panels = {
 
 		button = script:GetCustomProperty("donate_button"):WaitForObject(),
 		panel = script:GetCustomProperty("donate_panel"):WaitForObject(),
-
-	},
-
-	{
-		
-		button = script:GetCustomProperty("tutorial_button"):WaitForObject(),
-		panel = script:GetCustomProperty("tutorial_panel"):WaitForObject(),
 
 	},
 
@@ -74,9 +69,19 @@ local buttons_panels = {
 		button = script:GetCustomProperty("math_list_button"):WaitForObject(),
 		panel = script:GetCustomProperty("math_list"):WaitForObject()
 
+	},
+
+	{
+		
+		button = script:GetCustomProperty("node_glossary_button"):WaitForObject(),
+		panel = script:GetCustomProperty("node_glossary_panel"):WaitForObject()
+
 	}
 
 }
+
+local tutorial_tpl = script:GetCustomProperty("tutorial_tpl")
+local tutorial_ui = script:GetCustomProperty("tutorial_ui"):WaitForObject()
 
 local last_active = nil
 local tween = nil
@@ -86,6 +91,26 @@ function play_hover()
 	hover_sound:Play()
 end
 
+-- Tutorial
+
+tutorial_button.clickedEvent:Connect(function()
+	click_sound:Play()
+
+	Events.Broadcast("transition_in", function()
+		menu_container.visibility = Visibility.FORCE_OFF
+		
+		clean_up()
+
+		Events.Broadcast("show_base_ui")
+
+		World.SpawnAsset(tutorial_tpl, { parent = tutorial_ui })
+
+		Events.Broadcast("transition_out", function()
+			Events.Broadcast("start_tutorial")
+		end)
+	end)
+end)
+
 -- Logic
 
 logic_play.clickedEvent:Connect(function()
@@ -94,6 +119,7 @@ logic_play.clickedEvent:Connect(function()
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
 		
+		clean_up()
 		hide_last()
 		last_active = nil
 
@@ -111,6 +137,7 @@ math_play.clickedEvent:Connect(function()
 	Events.Broadcast("transition_in", function()
 		menu_container.visibility = Visibility.FORCE_OFF
 
+		clean_up()
 		hide_last()
 		last_active = nil
 
@@ -201,6 +228,14 @@ function Tick(dt)
 	if(tween ~= nil) then
 		tween:tween(dt)
 	end
+end
+
+function clean_up()
+	math_list.visibility = Visibility.FORCE_OFF
+	math_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
+
+	logic_list.visibility = Visibility.FORCE_OFF
+	logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
 end
 
 Events.Connect("show_main_menu", function()

@@ -261,6 +261,7 @@ Objects {
   ChildIds: 5361995976725761005
   ChildIds: 3627026760658224672
   ChildIds: 9651766503307601252
+  ChildIds: 10486534859035465714
   ChildIds: 3560492653544681397
   ChildIds: 18256827771134331817
   Collidable_v2 {
@@ -723,6 +724,7 @@ Objects {
   ChildIds: 3922638577498897365
   ChildIds: 10162472854146894300
   ChildIds: 240980488697631517
+  ChildIds: 140392818205184969
   ChildIds: 14844984461882649663
   ChildIds: 16320969655512262863
   Collidable_v2 {
@@ -789,7 +791,7 @@ Objects {
   Control {
     Width: 260
     Height: 80
-    UIX: 520
+    UIX: 650
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -946,7 +948,7 @@ Objects {
   Control {
     Width: 260
     Height: 80
-    UIX: 260
+    UIX: 390
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -1076,6 +1078,163 @@ Objects {
   }
 }
 Objects {
+  Id: 140392818205184969
+  Name: "Node Glossary"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 5253677316244535897
+  ChildIds: 12239909245855010872
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 260
+    Height: 80
+    UIX: 130
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Button {
+      FontColor {
+        A: 1
+      }
+      FontSize: 27
+      ButtonColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.4
+      }
+      HoveredColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.8
+      }
+      PressedColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.8
+      }
+      DisabledColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.4
+      }
+      Brush {
+        Id: 9402814787072448834
+      }
+      IsButtonEnabled: true
+      ClickMode {
+        Value: "mc:ebuttonclickmode:default"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:topcenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:topcenter"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 12239909245855010872
+  Name: "UI Text Box"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 140392818205184969
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 200
+    Height: 42
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    UseParentWidth: true
+    Text {
+      Label: "NODE GLOSSARY"
+      Color {
+        R: 1
+        G: 0.898
+        B: 0.898
+        A: 1
+      }
+      Size: 24
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      AutoWrapText: true
+      Font {
+        Id: 18375965876900075365
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:top"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+    }
+  }
+}
+Objects {
   Id: 240980488697631517
   Name: "Tutorial"
   Transform {
@@ -1103,6 +1262,7 @@ Objects {
   Control {
     Width: 260
     Height: 80
+    UIX: -130
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -1260,7 +1420,7 @@ Objects {
   Control {
     Width: 260
     Height: 80
-    UIX: -260
+    UIX: -390
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -1786,7 +1946,7 @@ Objects {
   Control {
     Width: 260
     Height: 80
-    UIX: -520
+    UIX: -650
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -2467,6 +2627,59 @@ Objects {
   }
   Relevance {
     Value: "mc:eproxyrelevance:medium"
+  }
+}
+Objects {
+  Id: 10486534859035465714
+  Name: "Tutorial UI"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8001455622970484507
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Control {
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Canvas {
+      ContentType {
+        Value: "mc:ecanvascontenttype:dynamic"
+      }
+      Opacity: 1
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:topleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:topleft"
+        }
+      }
+    }
   }
 }
 Objects {
@@ -7801,6 +8014,7 @@ Objects {
   Control {
     Width: 350
     Height: 850
+    UIX: 400
     UIY: 35
     RenderTransformPivot {
       Anchor {

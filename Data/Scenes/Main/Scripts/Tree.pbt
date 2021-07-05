@@ -242,12 +242,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:tutorial_panel"
-      ObjectReference {
-        SelfId: 6540510692168221284
-      }
-    }
-    Overrides {
       Name: "cs:my_games_button"
       ObjectReference {
         SelfId: 14844984461882649663
@@ -347,6 +341,30 @@ Objects {
       Name: "cs:math_list_scroll"
       ObjectReference {
         SelfId: 1612909182318786611
+      }
+    }
+    Overrides {
+      Name: "cs:tutorial_tpl"
+      AssetReference {
+        Id: 4992515830166844185
+      }
+    }
+    Overrides {
+      Name: "cs:tutorial_ui"
+      ObjectReference {
+        SelfId: 10486534859035465714
+      }
+    }
+    Overrides {
+      Name: "cs:node_glossary_button"
+      ObjectReference {
+        SelfId: 140392818205184969
+      }
+    }
+    Overrides {
+      Name: "cs:node_glossary_panel"
+      ObjectReference {
+        SelfId: 13270959195719678624
       }
     }
   }
