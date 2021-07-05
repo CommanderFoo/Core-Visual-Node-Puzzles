@@ -27,7 +27,7 @@ function on_join(player)
 	Events.Broadcast("set_networked_data", player, false, load_solutions)
 end
 
-function load_game(player, math)
+function load_data(player)
 	local player_data = Storage.GetPlayerData(player)
 	
 	if(clear_player_data) then
@@ -67,6 +67,12 @@ function load_game(player, math)
 	player:SetResource("current_logic_puzzle", player_data.clp)
 	player:SetResource("current_math_puzzle", player_data.cmp)
 
+	return player_data
+end
+
+function load_game(player, math)
+	local player_data = load_data(player)
+
 	YOOTIL.Events.broadcast_to_player(player, "load_game", math, player_data.clp, player_data.cmp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
 end
 
@@ -100,11 +106,15 @@ Events.ConnectForPlayer("update_settings", function(player, sfx_vol, music_vol, 
 end)
 
 Events.ConnectForPlayer("load_puzzle_id", function(player, id, is_math)
+	local player_data = load_data(player)
+
 	if(not is_math) then
 		player:SetResource("current_logic_puzzle", id)
+		player_data.clp = id
 	else
 		player:SetResource("current_math_puzzle", id)
+		player_data.cmp = id
 	end
 
-	YOOTIL.Events.broadcast_to_player(player, "load_game", is_math, player:GetResource("current_logic_puzzle"), player:GetResource("current_math_puzzle"), player:GetResource("speed"), player:GetResource("speed"), player:GetResource("sfx_volume"), player:GetResource("show_nodes"))
+	YOOTIL.Events.broadcast_to_player(player, "load_game", is_math,  player_data.clp, player_data.cmp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
 end)

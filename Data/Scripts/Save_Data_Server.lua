@@ -40,8 +40,7 @@ function save_data(player)
 	data.lp_p = player.serverUserData.logic_progress or {}
 	data.mp_p = player.serverUserData.math_progress or {}
 
-	--YOOTIL.Utils.dump(data)
-
+	--data = {}
 	Storage.SetPlayerData(player, data)
 end
 
@@ -119,13 +118,9 @@ function set_networked_data(player, logic_saving, load_solutions)
 	if(logic_saving) then
 		player:SetPrivateNetworkedData("logic_node_data", data)
 		player:SetPrivateNetworkedData("logic_progress", player.serverUserData.logic_progress)
-		--puzzle_data:SetNetworkedCustomProperty("logic_node_data", data)
-		--puzzle_data:SetNetworkedCustomProperty("logic_progress", YOOTIL.JSON.encode(player.serverUserData.logic_progress))
 	else
 		player:SetPrivateNetworkedData("math_node_data", data)
 		player:SetPrivateNetworkedData("math_progress", player.serverUserData.math_progress)
-		--puzzle_data:SetNetworkedCustomProperty("math_node_data", data)
-		--puzzle_data:SetNetworkedCustomProperty("math_progress", YOOTIL.JSON.encode(player.serverUserData.math_progress))
 	end
 end
 
@@ -205,12 +200,11 @@ Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, 
 
 			if(score > entry[3]) then
 				entry[3] = score
-				entry[4] = time()
 			end
 		else
 			player.serverUserData.logic_progress[#player.serverUserData.logic_progress + 1] = {
 
-				puzzle_id, award, score, time()
+				puzzle_id, award, score
 
 			}
 		end
@@ -226,12 +220,11 @@ Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, 
 
 			if(score > entry[3]) then
 				entry[3] = score
-				entry[4] = time()
 			end
 		else
 			player.serverUserData.math_progress[#player.serverUserData.math_progress + 1] = {
 
-				puzzle_id, award, score, time()
+				puzzle_id, award, score
 
 			}
 		end

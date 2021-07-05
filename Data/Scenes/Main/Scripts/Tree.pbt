@@ -343,6 +343,12 @@ Objects {
         SelfId: 6404696242457048192
       }
     }
+    Overrides {
+      Name: "cs:math_list_scroll"
+      ObjectReference {
+        SelfId: 1612909182318786611
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -661,11 +667,11 @@ Objects {
     }
     Overrides {
       Name: "cs:in_time"
-      Float: 1
+      Float: 0.6
     }
     Overrides {
       Name: "cs:out_time"
-      Float: 1
+      Float: 0.6
     }
     Overrides {
       Name: "cs:color"

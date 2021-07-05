@@ -21,6 +21,7 @@ local math_list_button = script:GetCustomProperty("math_list_button"):WaitForObj
 
 local puzzle_list_entry = script:GetCustomProperty("puzzle_list_entry")
 local logic_list_scroll = script:GetCustomProperty("logic_list_scroll"):WaitForObject()
+local math_list_scroll = script:GetCustomProperty("math_list_scroll"):WaitForObject()
 
 local buttons_panels = {
 
@@ -192,6 +193,10 @@ for _, o in pairs(buttons_panels) do
 	o.button.hoveredEvent:Connect(play_hover)
 end
 
+function reset_lists()
+
+end
+
 function Tick(dt)
 	if(tween ~= nil) then
 		tween:tween(dt)
@@ -229,6 +234,14 @@ function open_up_logic_puzzle(id)
 	entry:GetCustomProperty("name_txt"):GetObject().x = 15
 end
 
+function open_up_math_puzzle(id)
+	local entry = math_list_scroll:FindChildByName("Puzzle " .. tostring(id))
+
+	entry.isInteractable = true
+	entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
+	entry:GetCustomProperty("name_txt"):GetObject().x = 15
+end
+
 Events.Connect("update_logic_list", function(data)
 	if(data ~= nil) then
 		local last_id = 1
@@ -244,28 +257,37 @@ Events.Connect("update_logic_list", function(data)
 					entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
 					entry:GetCustomProperty("name_txt"):GetObject().x = 15
 
+					local gold = entry:GetCustomProperty("gold"):GetObject()
+					local gold_col = gold:GetColor()
+
+					local silver = entry:GetCustomProperty("silver"):GetObject()
+					local silver_col = silver:GetColor()
+
+					local bronze = entry:GetCustomProperty("bronze"):GetObject()
+					local bronze_col = bronze:GetColor()
+
 					if(p[2] == 3) then
-						local gold = entry:GetCustomProperty("gold"):GetObject()
-						local col = gold:GetColor()
-
-						col.a = 1
-						
-						gold:SetColor(col)
+						gold_col.a = 1
+						silver_col.a = .2
+						bronze_col.a = .2
 					elseif(p[2] == 2) then
-						local silver = entry:GetCustomProperty("silver"):GetObject()
-						local col = silver:GetColor()
-
-						col.a = 1
-						
-						silver:SetColor(col)
+						silver_col.a = 1
+						gold_col.a = .2
+						bronze_col.a = .2
 					elseif(p[2] == 1) then
-						local bronze = entry:GetCustomProperty("bronze"):GetObject()
-						local col = bronze:GetColor()
-
-						col.a = 1
-						
-						bronze:SetColor(col)
+						bronze_col.a = 1
+						silver_col.a = .2
+						gold_col.a = .2
 					end
+
+					gold:SetColor(gold_col)
+					silver:SetColor(silver_col)
+					bronze:SetColor(bronze_col)
+				end
+
+				if(p[3] > 0) then
+					entry:GetCustomProperty("score_txt"):GetObject().text = "Score: " .. tostring(YOOTIL.Utils.number_format(p[3]))
+					entry:GetCustomProperty("score_txt"):GetObject().visibility = Visibility.FORCE_ON
 				end
 			end
 		end
@@ -277,13 +299,69 @@ Events.Connect("update_logic_list", function(data)
 end)
 
 Events.Connect("update_math_list", function(data)
-	--print(data)
+	if(data ~= nil) then
+		local last_id = 1
+
+		for i, p in ipairs(data) do
+			local entry = math_list_scroll:FindChildByName("Puzzle " .. tostring(p[1]))
+
+			if(entry ~= nil) then
+				if(p[2] > 0) then
+					last_id = p[1] + 1
+
+					entry.isInteractable = true
+					entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
+					entry:GetCustomProperty("name_txt"):GetObject().x = 15
+
+					local gold = entry:GetCustomProperty("gold"):GetObject()
+					local gold_col = gold:GetColor()
+
+					local silver = entry:GetCustomProperty("silver"):GetObject()
+					local silver_col = silver:GetColor()
+
+					local bronze = entry:GetCustomProperty("bronze"):GetObject()
+					local bronze_col = bronze:GetColor()
+
+					if(p[2] == 3) then
+						gold_col.a = 1
+						silver_col.a = .2
+						bronze_col.a = .2
+					elseif(p[2] == 2) then
+						silver_col.a = 1
+						gold_col.a = .2
+						bronze_col.a = .2
+					elseif(p[2] == 1) then
+						bronze_col.a = 1
+						silver_col.a = .2
+						gold_col.a = .2
+					end
+
+					gold:SetColor(gold_col)
+					silver:SetColor(silver_col)
+					bronze:SetColor(bronze_col)
+				end
+
+				if(p[3] > 0) then
+					entry:GetCustomProperty("score_txt"):GetObject().text = "Score: " .. tostring(YOOTIL.Utils.number_format(p[3]))
+					entry:GetCustomProperty("score_txt"):GetObject().visibility = Visibility.FORCE_ON
+				end
+			end
+		end
+
+		if(last_id <= 25) then
+			open_up_math_puzzle(last_id)
+		end
+	end
 end)
 
-local offset = 0
+local logic_offset = 0
+local math_offset = 0
 local clicked = false
 
 for i = 1, 25 do
+	
+	-- Logic
+
 	local entry = World.SpawnAsset(puzzle_list_entry, { parent = logic_list_scroll })
 
 	entry:GetCustomProperty("name_txt"):GetObject().text = "PUZZLE #" .. tostring(i)
@@ -304,17 +382,55 @@ for i = 1, 25 do
 		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
 			Events.Broadcast("transition_in", function()
 				menu_container.visibility = Visibility.FORCE_OFF
-				
+				logic_list.visibility = Visibility.FORCE_OFF
+				logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
 				
 				last_active = nil
 		
-				YOOTIL.Events.broadcast_to_server("load_game", false)
+				YOOTIL.Events.broadcast_to_server("load_puzzle_id", i, false)
 				clicked = false
 			end)
 		end
 	end)
 
 	entry.name = "Puzzle " .. tostring(i)
-	entry.y = offset
-	offset = offset + 60
+	entry.y = logic_offset
+	logic_offset = logic_offset + 60
+
+	-- Math
+
+	local entry = World.SpawnAsset(puzzle_list_entry, { parent = math_list_scroll })
+
+	entry:GetCustomProperty("name_txt"):GetObject().text = "PUZZLE #" .. tostring(i)
+
+	if(i == 1) then
+		entry.isInteractable = true
+		entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
+		entry:GetCustomProperty("name_txt"):GetObject().x = 15
+	end
+
+	entry.clickedEvent:Connect(function()
+		if(clicked) then
+			return
+		end
+
+		clicked = true
+
+		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
+			Events.Broadcast("transition_in", function()
+				menu_container.visibility = Visibility.FORCE_OFF
+				math_list.visibility = Visibility.FORCE_OFF
+				math_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
+				
+				last_active = nil
+		
+				YOOTIL.Events.broadcast_to_server("load_puzzle_id", i, true)
+				clicked = false
+			end)
+		end
+	end)
+
+	entry.name = "Puzzle " .. tostring(i)
+	entry.y = math_offset
+	math_offset = math_offset + 60
 end
