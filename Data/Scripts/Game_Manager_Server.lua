@@ -63,6 +63,8 @@ function load_data(player)
 	-- 	player_data.cmp = force_load_math_puzzle
 	-- end
 
+	player_data.cs = 20
+	
 	player:SetResource("speed", player_data.cs)
 	player:SetResource("sfx_volume", player_data.sv)
 	player:SetResource("music_volume", player_data.mv)

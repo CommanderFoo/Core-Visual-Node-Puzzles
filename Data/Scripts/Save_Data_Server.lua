@@ -21,7 +21,7 @@ function save_data(player)
 
 	if(player.serverUserData.logic_node_data) then
 		data.lnd = tostring(data.clp) .. "@"
-		
+	
 		for k, v in pairs(player.serverUserData.logic_node_data) do
 			data.lnd = data.lnd .. v .. ":"
 		end
@@ -29,7 +29,7 @@ function save_data(player)
 
 	if(player.serverUserData.math_node_data) then
 		data.mnd = tostring(data.cmp) .. "@"
-		
+	
 		for k, v in pairs(player.serverUserData.math_node_data) do
 			data.mnd = data.mnd .. v .. ":"
 		end
@@ -46,7 +46,7 @@ function save_data(player)
 
 	print(YOOTIL.JSON.encode(data.mnd))
 	print(YOOTIL.JSON.encode(data.lnd))
-
+	
 	Storage.SetPlayerData(player, data)
 end
 
@@ -64,8 +64,11 @@ function set_networked_data(player, logic_saving, load_solutions, puzzle_id)
 	local player_data = Storage.GetPlayerData(player)
 	local data = ""
 	
-	player.serverUserData.logic_progress = player_data.lp_p or {}
-	player.serverUserData.math_progress = player_data.mp_p or {}
+	if(logic_saving) then
+		player.serverUserData.logic_progress = player_data.lp_p or {}
+	else
+		player.serverUserData.math_progress = player_data.mp_p or {}
+	end
 
 	if(load_solutions) then
 		local player_data = Storage.GetPlayerData(player)
@@ -166,7 +169,7 @@ Events.ConnectForPlayer("save_init", function(player, logic_saving)
 end)
 
 function has_logic_progress_entry(player, id)
-	for i, d in ipairs(player.serverUserData.logic_progress) do
+	for i, d in pairs(player.serverUserData.logic_progress) do
 		if(d[1] == id) then
 			return d
 		end
@@ -176,7 +179,7 @@ function has_logic_progress_entry(player, id)
 end
 
 function has_math_progress_entry(player, id)
-	for i, d in ipairs(player.serverUserData.math_progress) do
+	for i, d in pairs(player.serverUserData.math_progress) do
 		if(d[1] == id) then
 			return d
 		end
@@ -187,6 +190,7 @@ end
 
 Events.Connect("save_data", save_data)
 Events.Connect("set_networked_data", set_networked_data)
+
 Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, is_logic, puzzle_id)
 	if(is_logic) then
 		local entry = has_logic_progress_entry(player, puzzle_id)
@@ -200,7 +204,7 @@ Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, 
 				entry[3] = score
 			end
 		else
-			player.serverUserData.logic_progress[#player.serverUserData.logic_progress + 1] = {
+			player.serverUserData.logic_progress[tostring(puzzle_id)] = {
 
 				puzzle_id, award, score
 
@@ -220,7 +224,7 @@ Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, 
 				entry[3] = score
 			end
 		else
-			player.serverUserData.math_progress[#player.serverUserData.math_progress + 1] = {
+			player.serverUserData.math_progress[tostring(puzzle_id)] = {
 
 				puzzle_id, award, score
 

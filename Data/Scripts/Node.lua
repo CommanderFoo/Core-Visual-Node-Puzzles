@@ -1,4 +1,6 @@
-﻿local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+﻿-- No comments, sorry :O lol
+
+local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
 local Node_Events = {}
 

@@ -279,14 +279,16 @@ end
 
 Events.Connect("update_logic_list", function(data)
 	if(data ~= nil) then
-		local last_id = 1
+		local last_id = 0
 
-		for i, p in ipairs(data) do
+		for i, p in pairs(data) do
 			local entry = logic_list_scroll:FindChildByName("Puzzle " .. tostring(p[1]))
 
 			if(entry ~= nil) then
 				if(p[2] > 0) then
-					last_id = p[1] + 1
+					if(p[1] > last_id) then
+						last_id = p[1]
+					end
 
 					entry.isInteractable = true
 					entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
@@ -327,22 +329,24 @@ Events.Connect("update_logic_list", function(data)
 			end
 		end
 
-		if(last_id <= 25) then
-			open_up_logic_puzzle(last_id)
+		if(last_id < 25) then
+			open_up_logic_puzzle(last_id + 1)
 		end
 	end
 end)
 
 Events.Connect("update_math_list", function(data)
 	if(data ~= nil) then
-		local last_id = 1
+		local last_id = 0
 
-		for i, p in ipairs(data) do
+		for i, p in pairs(data) do
 			local entry = math_list_scroll:FindChildByName("Puzzle " .. tostring(p[1]))
 
 			if(entry ~= nil) then
 				if(p[2] > 0) then
-					last_id = p[1] + 1
+					if(p[1] > last_id) then
+						last_id = p[1]
+					end
 
 					entry.isInteractable = true
 					entry:GetCustomProperty("lock"):GetObject().visibility = Visibility.FORCE_OFF
@@ -383,8 +387,8 @@ Events.Connect("update_math_list", function(data)
 			end
 		end
 
-		if(last_id <= 25) then
-			open_up_math_puzzle(last_id)
+		if(last_id < 25) then
+			open_up_math_puzzle(last_id + 1)
 		end
 	end
 end)

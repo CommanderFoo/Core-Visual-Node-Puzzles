@@ -88,6 +88,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 			current_puzzle = local_player:GetResource("current_math_puzzle")
 		end
 
+		Events.Broadcast("save")
 		YOOTIL.Events.broadcast_to_server("save_puzzle_completed", award, score, is_logic, current_puzzle)
 	end
 
