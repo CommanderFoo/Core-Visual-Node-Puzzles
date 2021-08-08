@@ -43,10 +43,13 @@ function save_data(player)
 	data.mp_p = player.serverUserData.math_progress or {}
 
 	--data = {}
+
+	print(YOOTIL.JSON.encode(data.mnd))
+
 	Storage.SetPlayerData(player, data)
 end
 
-function set_networked_data(player, logic_saving, load_solutions)
+function set_networked_data(player, logic_saving, load_solutions, puzzle_id)
 	if(logic_saving) then
 		if(player.serverUserData.logic_node_data == nil) then
 			player.serverUserData.logic_node_data = {}
@@ -65,16 +68,8 @@ function set_networked_data(player, logic_saving, load_solutions)
 
 	if(load_solutions) then
 		local player_data = Storage.GetPlayerData(player)
-		local clp = 1
-		local cmp = 1
-
-		if(player_data.clp ~= nil and player_data.clp > 0) then
-			clp = player_data.clp
-		end
-	
-		if(player_data.cmp ~= nil and player_data.cmp > 0) then
-			cmp = player_data.cmp
-		end
+		local clp = puzzle_id or 1
+		local cmp = puzzle_id or 1
 
 		if(logic_saving) then
 			data = Logic_Solutions[clp] or ""

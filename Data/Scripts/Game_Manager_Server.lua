@@ -9,9 +9,9 @@ end)
 
 --@TODO: REMOVE
 
-local load_solutions = false
+local load_solutions = true
 local force_load_logic_puzzle = 1
-local force_load_math_puzzle = 11
+local force_load_math_puzzle = 12
 
 -- Prefetch node data and send early.
 
@@ -34,11 +34,15 @@ function load_data(player)
 		player_data = {}
 	end
 
-	if(player_data.clp == nil or player_data.clp < 1) then
+	if(load_solutions) then
+		player_data.clp = force_load_logic_puzzle
+	elseif(player_data.clp == nil or player_data.clp < 1) then
 		player_data.clp = 1 -- Current Logic Puzzle
 	end
 
-	if(player_data.cmp == nil or player_data.cmp < 1) then
+	if(load_solutions) then
+		player_data.cmp = force_load_math_puzzle
+	elseif(player_data.cmp == nil or player_data.cmp < 1) then
 		player_data.cmp = 1 -- Current Math Puzzle
 	end
 	
@@ -107,13 +111,21 @@ end)
 
 Events.ConnectForPlayer("load_puzzle_id", function(player, id, is_math)
 	local player_data = load_data(player)
-
+	
 	if(not is_math) then
 		player:SetResource("current_logic_puzzle", id)
 		player_data.clp = id
+
+		if(load_solutions) then
+			Events.Broadcast("set_networked_data", player, true, load_solutions, id)
+		end
 	else
 		player:SetResource("current_math_puzzle", id)
 		player_data.cmp = id
+
+		if(load_solutions) then
+			Events.Broadcast("set_networked_data", player, false, load_solutions, id)
+		end
 	end
 
 	YOOTIL.Events.broadcast_to_player(player, "load_game", is_math,  player_data.clp, player_data.cmp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
