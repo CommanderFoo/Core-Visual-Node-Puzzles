@@ -2,6 +2,8 @@ local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 local Logic_Solutions = require(script:GetCustomProperty("logic_puzzle_solutions"))
 local Math_Solutions = require(script:GetCustomProperty("math_puzzle_solutions"))
 
+local clear_player_data = false
+
 -- Internal ID | Unique ID | Position | Condition | Limit | Output Connections | Order
 
 function save_data(player)

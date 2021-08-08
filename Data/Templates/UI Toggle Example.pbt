@@ -1432,7 +1432,7 @@ Assets {
   Marketplace {
     Description: "A UI toggle component.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Toggle-Docs/"
   }
-  SerializationVersion: 91
+  SerializationVersion: 94
   DirectlyPublished: true
   VirtualFolderPath: "UI"
 }

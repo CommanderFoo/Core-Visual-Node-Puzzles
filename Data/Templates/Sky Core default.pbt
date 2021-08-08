@@ -390,6 +390,6 @@ Assets {
       AssetId: "Sky_CORE_default"
     }
   }
-  SerializationVersion: 91
+  SerializationVersion: 94
   VirtualFolderPath: "Misc"
 }

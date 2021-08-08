@@ -1,5 +1,8 @@
 {
   "files.exclude": {
     "**/*.pbt": true
-  }
+  },
+  "Lua.diagnostics.disable": [
+    "lowercase-global"
+  ]
 }
