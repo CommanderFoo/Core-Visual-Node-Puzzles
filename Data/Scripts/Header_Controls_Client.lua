@@ -88,7 +88,7 @@ main_menu_button.clickedEvent:Connect(function()
 
 	Events.Broadcast("on_disable_all_dropdowns")
 	Events.Broadcast("stop_auto_save")
-	
+
 	Events.Broadcast("transition_in", function()
 		Events.Broadcast("clear_puzzle")
 		Events.Broadcast("show_main_menu")

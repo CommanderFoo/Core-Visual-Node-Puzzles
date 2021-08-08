@@ -1,9 +1,33 @@
 Entries {
   Key {
-    StringVar: "cs"
+    StringVar: "clp"
   }
   SimpleValue {
-    IntVar: 1
+    IntVar: 0
+  }
+}
+Entries {
+  Key {
+    StringVar: "mnd"
+  }
+  SimpleValue {
+    StringVar: "0@"
+  }
+}
+Entries {
+  Key {
+    StringVar: "sn"
+  }
+  SimpleValue {
+    IntVar: 0
+  }
+}
+Entries {
+  Key {
+    StringVar: "an"
+  }
+  SimpleValue {
+    IntVar: 0
   }
 }
 Entries {
@@ -16,18 +40,10 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "clp"
+    StringVar: "cmp"
   }
   SimpleValue {
-    IntVar: 1
-  }
-}
-Entries {
-  Key {
-    StringVar: "mnd"
-  }
-  SimpleValue {
-    StringVar: "3@"
+    IntVar: 0
   }
 }
 Entries {
@@ -35,7 +51,7 @@ Entries {
     StringVar: "lnd"
   }
   SimpleValue {
-    StringVar: "1@"
+    StringVar: "0@"
   }
 }
 Entries {
@@ -445,30 +461,6 @@ Entries {
 }
 Entries {
   Key {
-    StringVar: "mv"
-  }
-  SimpleValue {
-    IntVar: 0
-  }
-}
-Entries {
-  Key {
-    StringVar: "an"
-  }
-  SimpleValue {
-    IntVar: 0
-  }
-}
-Entries {
-  Key {
-    StringVar: "cmp"
-  }
-  SimpleValue {
-    IntVar: 3
-  }
-}
-Entries {
-  Key {
     StringVar: "lp_p"
   }
   SimpleValue {
@@ -803,12 +795,119 @@ Entries {
           }
         }
       }
+      Entries {
+        Key {
+          IntVar: 11
+        }
+        SimpleValue {
+          Table {
+            Entries {
+              Key {
+                IntVar: 1
+              }
+              SimpleValue {
+                IntVar: 11
+              }
+            }
+            Entries {
+              Key {
+                IntVar: 2
+              }
+              SimpleValue {
+                IntVar: 3
+              }
+            }
+            Entries {
+              Key {
+                IntVar: 3
+              }
+              SimpleValue {
+                IntVar: 16078
+              }
+            }
+          }
+        }
+      }
+      Entries {
+        Key {
+          IntVar: 12
+        }
+        SimpleValue {
+          Table {
+            Entries {
+              Key {
+                IntVar: 1
+              }
+              SimpleValue {
+                IntVar: 12
+              }
+            }
+            Entries {
+              Key {
+                IntVar: 2
+              }
+              SimpleValue {
+                IntVar: 3
+              }
+            }
+            Entries {
+              Key {
+                IntVar: 3
+              }
+              SimpleValue {
+                IntVar: 19200
+              }
+            }
+          }
+        }
+      }
+      Entries {
+        Key {
+          IntVar: 13
+        }
+        SimpleValue {
+          Table {
+            Entries {
+              Key {
+                IntVar: 1
+              }
+              SimpleValue {
+                IntVar: 14
+              }
+            }
+            Entries {
+              Key {
+                IntVar: 2
+              }
+              SimpleValue {
+                IntVar: 3
+              }
+            }
+            Entries {
+              Key {
+                IntVar: 3
+              }
+              SimpleValue {
+                IntVar: 16512
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
 Entries {
   Key {
-    StringVar: "sn"
+    StringVar: "mv"
+  }
+  SimpleValue {
+    IntVar: 0
+  }
+}
+Entries {
+  Key {
+    StringVar: "cs"
   }
   SimpleValue {
     IntVar: 0

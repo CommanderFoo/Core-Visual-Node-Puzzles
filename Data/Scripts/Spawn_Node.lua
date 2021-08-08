@@ -32,6 +32,7 @@ local fourth_required = root:GetCustomProperty("fourth_required")
 local total_spawned = 0
 local template_id = nil
 local index = 1
+local node_destroy_evt = nil
 
 for i, c in ipairs(root.parent:GetChildren()) do
 	if(c == root) then
@@ -51,7 +52,7 @@ function find_node_script(n)
 	return nil
 end
 
-API.Node_Events.on("node_destroyed", function(node_id, tpl_id, internal_id)
+node_destroy_evt = API.Node_Events.on("node_destroyed", function(node_id, tpl_id, internal_id)
 	if(index == internal_id) then
 		if(total ~= -1) then
 			total_spawned = total_spawned - 1
@@ -209,4 +210,8 @@ script.destroyEvent:Connect(function()
 	end
 
 	evts = nil
+
+	if(node_destroy_evt ~= nil) then
+		API.Node_Events.off(node_destroy_evt)
+	end
 end)

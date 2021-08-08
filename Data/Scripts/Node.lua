@@ -25,30 +25,30 @@ local Puzzle_Type = {
 local Node_Events = {
 
 	events = {},
-	id = 1
+	id = 0
 
 }
 
 function Node_Events.on(evt, fn)
-	table.insert(Node_Events.events, #Node_Events.events + 1, {
+	Node_Events.id = Node_Events.id + 1
+
+	Node_Events.events[tostring(Node_Events.id)] = {
 
 		event = evt,
 		func = fn,
 		id = Node_Events.id
 
-	})
+	}
 
-	Node_Events.id = Node_Events.id + 1
-
-	return Node_Events.id - 1
+	return Node_Events.id
 end
 
 function Node_Events.off(event_id)
 	local to_remove = {}
 
-	for i, e in ipairs(Node_Events.events) do
-		if(e.id ~= nil and event_id == e.id) then
-			Node_Events.events[i] = ""
+	for k, v in pairs(Node_Events.events) do
+		if(v.id ~= nil and event_id == v.id) then
+			Node_Events.events[k] = nil
 		end
 	end
 end
@@ -56,7 +56,7 @@ end
 function Node_Events.trigger(...)
 	local args = {...}
 
-	for i, e in ipairs(Node_Events.events) do
+	for i, e in pairs(Node_Events.events) do
 		if(e.event == args[1]) then
 			e.func(args[2], args[3], args[4], args[5])
 		end
