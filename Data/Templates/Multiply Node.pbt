@@ -1,6 +1,6 @@
 Assets {
   Id: 14932339518083244493
-  Name: "Multiple Node"
+  Name: "Multiply Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {

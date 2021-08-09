@@ -1115,7 +1115,7 @@ Objects {
       }
       Size: 28
       Justification {
-        Value: "mc:etextjustify:left"
+        Value: "mc:etextjustify:center"
       }
       AutoWrapText: true
       Font {
