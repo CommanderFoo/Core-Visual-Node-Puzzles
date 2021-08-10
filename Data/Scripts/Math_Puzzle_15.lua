@@ -40,6 +40,7 @@ end
 
 evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 	output_one_number_complete = 0
+	output_two_number_complete = 0
 	showing_result_ui = false
 	total_puzzle_score = 0
 end)
