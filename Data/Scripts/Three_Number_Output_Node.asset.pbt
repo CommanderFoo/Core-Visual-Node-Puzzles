@@ -1,9 +1,8 @@
 Assets {
-  Id: 447584301027119511
-  Name: "Tutorial_Client"
+  Id: 8165397336364181928
+  Name: "Three_Number_Output_Node"
   PlatformAssetType: 3
   TextAsset {
   }
   SerializationVersion: 94
-  VirtualFolderPath: "Misc"
 }

@@ -3,6 +3,12 @@ local API, YOOTIL = require(script:GetCustomProperty("API"))
 local first_number = script:GetCustomProperty("first_number"):WaitForObject()
 local first_required = script:GetCustomProperty("first_required"):WaitForObject()
 
+local second_number = script:GetCustomProperty("second_number"):WaitForObject()
+local second_required = script:GetCustomProperty("second_required"):WaitForObject()
+
+local third_number = script:GetCustomProperty("third_number"):WaitForObject()
+local third_required = script:GetCustomProperty("third_required"):WaitForObject()
+
 local conditions = {}
 
 local evts = {}
@@ -17,6 +23,22 @@ function init(node_data)
 
 		required = data.first_required,
 		required_txt = first_required,
+		received = 0
+		
+	}
+
+	conditions[data.second_number] = {
+
+		required = data.second_required,
+		required_txt = second_required,
+		received = 0
+		
+	}
+
+	conditions[data.third_number] = {
+
+		required = data.third_required,
+		required_txt = third_required,
 		received = 0
 		
 	}
@@ -37,7 +59,7 @@ function init(node_data)
 						o.required_txt.text = tostring(math.max(0, o.required - o.received))
 
 						if(o.received == o.required) then
-							API.Puzzle_Events.trigger("output_one_number_complete")
+							API.Puzzle_Events.trigger("output_three_number_complete")
 						end
 					end
 				end
@@ -60,6 +82,12 @@ function init(node_data)
 
 	first_number.text = string.format("%.02f", data.first_number)
 	first_required.text = tostring(data.first_required)
+
+	second_number.text = string.format("%.02f", data.second_number)
+	second_required.text = tostring(data.second_required)
+
+	third_number.text = string.format("%.02f", data.third_number)
+	third_required.text = tostring(data.third_required)
 
 	node:set_from_saved_data(node_data)
 	API.register_node(node)

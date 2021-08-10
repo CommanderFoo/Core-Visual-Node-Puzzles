@@ -13,8 +13,6 @@ local evts = {}
 local node = nil
 local data = {}
 
-local first_received = 0
-
 function init(node_data)
 	data = node_data
 	

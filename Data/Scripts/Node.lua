@@ -2907,11 +2907,11 @@ function Node_Greater_Than:new(r, options)
 	local plus_button = this.body:FindDescendantByName("Plus")
 
 	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
-		if(amount > -99.9) then
-			local val = 0.05
+		if(amount > -100) then
+			local val = 0.50
 
 			if(this.shift_pressed) then
-				val = 0.5
+				val = 1
 			end
 
 			amount = amount - val
@@ -2922,11 +2922,11 @@ function Node_Greater_Than:new(r, options)
 	end)
 
 	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
-		if(amount > -99.9) then
-			local val = 0.05
+		if(amount < 100) then
+			local val = 0.50
 
 			if(this.shift_pressed) then
-				val = 0.5
+				val = 1
 			end
 
 			amount = amount + val
@@ -3082,7 +3082,7 @@ function Node_Greater_Than:new(r, options)
 	end
 
 	function this:set_amount(a)
-		if(a ~= nil and a > -99.9 and a < 99.9) then
+		if(a ~= nil and a > -100 and a < 100) then
 			amount = tonumber(string.format("%.02f", a))
 			amount_txt.text = string.format("%.02f", amount)
 			orig_amount = amount
@@ -3131,11 +3131,11 @@ function Node_Less_Than:new(r, options)
 	local plus_button = this.body:FindDescendantByName("Plus")
 
 	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
-		if(amount > -99.9) then
-			local val = 0.05
+		if(amount > -100) then
+			local val = 0.5
 
 			if(this.shift_pressed) then
-				val = 0.5
+				val = 1
 			end
 
 			amount = amount - val
@@ -3146,11 +3146,11 @@ function Node_Less_Than:new(r, options)
 	end)
 
 	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
-		if(amount > -99.9) then
-			local val = 0.05
+		if(amount < 100) then
+			local val = 0.5
 
 			if(this.shift_pressed) then
-				val = 0.5
+				val = 1
 			end
 
 			amount = amount + val
@@ -3202,14 +3202,20 @@ function Node_Less_Than:new(r, options)
 		local queue_func = function()
 			Events.Broadcast("score", this.options.node_time or 0)
 
-			if(this:has_top_connection() or this:has_bottom_connection()) then
+			local top_connection = this:has_top_connection()
+			local bottom_connection = this:has_bottom_connection()
+
+			if(top_connection or bottom_connection) then
 				local obj = nil
-				local line = this:get_connector_line(data.value < amount)
+
+				local line = this:get_connector_line(data.value > amount)
 				local tween = this:create_tween(line)
 				local connection_method = nil
 				local offset = this:get_top_offset()
 
-				if(this:has_top_connection() and data.value < amount) then
+				if(top_connection and data.value < amount) then
+					data.connection_to_id = top_connection
+
 					obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
 					connection_method = "send_data_top"
 
@@ -3219,7 +3225,9 @@ function Node_Less_Than:new(r, options)
 						tween = tween
 
 					})
-				elseif(this:has_bottom_connection()) then
+				elseif(bottom_connection) then
+					data.connection_to_id = bottom_connection
+
 					offset = this:get_bottom_offset()
 
 					if(Object.IsValid(line)) then
@@ -3298,7 +3306,7 @@ function Node_Less_Than:new(r, options)
 	end
 
 	function this:set_amount(a)
-		if(a ~= nil and a > -99.9 and a < 99.9) then
+		if(a ~= nil and a > -100 and a < 100) then
 			amount = tonumber(string.format("%.02f", a))
 			amount_txt.text = string.format("%.02f", amount)
 			orig_amount = amount
