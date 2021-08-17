@@ -269,7 +269,7 @@ Assets {
           }
           Overrides {
             Name: "cs:first_number"
-            Float: 20
+            Float: 30
           }
           Overrides {
             Name: "cs:first_count"
@@ -277,11 +277,11 @@ Assets {
           }
           Overrides {
             Name: "cs:second_number"
-            Float: 5
+            Float: 10
           }
           Overrides {
             Name: "cs:second_count"
-            Int: 60
+            Int: 120
           }
         }
         Collidable_v2 {
@@ -1818,7 +1818,7 @@ Assets {
           }
           Overrides {
             Name: "cs:first_number"
-            Float: 15
+            Float: 70
           }
           Overrides {
             Name: "cs:first_required"
