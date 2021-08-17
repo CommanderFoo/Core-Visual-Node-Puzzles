@@ -3355,11 +3355,11 @@ function Node_Equal:new(r, options)
 	local plus_button = this.body:FindDescendantByName("Plus")
 
 	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
-		if(amount > -99.9) then
-			local val = 0.05
+		if(amount > 100) then
+			local val = 0.5
 
 			if(this.shift_pressed) then
-				val = 0.5
+				val = 0.1
 			end
 
 			amount = amount - val
@@ -3370,11 +3370,11 @@ function Node_Equal:new(r, options)
 	end)
 
 	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
-		if(amount < 99.9) then
-			local val = 0.05
+		if(amount < 100) then
+			local val = 0.5
 
 			if(this.shift_pressed) then
-				val = 0.5
+				val = 1
 			end
 
 			amount = amount + val
@@ -3527,7 +3527,7 @@ function Node_Equal:new(r, options)
 	end
 
 	function this:set_amount(a)
-		if(a ~= nil and a > -99.9 and a < 99.9) then
+		if(a ~= nil and a > -100 and a < 100) then
 			amount = tonumber(string.format("%.02f", a))
 			amount_txt.text = string.format("%.02f", amount)
 			orig_amount = amount
@@ -3693,7 +3693,6 @@ return Node, Node_Events, {
 	Divide = Node_Divide,
 	Greater_Than = Node_Greater_Than,
 	Less_Than = Node_Less_Than,
-	Equal = Node_Equal,
 	Absolute = Node_Absolute
 
 }

@@ -4,7 +4,7 @@ Assets {
   PlatformAssetType: 3
   TextAsset {
   }
-  SerializationVersion: 94
+  SerializationVersion: 95
   VirtualFolderPath: "Nodes"
   VirtualFolderPath: "Math Nodes"
 }

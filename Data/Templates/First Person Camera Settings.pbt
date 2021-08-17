@@ -196,6 +196,6 @@ Assets {
       AssetId: "First_Person_Camera_Settings"
     }
   }
-  SerializationVersion: 94
+  SerializationVersion: 95
   VirtualFolderPath: "Misc"
 }

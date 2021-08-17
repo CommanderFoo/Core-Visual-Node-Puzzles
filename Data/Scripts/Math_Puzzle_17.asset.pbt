@@ -1,9 +1,8 @@
 Assets {
-  Id: 7760145848058207899
-  Name: "Result_UI"
+  Id: 10108057619208963198
+  Name: "Math_Puzzle_17"
   PlatformAssetType: 3
   TextAsset {
   }
   SerializationVersion: 95
-  VirtualFolderPath: "Misc"
 }

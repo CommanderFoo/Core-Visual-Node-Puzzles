@@ -1,8 +1,8 @@
 Assets {
-  Id: 12167701554170742329
+  Id: 14093167867596496057
   Name: "Virtual Folders"
   PlatformAssetType: 30
-  SerializationVersion: 94
+  SerializationVersion: 95
   VirtualFolderSetAsset {
     Folders {
       VirtualFolderPath: "Logic Puzzles"

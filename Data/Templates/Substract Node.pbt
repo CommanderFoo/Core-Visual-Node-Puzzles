@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 3627026760658224672
+        ParentId: 2388348428344626080
         ChildIds: 11555485295403891140
         ChildIds: 6552749837375290641
         ChildIds: 7153815708921767736
@@ -29,18 +29,6 @@ Assets {
           Overrides {
             Name: "cs:can_move"
             Bool: true
-          }
-          Overrides {
-            Name: "cs:square_shape"
-            AssetReference {
-              Id: 9532000891779708445
-            }
-          }
-          Overrides {
-            Name: "cs:circle_shape"
-            AssetReference {
-              Id: 1215131136983781123
-            }
           }
         }
         Collidable_v2 {
@@ -2453,7 +2441,7 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 94
+  SerializationVersion: 95
   VirtualFolderPath: "Nodes"
   VirtualFolderPath: "Math Nodes"
 }

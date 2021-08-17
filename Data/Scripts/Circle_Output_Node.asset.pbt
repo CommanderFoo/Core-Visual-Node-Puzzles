@@ -12,7 +12,7 @@ Assets {
       }
     }
   }
-  SerializationVersion: 94
+  SerializationVersion: 95
   VirtualFolderPath: "Nodes"
   VirtualFolderPath: "Output Nodes"
 }
