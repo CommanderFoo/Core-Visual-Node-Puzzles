@@ -1,5 +1,5 @@
-GameId: "6635FBD5482659811113B592789B9479"
-DisplayName: "Look Everyone I Can Program"
+GameId: "BABBA9A046CBDA7EEA5029BF0F17A6B6"
+DisplayName: "Visual Logic and Math Puzzles"
 GameSerializationVersion: 95
 Framework: "Empty Project"
 StorageVersion: 2
