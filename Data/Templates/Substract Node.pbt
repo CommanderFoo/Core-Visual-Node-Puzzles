@@ -43,8 +43,8 @@ Assets {
         Control {
           Width: 250
           Height: 150
-          UIX: 543.847168
-          UIY: 70.668457
+          UIX: -650
+          UIY: -50
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1037,8 +1037,8 @@ Assets {
               Id: 15322576452248986664
             }
             Color {
-              G: 0.229301751
-              B: 0.46600008
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             TeamSettings {
@@ -1225,8 +1225,8 @@ Assets {
           }
           Text {
             Color {
-              R: 0.370000064
-              G: 0.400000393
+              R: 1
+              G: 1
               B: 1
               A: 1
             }
@@ -1295,8 +1295,8 @@ Assets {
               Id: 12125222595592029656
             }
             Color {
-              R: 0.370000064
-              G: 0.400000393
+              R: 1
+              G: 1
               B: 1
               A: 1
             }
@@ -1478,8 +1478,9 @@ Assets {
               Id: 9402814787072448834
             }
             Color {
-              G: 0.229301751
-              B: 0.46600008
+              R: 1
+              G: 1
+              B: 1
               A: 1
             }
             TeamSettings {
@@ -1538,8 +1539,8 @@ Assets {
             Brush {
             }
             Color {
-              G: 0.229301751
-              B: 0.46600008
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             TeamSettings {
@@ -1661,8 +1662,8 @@ Assets {
             Brush {
             }
             Color {
-              G: 0.229301751
-              B: 0.46600008
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             TeamSettings {

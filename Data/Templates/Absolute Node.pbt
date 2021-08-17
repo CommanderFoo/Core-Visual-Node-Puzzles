@@ -30,18 +30,6 @@ Assets {
             Name: "cs:can_move"
             Bool: true
           }
-          Overrides {
-            Name: "cs:square_shape"
-            AssetReference {
-              Id: 9532000891779708445
-            }
-          }
-          Overrides {
-            Name: "cs:circle_shape"
-            AssetReference {
-              Id: 1215131136983781123
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -55,8 +43,8 @@ Assets {
         Control {
           Width: 250
           Height: 150
-          UIX: -258.500122
-          UIY: -6.2644043
+          UIX: -325
+          UIY: 125
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1014,8 +1002,8 @@ Assets {
           }
           Text {
             Color {
-              R: 0.370000064
-              G: 0.400000393
+              R: 1
+              G: 1
               B: 1
               A: 1
             }
@@ -1084,8 +1072,8 @@ Assets {
               Id: 12125222595592029656
             }
             Color {
-              R: 0.370000064
-              G: 0.400000393
+              R: 1
+              G: 1
               B: 1
               A: 1
             }

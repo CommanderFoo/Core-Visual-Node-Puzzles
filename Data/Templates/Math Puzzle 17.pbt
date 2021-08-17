@@ -205,7 +205,6 @@ Assets {
         ChildIds: 17936725154175077797
         ChildIds: 12834105441595177095
         ChildIds: 8067690288917304789
-        ChildIds: 3708844908702129041
         ChildIds: 2909840067548046119
         ChildIds: 15097405201487613170
         ChildIds: 1884699832555903611
@@ -1130,227 +1129,6 @@ Assets {
         }
       }
       Objects {
-        Id: 3708844908702129041
-        Name: "Less Than Dummy Node"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 7649052457903725854
-        ChildIds: 11697656241317712612
-        ChildIds: 12888200855260735564
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:total"
-            Int: 5
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Control {
-          Width: 250
-          Height: 60
-          UIY: 300
-          RenderTransformPivot {
-            Anchor {
-              Value: "mc:euianchor:middlecenter"
-            }
-          }
-          Panel {
-            Opacity: 1
-          }
-          AnchorLayout {
-            SelfAnchor {
-              Anchor {
-                Value: "mc:euianchor:topcenter"
-              }
-            }
-            TargetAnchor {
-              Anchor {
-                Value: "mc:euianchor:topcenter"
-              }
-            }
-          }
-        }
-      }
-      Objects {
-        Id: 11697656241317712612
-        Name: "Node Handle"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 3708844908702129041
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Control {
-          Width: 100
-          Height: 55
-          RenderTransformPivot {
-            Anchor {
-              Value: "mc:euianchor:middlecenter"
-            }
-          }
-          UseParentWidth: true
-          Button {
-            Label: "Less Than"
-            FontColor {
-              R: 1
-              G: 1
-              B: 1
-              A: 1
-            }
-            FontSize: 30
-            ButtonColor {
-              R: 0.0251868609
-              G: 0.25015837
-              B: 0.109461717
-              A: 1
-            }
-            HoveredColor {
-              R: 0.0340310894
-              G: 0.338000029
-              B: 0.14789857
-              A: 1
-            }
-            PressedColor {
-              R: 0.0251868609
-              G: 0.25015837
-              B: 0.109461717
-              A: 1
-            }
-            DisabledColor {
-              R: 0.0251868684
-              G: 0.25015837
-              B: 0.109461717
-              A: 0.8
-            }
-            Brush {
-              Id: 9402814787072448834
-            }
-            IsButtonEnabled: true
-            ClickMode {
-              Value: "mc:ebuttonclickmode:default"
-            }
-            Font {
-              Id: 18375965876900075365
-            }
-            Justification {
-              Value: "mc:etextjustify:center"
-            }
-            VerticalJustification {
-              Value: "mc:everticaljustification:top"
-            }
-          }
-          AnchorLayout {
-            SelfAnchor {
-              Anchor {
-                Value: "mc:euianchor:topleft"
-              }
-            }
-            TargetAnchor {
-              Anchor {
-                Value: "mc:euianchor:topleft"
-              }
-            }
-          }
-        }
-      }
-      Objects {
-        Id: 12888200855260735564
-        Name: "Client Scripts"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 3708844908702129041
-        ChildIds: 18029931667814825935
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:forceoff"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:forceoff"
-        }
-        NetworkContext {
-        }
-      }
-      Objects {
-        Id: 18029931667814825935
-        Name: "Spawn_Node"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 12888200855260735564
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:node"
-            AssetReference {
-              Id: 12352888538690541610
-            }
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 4265263488546421963
-          }
-        }
-      }
-      Objects {
         Id: 2909840067548046119
         Name: "Add Dummy Node"
         Transform {
@@ -1451,23 +1229,24 @@ Assets {
             }
             FontSize: 30
             ButtonColor {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             HoveredColor {
-              G: 0.37202394
-              B: 0.651041687
+              R: 0.0277812593
+              G: 0.114552177
+              B: 0.210000157
               A: 1
             }
             PressedColor {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             DisabledColor {
-              G: 0.270857304
-              B: 0.474000096
+              G: 0.100000091
+              B: 0.210000157
               A: 0.8
             }
             Brush {
@@ -1672,23 +1451,24 @@ Assets {
             }
             FontSize: 30
             ButtonColor {
-              G: 0.40200007
-              B: 0.274380922
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             HoveredColor {
-              G: 0.584374905
-              B: 0.398858935
+              R: 0.03215627
+              G: 0.116843849
+              B: 0.210000157
               A: 1
             }
             PressedColor {
-              G: 0.40200007
-              B: 0.274380922
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             DisabledColor {
-              G: 0.40200007
-              B: 0.274380922
+              G: 0.100000091
+              B: 0.210000157
               A: 0.8
             }
             Brush {
@@ -1897,23 +1677,24 @@ Assets {
             }
             FontSize: 30
             ButtonColor {
-              G: 0.40200007
-              B: 0.274380922
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             HoveredColor {
-              G: 0.584374905
-              B: 0.398858935
+              R: 0.0286562853
+              G: 0.115010522
+              B: 0.210000157
               A: 1
             }
             PressedColor {
-              G: 0.40200007
-              B: 0.274380922
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             DisabledColor {
-              G: 0.40200007
-              B: 0.274380922
+              G: 0.100000091
+              B: 0.210000157
               A: 0.8
             }
             Brush {
@@ -2267,4 +2048,5 @@ Assets {
     }
   }
   SerializationVersion: 95
+  VirtualFolderPath: "Math Puzzles"
 }

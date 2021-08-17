@@ -286,6 +286,8 @@ Assets {
         Control {
           Width: 250
           Height: 60
+          UIX: -850
+          UIY: 125
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -502,6 +504,8 @@ Assets {
         Control {
           Width: 250
           Height: 60
+          UIX: -850
+          UIY: 125
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -718,8 +722,8 @@ Assets {
         Control {
           Width: 250
           Height: 60
-          UIX: -50
-          UIY: -100
+          UIX: -900
+          UIY: 25
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -932,8 +936,8 @@ Assets {
         Control {
           Width: 250
           Height: 60
-          UIX: -300
-          UIY: 100
+          UIX: -1150
+          UIY: 225
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1154,8 +1158,8 @@ Assets {
         Control {
           Width: 250
           Height: 60
-          UIX: -300
-          UIY: 100
+          UIX: -1150
+          UIY: 300
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1221,23 +1225,25 @@ Assets {
             }
             FontSize: 30
             ButtonColor {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             HoveredColor {
-              G: 0.37202394
-              B: 0.651041687
+              R: 0.0435313061
+              G: 0.122802213
+              B: 0.210000157
               A: 1
             }
             PressedColor {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             DisabledColor {
-              G: 0.270857304
-              B: 0.474000096
+              R: 0.0435312949
+              G: 0.122802198
+              B: 0.210000157
               A: 0.8
             }
             Brush {
@@ -1376,7 +1382,8 @@ Assets {
         Control {
           Width: 250
           Height: 60
-          UIY: 100
+          UIX: -850
+          UIY: 225
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"

@@ -30,18 +30,6 @@ Assets {
             Name: "cs:can_move"
             Bool: true
           }
-          Overrides {
-            Name: "cs:square_shape"
-            AssetReference {
-              Id: 9532000891779708445
-            }
-          }
-          Overrides {
-            Name: "cs:circle_shape"
-            AssetReference {
-              Id: 1215131136983781123
-            }
-          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1049,8 +1037,8 @@ Assets {
               Id: 15322576452248986664
             }
             Color {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             TeamSettings {
@@ -1237,8 +1225,8 @@ Assets {
           }
           Text {
             Color {
-              R: 0.370000064
-              G: 0.400000393
+              R: 1
+              G: 1
               B: 1
               A: 1
             }
@@ -1307,8 +1295,8 @@ Assets {
               Id: 12125222595592029656
             }
             Color {
-              R: 0.370000064
-              G: 0.400000393
+              R: 1
+              G: 1
               B: 1
               A: 1
             }
@@ -1490,8 +1478,9 @@ Assets {
               Id: 163119404164711089
             }
             Color {
-              G: 0.270857394
-              B: 0.474000096
+              R: 1
+              G: 1
+              B: 1
               A: 1
             }
             TeamSettings {
@@ -1550,8 +1539,8 @@ Assets {
             Brush {
             }
             Color {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             TeamSettings {
@@ -1673,8 +1662,8 @@ Assets {
             Brush {
             }
             Color {
-              G: 0.270857394
-              B: 0.474000096
+              G: 0.100000143
+              B: 0.210000157
               A: 1
             }
             TeamSettings {
