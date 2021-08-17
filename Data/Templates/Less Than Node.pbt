@@ -2616,4 +2616,6 @@ Assets {
     }
   }
   SerializationVersion: 95
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Math Nodes"
 }

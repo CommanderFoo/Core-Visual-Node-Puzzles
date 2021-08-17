@@ -8034,6 +8034,7 @@ Objects {
   ParentId: 9651766503307601252
   ChildIds: 6241024291619969380
   ChildIds: 13409748212166834620
+  ChildIds: 11046918597743779941
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -8067,6 +8068,38 @@ Objects {
           Value: "mc:euianchor:middleright"
         }
       }
+    }
+  }
+}
+Objects {
+  Id: 11046918597743779941
+  Name: "Math Puzzle 18"
+  Transform {
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 7410864171820395270
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  TemplateInstance {
+    ParameterOverrideMap {
+      key: 5187904132844432647
+      value {
+        Overrides {
+          Name: "Name"
+          String: "Math Puzzle 18"
+        }
+      }
+    }
+    TemplateAsset {
+      Id: 17748980669893316215
     }
   }
 }
