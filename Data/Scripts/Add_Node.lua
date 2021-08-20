@@ -12,7 +12,7 @@ function init(node_data)
 
 	node:set_puzzle_type(API.Puzzle_Type.MATH)
 	node:set_from_saved_data(node_data)
-	
+
 	API.register_node(node)
 end
 

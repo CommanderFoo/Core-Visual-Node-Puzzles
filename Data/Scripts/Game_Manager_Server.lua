@@ -15,7 +15,7 @@ local force_load_math_puzzle = 1
 
 -- Prefetch node data and send early.
 
-function on_join(player)
+local function on_join(player)
 	player.isVisible = false
 	player.movementControlMode = MovementControlMode.NONE
 	player.lookControlMode = LookControlMode.NONE
@@ -27,7 +27,7 @@ function on_join(player)
 	Events.Broadcast("set_networked_data", player, false, load_solutions)
 end
 
-function load_data(player)
+local function load_data(player)
 	local player_data = Storage.GetPlayerData(player)
 	
 	if(clear_player_data) then
@@ -76,7 +76,7 @@ function load_data(player)
 	return player_data
 end
 
-function load_game(player, math)
+local function load_game(player, math)
 	local player_data = load_data(player)
 
 	YOOTIL.Events.broadcast_to_player(player, "load_game", math, player_data.clp, player_data.cmp, player_data.cs, player_data.sv, player_data.mv, player_data.an)
