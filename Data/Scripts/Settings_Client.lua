@@ -4,6 +4,8 @@ local save_button = script:GetCustomProperty("save_button"):WaitForObject()
 local close_button = script:GetCustomProperty("close_button"):WaitForObject()
 local sfx_folder = script:GetCustomProperty("sfx_folder"):WaitForObject()
 local music_folder = script:GetCustomProperty("music_folder"):WaitForObject()
+--local clear_logic = script:GetCustomProperty("clear_logic"):WaitForObject()
+--local clear_math = script:GetCustomProperty("clear_math"):WaitForObject()
 
 local sfx_amount = nil
 local music_amount = nil
@@ -21,6 +23,8 @@ close_button.clickedEvent:Connect(function()
 end)
 
 save_button.hoveredEvent:Connect(API.play_hover_sound)
+-- clear_logic.hoveredEvent:Connect(API.play_hover_sound)
+-- clear_math.hoveredEvent:Connect(API.play_hover_sound)
 
 save_button.clickedEvent:Connect(function()
 	update_sfx_volume()
@@ -37,6 +41,36 @@ save_button.clickedEvent:Connect(function()
 		save_button.isInteractable = true
 	end, 1)
 end)
+
+-- clear_math.clickedEvent:Connect(function()
+-- 	YOOTIL.Events.broadcast_to_server("clear_math_data")
+	
+-- 	Events.Broadcast("slider_release_handle")
+-- 	Events.Broadcast("clear_math_list")
+
+-- 	API.play_click_sound()
+
+-- 	clear_math.isInteractable = false
+
+-- 	Task.Spawn(function()
+-- 		clear_math.isInteractable = true
+-- 	end, 1)
+-- end)
+
+-- clear_logic.clickedEvent:Connect(function()
+-- 	YOOTIL.Events.broadcast_to_server("clear_logic_data")
+	
+-- 	Events.Broadcast("slider_release_handle")
+-- 	Events.Broadcast("clear_logic_list")
+
+-- 	API.play_click_sound()
+
+-- 	clear_logic.isInteractable = false
+
+-- 	Task.Spawn(function()
+-- 		clear_logic.isInteractable = true
+-- 	end, 1)
+-- end)
 
 function update_sfx_volume(v)
 	local fx_sounds = sfx_folder:GetChildren()

@@ -2575,8 +2575,8 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 1126
-    Height: 185
+    Width: 1454
+    Height: 139
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4997,6 +4997,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -5154,6 +5158,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -5311,6 +5319,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -5468,6 +5480,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -5771,6 +5787,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -5927,6 +5947,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -5994,6 +6018,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -6297,6 +6325,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -6453,6 +6485,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -6520,6 +6556,10 @@ Objects {
       VerticalJustification {
         Value: "mc:everticaljustification:top"
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -7344,13 +7384,13 @@ Objects {
   ChildIds: 8314421302107081357
   ChildIds: 10621022571944720980
   ChildIds: 1884096157415760281
-  ChildIds: 2653895806022693005
   ChildIds: 708995736485301128
   ChildIds: 406253195977708970
   ChildIds: 3963518621662240433
   ChildIds: 9009577787120568706
   ChildIds: 8251273773209668011
   ChildIds: 2599676393383195691
+  ChildIds: 2653895806022693005
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -7362,7 +7402,7 @@ Objects {
   }
   Control {
     Width: 746
-    Height: 585
+    Height: 569
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7382,6 +7422,96 @@ Objects {
           Value: "mc:euianchor:middlecenter"
         }
       }
+    }
+  }
+}
+Objects {
+  Id: 2653895806022693005
+  Name: "Client Scripts"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 14116838315011425361
+  ChildIds: 15358967927479608014
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:forceoff"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  NetworkContext {
+  }
+}
+Objects {
+  Id: 15358967927479608014
+  Name: "Settings_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2653895806022693005
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:API"
+      AssetReference {
+        Id: 11355776926042268297
+      }
+    }
+    Overrides {
+      Name: "cs:save_button"
+      ObjectReference {
+        SelfId: 8251273773209668011
+      }
+    }
+    Overrides {
+      Name: "cs:close_button"
+      ObjectReference {
+        SelfId: 2599676393383195691
+      }
+    }
+    Overrides {
+      Name: "cs:sfx_folder"
+      ObjectReference {
+        SelfId: 14914996981230800372
+      }
+    }
+    Overrides {
+      Name: "cs:music_folder"
+      ObjectReference {
+        SelfId: 17829228507645182166
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 13653404174753269356
     }
   }
 }
@@ -7413,7 +7543,7 @@ Objects {
     Width: 120
     Height: 40
     UIX: -65
-    UIY: -50
+    UIY: -41.3882294
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7507,7 +7637,7 @@ Objects {
     Width: 120
     Height: 40
     UIX: 65
-    UIY: -50
+    UIY: -41.3882294
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7658,8 +7788,8 @@ Objects {
   Control {
     Width: 40
     Height: 40
-    UIX: 21.7075405
-    UIY: 120
+    UIX: 21.708
+    UIY: 136.560242
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8040,7 +8170,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: -123.775261
-    UIY: 120
+    UIY: 136.560242
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8152,7 +8282,7 @@ Objects {
     Width: 250
     Height: 25
     UIX: 130
-    UIY: 45
+    UIY: 50.6695824
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8885,7 +9015,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: -91.6043854
-    UIY: 45
+    UIY: 50.6695824
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8918,96 +9048,6 @@ Objects {
           Value: "mc:euianchor:middlecenter"
         }
       }
-    }
-  }
-}
-Objects {
-  Id: 2653895806022693005
-  Name: "Client Scripts"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 14116838315011425361
-  ChildIds: 15358967927479608014
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:forceoff"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  NetworkContext {
-  }
-}
-Objects {
-  Id: 15358967927479608014
-  Name: "Settings_Client"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 2653895806022693005
-  UnregisteredParameters {
-    Overrides {
-      Name: "cs:API"
-      AssetReference {
-        Id: 11355776926042268297
-      }
-    }
-    Overrides {
-      Name: "cs:save_button"
-      ObjectReference {
-        SelfId: 8251273773209668011
-      }
-    }
-    Overrides {
-      Name: "cs:close_button"
-      ObjectReference {
-        SelfId: 2599676393383195691
-      }
-    }
-    Overrides {
-      Name: "cs:sfx_folder"
-      ObjectReference {
-        SelfId: 14914996981230800372
-      }
-    }
-    Overrides {
-      Name: "cs:music_folder"
-      ObjectReference {
-        SelfId: 17829228507645182166
-      }
-    }
-  }
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Script {
-    ScriptAsset {
-      Id: 13653404174753269356
     }
   }
 }
@@ -9087,7 +9127,7 @@ Objects {
     Width: 250
     Height: 25
     UIX: 130
-    UIY: -70
+    UIY: -82.2365341
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -9820,7 +9860,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: -130
-    UIY: -70
+    UIY: -82.2365341
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -9903,6 +9943,10 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -11007,6 +11051,10 @@ Objects {
       Font {
         Id: 18375965876900075365
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {

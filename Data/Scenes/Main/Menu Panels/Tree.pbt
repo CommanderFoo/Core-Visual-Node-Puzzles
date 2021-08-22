@@ -32868,6 +32868,10 @@ Objects {
       }
       ShadowOffset {
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -33122,6 +33126,10 @@ Objects {
       }
       ShadowOffset {
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -33376,6 +33384,10 @@ Objects {
       }
       ShadowOffset {
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -33831,6 +33843,10 @@ Objects {
       }
       ShadowOffset {
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {
@@ -35670,6 +35686,10 @@ Objects {
       }
       ShadowOffset {
       }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
     }
     AnchorLayout {
       SelfAnchor {

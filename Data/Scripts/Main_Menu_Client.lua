@@ -132,8 +132,6 @@ local function show_messages()
 	local txt_len = string.len(the_message:GetChildren()[1].text)
 	local delay = 5 + (txt_len / 100 * 3)
 
-	print(delay, index)
-
 	message_tween = YOOTIL.Tween:new(1, { a = 0 }, { a = 1 })
 
 	message_tween:on_start(function()
@@ -495,6 +493,8 @@ for i = 1, 25 do
 
 		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
 			Events.Broadcast("transition_in", function()
+				disable_messages()
+
 				menu_container.visibility = Visibility.FORCE_OFF
 				logic_list.visibility = Visibility.FORCE_OFF
 				logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
@@ -523,7 +523,7 @@ for i = 1, 25 do
 		entry:GetCustomProperty("name_txt"):GetObject().x = 15
 	end
 
-	entry.clickedEvent:Connect(function()
+	entry.clickedEvent:Connect(function()		
 		if(clicked) then
 			return
 		end
@@ -532,6 +532,8 @@ for i = 1, 25 do
 
 		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
 			Events.Broadcast("transition_in", function()
+				disable_messages()
+				
 				menu_container.visibility = Visibility.FORCE_OFF
 				math_list.visibility = Visibility.FORCE_OFF
 				math_list_button:SetButtonColor(logic_list_button:GetDisabledColor())

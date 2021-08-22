@@ -92,8 +92,11 @@ function set_handle_state()
 	end
 end
 
-handle.clickedEvent:Connect(set_handle_state)
-display_handle.clickedEvent:Connect(set_handle_state)
+handle.pressedEvent:Connect(set_handle_state)
+handle.releasedEvent:Connect(set_handle_state)
+
+display_handle.pressedEvent:Connect(set_handle_state)
+display_handle.releasedEvent:Connect(set_handle_state)
 
 local_player.bindingPressedEvent:Connect(function(player, binding)
 	if(binding == "ability_primary") then
