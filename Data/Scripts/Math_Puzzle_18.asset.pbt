@@ -5,4 +5,5 @@ Assets {
   TextAsset {
   }
   SerializationVersion: 95
+  VirtualFolderPath: "Math Puzzles"
 }

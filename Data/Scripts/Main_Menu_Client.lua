@@ -25,6 +25,8 @@ local math_list_scroll = script:GetCustomProperty("math_list_scroll"):WaitForObj
 
 local tutorial_button = script:GetCustomProperty("tutorial_button"):WaitForObject()
 
+local messages = script:GetCustomProperty("messages"):WaitForObject()
+
 local buttons_panels = {
 
 	{ 
@@ -86,9 +88,104 @@ local tutorial_ui = script:GetCustomProperty("tutorial_ui"):WaitForObject()
 local last_active = nil
 local tween = nil
 local local_player = Game.GetLocalPlayer()
+local last_message = nil
+local message_tween = nil
+local display_messages = false
 
 function play_hover()
 	hover_sound:Play()
+end
+
+local function clean_up()
+	math_list.visibility = Visibility.FORCE_OFF
+	math_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
+
+	logic_list.visibility = Visibility.FORCE_OFF
+	logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
+end
+
+local function disable_messages()
+	display_messages = false
+	message_tween = nil
+	messages.opacity = 0
+
+	if(last_message ~= nil) then
+		messages:GetChildren()[last_message].visibility = Visibility.FORCE_OFF
+		last_message = nil
+	end
+end
+
+local function show_messages()
+	if(not display_messages) then
+		return
+	end
+
+	local index = math.random(#messages:GetChildren())
+
+	while(last_message == index) do
+		index = math.random(#messages:GetChildren())
+	end
+
+	last_message = index
+
+	local the_message = messages:GetChildren()[index]
+	local txt_len = string.len(the_message:GetChildren()[1].text)
+	local delay = 5 + (txt_len / 100 * 3)
+
+	print(delay, index)
+
+	message_tween = YOOTIL.Tween:new(1, { a = 0 }, { a = 1 })
+
+	message_tween:on_start(function()
+		the_message.visibility = Visibility.FORCE_ON
+	end)
+
+	message_tween:on_change(function(c)
+		messages.opacity = c.a
+	end)
+
+	message_tween:on_complete(function()
+		message_tween = YOOTIL.Tween:new(1, { a = 1 }, { a = 0 })
+
+		message_tween:on_change(function(c)
+			messages.opacity = c.a
+		end)
+
+		message_tween:on_complete(function()
+			the_message.visibility = Visibility.FORCE_OFF
+
+			show_messages()
+		end)
+
+		message_tween:set_delay(delay) -- TODO: Change per message
+	end)
+
+	message_tween:set_delay(2)
+end
+
+local function hide_last()
+	if(last_active == nil) then
+		return
+	end
+
+	last_active.button:SetButtonColor(last_active.button:GetDisabledColor())
+
+	if(last_active.just_show) then
+		last_active.panel.visibility = Visibility.FORCE_OFF
+		last_active = nil
+	else
+		tween = YOOTIL.Tween:new(.3, { y = 0 }, { y = -900 })
+		tween:set_easing("outBack")
+		tween:on_change(function(c)
+			last_active.panel.y = c.y
+		end)
+
+		tween:on_complete(function()
+			tween = nil
+			last_active.panel.visibility = Visibility.FORCE_OFF
+			last_active = nil
+		end)
+	end
 end
 
 -- Tutorial
@@ -97,9 +194,12 @@ tutorial_button.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
+		disable_messages()
+
 		menu_container.visibility = Visibility.FORCE_OFF
 		
 		clean_up()
+		hide_last()
 
 		Events.Broadcast("show_base_ui")
 
@@ -117,11 +217,12 @@ logic_play.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
+		disable_messages()
+
 		menu_container.visibility = Visibility.FORCE_OFF
 		
 		clean_up()
 		hide_last()
-		last_active = nil
 
 		YOOTIL.Events.broadcast_to_server("load_game", false)
 	end)
@@ -135,6 +236,8 @@ math_play.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
+		disable_messages()
+
 		menu_container.visibility = Visibility.FORCE_OFF
 
 		clean_up()
@@ -148,30 +251,7 @@ end)
 
 math_play.hoveredEvent:Connect(play_hover)
 
-function hide_last()
-	if(last_active == nil) then
-		return
-	end
-
-	last_active.button:SetButtonColor(last_active.button:GetDisabledColor())
-
-	if(last_active.just_show) then
-		last_active.panel.visibility = Visibility.FORCE_OFF
-	else
-		tween = YOOTIL.Tween:new(.3, { y = 0 }, { y = -900 })
-		tween:set_easing("outBack")
-		tween:on_change(function(c)
-			last_active.panel.y = c.y
-		end)
-
-		tween:on_complete(function()
-			tween = nil
-			last_active.panel.visibility = Visibility.FORCE_OFF
-		end)
-	end
-end
-
-function display(o)
+local function display(o)
 	if(o.just_show) then
 		last_active = o
 		o.panel.visibility = Visibility.FORCE_ON
@@ -194,12 +274,12 @@ function display(o)
 	end
 end
 
-function show_panel(o)
+local function show_panel(o)
 	if(last_active ~= nil) then
 		if(last_active ~= o) then
 			hide_last()
 
-			if(not last_active.just_show) then
+			if(last_active ~= nil and not last_active.just_show) then
 				Task.Wait(.35)
 			end
 
@@ -220,22 +300,14 @@ for _, o in pairs(buttons_panels) do
 	o.button.hoveredEvent:Connect(play_hover)
 end
 
-function reset_lists()
-
-end
-
 function Tick(dt)
 	if(tween ~= nil) then
 		tween:tween(dt)
 	end
-end
 
-function clean_up()
-	math_list.visibility = Visibility.FORCE_OFF
-	math_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
-
-	logic_list.visibility = Visibility.FORCE_OFF
-	logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
+	if(message_tween ~= nil) then
+		message_tween:tween(dt)
+	end
 end
 
 Events.Connect("show_main_menu", function()
@@ -246,7 +318,10 @@ Events.Connect("show_main_menu", function()
 	menu_container.visibility = Visibility.FORCE_ON
 	bg_effect.visibility = Visibility.FORCE_ON
 
-	Events.Broadcast("transition_out")
+	Events.Broadcast("transition_out", function()
+		display_messages = true
+		show_messages()
+	end)
 end)
 
 overrun_button.clickedEvent:Connect(function()

@@ -367,6 +367,12 @@ Objects {
         SelfId: 13270959195719678624
       }
     }
+    Overrides {
+      Name: "cs:messages"
+      ObjectReference {
+        SelfId: 14801045368449505191
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
