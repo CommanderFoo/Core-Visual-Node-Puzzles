@@ -408,9 +408,9 @@ function Node:debug()
 		end
 	end
 
-	print("Inputs: " .. tostring(inputs))
-	print("Outputs: " .. tostring(outputs))
-	print("Events: " .. tostring(#self.n_evts) .. " / " .. tostring(#self.evts))
+	--print("Inputs: " .. tostring(inputs))
+	--print("Outputs: " .. tostring(outputs))
+	--print("Events: " .. tostring(#self.n_evts) .. " / " .. tostring(#self.evts))
 end
 
 function Node:setup_output_connections()
@@ -3078,7 +3078,7 @@ function Node_Greater_Than:new(r, options)
 	end
 
 	function this:get_amount()
-		return amount
+		return string.format("%.2f", amount)
 	end
 
 	function this:set_amount(a)
@@ -3302,7 +3302,7 @@ function Node_Less_Than:new(r, options)
 	end
 
 	function this:get_amount()
-		return amount
+		return string.format("%.2f", amount)
 	end
 
 	function this:set_amount(a)
@@ -3523,7 +3523,7 @@ function Node_Equal:new(r, options)
 	end
 
 	function this:get_amount()
-		return amount
+		return string.format("%.2f", amount)
 	end
 
 	function this:set_amount(a)

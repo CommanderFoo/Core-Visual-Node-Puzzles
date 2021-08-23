@@ -4,7 +4,8 @@ local Math_Solutions = require(script:GetCustomProperty("math_puzzle_solutions")
 
 local clear_player_data = false
 
--- Internal ID | Unique ID | Position | Condition | Limit | Output Connections | Order
+-- Logic Puzzle@Internal ID|Unique ID|Position|If / Else Condition|Limit|Output Connections (Index;Unique ID~Index)|Halt Order:
+-- Math  Puzzle@Internal ID|Unique ID|Position|If / Else Condition|Limit|Output Connections (Index;Unique ID~Index)|Halt Order:
 
 function save_data(player)
 	local data = {
@@ -234,15 +235,3 @@ Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, 
 		player:SetPrivateNetworkedData("math_progress", player.serverUserData.math_progress)
 	end
 end)
-
--- Events.ConnectForPlayer("clear_logic_data", function(player)
--- 	player.serverUserData.logic_node_data = {}
--- 	player.serverUserData.logic_progress = {}
--- 	save_data(player)
--- end)
-
--- Events.ConnectForPlayer("clear_math_data", function(player)
--- 	player.serverUserData.math_node_data = {}
--- 	player.serverUserData.math_progress = {}
--- 	save_data(player)
--- end)

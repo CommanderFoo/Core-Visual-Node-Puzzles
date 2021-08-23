@@ -130,7 +130,7 @@ local function show_messages()
 
 	local the_message = messages:GetChildren()[index]
 	local txt_len = string.len(the_message:GetChildren()[1].text)
-	local delay = 5 + (txt_len / 100 * 3)
+	local delay = 5 + (txt_len / 100 * 3.5)
 
 	message_tween = YOOTIL.Tween:new(1, { a = 0 }, { a = 1 })
 
