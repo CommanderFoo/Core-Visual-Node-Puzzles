@@ -10580,7 +10580,7 @@ Objects {
     }
     UseParentWidth: true
     Text {
-      Label: "0.00"
+      Label: "0"
       Color {
         R: 1
         G: 1
@@ -12378,7 +12378,7 @@ Objects {
     AddSizeToParentIfUsingParentSize: true
     UseParentWidth: true
     Text {
-      Label: "The Greater Than Node checks the incoming number data against the value set. If the data is greater, then it will be sent out of the top output, otherwise the bottom. Holding Shift while adjusting the value will go up or down by 1 instead of 0.5."
+      Label: "The Greater Than Node checks the incoming number data against the value set. If the data is greater, then it will be sent out of the top output, otherwise the bottom. Holding Shift while adjusting the value will go up or down by 5."
       Color {
         R: 1
         G: 1

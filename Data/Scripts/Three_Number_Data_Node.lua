@@ -18,13 +18,13 @@ local data = nil
 local paused = false
 
 function init(node_data)
-	first_number.text = string.format("%.02f", node_data.first_number)
+	first_number.text = string.format("%.0f", node_data.first_number)
 	first_count.text = tostring(node_data.first_count)
 
-	second_number.text = string.format("%.02f", node_data.second_number)
+	second_number.text = string.format("%.0f", node_data.second_number)
 	second_count.text = tostring(node_data.second_count)
 
-	third_number.text = string.format("%.02f", node_data.third_number)
+	third_number.text = string.format("%.0f", node_data.third_number)
 	third_count.text = tostring(node_data.third_count)
 
 	data = {

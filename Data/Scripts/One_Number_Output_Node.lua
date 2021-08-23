@@ -58,7 +58,7 @@ function init(node_data)
 
 	})
 
-	first_number.text = string.format("%.02f", data.first_number)
+	first_number.text = string.format("%.0f", data.first_number)
 	first_required.text = tostring(data.first_required)
 
 	node:set_from_saved_data(node_data)

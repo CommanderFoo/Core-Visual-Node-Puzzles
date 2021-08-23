@@ -1007,7 +1007,7 @@ function Node:spawn_asset(asset, x, y, value)
 	local obj = World.SpawnAsset(asset, {parent = self.items_container})
 
 	if(self.puzzle_type == Puzzle_Type.MATH) then
-		obj.text = tostring(value)
+		obj.text = string.format("%.0f", value)
 	end
 
 	obj.x = x
@@ -1621,7 +1621,7 @@ function Node_Alternate:new(r, options)
 			local top_connection = this:has_top_connection()
 			local bottom_connection = this:has_bottom_connection()
 
-			if(top_connection or bottom_connection) then
+			if(top_connection and bottom_connection) then
 				local obj = nil
 				local line = this:get_connector_line(switch)
 				local tween = this:create_tween(line)
@@ -1715,6 +1715,7 @@ function Node_Alternate:new(r, options)
 		end
 
 		monitor_started = false
+		switch = true
 		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 
@@ -2186,13 +2187,13 @@ function Node_Add:new(r, options)
 				if(top_item == nil and not top_queue:is_empty()) then
 					top_item = top_queue:pop()
 					top_queue_count.text = tostring(top_queue:length())
-					top_number.text = tostring(top_item)
+					top_number.text = string.format("%.0f", top_item)
 				end
 
 				if(bottom_item == nil and not bottom_queue:is_empty()) then
 					bottom_item = bottom_queue:pop()
 					bottom_queue_count.text = tostring(bottom_queue:length())
-					bottom_number.text = tostring(bottom_item)
+					bottom_number.text = string.format("%.0f", bottom_item)
 				end
 
 				if(top_item ~= nil and bottom_item ~= nil) then
@@ -2241,7 +2242,7 @@ function Node_Add:new(r, options)
 
 				if(connection_to_id) then
 					data.connection_to_id = connection_to_id
-					data.value = tonumber(string.format("%.02f", top_value + bottom_value))
+					data.value = tonumber(string.format("%.0f", top_value + bottom_value))
 
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
@@ -2373,13 +2374,13 @@ function Node_Substract:new(r, options)
 				if(top_item == nil and not top_queue:is_empty()) then
 					top_item = top_queue:pop()
 					top_queue_count.text = tostring(top_queue:length())
-					top_number.text = tostring(top_item)
+					top_number.text = string.format("%.0f", top_item)
 				end
 
 				if(bottom_item == nil and not bottom_queue:is_empty()) then
 					bottom_item = bottom_queue:pop()
 					bottom_queue_count.text = tostring(bottom_queue:length())
-					bottom_number.text = tostring(bottom_item)
+					bottom_number.text = string.format("%.0f", bottom_item)
 				end
 
 				if(top_item ~= nil and bottom_item ~= nil) then
@@ -2419,7 +2420,7 @@ function Node_Substract:new(r, options)
 
 				if(connection_to_id) then
 					data.connection_to_id = connection_to_id
-					data.value = tonumber(string.format("%.02f", top_value - bottom_value))
+					data.value = tonumber(string.format("%.0f", top_value - bottom_value))
 
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
@@ -2554,13 +2555,13 @@ function Node_Multiply:new(r, options)
 				if(top_item == nil and not top_queue:is_empty()) then
 					top_item = top_queue:pop()
 					top_queue_count.text = tostring(top_queue:length())
-					top_number.text = tostring(top_item)
+					top_number.text = string.format("%.0f", top_item)
 				end
 
 				if(bottom_item == nil and not bottom_queue:is_empty()) then
 					bottom_item = bottom_queue:pop()
 					bottom_queue_count.text = tostring(bottom_queue:length())
-					bottom_number.text = tostring(bottom_item)
+					bottom_number.text = string.format("%.0f", bottom_item)
 				end
 
 				if(top_item ~= nil and bottom_item ~= nil) then
@@ -2600,7 +2601,7 @@ function Node_Multiply:new(r, options)
 
 				if(connection_to_id) then
 					data.connection_to_id = connection_to_id
-					data.value = tonumber(string.format("%.02f", top_value * bottom_value))
+					data.value = tonumber(string.format("%.0f", top_value * bottom_value))
 
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
@@ -2735,13 +2736,13 @@ function Node_Divide:new(r, options)
 				if(top_item == nil and not top_queue:is_empty()) then
 					top_item = top_queue:pop()
 					top_queue_count.text = tostring(top_queue:length())
-					top_number.text = tostring(top_item)
+					top_number.text = string.format("%.0f", top_item)
 				end
 
 				if(bottom_item == nil and not bottom_queue:is_empty()) then
 					bottom_item = bottom_queue:pop()
 					bottom_queue_count.text = tostring(bottom_queue:length())
-					bottom_number.text = tostring(bottom_item)
+					bottom_number.text = string.format("%.0f", bottom_item)
 				end
 
 				if(top_item ~= nil and bottom_item ~= nil) then
@@ -2781,7 +2782,7 @@ function Node_Divide:new(r, options)
 
 				if(connection_to_id) then
 					data.connection_to_id = connection_to_id
-					data.value = tonumber(string.format("%.02f", top_value / bottom_value))
+					data.value = tonumber(string.format("%.0f", top_value / bottom_value))
 
 					local line = this:get_connector_line(true)
 					local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
@@ -2908,31 +2909,31 @@ function Node_Greater_Than:new(r, options)
 
 	this.evts[#this.evts + 1] = minus_button.clickedEvent:Connect(function()
 		if(amount > -100) then
-			local val = 0.50
+			local val = 1
 
 			if(this.shift_pressed) then
-				val = 1
+				val = 5
 			end
 
 			amount = amount - val
 		end
 
-		amount_txt.text = string.format("%0.2f", amount)
+		amount_txt.text = string.format("%.0f", amount)
 		orig_amount = amount
 	end)
 
 	this.evts[#this.evts + 1] = plus_button.clickedEvent:Connect(function()
 		if(amount < 100) then
-			local val = 0.50
+			local val = 1
 
 			if(this.shift_pressed) then
-				val = 1
+				val = 5
 			end
 
 			amount = amount + val
 		end
 
-		amount_txt.text = string.format("%0.2f", amount)
+		amount_txt.text = string.format("%.0f", amount)
 		orig_amount = amount
 	end)
 
@@ -3071,20 +3072,20 @@ function Node_Greater_Than:new(r, options)
 		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 		amount = orig_amount
-		amount_txt.text = string.format("%.02f", amount)
+		amount_txt.text = string.format("%.0f", amount)
 
 		this:clear_items_container()
 		this:hide_error_info()
 	end
 
 	function this:get_amount()
-		return string.format("%.2f", amount)
+		return string.format("%.0f", amount)
 	end
 
 	function this:set_amount(a)
 		if(a ~= nil and a > -100 and a < 100) then
-			amount = tonumber(string.format("%.02f", a))
-			amount_txt.text = string.format("%.02f", amount)
+			amount = tonumber(string.format("%.0f", a))
+			amount_txt.text = string.format("%.0f", amount)
 			orig_amount = amount
 		end
 	end
@@ -3295,7 +3296,7 @@ function Node_Less_Than:new(r, options)
 		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 		amount = orig_amount
-		amount_txt.text = string.format("%.02f", amount)
+		amount_txt.text = string.format("%.0f", amount)
 
 		this:clear_items_container()
 		this:hide_error_info()
@@ -3307,8 +3308,8 @@ function Node_Less_Than:new(r, options)
 
 	function this:set_amount(a)
 		if(a ~= nil and a > -100 and a < 100) then
-			amount = tonumber(string.format("%.02f", a))
-			amount_txt.text = string.format("%.02f", amount)
+			amount = tonumber(string.format("%.0f", a))
+			amount_txt.text = string.format("%.0f", amount)
 			orig_amount = amount
 		end
 	end
@@ -3516,7 +3517,7 @@ function Node_Equal:new(r, options)
 		queue = YOOTIL.Utils.Queue:new()
 		this.tweens = {}
 		amount = orig_amount
-		amount_txt.text = string.format("%.02f", amount)
+		amount_txt.text = string.format("%.0f", amount)
 
 		this:clear_items_container()
 		this:hide_error_info()
@@ -3528,8 +3529,8 @@ function Node_Equal:new(r, options)
 
 	function this:set_amount(a)
 		if(a ~= nil and a > -100 and a < 100) then
-			amount = tonumber(string.format("%.02f", a))
-			amount_txt.text = string.format("%.02f", amount)
+			amount = tonumber(string.format("%.0f", a))
+			amount_txt.text = string.format("%.0f", amount)
 			orig_amount = amount
 		end
 	end

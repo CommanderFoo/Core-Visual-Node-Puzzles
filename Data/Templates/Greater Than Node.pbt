@@ -1864,7 +1864,7 @@ Assets {
           }
           UseParentWidth: true
           Text {
-            Label: "0.00"
+            Label: "0"
             Color {
               R: 1
               G: 1
@@ -2464,7 +2464,7 @@ Assets {
           }
           Overrides {
             Name: "cs:info_2_text"
-            String: "Tip:  You can hold Shift while clicking to increment by 0.50."
+            String: "Tip:  You can hold Shift while clicking to increment by 5."
           }
           Overrides {
             Name: "cs:info_2_offset"
