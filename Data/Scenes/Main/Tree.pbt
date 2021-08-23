@@ -19,7 +19,6 @@ Objects {
   ChildIds: 5021637449606560396
   ChildIds: 8001455622970484507
   ChildIds: 11544835888898176273
-  ChildIds: 364593927435410960
   UnregisteredParameters {
   }
   Collidable_v2 {
@@ -32,78 +31,6 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Folder {
-  }
-}
-Objects {
-  Id: 364593927435410960
-  Name: "Trophy Data"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 4781671109827199097
-  ChildIds: 17421176195453024509
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:forceoff"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  NetworkContext {
-  }
-}
-Objects {
-  Id: 17421176195453024509
-  Name: "Trophy_Data"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 364593927435410960
-  UnregisteredParameters {
-    Overrides {
-      Name: "cs:id"
-      Int: 0
-    }
-    Overrides {
-      Name: "cs:title"
-      String: ""
-    }
-    Overrides {
-      Name: "cs:description"
-      String: ""
-    }
-  }
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Script {
-    ScriptAsset {
-      Id: 15413558830279998839
-    }
   }
 }
 Objects {
@@ -14087,6 +14014,12 @@ Objects {
       Name: "cs:MathPuzzle19"
       AssetReference {
         Id: 12048733943488332522
+      }
+    }
+    Overrides {
+      Name: "cs:MathPuzzle20"
+      AssetReference {
+        Id: 7252314039799592586
       }
     }
   }
