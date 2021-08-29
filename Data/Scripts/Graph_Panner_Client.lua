@@ -71,11 +71,11 @@ function Tick(dt)
 	end
 end
 
-Events.Connect("enable_graph_mover", function()
+Events.Connect("enable_graph_panning", function()
 	can_move = true
 end)
 
-Events.Connect("disable_graph_mover", function()
+Events.Connect("disable_graph_panning", function()
 	can_move = false
 end)
 

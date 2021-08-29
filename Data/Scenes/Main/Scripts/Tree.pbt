@@ -174,7 +174,7 @@ Objects {
 }
 Objects {
   Id: 12690753362760052858
-  Name: "Graph_Mover_Client"
+  Name: "Graph_Panner_Client"
   Transform {
     Location {
     }

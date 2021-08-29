@@ -61,10 +61,10 @@ function load_puzzle(id, logic)
 		})
 
 		Events.Broadcast("enable_header_ui")
-		Events.Broadcast("enable_graph_mover")
+		Events.Broadcast("enable_graph_panning")
 	else
 		Events.Broadcast("disable_header_ui", true)
-		Events.Broadcast("disable_graph_mover")
+		Events.Broadcast("disable_graph_panning")
 	end
 end
 

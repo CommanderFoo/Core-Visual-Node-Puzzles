@@ -99,7 +99,7 @@ main_menu_button.clickedEvent:Connect(function()
 	disable_ui(true)
 	API.disable_nodes()
 
-	Events.Broadcast("disable_graph_mover")
+	Events.Broadcast("disable_graph_panning")
 	Events.Broadcast("on_disable_all_dropdowns")
 	Events.Broadcast("stop_auto_save")
 
@@ -170,7 +170,7 @@ run_edit_button.clickedEvent:Connect(function()
 		Events.Broadcast("start_auto_save")
 		Events.Broadcast("unpause") -- Make sure we aren't paused for some reason.
 
-		Events.Broadcast("enable_graph_mover")
+		Events.Broadcast("enable_graph_panning")
 	else
 		run_edit_button.text = "Edit Program"
 		running = true
@@ -245,7 +245,6 @@ function disable_ui(disable_run_edit, ignore_settings)
 	end
 
 	Events.Broadcast("disable_available_nodes")
-	Events.Broadcast("disable_graph_mover")
 
 	ui_is_disabled = true
 end
@@ -281,7 +280,7 @@ end)
 
 function close_settings()
 	enable_ui()
-	Events.Broadcast("enable_graph_mover")	
+	Events.Broadcast("enable_graph_panning")	
 	settings.visibility = Visibility.FORCE_OFF
 	settings_open = false
 
@@ -295,7 +294,7 @@ settings_button.clickedEvent:Connect(function()
 		close_settings()
 	else
 		disable_ui(true, true)
-
+		Events.Broadcast("disable_graph_panning")
 		settings.visibility = Visibility.FORCE_ON
 		settings_open = true
 		
@@ -313,7 +312,7 @@ help_button.unhoveredEvent:Connect(API.play_hover_sound)
 
 function close_help()
 	enable_ui()
-	Events.Broadcast("enable_graph_mover")	
+	Events.Broadcast("enable_graph_panning")	
 	help.visibility = Visibility.FORCE_OFF
 	help_open = false
 
@@ -327,7 +326,7 @@ help_button.clickedEvent:Connect(function()
 		close_help()
 	else
 		disable_ui(true, true)
-
+		Events.Broadcast("disable_graph_panning")
 		help.visibility = Visibility.FORCE_ON
 		help_open = true
 		
