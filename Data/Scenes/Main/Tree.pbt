@@ -14649,16 +14649,13 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 2000
-    Height: 2000
+    Width: 6000
+    Height: 6000
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
-    AddSizeToParentIfUsingParentSize: true
-    UseParentWidth: true
-    UseParentHeight: true
     Panel {
       Opacity: 1
     }
@@ -14768,8 +14765,8 @@ Objects {
       Brush {
       }
       Color {
-        G: 0.0177083015
-        B: 0.0147571238
+        G: 0.0176419523
+        B: 0.0144438436
         A: 1
       }
       TeamSettings {

@@ -31,7 +31,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		title.text = "Well Done, All Puzzles Complete"	
 	end
 
-	local score = 20000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes() - 2) * 25)))
+	local score = 20000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes(true) - 2) * 25)))
 
 	program_score.text = string.format("Program Score: %.0f", score)
 

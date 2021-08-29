@@ -2274,15 +2274,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:total"
-            Int: 1
-          }
-          Overrides {
-            Name: "cs:first_number"
-            Float: 10
-          }
-          Overrides {
-            Name: "cs:first_required"
-            Int: 40
+            Int: 20
           }
         }
         Collidable_v2 {

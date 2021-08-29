@@ -155,7 +155,7 @@ function API.get_total_nodes()
 	local count = 0
 
 	for k, v in pairs(API.nodes) do
-		if(v ~= nil) then
+		if(v ~= nil and v:get_type() ~= "Reroute") then
 			count = count + 1
 		end
 	end

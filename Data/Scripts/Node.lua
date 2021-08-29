@@ -266,10 +266,12 @@ function Node:setup_node(root)
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI"):FindChildByName("Graph")
 	self.body = self.root:FindDescendantByName("Body Background")
 
-	self.circle_bubble = self.body:FindDescendantByName("Circle Bubble")
-	self.square_bubble = self.body:FindDescendantByName("Square Bubble")
-	self.triangle_bubble = self.body:FindDescendantByName("Triangle Bubble")
-	self.plus_bubble = self.body:FindDescendantByName("Plus Bubble")
+	if(Object.IsValid(self.body)) then
+		self.circle_bubble = self.body:FindDescendantByName("Circle Bubble")
+		self.square_bubble = self.body:FindDescendantByName("Square Bubble")
+		self.triangle_bubble = self.body:FindDescendantByName("Triangle Bubble")
+		self.plus_bubble = self.body:FindDescendantByName("Plus Bubble")
+	end
 
 	self.info_button = self.handle:FindChildByName("Info")
 	self.info_data = self.root:FindDescendantByName("Node_Information_Data")
@@ -608,20 +610,20 @@ function Node:drag_node()
 			if(pos.x >= 0) then
 				self.root.x = pos.x - self.offset.x
 
-				 if(self.root.x <= -1500) then
-				 	self.root.x = -1500
-				 elseif(self.root.x >= 1500) then
-				 	self.root.x = 1500
+				 if(self.root.x <= -3000) then
+				 	self.root.x = -3000
+				 elseif(self.root.x >= 3000) then
+				 	self.root.x = 3000
 				 end
 			end
 
 			if(pos.y >= 0) then
 				self.root.y = pos.y - self.offset.y
 
-				if(self.root.y <= -1500) then
-					self.root.y = -1500
-				elseif(self.root.y >= 1500) then
-					self.root.y = 1500
+				if(self.root.y <= -3000) then
+					self.root.y = -3000
+				elseif(self.root.y >= 3000) then
+					self.root.y = 3000
 				end
 			end
 		end
@@ -953,7 +955,7 @@ function Node:get_connector_line(condition)
 	return self:get_bottom_connector_line()
 end
 
-function Node:create_tween(line)
+function Node:create_tween(line, pass_score)
 	if(not line) then
 		return nil
 	end
@@ -963,11 +965,16 @@ function Node:create_tween(line)
 	if(self.options.tween_delay) then
 		t:set_delay(self.options.tween_delay / self.options.speed)
 
-		Events.Broadcast("score", self.options.tween_delay or 0)
+		if(not pass_score) then
+			Events.Broadcast("score", self.options.tween_delay or 0)
+		end
 	end
 
 	if(not self.options.added_tween) then
-		Events.Broadcast("score", self.options.tween_duration)
+		if(not pass_score) then
+			Events.Broadcast("score", self.options.tween_duration)
+		end
+
 		self.options.added_tween = true
 	end
 
@@ -3682,6 +3689,94 @@ end
 
 -- End Absolute Node
 
+-- Reroute Node
+
+local Node_Reroute = {}
+
+function Node_Reroute:new(r, options)
+	self.__index = self
+
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Reroute"
+
+	this.options.on_data_received = function(data, node, from_node)
+		this:set_speed(from_node:get_speed())
+
+		local queue_func = function()
+			local top_connection = this:has_top_connection()
+
+			if(top_connection) then
+				data.value = data.value
+				data.connection_to_id = top_connection
+
+				local line = this:get_connector_line(true)
+				local tween = this:create_tween(line, true)
+				local connection_method = "send_data_top"
+				local offset = -25
+				local obj = this:spawn_asset(data.asset, line.x, line.y, data.value)
+
+				this:insert_tween({
+
+					obj = obj,
+					tween = tween
+
+				})
+
+				if(tween ~= nil and connection_method ~= nil) then
+					tween:on_start(function()
+						obj.visibility = Visibility.FORCE_ON
+					end)
+
+					tween:on_complete(function()
+						this[connection_method](this, data)
+
+						if(Object.IsValid(obj)) then
+							obj:Destroy()
+						end
+
+						tween = nil
+					end)
+
+					tween:on_change(function(changed)
+						local x, y = this:get_path(obj, line, changed, offset)
+
+						if(x == nil or y == nil) then
+							return
+						end
+
+						obj.x = x
+						obj.y = y
+					end)
+				end
+			else
+				this:has_errors(true)
+			end
+		end
+
+		queue_func()
+	end
+
+	function this:reset()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
+	end
+
+	return this
+end
+
+-- End Reroute Node
+
 return Node, Node_Events, {
 
 	Output = Node_Output,
@@ -3696,6 +3791,7 @@ return Node, Node_Events, {
 	Divide = Node_Divide,
 	Greater_Than = Node_Greater_Than,
 	Less_Than = Node_Less_Than,
-	Absolute = Node_Absolute
+	Absolute = Node_Absolute,
+	Reroute = Node_Reroute
 
 }

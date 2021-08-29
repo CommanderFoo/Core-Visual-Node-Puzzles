@@ -51,20 +51,20 @@ function Tick(dt)
 		graph.x = pos.x - offset.x
 		graph.y = pos.y - offset.y
 
-		if(graph.x < -1500) then
-			graph.x = -1500
+		if(graph.x < -3000) then
+			graph.x = -3000
 		end
 			
-		if(graph.x > 1500) then
-			graph.x = 1500
+		if(graph.x > 3000) then
+			graph.x = 3000
 		end
 
-		if(graph.y < -1500) then
-			graph.y = -1500
+		if(graph.y < -3000) then
+			graph.y = -3000
 		end
 			
-		if(graph.y > 1500) then
-			graph.y = 1500
+		if(graph.y > 3000) then
+			graph.y = 3000
 		end
 	elseif(tween ~= nil) then
 		tween:tween(dt)
