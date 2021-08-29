@@ -363,7 +363,7 @@ Objects {
           Y: 40
         }
         VoiceChatHorizontalAlignment {
-          Value: "mc:ecorehorizontalalign:right"
+          Value: "mc:ecorehorizontalalign:left"
         }
         VoiceChatVerticalAlignment {
           Value: "mc:ecoreverticalalign:top"

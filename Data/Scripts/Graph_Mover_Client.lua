@@ -7,17 +7,10 @@ local is_moving = false
 local offset = Vector2.ZERO
 local tween
 
-local_player.bindingPressedEvent:Connect(function(_, binding)
-	if(binding == "ability_secondary") then
-		local pos = UI.GetCursorPosition()
-
-		offset.x = pos.x - graph.x
-		offset.y = pos.y - graph.y
-
-		is_moving = true
-	elseif(binding == "ability_extra_33" and can_move and (graph.x ~= 0 or graph.y ~= 0)) then
+local function tween_graph()
+	if(can_move and (graph.x ~= 0 or graph.y ~= 0)) then
 		tween = YOOTIL.Tween:new(.3, { x = graph.x, y = graph.y }, { x = 0, y = 0 })
-		
+			
 		tween:on_change(function(c)
 			graph.x = c.x
 			graph.y = c.y
@@ -28,6 +21,19 @@ local_player.bindingPressedEvent:Connect(function(_, binding)
 		end)
 
 		tween:set_easing("outCirc")
+	end
+end
+
+local_player.bindingPressedEvent:Connect(function(_, binding)
+	if(binding == "ability_secondary") then
+		local pos = UI.GetCursorPosition()
+
+		offset.x = pos.x - graph.x
+		offset.y = pos.y - graph.y
+
+		is_moving = true
+	elseif(binding == "ability_extra_33") then
+		tween_graph()
 	end
 end)
 
@@ -73,7 +79,11 @@ Events.Connect("disable_graph_mover", function()
 	can_move = false
 end)
 
-Events.Connect("reset_graph", function()
-	graph.x = 0
-	graph.y = 0
+Events.Connect("reset_graph", function(do_tween)
+	if(do_tween) then
+		tween_graph()
+	else
+		graph.x = 0
+		graph.y = 0
+	end
 end)

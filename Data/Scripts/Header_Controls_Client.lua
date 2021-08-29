@@ -16,12 +16,16 @@ local settings_button = script:GetCustomProperty("settings_button"):WaitForObjec
 local settings = script:GetCustomProperty("settings"):WaitForObject()
 
 local save_button = script:GetCustomProperty("save_button"):WaitForObject()
-
 local main_menu_button = script:GetCustomProperty("main_menu_button"):WaitForObject()
-
 local clear_button = script:GetCustomProperty("clear_button"):WaitForObject()
+local center_graph_button = script:GetCustomProperty("center_graph_button"):WaitForObject()
+
+local help_button = script:GetCustomProperty("help_button"):WaitForObject()
+local help = script:GetCustomProperty("help"):WaitForObject()
+local close_help_button = script:GetCustomProperty("close_help_button"):WaitForObject()
 
 local settings_open = false
+local help_open = false
 
 local gold_color = gold_award:GetColor()
 local silver_color = silver_award:GetColor()
@@ -70,6 +74,14 @@ function Tick(dt)
 	end
 end
 
+-- Center graph
+
+center_graph_button.hoveredEvent:Connect(API.play_hover_sound)
+
+center_graph_button.clickedEvent:Connect(function()
+	Events.Broadcast("reset_graph", true)
+end)
+
 -- Clear
 
 clear_button.hoveredEvent:Connect(API.play_hover_sound)
@@ -110,12 +122,12 @@ function show_hide_nodes()
 
 	if(showing_nodes) then	
 		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = 400})
-		available_nodes_button.text = "Show Available Nodes"
+		available_nodes_button.text = "Show Nodes"
 		
 		showing_nodes = false
 	else
 		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -20})
-		available_nodes_button.text = "Hide Available Nodes"
+		available_nodes_button.text = "Hide Nodes"
 		showing_nodes = true
 	end
 
@@ -221,6 +233,8 @@ function disable_ui(disable_run_edit, ignore_settings)
 	save_button.isInteractable = false
 	main_menu_button.isInteractable = false
 	clear_button.isInteractable = false
+	center_graph_button.isInteractable = false
+	help_button.isInteractable = false
 
 	if(disable_run_edit) then
 		run_edit_button.isInteractable = false
@@ -245,7 +259,9 @@ function enable_ui()
 	save_button.isInteractable = true
 	main_menu_button.isInteractable = true
 	clear_button.isInteractable = true
-	
+	center_graph_button.isInteractable = true
+	help_button.isInteractable = true
+
 	Events.Broadcast("enable_available_nodes")
 
 	ui_is_disabled = false
@@ -289,6 +305,41 @@ settings_button.clickedEvent:Connect(function()
 
 	API.play_click_sound()
 end)
+
+-- Help
+
+help_button.hoveredEvent:Connect(API.play_hover_sound)
+help_button.unhoveredEvent:Connect(API.play_hover_sound)
+
+function close_help()
+	enable_ui()
+	Events.Broadcast("enable_graph_mover")	
+	help.visibility = Visibility.FORCE_OFF
+	help_open = false
+
+	API.enable_nodes()
+	Events.Broadcast("on_enable_all_dropdowns")
+	API.play_click_sound()
+end
+
+help_button.clickedEvent:Connect(function()
+	if(help_open) then
+		close_help()
+	else
+		disable_ui(true, true)
+
+		help.visibility = Visibility.FORCE_ON
+		help_open = true
+		
+		API.disable_nodes()
+		Events.Broadcast("on_disable_all_dropdowns")
+	end
+
+	API.play_click_sound()
+end)
+
+close_help_button.hoveredEvent:Connect(API.play_hover_sound)
+close_help_button.clickedEvent:Connect(close_help)
 
 -- Save
 
@@ -351,7 +402,7 @@ end)
 
 Events.Connect("show_nodes", function()
 	tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -30})
-	available_nodes_button.text = "Hide Available Nodes"
+	available_nodes_button.text = "Hide Nodes"
 	showing_nodes = true
 
 	tween:on_start(function()

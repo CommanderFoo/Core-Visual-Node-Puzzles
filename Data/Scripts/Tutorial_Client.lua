@@ -122,7 +122,7 @@ function init()
 end
 
 function show_nodes()
-	show_hide_nodes_button.text = "Hide Available Nodes"
+	show_hide_nodes_button.text = "Hide Nodes"
 	node_tween = YOOTIL.Tween:new(.3, {v = nodes_panel.x}, {v = -20})
 
 	node_tween:on_complete(function()

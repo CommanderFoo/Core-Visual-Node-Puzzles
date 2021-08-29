@@ -944,6 +944,30 @@ Objects {
         SelfId: 17291627843593195179
       }
     }
+    Overrides {
+      Name: "cs:center_graph_button"
+      ObjectReference {
+        SelfId: 15307185592566286566
+      }
+    }
+    Overrides {
+      Name: "cs:help_button"
+      ObjectReference {
+        SelfId: 995505062823373878
+      }
+    }
+    Overrides {
+      Name: "cs:help"
+      ObjectReference {
+        SelfId: 8132410580797243272
+      }
+    }
+    Overrides {
+      Name: "cs:close_help_button"
+      ObjectReference {
+        SelfId: 16983164848258026425
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
