@@ -1812,6 +1812,6 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 95
+  SerializationVersion: 97
   VirtualFolderPath: "Math Puzzles"
 }

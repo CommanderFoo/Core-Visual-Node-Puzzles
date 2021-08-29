@@ -67,7 +67,7 @@ node_destroy_evt = API.Node_Events.on("node_destroyed", function(node_id, tpl_id
 end)
 
 function spawn_node(x, y, uid, condition, limit, order)
-	local n = World.SpawnAsset(node, { parent = container })
+	local n = World.SpawnAsset(node, { parent = container:FindChildByName("Graph") })
 		
 	n.x = x
 	n.y = y
@@ -173,8 +173,21 @@ end
 evts[#evts + 1] = button.hoveredEvent:Connect(API.play_hover_sound)
 
 evts[#evts + 1] = button.clickedEvent:Connect(function()
-	if(total_spawned < total or total == -1) then		
-		spawn_node(0, 0, nil)
+	if(total_spawned < total or total == -1) then
+		local screen = UI.GetScreenSize()
+		local graph = container:FindChildByName("Graph")
+		local x = 0
+		local y = 0
+
+		if(graph.x ~= 0) then
+			x = -graph.x
+		end
+
+		if(graph.y ~= 0) then
+			y = -graph.y
+		end
+
+		spawn_node(x, y, nil)
 
 		API.play_click_sound()
 	end

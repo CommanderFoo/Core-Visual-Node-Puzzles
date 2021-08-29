@@ -159,6 +159,7 @@ Objects {
   ChildIds: 15163209075878739494
   ChildIds: 6068750308711967726
   ChildIds: 3385943649788916117
+  ChildIds: 12690753362760052858
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -169,6 +170,53 @@ Objects {
     Value: "mc:ecollisionsetting:forceoff"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 12690753362760052858
+  Name: "Graph_Mover_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:graph"
+      ObjectReference {
+        SelfId: 4575669187186454556
+      }
+    }
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 9288086854115527291
+    }
   }
 }
 Objects {
@@ -624,7 +672,7 @@ Objects {
     Overrides {
       Name: "cs:node_ui"
       ObjectReference {
-        SelfId: 3627026760658224672
+        SelfId: 4575669187186454556
       }
     }
     Overrides {
@@ -938,18 +986,6 @@ Objects {
       Name: "cs:puzzle_name"
       ObjectReference {
         SelfId: 7400731441112918373
-      }
-    }
-    Overrides {
-      Name: "cs:data"
-      ObjectReference {
-        SelfId: 841534158063459245
-      }
-    }
-    Overrides {
-      Name: "cs:loading"
-      ObjectReference {
-        SelfId: 16860121657648772684
       }
     }
     Overrides {

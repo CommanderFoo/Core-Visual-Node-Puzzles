@@ -76,6 +76,7 @@ clear_button.hoveredEvent:Connect(API.play_hover_sound)
 
 clear_button.clickedEvent:Connect(function()
 	API.clear_graph()
+	Events.Broadcast("reset_graph")
 end)
 
 -- Main Menu
@@ -86,10 +87,12 @@ main_menu_button.clickedEvent:Connect(function()
 	disable_ui(true)
 	API.disable_nodes()
 
+	Events.Broadcast("disable_graph_mover")
 	Events.Broadcast("on_disable_all_dropdowns")
 	Events.Broadcast("stop_auto_save")
 
 	Events.Broadcast("transition_in", function()
+		Events.Broadcast("reset_graph")
 		Events.Broadcast("clear_puzzle")
 		Events.Broadcast("show_main_menu")
 	end)
@@ -154,6 +157,8 @@ run_edit_button.clickedEvent:Connect(function()
 
 		Events.Broadcast("start_auto_save")
 		Events.Broadcast("unpause") -- Make sure we aren't paused for some reason.
+
+		Events.Broadcast("enable_graph_mover")
 	else
 		run_edit_button.text = "Edit Program"
 		running = true
@@ -226,6 +231,7 @@ function disable_ui(disable_run_edit, ignore_settings)
 	end
 
 	Events.Broadcast("disable_available_nodes")
+	Events.Broadcast("disable_graph_mover")
 
 	ui_is_disabled = true
 end
@@ -259,7 +265,7 @@ end)
 
 function close_settings()
 	enable_ui()
-		
+	Events.Broadcast("enable_graph_mover")	
 	settings.visibility = Visibility.FORCE_OFF
 	settings_open = false
 

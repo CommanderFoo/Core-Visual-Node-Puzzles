@@ -233,6 +233,7 @@ Objects {
       CanMoveUp: true
       CanMoveDown: true
       MaxHitpoints: 100
+      PlayerMasterVolumeMultiplier: 1
     }
   }
   InstanceHistory {

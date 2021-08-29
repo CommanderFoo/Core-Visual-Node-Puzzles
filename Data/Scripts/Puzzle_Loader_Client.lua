@@ -2,8 +2,6 @@
 
 local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
-local data = script:GetCustomProperty("data"):WaitForObject()
-local loading = script:GetCustomProperty("loading"):WaitForObject()
 
 local logic_puzzles_data = script:GetCustomProperty("logic_puzzles_data"):WaitForObject()
 local math_puzzles_data = script:GetCustomProperty("math_puzzles_data"):WaitForObject()
@@ -63,8 +61,10 @@ function load_puzzle(id, logic)
 		})
 
 		Events.Broadcast("enable_header_ui")
+		Events.Broadcast("enable_graph_mover")
 	else
 		Events.Broadcast("disable_header_ui", true)
+		Events.Broadcast("disable_graph_mover")
 	end
 end
 

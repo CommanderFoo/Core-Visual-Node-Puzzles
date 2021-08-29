@@ -263,7 +263,7 @@ function Node:setup_node(root)
 	self.error_warning = self.root:FindDescendantByName("Error Warning")
 	self.delete_button = self.root:FindDescendantByName("Delete Node")
 	self.items_container = self.root:FindDescendantByName("Items Container")
-	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI")
+	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI"):FindChildByName("Graph")
 	self.body = self.root:FindDescendantByName("Body Background")
 
 	self.circle_bubble = self.body:FindDescendantByName("Circle Bubble")
@@ -608,20 +608,20 @@ function Node:drag_node()
 			if(pos.x >= 0) then
 				self.root.x = pos.x - self.offset.x
 
-				if(pos.x <= 0) then
-					self.root.x = 0
-				elseif(self.root.x >= screen_size.x) then
-					self.root.x = screen_size.x
-				end
+				 if(self.root.x <= -1500) then
+				 	self.root.x = -1500
+				 elseif(self.root.x >= 1500) then
+				 	self.root.x = 1500
+				 end
 			end
 
 			if(pos.y >= 0) then
 				self.root.y = pos.y - self.offset.y
 
-				if(pos.y < 0) then
-					self.root.y = self.root.height
-				elseif(self.root.y >= screen_size.y) then
-					self.root.y = screen_size.y
+				if(self.root.y <= -1500) then
+					self.root.y = -1500
+				elseif(self.root.y >= 1500) then
+					self.root.y = 1500
 				end
 			end
 		end
@@ -635,8 +635,10 @@ function Node:drag_connection()
 		local handle_y = self.active_connection.connector.y
 
 		local a = UI.GetCursorPosition() - (UI.GetScreenSize() / 2)
-		local b = Vector2.New(self.root.x + self.output_container.x - self.active_connection.line.x, self.root.y + self.output_container.y + handle_y)
+		--local b = Vector2.New(self.root.x + self.output_container.x - self.active_connection.line.x, self.root.y + self.output_container.y + handle_y)
 
+		local b = Vector2.New(self.root.x + self.output_container.x + self.node_ui.x, self.root.y + self.output_container.y + handle_y + self.node_ui.y)
+		
 		self.active_connection.line.width = Node.distance(a, b)
 		self.active_connection.line.rotationAngle = Node.angle_to(a, b)
 

@@ -104,6 +104,7 @@ edit_button.hoveredEvent:Connect(API.play_hover_sound)
 edit_button.clickedEvent:Connect(function()
 	Events.Broadcast("unpause")
 	Events.Broadcast("puzzle_edit")
+	Events.Broadcast("enable_graph_mover")
 	script.parent.parent.visibility = Visibility.FORCE_OFF
 
 	API.play_click_sound()
