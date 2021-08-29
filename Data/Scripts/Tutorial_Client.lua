@@ -15,6 +15,7 @@ local tips = {
 	script:GetCustomProperty("run"):WaitForObject(),
 	script:GetCustomProperty("show_nodes"):WaitForObject(),
 	script:GetCustomProperty("save"):WaitForObject(),
+	script:GetCustomProperty("center_graph"):WaitForObject(),
 	script:GetCustomProperty("clear"):WaitForObject(),
 	script:GetCustomProperty("nodes"):WaitForObject(),
 	script:GetCustomProperty("data_node"):WaitForObject(),
@@ -99,11 +100,11 @@ function fade_in()
 
 	current_index = current_index + 1
 	
-	if(current_index == 9) then
+	if(current_index == 10) then
 		show_nodes()
-	elseif(current_index == 10) then
+	elseif(current_index == 11) then
 		show_data_node()
-	elseif(current_index == 12) then
+	elseif(current_index == 13) then
 		show_output_node()
 		show_line()
 	end

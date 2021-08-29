@@ -726,7 +726,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 563
+    Width: 590
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -874,7 +874,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 661
+    Width: 701
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -1022,7 +1022,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 489
+    Width: 524
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -1170,7 +1170,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 935
+    Width: 973
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -1318,7 +1318,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 973
+    Width: 1047
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -1614,7 +1614,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 1021
+    Width: 1070
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -1910,7 +1910,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 991
+    Width: 1049
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -2058,7 +2058,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 774
+    Width: 812
     Height: 86
     RenderTransformPivot {
       Anchor {
@@ -2206,8 +2206,8 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 674
-    Height: 133
+    Width: 1068
+    Height: 84
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -2354,7 +2354,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 347
+    Width: 360
     Height: 81
     RenderTransformPivot {
       Anchor {
@@ -2502,7 +2502,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 1454
+    Width: 1487
     Height: 139
     RenderTransformPivot {
       Anchor {
@@ -3242,7 +3242,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 822
+    Width: 848
     Height: 84
     RenderTransformPivot {
       Anchor {
@@ -3390,7 +3390,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 802
+    Width: 857
     Height: 84
     RenderTransformPivot {
       Anchor {
@@ -3538,8 +3538,8 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 681
-    Height: 132
+    Width: 1065
+    Height: 84
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -3686,7 +3686,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 796
+    Width: 835
     Height: 84
     RenderTransformPivot {
       Anchor {
@@ -4130,7 +4130,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 856
+    Width: 906
     Height: 84
     RenderTransformPivot {
       Anchor {
@@ -4278,7 +4278,7 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 565
+    Width: 600
     Height: 84
     RenderTransformPivot {
       Anchor {
@@ -7311,6 +7311,11 @@ Objects {
   ChildIds: 13645780726091737541
   ChildIds: 17163424082599264536
   ChildIds: 5651000184208246100
+  ChildIds: 13129548902387718549
+  ChildIds: 9474640220128522440
+  ChildIds: 7872675735992957202
+  ChildIds: 13965783830800334134
+  ChildIds: 13859398384440420110
   ChildIds: 16983164848258026425
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -7322,8 +7327,8 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 746
-    Height: 569
+    Width: 800
+    Height: 688
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7373,8 +7378,7 @@ Objects {
   Control {
     Width: 120
     Height: 40
-    UIX: -65
-    UIY: -41.3882294
+    UIY: -32.362587
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7441,8 +7445,73 @@ Objects {
   }
 }
 Objects {
-  Id: 5651000184208246100
-  Name: "UI Text Box"
+  Id: 13859398384440420110
+  Name: "Text"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8132410580797243272
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 722
+    Height: 45
+    UIX: 50
+    UIY: 141.460587
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Label: "Score is based on totals nodes used and the time it takes for data to transfer to the Output Node. Each node has a time value, indicating how long it takes for it to process data."
+      Color {
+        R: 1
+        G: 1
+        B: 1
+        A: 1
+      }
+      Size: 25
+      Justification {
+        Value: "mc:etextjustify:left"
+      }
+      AutoWrapText: true
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 13965783830800334134
+  Name: "Score"
   Transform {
     Location {
     }
@@ -7467,24 +7536,23 @@ Objects {
   Control {
     Width: 250
     Height: 45
-    UIX: -123.775261
-    UIY: 136.560242
+    UIX: 50
+    UIY: 99.7321701
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
     Text {
-      Label: "Disable Notifications"
+      Label: "Puzzle Scoring"
       Color {
         R: 1
         G: 1
-        B: 1
         A: 1
       }
       Size: 25
       Justification {
-        Value: "mc:etextjustify:center"
+        Value: "mc:etextjustify:left"
       }
       Font {
         Id: 18375965876900075365
@@ -7493,12 +7561,266 @@ Objects {
     AnchorLayout {
       SelfAnchor {
         Anchor {
-          Value: "mc:euianchor:middlecenter"
+          Value: "mc:euianchor:middleleft"
         }
       }
       TargetAnchor {
         Anchor {
-          Value: "mc:euianchor:middlecenter"
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 7872675735992957202
+  Name: "Text"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8132410580797243272
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 250
+    Height: 45
+    UIX: 50
+    UIY: -58.9435387
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Label: "- Click ? in a node header to learn more about that node.\r\n- See the Glossary at the main menu for node information.\r\n- Halt nodes must connect directly to an Ordered Output node."
+      Color {
+        R: 1
+        G: 1
+        B: 1
+        A: 1
+      }
+      Size: 25
+      Justification {
+        Value: "mc:etextjustify:left"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 9474640220128522440
+  Name: "Nodes"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8132410580797243272
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 250
+    Height: 45
+    UIX: 50
+    UIY: -99.5786743
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Label: "Nodes"
+      Color {
+        R: 1
+        G: 1
+        A: 1
+      }
+      Size: 25
+      Justification {
+        Value: "mc:etextjustify:left"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 13129548902387718549
+  Name: "Text"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8132410580797243272
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 250
+    Height: 45
+    UIX: 50
+    UIY: -159.562927
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Label: "- Press F to center the graph."
+      Color {
+        R: 1
+        G: 1
+        B: 1
+        A: 1
+      }
+      Size: 25
+      Justification {
+        Value: "mc:etextjustify:left"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 5651000184208246100
+  Name: "Shortcuts"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8132410580797243272
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 250
+    Height: 45
+    UIX: 50
+    UIY: -196.856415
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Text {
+      Label: "Shortcuts"
+      Color {
+        R: 1
+        G: 1
+        A: 1
+      }
+      Size: 25
+      Justification {
+        Value: "mc:etextjustify:left"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middleleft"
         }
       }
     }
@@ -14665,6 +14987,12 @@ Objects {
       Name: "cs:MathPuzzle21"
       AssetReference {
         Id: 15551262131385249539
+      }
+    }
+    Overrides {
+      Name: "cs:MathPuzzle22"
+      AssetReference {
+        Id: 14089756576466812234
       }
     }
   }

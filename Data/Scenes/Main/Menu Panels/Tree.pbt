@@ -32351,7 +32351,7 @@ Objects {
     AddSizeToParentIfUsingParentSize: true
     UseParentWidth: true
     Text {
-      Label: "The data node holds the data for the puzzle. It can have multiple data types. The output order is not guaranteed."
+      Label: "The Data Node holds the data for the puzzle.It can have multiple data types. The output order is not guaranteed."
       Color {
         R: 1
         G: 1
