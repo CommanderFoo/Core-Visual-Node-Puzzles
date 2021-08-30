@@ -1,13 +1,13 @@
 Assets {
-  Id: 4542701325782892272
-  Name: "Reroute Node"
+  Id: 16823169683280041501
+  Name: "Reroute Math Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 16542797137340056358
       Objects {
         Id: 16542797137340056358
-        Name: "Reroute Node"
+        Name: "Reroute Math Node"
         Transform {
           Scale {
             X: 1
@@ -30,7 +30,7 @@ Assets {
           }
           Overrides {
             Name: "cs:is_math"
-            Bool: false
+            Bool: true
           }
         }
         Collidable_v2 {
