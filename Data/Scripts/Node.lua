@@ -1,8 +1,11 @@
-﻿-- No comments, sorry :O lol
+﻿-- Minimal comments, sorry :O.
+
+-- My Utility library.
 
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
-local Node_Events = {}
+-- Math functions cached here for maybe a tiny optimisation.
+-- as they get used a few times (or did).
 
 local floor = math.floor
 local abs = math.abs
@@ -13,7 +16,11 @@ local deg = math.deg
 local pi = math.pi
 local atan = math.atan
 
+-- Need it for bindings.
+
 local local_player = Game.GetLocalPlayer()
+
+-- Puzzle type to handle item tween offsets.
 
 local Puzzle_Type = {
 
@@ -24,12 +31,16 @@ local Puzzle_Type = {
 
 -- Node Events
 
+local Node_Events = {}
+
 local Node_Events = {
 
 	events = {},
 	id = 0
 
 }
+
+-- Adding event
 
 function Node_Events.on(evt, fn)
 	Node_Events.id = Node_Events.id + 1
@@ -45,6 +56,8 @@ function Node_Events.on(evt, fn)
 	return Node_Events.id
 end
 
+-- Removing
+
 function Node_Events.off(event_id)
 	local to_remove = {}
 
@@ -55,11 +68,16 @@ function Node_Events.off(event_id)
 	end
 end
 
+-- Trigger event, usually called from the Node class or sub class.
+
 function Node_Events.trigger(...)
 	local args = {...}
 
 	for i, e in pairs(Node_Events.events) do
 		if(e.event == args[1]) then
+
+			-- Limited arg support, as I only need a specific amount.
+
 			e.func(args[2], args[3], args[4], args[5])
 		end
 	end
@@ -69,12 +87,18 @@ end
 
 local Node = {
 
+	-- Helper function to work out the distance between 2 objects.
+	-- Used for the connectors.
+
 	distance = function(a, b)
 		local dx = a.x - b.x
 		local dy = a.y - b.y
 
 		return floor(abs(sqrt(dx * dx + dy * dy)))
 	end,
+
+	-- Helper function to work out the angle between 2 objects.
+	-- Used for the connectors so they connect up to each other.
 
 	angle_to = function(a, b)
 		if(b) then
@@ -87,7 +111,11 @@ local Node = {
 }
 
 function Node:setup(r)
+
+	-- Turn on for a little bit of debug.
+	
 	self.debug_node = false
+
 	self.moving = false
 	self.offset = Vector2.New(0, 0)
 	self.active_connection = nil
@@ -107,14 +135,27 @@ function Node:setup(r)
 	self.puzzle_type = Puzzle_Type.LOGIC
 	self.paused = false
 
+	-- Store all node events here so they can be disconnected later.
+
 	self.n_evts = {}
+
+	-- Store all Core events here (i.e. binding) so they can be disconnected later.
+
 	self.evts = {}
 
+	-- Internal ID is an ID that only the node system needs to know about. This is quite
+	-- important as it's used with saving.
+
 	self.internal_node_id = 0
+	
+	-- Each node needs a unique ID. This is used with events as well.
+
 	self.unique_id = 0
 
 	self.options.tween_duration = self.options.tween_duration or 1.5
 	self.options.speed = self.options.speed or 1
+
+	-- Tweening offsets for the top and bottom connectors.
 
 	self.OFFSETS = {
 
@@ -207,6 +248,8 @@ function Node:setup(r)
 	end)
 end
 
+-- Compresses the position, don't need exact location. Who is going to notice?
+
 function Node:get_position_as_string()
 	return string.format("%.2f,%.2f", self.root.x, self.root.y)
 end
@@ -218,6 +261,8 @@ end
 function Node:set_internal_id(id)
 	self.internal_node_id = id
 end
+
+-- Simulates Core Tick, but this changes per node speed and program running speed.
 
 function Node:tick()
 	if(self.options.tick and self.ticking_task == nil) then
@@ -247,6 +292,8 @@ function Node:stop_ticking()
 		self.ticking_task = nil
 	end
 end
+
+-- All nodes have the ability to receive data.
 
 function Node:receive_data(data, from_node)
 	if(self.options.on_data_received ~= nil) then
@@ -291,6 +338,8 @@ function Node:setup_node(root)
 			if(self.moving) then
 				self.moving = false
 				self.highlight.visibility = Visibility.FORCE_OFF
+				
+				--self:highlight_connections(Color.New(0.215861, 0.215861, 0.215861))
 
 				Node_Events.trigger("end_drag_node", self)
 			end
@@ -315,6 +364,7 @@ function Node:setup_node(root)
 
 		self:move_to_front()
 		self:move_connections()
+		--self:highlight_connections(Color.New(0.417708, 0.417708, 0.417708))
 
 		self.highlight.visibility = Visibility.FORCE_ON
 
@@ -413,6 +463,18 @@ function Node:debug()
 	--print("Inputs: " .. tostring(inputs))
 	--print("Outputs: " .. tostring(outputs))
 	--print("Events: " .. tostring(#self.n_evts) .. " / " .. tostring(#self.evts))
+end
+
+function Node:highlight_connections(color)
+	if(self.output_container ~= nil and #self.output_container:GetChildren() > 0) then
+		local connections = self.output_container:GetChildren()
+
+		for c = 1, #connections do
+			local line = connections[c]:FindDescendantByName("Line")
+
+			line:SetColor(color)
+		end
+	end
 end
 
 function Node:setup_output_connections()

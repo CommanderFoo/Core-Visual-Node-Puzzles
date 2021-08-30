@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 3627026760658224672
+        ParentId: 4575669187186454556
         ChildIds: 18376471766229974956
         ChildIds: 10778547024631273099
         ChildIds: 16327950844410228396
@@ -2175,7 +2175,7 @@ Assets {
           Width: 25
           Height: 25
           UIX: -18.000061
-          UIY: 10
+          UIY: 11
           RotationAngle: 45
           RenderTransformPivot {
             Anchor {
@@ -2331,7 +2331,7 @@ Assets {
           Width: 50
           Height: 50
           UIX: 7
-          UIY: 1
+          UIY: 5
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"

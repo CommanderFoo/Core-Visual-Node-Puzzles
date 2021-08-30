@@ -45,7 +45,7 @@ Assets {
         Control {
           Width: 100
           Height: 50
-          UIX: 84.9243774
+          UIX: 718.174805
           UIY: 46.4315186
           RenderTransformPivot {
             Anchor {
@@ -159,7 +159,7 @@ Assets {
         Control {
           Width: 35
           Height: 35
-          UIX: 50
+          UIX: 52
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -427,7 +427,7 @@ Assets {
         Control {
           Width: 35
           Height: 35
-          UIX: -50
+          UIX: -52
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1082,4 +1082,6 @@ Assets {
     }
   }
   SerializationVersion: 97
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Logic Nodes"
 }

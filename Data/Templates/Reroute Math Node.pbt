@@ -159,7 +159,7 @@ Assets {
         Control {
           Width: 35
           Height: 35
-          UIX: 50
+          UIX: 52
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -427,7 +427,7 @@ Assets {
         Control {
           Width: 35
           Height: 35
-          UIX: -50
+          UIX: -52
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -903,7 +903,7 @@ Assets {
           Width: 25
           Height: 25
           UIX: -18.000061
-          UIY: 10
+          UIY: 11
           RotationAngle: 45
           RenderTransformPivot {
             Anchor {
@@ -1082,4 +1082,6 @@ Assets {
     }
   }
   SerializationVersion: 97
+  VirtualFolderPath: "Nodes"
+  VirtualFolderPath: "Math Nodes"
 }

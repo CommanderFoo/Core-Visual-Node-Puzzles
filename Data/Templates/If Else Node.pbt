@@ -3387,7 +3387,7 @@ Assets {
           Width: 25
           Height: 25
           UIX: -18.000061
-          UIY: 10
+          UIY: 11
           RotationAngle: 45
           RenderTransformPivot {
             Anchor {
@@ -3543,7 +3543,7 @@ Assets {
           Width: 50
           Height: 50
           UIX: 7
-          UIY: 1
+          UIY: 5
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
