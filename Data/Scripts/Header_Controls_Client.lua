@@ -80,6 +80,7 @@ center_graph_button.hoveredEvent:Connect(API.play_hover_sound)
 
 center_graph_button.clickedEvent:Connect(function()
 	Events.Broadcast("reset_graph", true)
+	API.play_click_sound()
 end)
 
 -- Clear
@@ -89,6 +90,7 @@ clear_button.hoveredEvent:Connect(API.play_hover_sound)
 clear_button.clickedEvent:Connect(function()
 	API.clear_graph()
 	Events.Broadcast("reset_graph")
+	API.play_click_sound()
 end)
 
 -- Main Menu
