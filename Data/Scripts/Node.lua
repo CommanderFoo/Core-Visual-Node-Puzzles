@@ -1,4 +1,4 @@
-﻿-- Minimal comments, sorry :O.
+-- Minimal comments, sorry :O.
 
 -- My Utility library.
 
@@ -221,8 +221,29 @@ function Node:setup(r)
 
 	self.n_evts[#self.n_evts + 1] = Node_Events.on("node_input_update", function(node_id)
 		if(node_id ~= self:get_id()) then
+			local count = 0
+			local connection = nil
+
 			for k, v in pairs(self.input_connected_to) do
-				for i, c in ipairs(v) do
+				for i, c in pairs(v) do
+					if(c.connected_from_node:get_id() == node_id) then
+						connection = c.connected_to_connection.connection
+					else
+						count = count + 1
+					end
+				end
+			end
+
+			if(connection ~= nil and count == 0) then
+				local no_connection = connection:FindChildByName("No Connection")
+		
+				if(Object.IsValid(no_connection)) then
+					no_connection.visibility = Visibility.FORCE_ON
+				end
+			end
+
+			for k, v in pairs(self.input_connected_to) do
+				for i, c in pairs(v) do
 					if(c.connected_from_node:get_id() == node_id) then
 						v[i] = nil
 					end
@@ -520,11 +541,26 @@ function Node:clear_output_connection(id)
 end
 
 function Node:clear_input_connection(id)
+	local count = 0
+	local connected_to = nil
+
 	for k, v in pairs(self.input_connected_to) do
 		for i, j in pairs(v) do
+			connected_to = j.connected_to_connection.connection
+
 			if(j.connected_from_connection.id == id) then
 				self.input_connected_to[k][i] = nil
+			else
+				count = count + 1
 			end
+		end
+	end
+
+	if(connected_to ~= nil and count == 0) then
+		local no_connection = connected_to:FindChildByName("No Connection")
+
+		if(Object.IsValid(no_connection)) then
+			no_connection.visibility = Visibility.FORCE_ON
 		end
 	end
 end
@@ -603,11 +639,23 @@ function Node:do_input_connect(connected_from_node, connected_from_connection, c
 		connected_to_connection = connected_to_connection
 
 	})
+
+	local no_connection = connected_to_connection.connection:FindChildByName("No Connection")
+
+	if(Object.IsValid(no_connection)) then
+		no_connection.visibility = Visibility.FORCE_OFF
+	end
 end
 
 function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection, set_order)
 	if(self.input_connected_to[connected_to_connection.id] == nil) then
 		self.input_connected_to[connected_to_connection.id] = {}
+	end
+
+	local no_connection = connected_to_connection.connection:FindChildByName("No Connection")
+
+	if(Object.IsValid(no_connection)) then
+		no_connection.visibility = Visibility.FORCE_OFF
 	end
 
 	table.insert(self.input_connected_to[connected_to_connection.id], #self.input_connected_to[connected_to_connection.id] + 1, {
@@ -618,6 +666,15 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 
 	})
 
+	-- local from_handle_y = connected_from_connection.connector.y + 30
+	-- local to_handle_y = connected_to_connection.connection.y + 30
+
+	-- local to = Vector2.New(self.root.x - (self.root.width / 2) - 10, self.root.y + to_handle_y)
+	-- local from = Vector2.New(connected_from_node.root.x + (connected_from_node.root.width / 2) - 10, connected_from_node.root.y + from_handle_y)
+
+	-- connected_to_connection.line.width = Node.distance(from, to)
+	-- connected_to_connection.line.rotationAngle = Node.angle_to(from, to)
+	
 	Node_Events.trigger("input_connected_to", connected_from_node, self, set_order)
 end
 
