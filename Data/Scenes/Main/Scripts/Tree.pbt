@@ -160,6 +160,7 @@ Objects {
   ChildIds: 6068750308711967726
   ChildIds: 3385943649788916117
   ChildIds: 12690753362760052858
+  ChildIds: 8026521745831996317
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -170,6 +171,65 @@ Objects {
     Value: "mc:ecollisionsetting:forceoff"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 8026521745831996317
+  Name: "Error_Log_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:API"
+      AssetReference {
+        Id: 11355776926042268297
+      }
+    }
+    Overrides {
+      Name: "cs:error_log_panel"
+      ObjectReference {
+        SelfId: 16964934813499154458
+      }
+    }
+    Overrides {
+      Name: "cs:button"
+      ObjectReference {
+        SelfId: 11111585532005637532
+      }
+    }
+    Overrides {
+      Name: "cs:scroll_panel"
+      ObjectReference {
+        SelfId: 2376923816361499174
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 10817041255519991475
+    }
   }
 }
 Objects {
