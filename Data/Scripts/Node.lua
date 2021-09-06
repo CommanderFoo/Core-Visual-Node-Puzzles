@@ -645,6 +645,10 @@ function Node:do_input_connect(connected_from_node, connected_from_connection, c
 	if(Object.IsValid(no_connection)) then
 		no_connection.visibility = Visibility.FORCE_OFF
 	end
+
+	-- if(self:get_type() == "Reroute" and connected_from_node:get_type() == "Halt") then
+	-- 	self.node_sub_type = connected_from_node
+	-- end
 end
 
 function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection, set_order)
@@ -676,6 +680,10 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 	-- connected_to_connection.line.rotationAngle = Node.angle_to(from, to)
 	
 	Node_Events.trigger("input_connected_to", connected_from_node, self, set_order)
+
+	-- if(self:get_type() == "Reroute" and connected_from_node:get_type() == "Halt") then
+	-- 	self.node_sub_type = connected_from_node
+	-- end
 end
 
 function Node:move_connections()
@@ -906,12 +914,60 @@ function Node:hide_error_info()
 	end
 end
 
-function Node:has_errors(b)
-	if(b) then
-		self:show_error_info()
-	else
-		self:hide_error_info()
+function Node:has_errors(msg)
+	self:show_error_info()
+	
+	if(msg) then
+		print(msg)
 	end
+end
+
+function Node:get_top_connection_node_type(sub)
+	for _, c in pairs(self.output_connected_to) do
+		for i, cs in pairs(c) do
+			if(cs.connected_to_connection and cs.connection.connector.name == "Connection Handle Top") then
+				if(sub) then
+					return cs.connected_to_node:get_sub_type()
+				else
+					return cs.connected_to_node:get_type()
+				end
+			end
+		end
+	end
+
+	return nil
+end
+
+function Node:get_middle_connection_node_type(sub)
+	for _, c in pairs(self.output_connected_to) do
+		for i, cs in pairs(c) do
+			if(cs.connected_to_connection and cs.connection.connector.name == "Connection Handle Middle") then
+				if(sub) then
+					return cs.connected_to_node:get_sub_type()
+				else
+					return cs.connected_to_node:get_type()
+				end
+			end
+		end
+	end
+
+	return nil
+end
+
+function Node:get_bottom_connection_node_type(sub)
+	for _, c in pairs(self.output_connected_to) do
+		for i, cs in pairs(c) do
+			if(cs.connected_to_connection and cs.connection.connector.name == "Connection Handle Bottom") then
+				if(sub) then
+					return cs.connected_to_node:get_sub_type()
+				else
+					return cs.connected_to_node:get_type()
+				end
+			end
+		end
+	end
+
+	return nil
 end
 
 function Node:has_top_connection()
@@ -1190,6 +1246,10 @@ function Node:get_type()
 	return self.node_type
 end
 
+function Node:get_sub_type()
+	return self.node_sub_type
+end
+
 function Node:get_condition()
 	return ""
 end
@@ -1459,6 +1519,11 @@ function Node_Output:new(r, options)
 	this:setup(r)
 
 	this.node_type = "Output"
+
+	if(options.sub_type ~= nil) then
+		this.node_sub_type = options.sub_type
+	end
+
 	this.halt_order = 1
 
 	function this:get_halt_nodes(cur_id)
@@ -1619,7 +1684,7 @@ function Node_If:new(r, options)
 						})
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -1649,7 +1714,7 @@ function Node_If:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -1787,7 +1852,7 @@ function Node_Alternate:new(r, options)
 						})
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -1817,7 +1882,7 @@ function Node_Alternate:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 
 			if(switch) then
@@ -1992,7 +2057,7 @@ function Node_Limit:new(r, options)
 						})
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -2022,7 +2087,7 @@ function Node_Limit:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -2099,7 +2164,6 @@ function Node_Halt:new(r, options)
 	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 	local from_speed = 1
-	local order = 0
 	local halting_data_type = nil
 	local count = this.body:FindDescendantByName("Count")
 	local active_shape = nil
@@ -2151,6 +2215,10 @@ function Node_Halt:new(r, options)
 		end
 	end)
 
+	local has_sent_no_connection_error = false
+	local has_sent_no_ordered_output_error = false
+	local has_sent_input_data_not_matched = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(halting_data_type == nil) then
 			halting_data_type = data.condition
@@ -2158,9 +2226,29 @@ function Node_Halt:new(r, options)
 			active_shape.visibility = Visibility.FORCE_ON
 			this.body:FindDescendantByName("None").visibility = Visibility.FORCE_OFF
 		elseif(halting_data_type ~= data.condition) then
-			this:has_errors(true)
+			if(not has_sent_input_data_not_matched) then
+				this:has_errors("Data input for Halt Node does not match stored data.")
+				has_sent_input_data_not_matched = true
+			end
 
 			return
+		else
+			local type = this:get_top_connection_node_type()
+			local sub_type =  this:get_top_connection_node_type(true)
+
+			if(not has_sent_no_connection_error and type == nil) then
+				this:has_errors("Halt Node has no connection.")
+				has_sent_no_connection_error = true
+
+				return
+			else
+				if(not has_sent_no_ordered_output_error and type ~= nil and sub_type ~= "Ordered") then
+					this:has_errors("Halt Nodes must connect directly to Ordered Output Nodes")
+					has_sent_no_ordered_output_error = true
+
+					return
+				end
+			end
 		end
 
 		count.text = tostring(tonumber(count.text) + 1)
@@ -2215,7 +2303,7 @@ function Node_Halt:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -2262,6 +2350,10 @@ function Node_Halt:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connection_error = false
+		has_sent_no_ordered_output_error = false
+		has_sent_input_data_not_matched = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -2411,7 +2503,7 @@ function Node_Add:new(r, options)
 						end)
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 			end
 
@@ -2589,7 +2681,7 @@ function Node_Substract:new(r, options)
 						end)
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 			end
 
@@ -2770,7 +2862,7 @@ function Node_Multiply:new(r, options)
 						end)
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 			end
 
@@ -2951,7 +3043,7 @@ function Node_Divide:new(r, options)
 						end)
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 			end
 
@@ -3147,7 +3239,7 @@ function Node_Greater_Than:new(r, options)
 						})
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -3177,7 +3269,7 @@ function Node_Greater_Than:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -3371,7 +3463,7 @@ function Node_Less_Than:new(r, options)
 						})
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -3401,7 +3493,7 @@ function Node_Less_Than:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -3592,7 +3684,7 @@ function Node_Equal:new(r, options)
 						})
 					end
 				else
-					this:has_errors(true)
+					this:has_errors()
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -3622,7 +3714,7 @@ function Node_Equal:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -3769,7 +3861,7 @@ function Node_Absolute:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 
@@ -3826,6 +3918,7 @@ function Node_Reroute:new(r, options)
 	this:setup(r)
 
 	this.node_type = "Reroute"
+	this.node_sub_type = nil
 
 	this.options.on_data_received = function(data, node, from_node)
 		this:set_speed(from_node:get_speed())
@@ -3877,7 +3970,7 @@ function Node_Reroute:new(r, options)
 					end)
 				end
 			else
-				this:has_errors(true)
+				this:has_errors()
 			end
 		end
 

@@ -28,6 +28,7 @@ function init(node_data)
 
 	node = API.Node_Type.Output:new(script.parent.parent, {
 
+		sub_type = "Ordered",
 		on_data_received = function(data, node)
 			local error = false
 
@@ -53,7 +54,7 @@ function init(node_data)
 						
 						node:check_halting()
 					elseif(total_circle > amount) then
-						node:has_errors(true)
+						node:has_errors()
 						error = true
 					end
 				elseif(c == condition_square and circle_complete) then
@@ -75,7 +76,7 @@ function init(node_data)
 
 						node:check_halting()
 					elseif(total_square > amount) then
-						node:has_errors(true)
+						node:has_errors()
 						error = true
 					end
 				elseif(c == condition_triangle and circle_complete and square_complete) then
@@ -97,7 +98,7 @@ function init(node_data)
 
 						node:check_halting()
 					elseif(total_triangle > amount) then
-						node:has_errors(true)
+						node:has_errors()
 						error = true
 					end
 				elseif(c == condition_plus and circle_complete and square_complete and triangle_complete) then
@@ -117,11 +118,11 @@ function init(node_data)
 					if(total_plus == amount) then
 						plus_complete = true
 					elseif(total_plus > amount) then
-						node:has_errors(true)
+						node:has_errors()
 						error = true
 					end
 				else
-					node:has_errors(true)
+					node:has_errors()
 					error = true
 				end
 
@@ -129,7 +130,7 @@ function init(node_data)
 					API.Puzzle_Events.trigger("output_" .. event .. "_complete")
 				end
 			else
-				node:has_errors(true)
+				node:has_errors()
 				error = true
 			end
 

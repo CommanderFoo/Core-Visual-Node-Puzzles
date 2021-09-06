@@ -34,11 +34,11 @@ function init(node_data)
 				if(total == amount) then
 					API.Puzzle_Events.trigger("output_" .. data.condition .. "_complete")
 				elseif(total > amount) then
-					node:has_errors(true)
+					node:has_errors()
 					error = true
 				end
 			else
-				node:has_errors(true)
+				node:has_errors()
 				error = true
 			end
 

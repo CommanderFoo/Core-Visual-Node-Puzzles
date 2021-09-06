@@ -65,11 +65,11 @@ function init(node_data)
 				end
 
 				if(not has_match) then
-					node:has_errors(true)
+					node:has_errors()
 					error = true
 				end
 			else
-				node:has_errors(true)
+				node:has_errors()
 				error = true
 			end
 

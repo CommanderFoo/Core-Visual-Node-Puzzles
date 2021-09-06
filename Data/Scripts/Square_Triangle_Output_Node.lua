@@ -43,7 +43,7 @@ function init(node_data)
 					if(total_triangle == amount) then
 						triangle_complete = true
 					elseif(total_triangle > amount) then
-						node:has_errors(true)
+						node:has_errors()
 						error = true
 					end
 				elseif(c == condition_square) then
@@ -63,7 +63,7 @@ function init(node_data)
 					if(total_square == amount) then
 						square_complete = true
 					elseif(total_square > amount) then
-						node:has_errors(true)
+						node:has_errors()
 						error = true
 					end
 				end
@@ -72,7 +72,7 @@ function init(node_data)
 					API.Puzzle_Events.trigger("output_" .. event .. "_complete")
 				end
 			else
-				node:has_errors(true)
+				node:has_errors()
 				error = true
 			end
 
