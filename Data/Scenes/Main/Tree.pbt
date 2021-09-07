@@ -15847,7 +15847,7 @@ Objects {
     Overrides {
       Name: "cs:MathPuzzle22"
       AssetReference {
-        Id: 14089756576466812234
+        Id: 12350129784131404494
       }
     }
   }

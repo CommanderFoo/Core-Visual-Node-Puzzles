@@ -221,27 +221,6 @@ function Node:setup(r)
 
 	self.n_evts[#self.n_evts + 1] = Node_Events.on("node_input_update", function(node_id)
 		if(node_id ~= self:get_id()) then
-			local count = 0
-			local connection = nil
-
-			for k, v in pairs(self.input_connected_to) do
-				for i, c in pairs(v) do
-					if(c.connected_from_node:get_id() == node_id) then
-						connection = c.connected_to_connection.connection
-					else
-						count = count + 1
-					end
-				end
-			end
-
-			if(connection ~= nil and count == 0) then
-				local no_connection = connection:FindChildByName("No Connection")
-		
-				if(Object.IsValid(no_connection)) then
-					no_connection.visibility = Visibility.FORCE_ON
-				end
-			end
-
 			for k, v in pairs(self.input_connected_to) do
 				for i, c in pairs(v) do
 					if(c.connected_from_node:get_id() == node_id) then
@@ -249,6 +228,8 @@ function Node:setup(r)
 					end
 				end
 			end
+
+			self:update_no_connection()
 		end
 	end)
 
@@ -540,29 +521,31 @@ function Node:clear_output_connection(id)
 	end
 end
 
-function Node:clear_input_connection(id)
-	local count = 0
-	local connected_to = nil
+function Node:update_no_connection()
+	for k, v in pairs(self.input_connected_to) do
+		local has_connections = false
 
+		for i, j in pairs(v) do
+			has_connections = true
+			break
+		end
+
+		if(not has_connections) then
+			self.input_connections[k].no_connection.visibility = Visibility.FORCE_ON
+		end
+	end
+end
+
+function Node:clear_input_connection(id)
 	for k, v in pairs(self.input_connected_to) do
 		for i, j in pairs(v) do
-			connected_to = j.connected_to_connection.connection
-
 			if(j.connected_from_connection.id == id) then
 				self.input_connected_to[k][i] = nil
-			else
-				count = count + 1
 			end
 		end
 	end
 
-	if(connected_to ~= nil and count == 0) then
-		local no_connection = connected_to:FindChildByName("No Connection")
-
-		if(Object.IsValid(no_connection)) then
-			no_connection.visibility = Visibility.FORCE_ON
-		end
-	end
+	self:update_no_connection()
 end
 
 function Node:setup_input_connections()
@@ -577,7 +560,8 @@ function Node:setup_input_connections()
 				id = connections[c].id,
 				connection = connections[c],
 				can_be_connected_to = true,
-				line = connections[c]:FindDescendantByName("Line")
+				line = connections[c]:FindDescendantByName("Line"),
+				no_connection = connections[c]:FindDescendantByName("No Connection")
 
 			}
 

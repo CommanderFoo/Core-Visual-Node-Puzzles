@@ -21,7 +21,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:name"
-            String: "Puzzle 20"
+            String: "Puzzle 21"
           }
           Overrides {
             Name: "cs:gold_score"
