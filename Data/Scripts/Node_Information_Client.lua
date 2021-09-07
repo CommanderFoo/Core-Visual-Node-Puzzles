@@ -234,3 +234,7 @@ end
 
 Events.Connect("show_node_information", show)
 Events.Connect("hide_node_information", hide)
+Events.Connect("force_hide_node_information", function()
+	fade_code_out()
+	hide()
+end)

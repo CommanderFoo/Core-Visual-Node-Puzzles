@@ -247,6 +247,7 @@ function disable_ui(disable_run_edit, ignore_settings)
 	end
 
 	Events.Broadcast("disable_available_nodes")
+	Events.Broadcast("force_hide_node_information")
 
 	ui_is_disabled = true
 end
