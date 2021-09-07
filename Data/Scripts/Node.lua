@@ -134,6 +134,8 @@ function Node:setup(r)
 	self.can_edit_nodes = true
 	self.puzzle_type = Puzzle_Type.LOGIC
 	self.paused = false
+	self.highlight_color = Color.New(0.665387, 0.665387, 0.665387)
+	self.error_highlight_color = Color.RED
 
 	-- Store all node events here so they can be disconnected later.
 
@@ -885,6 +887,9 @@ function Node:show_error_info()
 		self.error_task.repeatCount = -1
 		self.error_task.repeatInterval = 0.6
 	end
+
+	self.highlight:SetColor(self.error_highlight_color)
+	self.highlight.visibility = Visibility.FORCE_ON
 end
 
 function Node:hide_error_info()
@@ -896,6 +901,9 @@ function Node:hide_error_info()
 			self.error_warning.visibility = Visibility.FORCE_OFF
 		end
 	end
+
+	self.highlight.visibility = Visibility.FORCE_OFF
+	self.highlight:SetColor(self.highlight_color)
 end
 
 function Node:has_errors(msg)
