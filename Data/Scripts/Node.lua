@@ -1418,7 +1418,7 @@ function Node_Data:new(r, options)
 	this.options.count = 0
 	this.options.added_tween = false
 
-	function setup_data()
+	local function setup_data()
 		this.options.total_data_items = 0
 
 		for _, d in pairs(this.options.data_items) do
