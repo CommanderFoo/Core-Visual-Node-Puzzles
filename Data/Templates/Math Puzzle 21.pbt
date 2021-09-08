@@ -2310,12 +2310,12 @@ Assets {
           AnchorLayout {
             SelfAnchor {
               Anchor {
-                Value: "mc:euianchor:topcenter"
+                Value: "mc:euianchor:bottomcenter"
               }
             }
             TargetAnchor {
               Anchor {
-                Value: "mc:euianchor:topcenter"
+                Value: "mc:euianchor:bottomcenter"
               }
             }
           }
@@ -2462,7 +2462,7 @@ Assets {
           Overrides {
             Name: "cs:node"
             AssetReference {
-              Id: 841534158063459245
+              Id: 16823169683280041501
             }
           }
         }
@@ -2505,6 +2505,6 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 97
+  SerializationVersion: 98
   VirtualFolderPath: "Math Puzzles"
 }

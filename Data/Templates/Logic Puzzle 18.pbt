@@ -2482,6 +2482,6 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 97
+  SerializationVersion: 98
   VirtualFolderPath: "Logic Puzzles"
 }
