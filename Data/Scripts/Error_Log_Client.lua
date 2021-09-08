@@ -7,6 +7,7 @@ local clear_button = script:GetCustomProperty("clear_button"):WaitForObject()
 local info_entry = script:GetCustomProperty("info_entry")
 local error_entry = script:GetCustomProperty("error_entry")
 local auto_scroll = script:GetCustomProperty("auto_scroll"):WaitForObject()
+local resize_handle = script:GetCustomProperty("resize_handle"):WaitForObject()
 
 local is_showing = false
 local y_offset = 0
@@ -25,6 +26,7 @@ local function clear_message_log()
 
 	y_offset = 0
 	active_node = nil
+	scroll_panel.scrollPosition = 0
 end
 
 button.clickedEvent:Connect(function()
@@ -119,6 +121,30 @@ local function add_log_message(msg, node, is_error)
 		Task.Spawn(function()
 			scroll_panel.scrollPosition = scroll_panel.contentLength + 50
 		end)
+	end
+end
+
+-- Resize
+
+local is_dragging = false
+
+resize_handle.pressedEvent:Connect(function()
+	is_dragging = true
+end)
+
+resize_handle.releasedEvent:Connect(function()
+	is_dragging = false
+end)
+
+resize_handle.clickedEvent:Connect(API.play_click_sound)
+--resize_handle.hoveredEvent:Connect(API.play_hover_sound)
+
+function Tick()
+	if(is_dragging) then
+		local mouse_pos = UI.GetCursorPosition()
+		local screen = UI.GetScreenSize()
+
+		error_log_panel.parent.height = math.max(100, math.min(800, math.floor(screen.y - mouse_pos.y))) + 7
 	end
 end
 

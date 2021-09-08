@@ -243,6 +243,12 @@ Objects {
         SelfId: 15923050546157474944
       }
     }
+    Overrides {
+      Name: "cs:resize_handle"
+      ObjectReference {
+        SelfId: 12560100355080335450
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

@@ -35,6 +35,15 @@ Assets {
   }
 }
 Assets {
+  Id: 13239260661472566277
+  Name: "UI Basic Shape Square"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "UI_Basic_Shape_Square"
+  }
+}
+Assets {
   Id: 11304211983960048976
   Name: "Energy Shield Panel"
   PlatformAssetType: 8
