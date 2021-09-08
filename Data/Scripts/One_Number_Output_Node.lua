@@ -10,6 +10,8 @@ local evts = {}
 local node = nil
 local data = {}
 
+local has_sent_no_number_match = false
+
 function init(node_data)
 	data = node_data
 	
@@ -43,7 +45,11 @@ function init(node_data)
 				end
 
 				if(not has_match) then
-					node:has_errors()
+					if(not has_sent_no_number_match) then
+						node:has_errors("Input data does not match required data.")
+						has_sent_no_number_match = true
+					end
+
 					error = true
 				end
 			else
@@ -75,6 +81,8 @@ evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 			o.received = 0
 			o.required_txt.text = tostring(o.required)
 		end
+
+		has_sent_no_number_match = false
 
 		node:reset()
 		node:hide_error_info()
