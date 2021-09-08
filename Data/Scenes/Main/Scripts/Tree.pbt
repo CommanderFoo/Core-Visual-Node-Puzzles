@@ -213,6 +213,36 @@ Objects {
         SelfId: 2376923816361499174
       }
     }
+    Overrides {
+      Name: "cs:clear_button"
+      ObjectReference {
+        SelfId: 6647695688971823446
+      }
+    }
+    Overrides {
+      Name: "cs:info_entry"
+      AssetReference {
+        Id: 14984624265271380340
+      }
+    }
+    Overrides {
+      Name: "cs:error_entry"
+      AssetReference {
+        Id: 10177817482617465887
+      }
+    }
+    Overrides {
+      Name: "cs:graph"
+      ObjectReference {
+        SelfId: 4575669187186454556
+      }
+    }
+    Overrides {
+      Name: "cs:auto_scroll"
+      ObjectReference {
+        SelfId: 15923050546157474944
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

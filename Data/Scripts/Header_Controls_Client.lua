@@ -80,6 +80,7 @@ center_graph_button.hoveredEvent:Connect(API.play_hover_sound)
 
 center_graph_button.clickedEvent:Connect(function()
 	Events.Broadcast("reset_graph", true)
+	Events.Broadcast("add_log_message", "Graph reset to center.", "Info", false)
 	API.play_click_sound()
 end)
 
@@ -90,6 +91,7 @@ clear_button.hoveredEvent:Connect(API.play_hover_sound)
 clear_button.clickedEvent:Connect(function()
 	API.clear_graph()
 	Events.Broadcast("reset_graph")
+	Events.Broadcast("graph_cleared")
 	API.play_click_sound()
 end)
 
@@ -171,8 +173,8 @@ run_edit_button.clickedEvent:Connect(function()
 
 		Events.Broadcast("start_auto_save")
 		Events.Broadcast("unpause") -- Make sure we aren't paused for some reason.
-
 		Events.Broadcast("enable_graph_panning")
+		Events.Broadcast("program_running", false)
 	else
 		run_edit_button.text = "Edit Program"
 		running = true
@@ -185,8 +187,22 @@ run_edit_button.clickedEvent:Connect(function()
 			show_hide_nodes()
 		end
 
+		local total_nodes = 0
+		local total_reroute = 0
+
+		for _, n in pairs(API.nodes) do
+			if(n:get_type() == "Reroute") then
+				total_reroute = total_reroute + 1
+			else
+				total_nodes = total_nodes + 1
+			end
+		end
+
+		Events.Broadcast("add_log_message", "Total Nodes: " .. tostring(total_nodes) .. " - Total Reroute Nodes: " .. tostring(total_reroute) .. ".", "Info", false)
+
 		Events.Broadcast("puzzle_run", speed)
 		Events.Broadcast("stop_auto_save")
+		Events.Broadcast("program_running", true)
 	end
 
 	API.play_click_sound()

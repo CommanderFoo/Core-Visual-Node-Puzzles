@@ -9,6 +9,9 @@ local total = 0
 local node = nil
 local data = {}
 
+local has_sent_exceeded_square_error = false
+local has_sent_condition_not_met_error = false
+
 function init(node_data)
 	data = node_data
 	
@@ -34,11 +37,19 @@ function init(node_data)
 				if(total == amount) then
 					API.Puzzle_Events.trigger("output_" .. data.condition .. "_complete")
 				elseif(total > amount) then
-					node:has_errors()
+					if(not has_sent_exceeded_square_error) then
+						node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+						has_sent_exceeded_square_error = true
+					end
+
 					error = true
 				end
 			else
-				node:has_errors()
+				if(not has_sent_condition_not_met_error) then
+					node:has_errors("Input data does not match required data.")
+					has_sent_condition_not_met_error = true
+				end
+
 				error = true
 			end
 
@@ -63,6 +74,9 @@ evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 	if(Object.IsValid(square_count)) then
 		square_count.text = "0"
 		total = 0
+
+		has_sent_exceeded_square_error = false
+		has_sent_condition_not_met_error = false
 
 		API.set_bubble("square", node, data, false)
 

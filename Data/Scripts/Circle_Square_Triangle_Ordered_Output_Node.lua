@@ -19,6 +19,11 @@ local square_complete = false
 local triangle_complete = false
 local data = {}
 
+local has_sent_exceeded_circle_error = false
+local has_sent_exceeded_square_error = false
+local has_sent_exceeded_triangle_error = false
+local has_sent_order_error = false
+
 function init(node_data)
 	data = node_data
 
@@ -50,7 +55,11 @@ function init(node_data)
 						
 						node:check_halting()
 					elseif(total_circle > amount) then
-						node:has_errors()
+						if(not has_sent_exceeded_circle_error) then
+							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							has_sent_exceeded_circle_error = true
+						end
+						
 						error = true
 					end
 				elseif(c == condition_square and circle_complete) then
@@ -72,7 +81,11 @@ function init(node_data)
 
 						node:check_halting()
 					elseif(total_square > amount) then
-						node:has_errors()
+						if(not has_sent_exceeded_square_error) then
+							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							has_sent_exceeded_square_error = true
+						end
+						
 						error = true
 					end
 				elseif(c == condition_triangle and circle_complete and square_complete) then
@@ -92,11 +105,19 @@ function init(node_data)
 					if(total_triangle == amount) then
 						triangle_complete = true
 					elseif(total_triangle > amount) then
-						node:has_errors()
+						if(not has_sent_exceeded_triangle_error) then
+							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							has_sent_exceeded_triangle_error = true
+						end
+						
 						error = true
 					end
 				else
-					node:has_errors()
+					if(not has_sent_order_error) then
+						node:has_errors("Input data is not in the correct order.")
+						has_sent_order_error = true
+					end
+					
 					error = true
 				end
 
@@ -142,6 +163,11 @@ evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 		square_complete = false
 		triangle_complete = false
 
+		has_sent_exceeded_circle_error = false
+		has_sent_exceeded_square_error = false
+		has_sent_exceeded_triangle_error = false
+		has_sent_order_error = false
+	
 		API.set_bubble("circle", node, data, false)
 		API.set_bubble("square", node, data, false)
 		API.set_bubble("triangle", node, data, false)

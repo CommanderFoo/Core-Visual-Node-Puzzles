@@ -4,17 +4,12 @@ local title = script:GetCustomProperty("title"):WaitForObject()
 local edit_button = script:GetCustomProperty("edit_button"):WaitForObject()
 local next_button = script:GetCustomProperty("next_button"):WaitForObject()
 local program_score = script:GetCustomProperty("program_score"):WaitForObject()
-local available_nodes = script:GetCustomProperty("available_nodes"):WaitForObject()
 
 local gold_award = script:GetCustomProperty("gold_award"):WaitForObject()
 local silver_award = script:GetCustomProperty("silver_award"):WaitForObject()
 local bronze_award = script:GetCustomProperty("bronze_award"):WaitForObject()
 
-local gold_color = gold_award:GetColor()
-local silver_color = silver_award:GetColor()
-local bronze_color = bronze_award:GetColor()
-
-local floor = math.floor
+local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 
 local local_player = Game.GetLocalPlayer()
 
@@ -49,6 +44,8 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 	else
 		bronze_award:GetChildren()[1].text = string.format("%.0f", bronze_score)
 	end
+
+	Events.Broadcast("add_log_message", puzzle_name.text .. " Score: " .. tostring(score), "Puzzle Info", false)
 
 	local award = 0
 

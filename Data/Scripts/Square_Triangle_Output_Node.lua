@@ -15,6 +15,10 @@ local triangle_complete = false
 local square_complete = false
 local data = {}
 
+local has_sent_exceeded_square_error = false
+local has_sent_exceeded_triangle_error = false
+local has_sent_condition_not_met_error = false
+
 function init(node_data)
 	data = node_data
 
@@ -43,7 +47,11 @@ function init(node_data)
 					if(total_triangle == amount) then
 						triangle_complete = true
 					elseif(total_triangle > amount) then
-						node:has_errors()
+						if(not has_sent_exceeded_triangle_error) then
+							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							has_sent_exceeded_triangle_error = true
+						end
+
 						error = true
 					end
 				elseif(c == condition_square) then
@@ -63,9 +71,20 @@ function init(node_data)
 					if(total_square == amount) then
 						square_complete = true
 					elseif(total_square > amount) then
-						node:has_errors()
+						if(not has_sent_exceeded_square_error) then
+							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							has_sent_exceeded_square_error = true
+						end
+
 						error = true
 					end
+				else
+					if(not has_sent_condition_not_met_error) then
+						node:has_errors("Input data does not match required data.")
+						has_sent_condition_not_met_error = true
+					end
+	
+					error = true
 				end
 
 				if(triangle_complete and square_complete) then
@@ -101,6 +120,10 @@ evts[#evts + 1] = Events.Connect("puzzle_edit", function()
 
 		total_triangle = 0
 		total_square = 0
+
+		has_sent_exceeded_triangle_error = false
+		has_sent_exceeded_square_error = false
+		has_sent_condition_not_met_error = false
 
 		triangle_complete = false
 		square_complete = false

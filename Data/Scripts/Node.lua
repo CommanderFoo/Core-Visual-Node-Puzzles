@@ -250,6 +250,38 @@ function Node:setup(r)
 			end
 		end
 	end)
+
+	self.n_evts[#self.n_evts + 1] = Node_Events.on("clear_highlight", function()
+		if(not Object.IsValid(self.highlight)) then
+			return
+		end
+
+		self.highlight:SetColor(self.highlight_color)
+		self.highlight.visibility = Visibility.FORCE_OFF
+	end)
+end
+
+function Node:clear_error_log_highlight(program_running)
+	if(not Object.IsValid(self.highlight)) then
+		return
+	end
+
+	if(program_running) then
+		self.highlight:SetColor(self.error_highlight_color)
+		self.highlight.visibility = Visibility.FORCE_ON
+	else
+		self.highlight:SetColor(self.highlight_color)
+		self.highlight.visibility = Visibility.FORCE_OFF
+	end
+end
+
+function Node:set_error_log_highlight()
+	if(not Object.IsValid(self.highlight)) then
+		return
+	end
+	
+	self.highlight:SetColor(Color.YELLOW)
+	self.highlight.visibility = Visibility.FORCE_ON
 end
 
 -- Compresses the position, don't need exact location. Who is going to notice?
@@ -370,7 +402,10 @@ function Node:setup_node(root)
 		self:move_connections()
 		--self:highlight_connections(Color.New(0.417708, 0.417708, 0.417708))
 
+		self.highlight:SetColor(self.highlight_color)
 		self.highlight.visibility = Visibility.FORCE_ON
+
+		Events.Broadcast("highlight_reset")
 
 		Node_Events.trigger("begin_drag_node", self)
 	end)
@@ -388,6 +423,7 @@ function Node:setup_node(root)
 		Node_Events.trigger("late_node_input_update", self:get_id(), self:get_type(), self:get_unique_id())
 		Node_Events.trigger("late_node_output_update", self:get_id(), self:get_type(), self:get_unique_id())
 
+		Events.Broadcast("node_deleted", self:get_root().id)
 		self:remove()
 	end)
 
@@ -910,7 +946,7 @@ function Node:has_errors(msg)
 	self:show_error_info()
 	
 	if(msg) then
-		print(msg)
+		Events.Broadcast("add_log_message", msg, self, true)
 	end
 end
 
@@ -1393,6 +1429,8 @@ function Node_Data:new(r, options)
 
 	setup_data()
 
+	local has_sent_no_connection_error = false
+
 	function this:reset()
 		this:stop_ticking()
 		this:clear_items_container()
@@ -1400,6 +1438,7 @@ function Node_Data:new(r, options)
 
 		setup_data()
 
+		has_sent_no_connection_error = false
 		this.options.added_tween = false
 		this.options.index = 1
 		this.options.count = 0
@@ -1485,6 +1524,9 @@ function Node_Data:new(r, options)
 			end
 
 			this.options.index = this.options.index + 1
+		elseif(not has_sent_no_connection_error) then
+			this:has_errors("No output connection. The data needs to go somewhere.")
+			has_sent_no_connection_error = true
 		end
 	end
 
@@ -1614,6 +1656,9 @@ function Node_If:new(r, options)
 	local queue = YOOTIL.Utils.Queue:new()
 	local monitor_started = false
 
+	local has_sent_no_else_error = false
+	local has_sent_no_connection_error = false
+
 	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
 			this.options.queue_task = Task.Spawn(function()
@@ -1675,8 +1720,9 @@ function Node_If:new(r, options)
 
 						})
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_else_error) then
+					this:has_errors("No falsy output connection.")
+					has_sent_no_else_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -1705,8 +1751,9 @@ function Node_If:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connection_error) then
+				this:has_errors("No truthy or falsy output connections.")
+				has_sent_no_connection_error = true
 			end
 		end
 
@@ -1731,6 +1778,9 @@ function Node_If:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connection_error = false
+		has_sent_no_else_error = false
 	end
 
 	function this:get_condition()
@@ -1778,6 +1828,8 @@ function Node_Alternate:new(r, options)
 	local monitor_started = false
 
 	local switch = true
+	local has_sent_no_bottom_error = false
+	local has_sent_no_connection = false
 
 	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
@@ -1813,8 +1865,6 @@ function Node_Alternate:new(r, options)
 				local connection_method = nil
 				local offset = this:get_top_offset()
 				local connection_to_top_id = this:has_top_connection()
-				local connection_to_bottom_id = this:has_bottom_connection()
-				local connection_to_id = nil
 
 				if(switch and top_connection) then
 					data.connection_to_id = top_connection
@@ -1843,8 +1893,9 @@ function Node_Alternate:new(r, options)
 
 						})
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_bottom_error) then
+					this:has_errors("No bottom output connection.")
+					has_sent_no_bottom_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -1873,8 +1924,9 @@ function Node_Alternate:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connection) then
+				this:has_errors("No output connections to alternate.")
+				has_sent_no_connection = true
 			end
 
 			if(switch) then
@@ -1906,6 +1958,9 @@ function Node_Alternate:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_bottom_error = false
+		has_sent_no_connection = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -1998,6 +2053,9 @@ function Node_Limit:new(r, options)
 		end
 	end
 
+	local has_sent_no_bottom_connection_error = false
+	local has_sent_no_connections_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -2048,8 +2106,9 @@ function Node_Limit:new(r, options)
 
 						})
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_bottom_connection_error) then
+					this:has_errors("No bottom output connection.")
+					has_sent_no_bottom_connection_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -2078,8 +2137,9 @@ function Node_Limit:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connections_error) then
+				this:has_errors("No output connections.")
+				has_sent_no_connections_error = true
 			end
 		end
 
@@ -2106,6 +2166,9 @@ function Node_Limit:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_bottom_connection_error = false
+		has_sent_no_connections_error = false
 	end
 
 	function this:get_limit()
@@ -2219,7 +2282,7 @@ function Node_Halt:new(r, options)
 			this.body:FindDescendantByName("None").visibility = Visibility.FORCE_OFF
 		elseif(halting_data_type ~= data.condition) then
 			if(not has_sent_input_data_not_matched) then
-				this:has_errors("Data input for Halt Node does not match stored data.")
+				this:has_errors("Input data does not match stored data.")
 				has_sent_input_data_not_matched = true
 			end
 
@@ -2229,13 +2292,13 @@ function Node_Halt:new(r, options)
 			local sub_type =  this:get_top_connection_node_type(true)
 
 			if(not has_sent_no_connection_error and type == nil) then
-				this:has_errors("Halt Node has no connection.")
+				this:has_errors("No output connection.")
 				has_sent_no_connection_error = true
 
 				return
 			else
 				if(not has_sent_no_ordered_output_error and type ~= nil and sub_type ~= "Ordered") then
-					this:has_errors("Halt Nodes must connect directly to Ordered Output Nodes")
+					this:has_errors("Connected to node is not an Ordered Output Node. Direct connection required.")
 					has_sent_no_ordered_output_error = true
 
 					return
@@ -2295,6 +2358,7 @@ function Node_Halt:new(r, options)
 					end)
 				end
 			else
+				print("Eh? Shouldn't be possible.")
 				this:has_errors()
 			end
 		end
@@ -2426,6 +2490,8 @@ function Node_Add:new(r, options)
 		end
 	end
 
+	local has_sent_no_connection_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -2494,8 +2560,9 @@ function Node_Add:new(r, options)
 							obj.y = y
 						end)
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_connection_error) then
+					this:has_errors("No output connection.")
+					has_sent_no_connection_error = true
 				end
 			end
 
@@ -2533,6 +2600,8 @@ function Node_Add:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connection_error = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -2613,6 +2682,8 @@ function Node_Substract:new(r, options)
 		end
 	end
 
+	local has_sent_no_connection_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -2672,8 +2743,9 @@ function Node_Substract:new(r, options)
 							obj.y = y
 						end)
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_connection_error) then
+					this:has_errors("No output connection.")
+					has_sent_no_connection_error = true
 				end
 			end
 
@@ -2714,6 +2786,8 @@ function Node_Substract:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connection_error = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -2794,6 +2868,8 @@ function Node_Multiply:new(r, options)
 		end
 	end
 
+	local has_sent_no_connection_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -2853,8 +2929,9 @@ function Node_Multiply:new(r, options)
 							obj.y = y
 						end)
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_connection_error) then
+					this:has_errors("No output connection.")
+					has_sent_no_connection_error = true
 				end
 			end
 
@@ -2895,6 +2972,8 @@ function Node_Multiply:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connection_error = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -2975,6 +3054,8 @@ function Node_Divide:new(r, options)
 		end
 	end
 
+	local has_sent_no_connection_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -3034,8 +3115,9 @@ function Node_Divide:new(r, options)
 							obj.y = y
 						end)
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_connection_error) then
+					this:has_errors("No output connection.")
+					has_sent_no_connection_error = true
 				end
 			end
 
@@ -3076,6 +3158,8 @@ function Node_Divide:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connection_error = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -3180,6 +3264,8 @@ function Node_Greater_Than:new(r, options)
 		end
 	end
 
+	local has_sent_no_falsy_connection_error = false
+	
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -3230,8 +3316,9 @@ function Node_Greater_Than:new(r, options)
 
 						})
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_falsy_connection_error) then
+					this:has_errors("No falsy output connection.")
+					has_sent_no_falsy_connection_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -3288,6 +3375,8 @@ function Node_Greater_Than:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_falsy_connection_error = false
 	end
 
 	function this:get_amount()
