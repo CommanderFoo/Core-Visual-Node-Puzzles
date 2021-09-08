@@ -1828,8 +1828,10 @@ function Node_Alternate:new(r, options)
 	local monitor_started = false
 
 	local switch = true
-	local has_sent_no_bottom_error = false
-	local has_sent_no_connection = false
+
+	local has_sent_no_connection_bottom_error = false
+	local has_sent_no_connection_top_error = false
+	local has_sent_no_connection_error = false
 
 	function this:monitor_queue(speed)
 		if(this.options.node_time ~= nil and this.options.node_time > 0) then
@@ -1893,9 +1895,6 @@ function Node_Alternate:new(r, options)
 
 						})
 					end
-				elseif(not has_sent_no_bottom_error) then
-					this:has_errors("No bottom output connection.")
-					has_sent_no_bottom_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -1924,9 +1923,23 @@ function Node_Alternate:new(r, options)
 						obj.y = y
 					end)
 				end
-			elseif(not has_sent_no_connection) then
-				this:has_errors("No output connections to alternate.")
-				has_sent_no_connection = true
+			else
+				if(not top_connection and not bottom_connection) then
+					if(not has_sent_no_connection_error) then
+						this:has_errors("No output connections to alternate.")
+						has_sent_no_connection_error = true
+					end
+				elseif(not top_connection) then
+					if(not has_sent_no_connection_top_error) then
+						this:has_errors("No top output connection to alternate.")
+						has_sent_no_connection_top_error = true
+					end
+				elseif(not bottom_connection) then
+					if(not has_sent_no_connection_bottom_error) then
+						this:has_errors("No bottom output connection to alternate.")
+						has_sent_no_connection_bottom_error = true
+					end
+				end
 			end
 
 			if(switch) then
@@ -1959,8 +1972,9 @@ function Node_Alternate:new(r, options)
 		this:clear_items_container()
 		this:hide_error_info()
 
-		has_sent_no_bottom_error = false
-		has_sent_no_connection = false
+		has_sent_no_connection_error = false
+		has_sent_no_connection_bottom_error = false
+		has_sent_no_connection_top_error = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -3265,7 +3279,8 @@ function Node_Greater_Than:new(r, options)
 	end
 
 	local has_sent_no_falsy_connection_error = false
-	
+	local has_sent_no_connections_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -3347,8 +3362,9 @@ function Node_Greater_Than:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connections_error) then
+				this:has_errors("No output connection.")
+				has_sent_no_connections_error = true
 			end
 		end
 
@@ -3377,6 +3393,7 @@ function Node_Greater_Than:new(r, options)
 		this:hide_error_info()
 
 		has_sent_no_falsy_connection_error = false
+		has_sent_no_connections_error = false
 	end
 
 	function this:get_amount()
@@ -3493,6 +3510,9 @@ function Node_Less_Than:new(r, options)
 		end
 	end
 
+	local has_sent_no_falsy_connection_error = false
+	local has_sent_no_connections_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -3543,8 +3563,9 @@ function Node_Less_Than:new(r, options)
 
 						})
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_falsy_connection_error) then
+					this:has_errors("No falsy output connection.")
+					has_sent_no_falsy_connection_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -3573,8 +3594,9 @@ function Node_Less_Than:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connections_error) then
+				this:has_errors("No output connection.")
+				has_sent_no_connections_error = true
 			end
 		end
 
@@ -3601,6 +3623,9 @@ function Node_Less_Than:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_falsy_connection_error = false
+		has_sent_no_connections_error = false
 	end
 
 	function this:get_amount()
@@ -3717,6 +3742,9 @@ function Node_Equal:new(r, options)
 		end
 	end
 
+	local has_sent_no_falsy_connection_error = false
+	local has_sent_no_connections_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -3764,8 +3792,9 @@ function Node_Equal:new(r, options)
 
 						})
 					end
-				else
-					this:has_errors()
+				elseif(not has_sent_no_falsy_connection_error) then
+					this:has_errors("No falsy output connection.")
+					has_sent_no_falsy_connection_error = true
 				end
 
 				if(tween ~= nil and connection_method ~= nil) then
@@ -3794,8 +3823,9 @@ function Node_Equal:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connections_error) then
+				this:has_errors("No output connection.")
+				has_sent_no_connections_error = true
 			end
 		end
 
@@ -3822,6 +3852,9 @@ function Node_Equal:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_falsy_connection_error = false
+		has_sent_no_connections_error = false
 	end
 
 	function this:get_amount()
@@ -3885,6 +3918,8 @@ function Node_Absolute:new(r, options)
 		end
 	end
 
+	local has_sent_no_connections_error = false
+
 	this.options.on_data_received = function(data, node, from_node)
 		if(not monitor_started) then
 			monitor_started = true
@@ -3941,8 +3976,9 @@ function Node_Absolute:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connections_error) then
+				this:has_errors("No output connection.")
+				has_sent_no_connections_error = true
 			end
 		end
 
@@ -3967,6 +4003,8 @@ function Node_Absolute:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connections_error = false
 	end
 
 	this.n_evts[#this.n_evts + 1] = Node_Events.on("node_destroyed", function()
@@ -4000,6 +4038,8 @@ function Node_Reroute:new(r, options)
 
 	this.node_type = "Reroute"
 	this.node_sub_type = nil
+
+	local has_sent_no_connections_error = false
 
 	this.options.on_data_received = function(data, node, from_node)
 		this:set_speed(from_node:get_speed())
@@ -4050,8 +4090,9 @@ function Node_Reroute:new(r, options)
 						obj.y = y
 					end)
 				end
-			else
-				this:has_errors()
+			elseif(not has_sent_no_connections_error) then
+				this:has_errors("No output connection.")
+				has_sent_no_connections_error = true
 			end
 		end
 
@@ -4063,6 +4104,8 @@ function Node_Reroute:new(r, options)
 
 		this:clear_items_container()
 		this:hide_error_info()
+
+		has_sent_no_connections_error = false
 	end
 
 	return this

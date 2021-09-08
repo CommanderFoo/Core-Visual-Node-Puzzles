@@ -267,7 +267,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -316,13 +316,14 @@ Assets {
         }
         Control {
           Width: 100
-          Height: 55
+          Height: 45
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Data"
             FontColor {
@@ -331,7 +332,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.146000028
               B: 0.13673012
@@ -483,7 +484,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIY: 100
           RenderTransformPivot {
             Anchor {
@@ -533,13 +534,14 @@ Assets {
         }
         Control {
           Width: 100
-          Height: 55
+          Height: 45
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Output 1"
             FontColor {
@@ -548,7 +550,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -704,7 +706,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -753,13 +755,14 @@ Assets {
         }
         Control {
           Width: 100
-          Height: 55
+          Height: 45
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Reroute Node"
             FontColor {
@@ -768,7 +771,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.0468751602
               B: 0.0383777134

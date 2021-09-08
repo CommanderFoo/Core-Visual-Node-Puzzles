@@ -283,7 +283,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -339,6 +339,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Data"
             FontColor {
@@ -347,7 +348,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.146000028
               B: 0.13673012
@@ -495,7 +496,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIX: -300
           UIY: 100
           RenderTransformPivot {
@@ -553,6 +554,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "If Else"
             FontColor {
@@ -561,7 +563,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.0251868609
               G: 0.25015837
@@ -713,7 +715,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIX: 50
           UIY: 100
           RenderTransformPivot {
@@ -771,6 +773,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Alternate"
             FontColor {
@@ -779,7 +782,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.227143213
               B: 0.53000021
@@ -927,7 +930,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIX: 50
           UIY: 100
           RenderTransformPivot {
@@ -985,6 +988,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Limit"
             FontColor {
@@ -993,7 +997,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.34270826
               B: 0.0271989647
@@ -1141,7 +1145,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -1197,6 +1201,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Halt"
             FontColor {
@@ -1205,7 +1210,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.426000118
               B: 0.27047646
@@ -1365,7 +1370,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIX: 1150.3064
           UIY: 100
           RenderTransformPivot {
@@ -1423,6 +1428,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Output 1"
             FontColor {
@@ -1431,7 +1437,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -1595,7 +1601,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIX: 50
           UIY: 300
           RenderTransformPivot {
@@ -1653,6 +1659,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Ordered Output 1"
             FontColor {
@@ -1661,7 +1668,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.51875
               G: 0.0606394149
@@ -1825,7 +1832,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIX: 50
           UIY: 300
           RenderTransformPivot {
@@ -1883,6 +1890,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Ordered Output 2"
             FontColor {
@@ -1891,7 +1899,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.51875
               G: 0.0606394149
@@ -2047,7 +2055,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -2103,6 +2111,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Reroute Node"
             FontColor {
@@ -2111,7 +2120,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.0468751602
               B: 0.0383777134

@@ -10,6 +10,6 @@ for i, c in ipairs(children) do
 	else
 		c.y = offset
 		c.x = 0
-		offset = offset + 65
+		offset = offset + 55
 	end
 end

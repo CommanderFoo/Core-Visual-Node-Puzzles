@@ -30,7 +30,6 @@ local fourth_count = root:GetCustomProperty("fourth_count")
 local fourth_required = root:GetCustomProperty("fourth_required")
 
 local total_spawned = 0
-local template_id = nil
 local index = 1
 local node_destroy_evt = nil
 
@@ -174,7 +173,6 @@ evts[#evts + 1] = button.hoveredEvent:Connect(API.play_hover_sound)
 
 evts[#evts + 1] = button.clickedEvent:Connect(function()
 	if(total_spawned < total or total == -1) then
-		local screen = UI.GetScreenSize()
 		local graph = container:FindChildByName("Graph")
 		local x = 0
 		local y = 0

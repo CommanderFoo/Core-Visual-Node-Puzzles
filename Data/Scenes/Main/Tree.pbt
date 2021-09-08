@@ -12823,9 +12823,8 @@ Objects {
   }
   Control {
     Width: 350
-    Height: 850
+    Height: 740
     UIX: 400
-    UIY: 35
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -12890,7 +12889,7 @@ Objects {
       Color {
         G: 0.0312500782
         B: 0.0255851038
-        A: 1
+        A: 0.575
       }
       TeamSettings {
       }
@@ -12947,8 +12946,8 @@ Objects {
       }
       Color {
         G: 0.00937509537
-        B: 0.00781269092
-        A: 1
+        B: 0.00781269465
+        A: 0.575
       }
       TeamSettings {
       }
