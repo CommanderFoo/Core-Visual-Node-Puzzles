@@ -402,7 +402,7 @@ Events.Connect("update_logic_list", function(data)
 			end
 		end
 
-		if(last_id < 26) then
+		if(last_id < 25) then
 			open_up_logic_puzzle(last_id + 1)
 		end
 	end
@@ -460,7 +460,7 @@ Events.Connect("update_math_list", function(data)
 			end
 		end
 
-		if(last_id < 26) then
+		if(last_id < 25) then
 			open_up_math_puzzle(last_id + 1)
 		end
 	end
@@ -470,7 +470,7 @@ local logic_offset = 0
 local math_offset = 0
 local clicked = false
 
-for i = 1, 26 do
+for i = 1, 25 do
 	
 	-- Logic
 

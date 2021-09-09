@@ -10,8 +10,8 @@ end)
 --@TODO: REMOVE
 
 local load_solutions = true
-local force_load_logic_puzzle = 26
-local force_load_math_puzzle = 26
+local force_load_logic_puzzle = 25
+local force_load_math_puzzle = 25
 
 -- Prefetch node data and send early.
 

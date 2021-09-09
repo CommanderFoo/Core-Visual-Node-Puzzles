@@ -13232,7 +13232,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:forceon"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -15913,7 +15913,7 @@ Objects {
     Overrides {
       Name: "cs:MathPuzzle22"
       AssetReference {
-        Id: 12350129784131404494
+        Id: 12305063186628474579
       }
     }
   }
@@ -16095,12 +16095,6 @@ Objects {
       Name: "cs:LogicPuzzle25"
       AssetReference {
         Id: 4780243777789049219
-      }
-    }
-    Overrides {
-      Name: "cs:LogicPuzzle26"
-      AssetReference {
-        Id: 3623874707645095484
       }
     }
   }
