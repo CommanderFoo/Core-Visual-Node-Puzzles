@@ -187,6 +187,7 @@ function API.clear_graph()
 	end
 
 	API.nodes = {}
+	API.unique_id = 0
 end
 
 function API.get_node_by_unique_id(id)

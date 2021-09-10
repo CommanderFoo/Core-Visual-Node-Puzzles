@@ -910,7 +910,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:preciseclick"
+              Value: "mc:ebuttonclickmode:default"
             }
             Font {
             }

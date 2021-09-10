@@ -1600,7 +1600,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:preciseclick"
+              Value: "mc:ebuttonclickmode:default"
             }
             Font {
               Id: 18375965876900075365

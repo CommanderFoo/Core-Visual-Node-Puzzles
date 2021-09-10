@@ -868,6 +868,7 @@ Assets {
         }
         ParentId: 16542797137340056358
         ChildIds: 2260531182736350714
+        ChildIds: 7080306290149141113
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -924,7 +925,7 @@ Assets {
             IsButtonEnabled: true
             OnlyUseMainColor: true
             ClickMode {
-              Value: "mc:ebuttonclickmode:preciseclick"
+              Value: "mc:ebuttonclickmode:default"
             }
             Font {
               Id: 18375965876900075365
@@ -978,7 +979,7 @@ Assets {
           Width: 25
           Height: 25
           UIX: -18.000061
-          UIY: 11
+          UIY: 10
           RotationAngle: 45
           RenderTransformPivot {
             Anchor {
@@ -1040,6 +1041,69 @@ Assets {
             TargetAnchor {
               Anchor {
                 Value: "mc:euianchor:middleright"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 7080306290149141113
+        Name: "Node Name"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 11267358229680390409
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Height: 37
+          UIX: -15.3427849
+          UIY: -1
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          UseParentWidth: true
+          Text {
+            Color {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            Size: 25
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
               }
             }
           }

@@ -373,7 +373,10 @@ function Node:setup_node(root)
 		if(binding == YOOTIL.Input.left_button) then
 			if(self.moving) then
 				self.moving = false
-				self.highlight.visibility = Visibility.FORCE_OFF
+
+				if(Object.IsValid(self.highlight)) then
+					self.highlight.visibility = Visibility.FORCE_OFF
+				end
 				
 				--self:highlight_connections(Color.New(0.215861, 0.215861, 0.215861))
 
@@ -391,19 +394,21 @@ function Node:setup_node(root)
 
 		self:clear_active_connection()
 
+		self.moving = true
+		
 		local pos = UI.GetCursorPosition()
 
 		self.offset.x = pos.x - self.root.x
 		self.offset.y = pos.y - self.root.y
 
-		self.moving = true
-
 		self:move_to_front()
 		self:move_connections()
 		--self:highlight_connections(Color.New(0.417708, 0.417708, 0.417708))
 
-		self.highlight:SetColor(self.highlight_color)
-		self.highlight.visibility = Visibility.FORCE_ON
+		if(not Object.IsValid(self.highlight)) then
+			self.highlight:SetColor(self.highlight_color)
+			self.highlight.visibility = Visibility.FORCE_ON
+		end
 
 		Events.Broadcast("highlight_reset")
 
@@ -481,7 +486,7 @@ function Node:debug()
 
 	local handle_text = self.handle:FindChildByName("Node Name")
 
-	if(not string.find(handle_text.text, "%[")) then
+	if(Object.IsValid(handle_text) and not string.find(handle_text.text, "%[")) then
 		handle_text.text = handle_text.text .. "[" .. tostring(self.unique_id) .. "]"
 	end
 
@@ -750,8 +755,6 @@ function Node:move_to_front()
 end
 
 function Node:drag_node()
-	local screen_size = UI.GetScreenSize()
-
 	if(self.moving) then
 		local pos = UI.GetCursorPosition()
 
@@ -924,8 +927,10 @@ function Node:show_error_info()
 		self.error_task.repeatInterval = 0.6
 	end
 
-	self.highlight:SetColor(self.error_highlight_color)
-	self.highlight.visibility = Visibility.FORCE_ON
+	if(not Object.IsValid(self.highlight)) then
+		self.highlight:SetColor(self.error_highlight_color)
+		self.highlight.visibility = Visibility.FORCE_ON
+	end
 end
 
 function Node:hide_error_info()
@@ -938,8 +943,10 @@ function Node:hide_error_info()
 		end
 	end
 
-	self.highlight.visibility = Visibility.FORCE_OFF
-	self.highlight:SetColor(self.highlight_color)
+	if(not Object.IsValid(self.highlight)) then
+		self.highlight.visibility = Visibility.FORCE_OFF
+		self.highlight:SetColor(self.highlight_color)
+	end
 end
 
 function Node:has_errors(msg)
