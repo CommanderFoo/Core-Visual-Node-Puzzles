@@ -1238,7 +1238,11 @@ function Node:spawn_asset(asset, x, y, value)
 end
 
 function Node:set_puzzle_type(type)
-	self.puzzle_type = type
+	if(not type) then
+		self.puzzle_type = Puzzle_Type.LOGIC
+	else
+		self.puzzle_type = Puzzle_Type.MATH
+	end
 end
 
 function Node:clear_items_container()
@@ -4120,6 +4124,58 @@ end
 
 -- End Reroute Node
 
+-- Viewer Node
+
+local Node_Viewer = {}
+
+function Node_Viewer:new(r, options)
+	self.__index = self
+
+	local this = setmetatable({
+
+		options = options or {}
+
+	}, self)
+
+	setmetatable(this, {__index = Node})
+
+	this:setup(r)
+
+	this.node_type = "Viewer"
+
+	local active = nil
+
+	this.options.on_data_received = function(data, node, from_node)
+		if(this.puzzle_type == Puzzle_Type.LOGIC) then
+			if(active ~= nil) then
+				active.visibility = Visibility.FORCE_OFF
+			end
+
+			active = this.body:FindDescendantByName(data.condition:gsub("^%l", string.upper))
+			active.visibility = Visibility.FORCE_ON
+		else
+			active = this.body:FindDescendantByName("Number")
+			active.text = string.format("%.0f", data.value)
+			active.visibility = Visibility.FORCE_ON
+		end
+	end
+
+	function this:reset()
+		this.tweens = {}
+
+		this:clear_items_container()
+		this:hide_error_info()
+
+		if(active ~= nil) then
+			active.visibility = Visibility.FORCE_OFF
+		end
+	end
+
+	return this
+end
+
+-- End Viewer Node
+
 return Node, Node_Events, {
 
 	Output = Node_Output,
@@ -4135,6 +4191,7 @@ return Node, Node_Events, {
 	Greater_Than = Node_Greater_Than,
 	Less_Than = Node_Less_Than,
 	Absolute = Node_Absolute,
-	Reroute = Node_Reroute
+	Reroute = Node_Reroute,
+	Viewer = Node_Viewer
 
 }
