@@ -2430,7 +2430,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:title"
-            String: "Halt"
+            String: "Add"
           }
           Overrides {
             Name: "cs:button_offset"
@@ -2438,15 +2438,15 @@ Assets {
           }
           Overrides {
             Name: "cs:info_height"
-            Float: 680
+            Float: 250
           }
           Overrides {
             Name: "cs:info_1_text"
-            String: "This node plays an important role in making sure that the data is sent to the output in the correct order.  Each Halt node will be assigned an order number based on the order you connect it to the Output Node."
+            String: "This node will add the top and bottom input data together. This node works with positive and negative numbers."
           }
           Overrides {
             Name: "cs:info_2_text"
-            String: "It is important to remember that Halt Nodes must be directly connected to Output Nodes, otherwise your program will fail.  It makes no sense halting data early in your program, you should process data then set the order at the end to improve performance."
+            String: ""
           }
           Overrides {
             Name: "cs:info_2_offset"

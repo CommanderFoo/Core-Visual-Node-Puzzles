@@ -8,12 +8,14 @@ local info_entry = script:GetCustomProperty("info_entry")
 local error_entry = script:GetCustomProperty("error_entry")
 local auto_scroll = script:GetCustomProperty("auto_scroll"):WaitForObject()
 local resize_handle = script:GetCustomProperty("resize_handle"):WaitForObject()
+local show_ids_button = script:GetCustomProperty("show_ids_button"):WaitForObject()
 
 local is_showing = false
 local y_offset = 0
 local active_node = nil
 local program_running = false
 local can_auto_scroll = true
+local showing_ids = false
 
 local function clear_message_log()
 	if(active_node ~= nil) then
@@ -61,9 +63,7 @@ auto_scroll.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
-auto_scroll.hoveredEvent:Connect(function()
-	API.play_hover_sound()
-end)
+auto_scroll.hoveredEvent:Connect(API.play_hover_sound)
 
 -- Auto scroll
 
@@ -72,9 +72,25 @@ clear_button.clickedEvent:Connect(function()
 	API.play_click_sound()
 end)
 
-clear_button.hoveredEvent:Connect(function()
-	API.play_hover_sound()
+clear_button.hoveredEvent:Connect(API.play_hover_sound)
+
+-- Show IDs
+
+show_ids_button.clickedEvent:Connect(function()
+	if(showing_ids) then
+		API.hide_all_node_ids()
+		show_ids_button.text = "Show Node IDs"
+		showing_ids = false
+	else
+		API.show_all_node_ids()
+		show_ids_button.text = "Hide Node IDs"
+		showing_ids = true
+	end
+
+	API.play_click_sound()
 end)
+
+show_ids_button.hoveredEvent:Connect(API.play_hover_sound)
 
 Events.Connect("show_error_log", function()
 	button.text = "Hide Error Log"

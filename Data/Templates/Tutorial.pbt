@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 7410864171820395270
+        ParentId: 10486534859035465714
         ChildIds: 12651624164584631129
         ChildIds: 14158264519078340793
         ChildIds: 8279872155775569690
@@ -7390,9 +7390,8 @@ Assets {
         }
         Control {
           Width: 350
-          Height: 850
+          Height: 740
           UIX: 400
-          UIY: 35
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -7558,6 +7557,8 @@ Assets {
         ChildIds: 4260494881300227131
         ChildIds: 2876341193007665499
         ChildIds: 6041639739535885499
+        ChildIds: 1473400116767111934
+        ChildIds: 10650400547354141003
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -7639,7 +7640,7 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
+          Height: 50
           UIY: 25
           RenderTransformPivot {
             Anchor {
@@ -7696,6 +7697,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Data"
             FontColor {
@@ -7704,7 +7706,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.146000028
               B: 0.13673012
@@ -7786,8 +7788,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 90
+          Height: 50
+          UIY: 80
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -7843,6 +7845,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "If Else"
             FontColor {
@@ -7851,7 +7854,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.0251868609
               G: 0.25015837
@@ -7937,8 +7940,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 155
+          Height: 50
+          UIY: 135
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -7994,6 +7997,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Alternate"
             FontColor {
@@ -8002,7 +8006,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.227143213
               B: 0.53000021
@@ -8084,8 +8088,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 220
+          Height: 50
+          UIY: 190
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -8141,6 +8145,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Limit"
             FontColor {
@@ -8149,7 +8154,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               G: 0.34270826
               B: 0.0271989647
@@ -8231,8 +8236,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 285
+          Height: 50
+          UIY: 245
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -8288,6 +8293,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Halt"
             FontColor {
@@ -8296,7 +8302,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.426000118
               B: 0.27047646
@@ -8398,8 +8404,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 350
+          Height: 50
+          UIY: 300
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -8455,6 +8461,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Ordered Output 1"
             FontColor {
@@ -8463,7 +8470,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.51875
               G: 0.0606394149
@@ -8561,8 +8568,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 415
+          Height: 50
+          UIY: 355
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -8618,6 +8625,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Ordered Output 2"
             FontColor {
@@ -8626,7 +8634,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.51875
               G: 0.0606394149
@@ -8720,8 +8728,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 480
+          Height: 50
+          UIY: 410
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -8777,6 +8785,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Output 3"
             FontColor {
@@ -8785,7 +8794,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -8887,8 +8896,8 @@ Assets {
         }
         Control {
           Width: 250
-          Height: 60
-          UIY: 545
+          Height: 50
+          UIY: 465
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -8944,6 +8953,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          UseParentHeight: true
           Button {
             Label: "Output 4"
             FontColor {
@@ -8952,7 +8962,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 30
+            FontSize: 28
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -8993,6 +9003,303 @@ Assets {
             }
             VerticalJustification {
               Value: "mc:everticaljustification:center"
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:topleft"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:topleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 1473400116767111934
+        Name: "Viewer Dummy Node"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 8539100829106811877
+        ChildIds: 7425578246831344603
+        UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 5
+          }
+        }
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 250
+          Height: 50
+          UIY: -80
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Panel {
+            Opacity: 1
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:bottomcenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:bottomcenter"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 7425578246831344603
+        Name: "Node Handle"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 1473400116767111934
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 100
+          Height: 55
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          UseParentWidth: true
+          UseParentHeight: true
+          Button {
+            Label: "Viewer"
+            FontColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            FontSize: 28
+            ButtonColor {
+              A: 1
+            }
+            HoveredColor {
+              R: 0.00625006342
+              G: 0.00625006342
+              B: 0.00625006342
+              A: 1
+            }
+            PressedColor {
+              A: 1
+            }
+            DisabledColor {
+              A: 0.8
+            }
+            Brush {
+              Id: 9402814787072448834
+            }
+            IsButtonEnabled: true
+            ClickMode {
+              Value: "mc:ebuttonclickmode:default"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            VerticalJustification {
+              Value: "mc:everticaljustification:top"
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:topleft"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:topleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 10650400547354141003
+        Name: "Reroute Dummy Node"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 8539100829106811877
+        ChildIds: 561265363993357387
+        UnregisteredParameters {
+          Overrides {
+            Name: "cs:total"
+            Int: 20
+          }
+        }
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 250
+          Height: 50
+          UIY: -25
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Panel {
+            Opacity: 1
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:bottomcenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:bottomcenter"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 561265363993357387
+        Name: "Node Handle"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 10650400547354141003
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 100
+          Height: 45
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          UseParentWidth: true
+          UseParentHeight: true
+          Button {
+            Label: "Reroute Node"
+            FontColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            FontSize: 28
+            ButtonColor {
+              G: 0.0468751602
+              B: 0.0383777134
+              A: 1
+            }
+            HoveredColor {
+              G: 0.0677084923
+              B: 0.0554344319
+              A: 1
+            }
+            PressedColor {
+              G: 0.0468751602
+              B: 0.0383777134
+              A: 1
+            }
+            DisabledColor {
+              G: 0.0468751602
+              B: 0.0383777246
+              A: 0.8
+            }
+            Brush {
+              Id: 9402814787072448834
+            }
+            IsButtonEnabled: true
+            ClickMode {
+              Value: "mc:ebuttonclickmode:default"
+            }
+            Font {
+              Id: 18375965876900075365
+            }
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            VerticalJustification {
+              Value: "mc:everticaljustification:top"
             }
           }
           AnchorLayout {

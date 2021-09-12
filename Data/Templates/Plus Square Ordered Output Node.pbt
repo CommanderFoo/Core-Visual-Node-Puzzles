@@ -1805,7 +1805,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:info_height"
-            Float: 395
+            Float: 405
           }
           Overrides {
             Name: "cs:button_offset"

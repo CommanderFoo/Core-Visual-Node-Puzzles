@@ -46,7 +46,7 @@ function save_data(player)
 	--data = {}
 
 	print(YOOTIL.JSON.encode(data.mnd))
-	--print(YOOTIL.JSON.encode(data.lnd))
+	print(YOOTIL.JSON.encode(data.lnd))
 	
 	Storage.SetPlayerData(player, data)
 end

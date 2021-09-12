@@ -30,6 +30,7 @@ API.active_node = nil
 API.can_edit_nodes = true
 API.unique_id = 0
 API.auto_set_order = true
+API.show_ids = false
 
 API.Puzzle_Type = {
 
@@ -43,9 +44,26 @@ local local_player = Game.GetLocalPlayer()
 function API.register_node(node)
 	if(node:get_unique_id() == 0) then
 		node:set_unique_id(API.get_next_unique_id())
+		node:show_id(API.show_ids)
 	end
 	
 	table.insert(API.nodes, node)
+end
+
+function API.show_all_node_ids()
+	API.show_ids = true
+
+	for k, n in pairs(API.nodes) do
+		n:show_id(true)
+	end
+end
+
+function API.hide_all_node_ids()
+	API.show_ids = false
+
+	for k, n in pairs(API.nodes) do
+		n:show_id(false)
+	end
 end
 
 API.Node_Events.on("begin_drag_node", function(node)

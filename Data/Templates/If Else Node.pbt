@@ -3765,11 +3765,11 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:info_height"
-            Float: 445
+            Float: 400
           }
           Overrides {
             Name: "cs:button_offset"
-            Float: 370
+            Float: 330
           }
           Overrides {
             Name: "cs:title"
@@ -3781,7 +3781,7 @@ Assets {
           }
           Overrides {
             Name: "cs:info_2_text"
-            String: "The else is optional."
+            String: ""
           }
           Overrides {
             Name: "cs:info_2_offset"

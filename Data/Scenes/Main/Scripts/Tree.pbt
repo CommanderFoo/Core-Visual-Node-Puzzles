@@ -249,6 +249,12 @@ Objects {
         SelfId: 12560100355080335450
       }
     }
+    Overrides {
+      Name: "cs:show_ids_button"
+      ObjectReference {
+        SelfId: 6664268774446466192
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

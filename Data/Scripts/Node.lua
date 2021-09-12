@@ -348,6 +348,7 @@ function Node:setup_node(root)
 	self.items_container = self.root:FindDescendantByName("Items Container")
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI"):FindChildByName("Graph")
 	self.body = self.root:FindDescendantByName("Body Background")
+	self.node_name = self.handle:FindChildByName("Node Name").text
 
 	if(Object.IsValid(self.body)) then
 		self.circle_bubble = self.body:FindDescendantByName("Circle Bubble")
@@ -479,15 +480,23 @@ function Node:remove()
 	self.root:Destroy()
 end
 
-function Node:debug()
-	if(not self.debug_node) then
+function Node:show_id(v)
+	local handle_text = self.handle:FindChildByName("Node Name")
+
+	if(not Object.IsValid(handle_text)) then
 		return
 	end
 
-	local handle_text = self.handle:FindChildByName("Node Name")
+	if(v) then
+		handle_text.text = self.node_name .. "[" .. tostring(self.unique_id) .. "]"
+	else
+		handle_text.text = self.node_name
+	end
+end
 
-	if(Object.IsValid(handle_text) and not string.find(handle_text.text, "%[")) then
-		handle_text.text = handle_text.text .. "[" .. tostring(self.unique_id) .. "]"
+function Node:debug()
+	if(not self.debug_node) then
+		return
 	end
 
 	local inputs = 0
