@@ -189,16 +189,19 @@ run_edit_button.clickedEvent:Connect(function()
 
 		local total_nodes = 0
 		local total_reroute = 0
-
+		local total_viewer = 0
+		
 		for _, n in pairs(API.nodes) do
 			if(n:get_type() == "Reroute") then
 				total_reroute = total_reroute + 1
+			elseif(n:get_type() == "Viewer") then
+				total_viewer = total_viewer + 1
 			else
 				total_nodes = total_nodes + 1
 			end
 		end
 
-		Events.Broadcast("add_log_message", "Total Nodes: " .. tostring(total_nodes) .. " - Total Reroute Nodes: " .. tostring(total_reroute) .. ".", "Info", false)
+		Events.Broadcast("add_log_message", "Total Nodes: " .. tostring(total_nodes) .. " - Total Reroute Nodes: " .. tostring(total_reroute) .. " - Total Viewer Nodes: " .. tostring(total_viewer) .. ".", "Info", false)
 
 		Events.Broadcast("puzzle_run", speed)
 		Events.Broadcast("stop_auto_save")
