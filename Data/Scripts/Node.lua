@@ -2410,7 +2410,7 @@ function Node_Halt:new(r, options)
 		end
 
 		this.order = ord
-		this.body:FindDescendantByName("Order").text = tostring(this.order)
+		this.body:FindDescendantByName("Order").text = tostring(this.order + 1)
 	end
 
 	function this:get_order()
