@@ -60,17 +60,17 @@ function create_nodes(node_data)
 
 			last_uid = tonumber(uid)
 
-			if(x < -(screen.x / 2)) then
-				x = 250	
-			elseif(x > screen.x) then
-				x = (screen.x / 2) - 300
-			end
+			-- if(x < -(screen.x / 2)) then
+			-- 	x = 250	
+			-- elseif(x > screen.x) then
+			-- 	x = (screen.x / 2) - 300
+			-- end
 
-			if(y < -(screen.y / 2)) then
-				y = 150	
-			elseif(y > screen.y) then
-				y = (screen.y / 2) - 150
-			end
+			-- if(y < -(screen.y / 2)) then
+			-- 	y = 150	
+			-- elseif(y > screen.y) then
+			-- 	y = (screen.y / 2) - 150
+			-- end
 
 			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit), tonumber(order))
 		end
