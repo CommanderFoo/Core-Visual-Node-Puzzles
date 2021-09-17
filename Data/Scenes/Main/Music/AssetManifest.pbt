@@ -115,12 +115,3 @@ Assets {
     AssetId: "abp_acoustic_campfire_stories_kit_ref"
   }
 }
-Assets {
-  Id: 3108683420737422582
-  Name: "\"Simple Jazz Swing\" Music Construction Kit (Sections) 01"
-  PlatformAssetType: 10
-  PrimaryAsset {
-    AssetType: "AudioBlueprintAssetRef"
-    AssetId: "abp_simple_jazz_swing_sections_kit_ref"
-  }
-}

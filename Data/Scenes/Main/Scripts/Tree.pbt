@@ -339,6 +339,18 @@ Objects {
         SelfId: 6664268774446466192
       }
     }
+    Overrides {
+      Name: "cs:skip_song"
+      ObjectReference {
+        SelfId: 5791940092048010206
+      }
+    }
+    Overrides {
+      Name: "cs:current_song"
+      ObjectReference {
+        SelfId: 7869379842707255342
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1003,6 +1015,12 @@ Objects {
       Name: "cs:sfx"
       ObjectReference {
         SelfId: 14914996981230800372
+      }
+    }
+    Overrides {
+      Name: "cs:music"
+      ObjectReference {
+        SelfId: 17829228507645182166
       }
     }
   }

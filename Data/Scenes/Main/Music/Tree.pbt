@@ -35,7 +35,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -74,7 +74,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -113,7 +113,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -152,7 +152,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -191,46 +191,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
-    }
-  }
-}
-Objects {
-  Id: 11251744943254967280
-  Name: "\"Simple Jazz Swing\" Music Construction Kit (Sections) 01"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 17829228507645182166
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Blueprint {
-    BlueprintAsset {
-      Id: 3108683420737422582
-    }
-    TeamSettings {
-    }
-    AudioBP {
-      Volume: 1
-      Falloff: 3600
-      Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -269,7 +230,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -288,6 +249,14 @@ Objects {
     }
   }
   ParentId: 17829228507645182166
+  UnregisteredParameters {
+    Overrides {
+      Name: "bp:Type"
+      Enum {
+        Value: "mc:emx_violet_serenity_lofi_sections_kit:48"
+      }
+    }
+  }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -308,7 +277,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -347,7 +316,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -386,7 +355,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -425,7 +394,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -464,7 +433,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -503,7 +472,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
@@ -542,7 +511,7 @@ Objects {
       Falloff: 3600
       Radius: 400
       FadeInTime: 1
-      FadeOutTime: 1
+      FadeOutTime: 3
     }
   }
 }
