@@ -6,23 +6,11 @@ local top_ui = script:GetCustomProperty("top_ui"):WaitForObject()
 
 local local_player = Game.GetLocalPlayer()
 
-Task.Spawn(function()
-	YOOTIL.Events.broadcast_to_server("init")
-end)
-
-Events.Connect("load_game", function(math, logic_id, math_id, speed, sfx_vol, music_vol, show_nodes)
+Events.Connect("load_game", function(math, logic_id, math_id)
 	if(math) then
 		local_player.clientUserData.logic = false
 	else
 		local_player.clientUserData.logic = true
-	end
-
-	Events.Broadcast("set_speed", speed)
-	Events.Broadcast("set_sfx_slider_amount", sfx_vol)
-	Events.Broadcast("set_music_slider_amount", music_vol)
-
-	if(show_nodes == 1) then
-		Events.Broadcast("show_nodes")
 	end
 
 	base_ui.visibility = Visibility.FORCE_ON
@@ -63,3 +51,6 @@ Events.Connect("hide_ui", function()
 	node_ui.visibility = Visibility.FORCE_OFF
 	top_ui.visibility = Visibility.FORCE_OFF
 end)
+
+Task.Wait()
+YOOTIL.Events.broadcast_to_server("init")

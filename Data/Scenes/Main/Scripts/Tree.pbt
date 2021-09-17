@@ -17,6 +17,7 @@ Objects {
   ParentId: 5021637449606560396
   ChildIds: 1419306634217875590
   ChildIds: 15294849702650267166
+  ChildIds: 15241202507953327223
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -28,6 +29,47 @@ Objects {
   }
   NetworkContext {
     Type: Server
+  }
+}
+Objects {
+  Id: 15241202507953327223
+  Name: "Settings_Manager_Server"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 917384028508757458
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 1192743660672339167
+    }
   }
 }
 Objects {
@@ -161,6 +203,7 @@ Objects {
   ChildIds: 3385943649788916117
   ChildIds: 12690753362760052858
   ChildIds: 8026521745831996317
+  ChildIds: 6237632426768673951
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -171,6 +214,47 @@ Objects {
     Value: "mc:ecollisionsetting:forceoff"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 6237632426768673951
+  Name: "Settings_Manager_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:YOOTIL"
+      AssetReference {
+        Id: 16622261663679835299
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 15599558467681684025
+    }
   }
 }
 Objects {
@@ -895,7 +979,7 @@ Objects {
 }
 Objects {
   Id: 225476450877697714
-  Name: "Music_Manager_Client"
+  Name: "Audio_Manager_Client"
   Transform {
     Location {
     }
@@ -910,15 +994,15 @@ Objects {
   ParentId: 2456857752610234367
   UnregisteredParameters {
     Overrides {
-      Name: "cs:music_folder"
-      ObjectReference {
-        SelfId: 17829228507645182166
-      }
-    }
-    Overrides {
       Name: "cs:main_menu"
       ObjectReference {
         SelfId: 2074062803672340080
+      }
+    }
+    Overrides {
+      Name: "cs:sfx"
+      ObjectReference {
+        SelfId: 14914996981230800372
       }
     }
   }

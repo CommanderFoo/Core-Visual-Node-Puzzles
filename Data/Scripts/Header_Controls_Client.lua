@@ -37,14 +37,11 @@ local speed = 1
 local showing_nodes = false
 local orig_showing_nodes = false
 local tween = nil
-local errors = 0
 
 local total_puzzle_score = 0
 local score_conditions = nil
 
 local ui_is_disabled = false
-
-local floor = math.floor
 
 function Tick(dt)
 	if(tween ~= nil) then
@@ -149,7 +146,7 @@ function show_hide_nodes()
 		available_nodes_container.x = changed.v
 	end)
 
-	YOOTIL.Events.broadcast_to_server("update_player_prefs", speed, showing_nodes)
+	YOOTIL.Events.broadcast_to_server("update_game_settings", speed, showing_nodes and 1 or 0)
 
 	API.play_click_sound()
 end
@@ -222,7 +219,7 @@ speed_up_button.clickedEvent:Connect(function()
 
 	current_speed.text = tostring(speed)
 
-	YOOTIL.Events.broadcast_to_server("update_player_prefs", speed, showing_nodes)
+	YOOTIL.Events.broadcast_to_server("update_game_settings", speed, showing_nodes and 1 or 0)
 
 	API.play_click_sound()
 end)

@@ -102,7 +102,6 @@ Objects {
     TeamSettings {
     }
     AudioBP {
-      AutoPlay: true
       Repeat: true
       Volume: 0.8
       Falloff: 3600
@@ -8049,8 +8048,8 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 746
-    Height: 569
+    Width: 772
+    Height: 513
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -8428,7 +8427,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -8809,7 +8808,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
+    Value: "mc:evisibilitysetting:forceoff"
   }
   CameraCollidable {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -8930,7 +8929,7 @@ Objects {
     Width: 250
     Height: 25
     UIX: 130
-    UIY: 50.6695824
+    UIY: 95.3379059
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -9663,7 +9662,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: -91.6043854
-    UIY: 50.6695824
+    UIY: 95.3379059
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -9775,7 +9774,7 @@ Objects {
     Width: 250
     Height: 25
     UIX: 130
-    UIY: -82.2365341
+    UIY: -49.2725372
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -10508,7 +10507,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: -130
-    UIY: -82.2365341
+    UIY: -49.2725372
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -10570,7 +10569,7 @@ Objects {
   }
   Control {
     Width: 200
-    Height: 132
+    Height: 93
     UIY: 20
     RenderTransformPivot {
       Anchor {
