@@ -10,6 +10,9 @@ local auto_scroll = script:GetCustomProperty("auto_scroll"):WaitForObject()
 local resize_handle = script:GetCustomProperty("resize_handle"):WaitForObject()
 local show_ids_button = script:GetCustomProperty("show_ids_button"):WaitForObject()
 
+local skip_song = script:GetCustomProperty("skip_song"):WaitForObject()
+local current_song = script:GetCustomProperty("current_song"):WaitForObject()
+
 local is_showing = false
 local y_offset = 0
 local active_node = nil
@@ -48,6 +51,15 @@ end)
 button.hoveredEvent:Connect(function()
 	API.play_hover_sound()
 end)
+
+-- Skip song button
+
+skip_song.clickedEvent:Connect(function()
+	Events.Broadcast("skip_song")
+	API.play_click_sound()
+end)
+
+skip_song.hoveredEvent:Connect(API.play_hover_sound)
 
 -- Clear button
 
@@ -160,7 +172,7 @@ function Tick()
 		local mouse_pos = UI.GetCursorPosition()
 		local screen = UI.GetScreenSize()
 
-		error_log_panel.parent.height = math.max(100, math.min(800, math.floor(screen.y - mouse_pos.y))) + 7
+		error_log_panel.parent.height = math.max(143, math.min(800, math.floor(screen.y - mouse_pos.y))) + 7
 	end
 end
 
@@ -198,4 +210,8 @@ Events.Connect("graph_cleared", function()
 	end
 
 	add_log_message("Node graph cleared.", "Info", false)
+end)
+
+Events.Connect("set_song_name", function(s)
+	current_song.text = s
 end)
