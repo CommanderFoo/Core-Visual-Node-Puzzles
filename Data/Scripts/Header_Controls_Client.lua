@@ -27,10 +27,6 @@ local close_help_button = script:GetCustomProperty("close_help_button"):WaitForO
 local settings_open = false
 local help_open = false
 
-local gold_color = gold_award:GetColor()
-local silver_color = silver_award:GetColor()
-local bronze_color = bronze_award:GetColor()
-
 local running = false
 local speed = 1
 
@@ -244,7 +240,7 @@ function reset_award()
 	API.set_award(bronze_award, .2)
 end
 
-function disable_ui(disable_run_edit, ignore_settings)
+function disable_ui(disable_run_edit, ignore_settings, ignore_help)
 	slow_down_button.isInteractable = false
 	speed_up_button.isInteractable = false
 	available_nodes_button.isInteractable = false
@@ -252,7 +248,6 @@ function disable_ui(disable_run_edit, ignore_settings)
 	main_menu_button.isInteractable = false
 	clear_button.isInteractable = false
 	center_graph_button.isInteractable = false
-	help_button.isInteractable = false
 
 	if(disable_run_edit) then
 		run_edit_button.isInteractable = false
@@ -260,6 +255,10 @@ function disable_ui(disable_run_edit, ignore_settings)
 
 	if(not ignore_settings) then
 		settings_button.isInteractable = false
+	end
+
+	if(not ignore_help) then
+		help_button.isInteractable = false
 	end
 
 	Events.Broadcast("disable_available_nodes")
@@ -309,6 +308,10 @@ function close_settings()
 end
 
 settings_button.clickedEvent:Connect(function()
+	if(help_open) then
+		return
+	end
+
 	if(settings_open) then
 		close_settings()
 	else
@@ -341,10 +344,14 @@ function close_help()
 end
 
 help_button.clickedEvent:Connect(function()
+	if(settings_open) then
+		return
+	end
+
 	if(help_open) then
 		close_help()
 	else
-		disable_ui(true, true)
+		disable_ui(true, true, true)
 		Events.Broadcast("disable_graph_panning")
 		help.visibility = Visibility.FORCE_ON
 		help_open = true
@@ -378,6 +385,9 @@ end)
 
 Events.Connect("saved", function()
 	Task.Wait(2)
+
+	Events.Broadcast("add_log_message", "Game saved.", "Info", false)
+
 	if(not ui_is_disabled) then
 		save_button.isInteractable = true
 	end

@@ -1,6 +1,98 @@
 Name: "Music"
 RootId: 17829228507645182166
 Objects {
+  Id: 2160066234958558647
+  Name: "\"LoFi Reflective\" Sections Kit 01"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 17829228507645182166
+  UnregisteredParameters {
+    Overrides {
+      Name: "bp:Type"
+      Enum {
+        Value: "mc:emx_lofi_reflective_sections_kit:48"
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Blueprint {
+    BlueprintAsset {
+      Id: 4765331341461015482
+    }
+    TeamSettings {
+    }
+    AudioBP {
+      Volume: 1
+      Falloff: 3600
+      Radius: 400
+      FadeInTime: 3
+      FadeOutTime: 1
+    }
+  }
+}
+Objects {
+  Id: 3652548516299282297
+  Name: "\"Grey Bliss LoFi\" Music Construction Kit (Layers) 01"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 17829228507645182166
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Blueprint {
+    BlueprintAsset {
+      Id: 13625479584813446313
+    }
+    TeamSettings {
+    }
+    AudioBP {
+      Volume: 1
+      Falloff: 3600
+      Radius: 400
+      FadeInTime: 3
+      FadeOutTime: 1
+    }
+  }
+}
+Objects {
   Id: 11747254585239303058
   Name: "\"LoFi Moody\" Sections Kit 01"
   Transform {
@@ -34,8 +126,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -73,8 +165,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -112,8 +204,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -132,6 +224,14 @@ Objects {
     }
   }
   ParentId: 17829228507645182166
+  UnregisteredParameters {
+    Overrides {
+      Name: "bp:Type"
+      Enum {
+        Value: "mc:emx_lofi_reflective_sections_kit:48"
+      }
+    }
+  }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -151,8 +251,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -190,8 +290,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -229,8 +329,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -276,8 +376,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -315,8 +415,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -354,47 +454,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
-    }
-  }
-}
-Objects {
-  Id: 13841005052525880751
-  Name: "\"Astral Chill\" Music Construction Kit (Sections) 01"
-  Transform {
-    Location {
-    }
-    Rotation {
-    }
-    Scale {
-      X: 1
-      Y: 1
-      Z: 1
-    }
-  }
-  ParentId: 17829228507645182166
-  Collidable_v2 {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Visible_v2 {
-    Value: "mc:evisibilitysetting:inheritfromparent"
-  }
-  CameraCollidable {
-    Value: "mc:ecollisionsetting:inheritfromparent"
-  }
-  Blueprint {
-    BlueprintAsset {
-      Id: 6856142566052620077
-    }
-    TeamSettings {
-    }
-    AudioBP {
-      Volume: 1
-      Falloff: 3600
-      Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -432,8 +493,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -471,8 +532,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }
@@ -510,8 +571,8 @@ Objects {
       Volume: 1
       Falloff: 3600
       Radius: 400
-      FadeInTime: 1
-      FadeOutTime: 3
+      FadeInTime: 3
+      FadeOutTime: 1
     }
   }
 }

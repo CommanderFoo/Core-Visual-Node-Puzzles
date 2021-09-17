@@ -44,6 +44,15 @@ Assets {
   }
 }
 Assets {
+  Id: 13625479584813446313
+  Name: "\"Grey Bliss LoFi\" Music Construction Kit (Layers) 01"
+  PlatformAssetType: 10
+  PrimaryAsset {
+    AssetType: "AudioBlueprintAssetRef"
+    AssetId: "abp_grey_bliss_lofi_layers_Kit_ref"
+  }
+}
+Assets {
   Id: 12894132578072636061
   Name: "\"Space Nebula Meditation\" Music Construction Kit (Sections) 01"
   PlatformAssetType: 10
@@ -89,21 +98,21 @@ Assets {
   }
 }
 Assets {
-  Id: 6856142566052620077
-  Name: "\"Astral Chill\" Music Construction Kit (Sections) 01"
-  PlatformAssetType: 10
-  PrimaryAsset {
-    AssetType: "AudioBlueprintAssetRef"
-    AssetId: "abp_astral_chill_sections_kit_ref"
-  }
-}
-Assets {
   Id: 5222430598492433691
   Name: "\"A Slice of Life\" Music Construction Kit (Layers) 01"
   PlatformAssetType: 10
   PrimaryAsset {
     AssetType: "AudioBlueprintAssetRef"
     AssetId: "abp_asliceoflife_LayersKit_ref"
+  }
+}
+Assets {
+  Id: 4765331341461015482
+  Name: "\"LoFi Reflective\" Sections Kit 01"
+  PlatformAssetType: 10
+  PrimaryAsset {
+    AssetType: "AudioBlueprintAssetRef"
+    AssetId: "abp_lofi_reflective_sections_kit_ref"
   }
 }
 Assets {

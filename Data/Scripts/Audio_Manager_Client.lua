@@ -8,8 +8,8 @@ local can_change_song = true
 local total_play_time = 0
 local allowed_play_time = 60
 
-local function get_song_name(song)
-	return song.name:match("\"(.+)\"")
+local function get_song_name(song_name)
+	return song_name:match("\"(.+)\"")
 end
 
 local function get_random_song()
@@ -23,20 +23,35 @@ local function get_random_song()
 		 until(song ~= current)
 	end
 
-	Events.Broadcast("set_song_name", get_song_name(song))
-
 	return song
 end
 
 local function play_song()
 	if(can_change_song) then
+		local old_name = nil
+
 		if(current ~= nil) then
+			old_name = current.name
 			current:Stop()
 		end
 
 		total_play_time = 0
 		current = get_random_song()
 		current:Play()
+
+		local new_name = get_song_name(current.name)
+
+		Events.Broadcast("set_song_name", new_name)
+
+		local log_str = "Changed song "
+
+		if(old_name ~= nil) then
+			log_str = log_str .. "from \"" .. get_song_name(old_name) .. "\""
+		end
+
+		log_str = log_str .. " to \"" .. new_name .. "\"."
+
+		Events.Broadcast("add_log_message", log_str, "Info", false)
 	end
 end
 

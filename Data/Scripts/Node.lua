@@ -936,7 +936,7 @@ function Node:show_error_info()
 		self.error_task.repeatInterval = 0.6
 	end
 
-	if(not Object.IsValid(self.highlight)) then
+	if(Object.IsValid(self.highlight)) then
 		self.highlight:SetColor(self.error_highlight_color)
 		self.highlight.visibility = Visibility.FORCE_ON
 	end

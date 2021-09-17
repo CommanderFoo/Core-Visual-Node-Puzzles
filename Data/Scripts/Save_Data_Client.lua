@@ -8,7 +8,7 @@ local loaded_logic_node_data = ""
 local loaded_math_node_data = ""
 
 function save()
-	print("Is Saving: ", saving)
+	--print("Is Saving: ", saving)
 
 	if(saving) then
 		return
@@ -150,7 +150,7 @@ Events.Connect("load_saved_math_nodes", function(math_id)
 end)
 
 Events.Connect("save_complete", function()
-	print("Save Complete")
+	--print("Save Complete")
 	
 	saving = false
 	Events.Broadcast("saved")
