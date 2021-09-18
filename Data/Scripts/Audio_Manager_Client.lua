@@ -57,7 +57,7 @@ end
 
 function Tick(dt)
 	if(current ~= nil) then
-		print(total_play_time, current)
+		--print(total_play_time, current)
 
 		if(total_play_time > allowed_play_time) then
 			can_change_song = true

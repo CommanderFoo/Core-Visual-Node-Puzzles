@@ -10,6 +10,12 @@ Assets {
           Id: 16622261663679835299
         }
       }
+      Overrides {
+        Name: "cs:line"
+        AssetReference {
+          Id: 11249806620527031590
+        }
+      }
     }
   }
   SerializationVersion: 98

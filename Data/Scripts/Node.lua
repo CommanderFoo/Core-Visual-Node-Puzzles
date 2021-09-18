@@ -4,6 +4,10 @@
 
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
+-- Line for connections
+
+local line_asset = script:GetCustomProperty("line")
+
 -- Math functions cached here for maybe a tiny optimisation.
 -- as they get used a few times (or did).
 
@@ -136,6 +140,7 @@ function Node:setup(r)
 	self.paused = false
 	self.highlight_color = Color.New(0.665387, 0.665387, 0.665387)
 	self.error_highlight_color = Color.RED
+	self.lines = {}
 
 	-- Store all node events here so they can be disconnected later.
 
@@ -226,6 +231,15 @@ function Node:setup(r)
 			for k, v in pairs(self.input_connected_to) do
 				for i, c in pairs(v) do
 					if(c.connected_from_node:get_id() == node_id) then
+						for i = #self.lines, 1, -1 do
+							if(self.lines[i].connected_from_node:get_id() == node_id) then
+								if(Object.IsValid(self.lines[i].line)) then
+									self.lines[i].line:Destroy()
+									table.remove(self.lines, i)
+								end
+							end
+						end
+
 						v[i] = nil
 					end
 				end
@@ -514,9 +528,9 @@ function Node:debug()
 		end
 	end
 
-	--print("Inputs: " .. tostring(inputs))
-	--print("Outputs: " .. tostring(outputs))
-	--print("Events: " .. tostring(#self.n_evts) .. " / " .. tostring(#self.evts))
+	print("Inputs: " .. tostring(inputs))
+	print("Outputs: " .. tostring(outputs))
+	print("Events: " .. tostring(#self.n_evts) .. " / " .. tostring(#self.evts))
 end
 
 function Node:highlight_connections(color)
@@ -592,6 +606,15 @@ function Node:clear_input_connection(id)
 	for k, v in pairs(self.input_connected_to) do
 		for i, j in pairs(v) do
 			if(j.connected_from_connection.id == id) then
+				for i = #self.lines, 1, -1 do
+					if(self.lines[i].connected_from_connection.id == j.connected_from_connection.id) then
+						if(Object.IsValid(self.lines[i].line)) then
+							self.lines[i].line:Destroy()
+							table.remove(self.lines, i)
+						end
+					end
+				end
+
 				self.input_connected_to[k][i] = nil
 			end
 		end
@@ -659,6 +682,31 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 	Node_Events.trigger("output_connected_to", connected_to_node, self)
 end
 
+function Node:create_line(connected_from_node, connected_from_connection, connected_to_connection)
+	local line = World.SpawnAsset(line_asset, { parent = connected_to_connection.connection })
+
+	line.name = connected_from_node.root.id
+
+	local from_handle_y = connected_from_connection.connector.y + 30
+	local to_handle_y = connected_to_connection.connection.y + 30
+
+	local to = Vector2.New(self.root.x - (self.root.width / 2), self.root.y + to_handle_y)
+	local from = Vector2.New(connected_from_node.root.x + (connected_from_node.root.width / 2), connected_from_node.root.y + from_handle_y)
+
+	line.x = -15
+	line.width = connected_from_connection.line.width
+	line.rotationAngle = Node.angle_to(from, to)
+	
+	self.lines[#self.lines + 1] = {
+		
+		line = line,
+		connected_from_connection = connected_from_connection,
+		connected_to_connection = connected_to_connection,
+		connected_from_node = connected_from_node
+
+	}
+end
+
 function Node:do_input_connect(connected_from_node, connected_from_connection, connected_to_connection)
 	if(connected_to_connection == nil) then
 		return
@@ -676,15 +724,13 @@ function Node:do_input_connect(connected_from_node, connected_from_connection, c
 
 	})
 
+	self:create_line(connected_from_node, connected_from_connection, connected_to_connection)
+
 	local no_connection = connected_to_connection.connection:FindChildByName("No Connection")
 
 	if(Object.IsValid(no_connection)) then
 		no_connection.visibility = Visibility.FORCE_OFF
 	end
-
-	-- if(self:get_type() == "Reroute" and connected_from_node:get_type() == "Halt") then
-	-- 	self.node_sub_type = connected_from_node
-	-- end
 end
 
 function Node:input_connect_to(connected_from_node, connected_from_connection, connected_to_connection, set_order)
@@ -706,20 +752,23 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 
 	})
 
-	-- local from_handle_y = connected_from_connection.connector.y + 30
-	-- local to_handle_y = connected_to_connection.connection.y + 30
+	self:create_line(connected_from_node, connected_from_connection, connected_to_connection)
 
-	-- local to = Vector2.New(self.root.x - (self.root.width / 2) - 10, self.root.y + to_handle_y)
-	-- local from = Vector2.New(connected_from_node.root.x + (connected_from_node.root.width / 2) - 10, connected_from_node.root.y + from_handle_y)
-
-	-- connected_to_connection.line.width = Node.distance(from, to)
-	-- connected_to_connection.line.rotationAngle = Node.angle_to(from, to)
-	
 	Node_Events.trigger("input_connected_to", connected_from_node, self, set_order)
+end
 
-	-- if(self:get_type() == "Reroute" and connected_from_node:get_type() == "Halt") then
-	-- 	self.node_sub_type = connected_from_node
-	-- end
+function Node:update_lines()
+	for i, l in ipairs(self.lines) do
+		local from_handle_y = l.connected_to_connection.connection.y + 30
+		local to_handle_y = l.connected_from_connection.connector.y + 30
+
+		local from = Vector2.New(l.connected_from_node.root.x + l.connected_from_node.output_container.x, l.connected_from_node.root.y + l.connected_from_node.output_container.y + to_handle_y)
+		local to = Vector2.New(self.root.x - (self.root.width / 2) - 10, self.root.y + from_handle_y)
+
+		l.line.x = -15
+		l.line.width = l.connected_from_connection.line.width
+		l.line.rotationAngle = Node.angle_to(from, to)
+	end
 end
 
 function Node:move_connections()
@@ -734,6 +783,10 @@ function Node:move_connections()
 
 				e.connection.line.width = Node.distance(from, to)
 				e.connection.line.rotationAngle = Node.angle_to(from, to)
+
+				-- Connected to input line (culling solution)
+
+				e.connected_to_node:update_lines()
 			end
 		end
 	end
@@ -798,8 +851,6 @@ function Node:drag_connection()
 		local handle_y = self.active_connection.connector.y
 
 		local a = UI.GetCursorPosition() - (UI.GetScreenSize() / 2)
-		--local b = Vector2.New(self.root.x + self.output_container.x - self.active_connection.line.x, self.root.y + self.output_container.y + handle_y)
-
 		local b = Vector2.New(self.root.x + self.output_container.x + self.node_ui.x, self.root.y + self.output_container.y + handle_y + self.node_ui.y)
 		
 		self.active_connection.line.width = Node.distance(a, b)
