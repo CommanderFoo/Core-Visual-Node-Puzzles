@@ -7327,8 +7327,8 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 800
-    Height: 688
+    Width: 1001
+    Height: 801
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7469,10 +7469,10 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 722
+    Width: 913
     Height: 45
     UIX: 50
-    UIY: 141.460587
+    UIY: 200.545181
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7537,7 +7537,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: 50
-    UIY: 99.7321701
+    UIY: 157.843475
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7600,7 +7600,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: 50
-    UIY: -58.9435387
+    UIY: 3.3024826
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7664,7 +7664,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: 50
-    UIY: -99.5786743
+    UIY: -37.9762421
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -7727,14 +7727,14 @@ Objects {
     Width: 250
     Height: 45
     UIX: 50
-    UIY: -159.562927
+    UIY: -191.63942
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
     Text {
-      Label: "- Press F to center the graph."
+      Label: "- Press F to center the graph.\r\n- Hold right mouse button on graph and drag to move it around.\r\n- W, A, S, D also moves the graph around (hold shift to increase speed)."
       Color {
         R: 1
         G: 1
@@ -7791,7 +7791,7 @@ Objects {
     Width: 250
     Height: 45
     UIX: 50
-    UIY: -196.856415
+    UIY: -234.535278
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"

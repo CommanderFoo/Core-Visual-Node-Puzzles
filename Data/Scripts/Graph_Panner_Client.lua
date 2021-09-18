@@ -5,7 +5,7 @@ local local_player = Game.GetLocalPlayer()
 local can_move = false
 local is_moving = false
 local offset = Vector2.ZERO
-local tween
+local tween = nil
 
 local function tween_graph()
 	if(can_move and (graph.x ~= 0 or graph.y ~= 0)) then
@@ -25,14 +25,14 @@ local function tween_graph()
 end
 
 local_player.bindingPressedEvent:Connect(function(_, binding)
-	if(binding == "ability_secondary") then
+	if(binding == YOOTIL.Input.right_button) then
 		local pos = UI.GetCursorPosition()
 
 		offset.x = pos.x - graph.x
 		offset.y = pos.y - graph.y
 
 		is_moving = true
-	elseif(binding == "ability_extra_33") then
+	elseif(binding == YOOTIL.Input.f) then
 		tween_graph()
 	end
 end)
@@ -46,7 +46,6 @@ end)
 function Tick(dt)
 	if(can_move and is_moving and tween == nil) then
 		local pos = UI.GetCursorPosition()
-		local screen = UI.GetScreenSize()
 
 		graph.x = pos.x - offset.x
 		graph.y = pos.y - offset.y
@@ -68,6 +67,24 @@ function Tick(dt)
 		end
 	elseif(tween ~= nil) then
 		tween:tween(dt)
+	elseif(can_move) then
+		local speed = 1
+
+		if(local_player:IsBindingPressed(YOOTIL.Input.left_shift)) then
+			speed = 4
+		end
+
+		if(local_player:IsBindingPressed(YOOTIL.Input.w) and graph.y < 3000) then
+			graph.y = graph.y + 4 * speed
+		elseif(local_player:IsBindingPressed(YOOTIL.Input.s) and graph.y > -3000) then
+			graph.y = graph.y - 4 * speed
+		end
+
+		if(local_player:IsBindingPressed(YOOTIL.Input.a) and graph.x < 3000) then
+			graph.x = graph.x + 4 * speed
+		elseif(local_player:IsBindingPressed(YOOTIL.Input.d) and graph.x > -3000) then
+			graph.x = graph.x - 4 * speed
+		end
 	end
 end
 
