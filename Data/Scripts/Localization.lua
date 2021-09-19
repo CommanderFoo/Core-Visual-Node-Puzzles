@@ -20,10 +20,14 @@ end
 function Localization.get_text(id)
 	if(Localization[Localization.language][id] ~= nil) then
 		return Localization[Localization.language][id]
-	else
-		print(id)
+	elseif(Localization["English"][id] ~= nil) then
+		print("Localization Missing: ", id)
+
+		return Localization["English"][id]
 	end
 
+	print("Localization Missing: ", id)
+	
 	return "MISSING TEXT"
 end
 

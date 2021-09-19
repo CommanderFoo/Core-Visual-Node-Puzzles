@@ -8212,7 +8212,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 800
+    Width: 850
     Height: 600
     RenderTransformPivot {
       Anchor {
@@ -8353,7 +8353,7 @@ Objects {
   Control {
     Width: 250
     Height: 45
-    UIX: -123.775
+    UIX: -140
     UIY: 125.024
     RenderTransformPivot {
       Anchor {
@@ -8370,7 +8370,7 @@ Objects {
       }
       Size: 25
       Justification {
-        Value: "mc:etextjustify:center"
+        Value: "mc:etextjustify:right"
       }
       Font {
         Id: 18375965876900075365
@@ -9370,10 +9370,10 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 120
+    Width: 250
     Height: 40
-    UIX: -65
-    UIY: -41.3882294
+    UIX: -135
+    UIY: -41.388
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -9464,10 +9464,10 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 120
+    Width: 250
     Height: 40
-    UIX: 65
-    UIY: -41.3882294
+    UIX: 135
+    UIY: -41.388
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -12084,6 +12084,12 @@ Objects {
         SelfId: 7400731441112918373
       }
     }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -12190,7 +12196,7 @@ Objects {
       }
     }
     Text {
-      Label: "Program Score: 0"
+      Label: "Puzzle Score: 0"
       Color {
         R: 1
         G: 0.802
@@ -12254,7 +12260,7 @@ Objects {
       }
     }
     Button {
-      Label: "Next Puzzle"
+      Label: "Next"
       FontColor {
         R: 1
         G: 0.818
@@ -12348,7 +12354,7 @@ Objects {
       }
     }
     Button {
-      Label: "Edit Program"
+      Label: "Edit"
       FontColor {
         A: 1
       }
@@ -12867,7 +12873,7 @@ Objects {
   Control {
     Width: 200
     Height: 132
-    UIY: 20
+    UIY: 44.2397232
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -12880,7 +12886,7 @@ Objects {
         G: 1
         A: 1
       }
-      Size: 46
+      Size: 40
       Justification {
         Value: "mc:etextjustify:center"
       }
@@ -14326,7 +14332,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 145
+    Width: 170
     Height: 40
     UIX: -30
     UIY: -25
@@ -14336,7 +14342,7 @@ Objects {
       }
     }
     Button {
-      Label: "Show Error Log"
+      Label: "View Log"
       FontColor {
         R: 1
         G: 0.818
@@ -14630,7 +14636,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 100
+    Width: 170
     Height: 40
     UIX: -30
     UIY: -75
@@ -14727,9 +14733,9 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   Control {
-    Width: 617
+    Width: 545
     Height: 33
-    UIX: -142.093597
+    UIX: -210
     UIY: -77.6843
     RenderTransformPivot {
       Anchor {
@@ -14801,9 +14807,9 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 152
+    Width: 215
     Height: 40
-    UIX: -494.121399
+    UIX: -545
     UIY: -25
     RenderTransformPivot {
       Anchor {
@@ -14895,9 +14901,9 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 170
+    Width: 215
     Height: 40
-    UIX: -304.944672
+    UIX: -320
     UIY: -25
     RenderTransformPivot {
       Anchor {
@@ -14905,7 +14911,7 @@ Objects {
       }
     }
     Button {
-      Label: "Disable Auto Scroll"
+      Label: "Disable Scrolling"
       FontColor {
         R: 1
         G: 0.818
@@ -14991,7 +14997,7 @@ Objects {
   Control {
     Width: 100
     Height: 40
-    UIX: -190
+    UIX: -210
     UIY: -25
     RenderTransformPivot {
       Anchor {
@@ -14999,7 +15005,7 @@ Objects {
       }
     }
     Button {
-      Label: "Clear Log"
+      Label: "Clear"
       FontColor {
         R: 1
         G: 0.818
@@ -15751,7 +15757,7 @@ Objects {
       }
     }
     Button {
-      Label: "Save"
+      Label: "Save Game"
       FontColor {
         R: 1
         G: 0.818

@@ -1,4 +1,7 @@
-﻿local root = script.parent.parent
+﻿---@diagnostic disable: undefined-field
+local Localization = require(script:GetCustomProperty("Localization"))
+
+local root = script.parent.parent
 local node_root = root.parent.parent
 
 local evts = {}

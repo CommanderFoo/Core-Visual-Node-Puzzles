@@ -1,4 +1,5 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local error_log_panel = script:GetCustomProperty("error_log_panel"):WaitForObject()
 local button = script:GetCustomProperty("button"):WaitForObject()
@@ -36,11 +37,11 @@ end
 
 button.clickedEvent:Connect(function()
 	if(is_showing) then
-		button.text = "Show Error Log"
+		button.text = Localization.get_text("Show_Error_Log")
 		error_log_panel.visibility = Visibility.FORCE_OFF
 		is_showing = false
 	else
-		button.text = "Hide Error Log"
+		button.text = Localization.get_text("Hide_Error_Log")
 		error_log_panel.visibility = Visibility.FORCE_ON
 		is_showing = true
 	end
@@ -66,10 +67,10 @@ skip_song.hoveredEvent:Connect(API.play_hover_sound)
 auto_scroll.clickedEvent:Connect(function()
 	if(can_auto_scroll) then
 		can_auto_scroll = false
-		auto_scroll.text = "Enable Auto Scroll"
+		auto_scroll.text = Localization.get_text("Enable_Scroll")
 	else
 		can_auto_scroll = true
-		auto_scroll.text = "Disable Auto Scroll"
+		auto_scroll.text = Localization.get_text("Disable_Scroll")
 	end
 
 	API.play_click_sound()
@@ -91,11 +92,11 @@ clear_button.hoveredEvent:Connect(API.play_hover_sound)
 show_ids_button.clickedEvent:Connect(function()
 	if(showing_ids) then
 		API.hide_all_node_ids()
-		show_ids_button.text = "Show Node IDs"
+		show_ids_button.text = Localization.get_text("View_IDs")
 		showing_ids = false
 	else
 		API.show_all_node_ids()
-		show_ids_button.text = "Hide Node IDs"
+		show_ids_button.text = Localization.get_text("Hide_IDs")
 		showing_ids = true
 	end
 
@@ -105,7 +106,7 @@ end)
 show_ids_button.hoveredEvent:Connect(API.play_hover_sound)
 
 Events.Connect("show_error_log", function()
-	button.text = "Hide Error Log"
+	button.text = Localization.get_text("Hide_Error_Log")
 	error_log_panel.visibility = Visibility.FORCE_OFF
 	is_showing = true
 end)
@@ -209,7 +210,7 @@ Events.Connect("graph_cleared", function()
 		end
 	end
 
-	add_log_message("Node graph cleared.", "Info", false)
+	add_log_message(Localization.get_text("Log_Node_Graph_Cleared"), "Info", false)
 end)
 
 Events.Connect("set_song_name", function(s)

@@ -232,7 +232,7 @@ Assets {
       }
       Objects {
         Id: 15240681041564375238
-        Name: "Data Dummy Node"
+        Name: "Data"
         Transform {
           Location {
           }
@@ -333,7 +333,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.146000028
               B: 0.13673012
@@ -453,7 +453,7 @@ Assets {
       }
       Objects {
         Id: 12221223009878035191
-        Name: "Ouput Dummy Node"
+        Name: "Output 1"
         Transform {
           Scale {
             X: 1
@@ -551,7 +551,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -675,7 +675,7 @@ Assets {
       }
       Objects {
         Id: 11634704346256728954
-        Name: "Reroute Dummy Node"
+        Name: "Reroute"
         Transform {
           Location {
           }
@@ -765,14 +765,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Button {
-            Label: "Reroute Node"
+            Label: "Reroute"
             FontColor {
               R: 1
               G: 1
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.0468751602
               B: 0.0383777134
@@ -892,7 +892,7 @@ Assets {
       }
       Objects {
         Id: 2794913146011400399
-        Name: "Viewer Dummy Node"
+        Name: "View"
         Transform {
           Location {
           }
@@ -983,14 +983,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Button {
-            Label: "Viewer"
+            Label: "View"
             FontColor {
               R: 1
               G: 1
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               A: 1
             }

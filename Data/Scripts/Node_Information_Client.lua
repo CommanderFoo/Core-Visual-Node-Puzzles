@@ -1,4 +1,5 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local container = script:GetCustomProperty("container"):WaitForObject()
 local title = script:GetCustomProperty("title"):WaitForObject()
@@ -91,10 +92,10 @@ function show(info_data)
 	t:on_start(function()
 		is_tweening = true
 
-		local txt_1 = info_data:GetCustomProperty("info_1_text")
-		local txt_2 = info_data:GetCustomProperty("info_2_text")
+		local txt_1 = Localization.get_text("Info_" .. title_txt .. "_1")
+		local txt_2 = Localization.get_text("Info_" .. title_txt .. "_2")
 
-		title.text = title_txt .. " Node"
+		title.text = title_txt
 		last_title = title.text
 
 		if(string.len(txt_1) > 0) then

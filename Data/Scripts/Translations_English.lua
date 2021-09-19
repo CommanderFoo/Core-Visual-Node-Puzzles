@@ -2,24 +2,44 @@ local translations = {}
 
 -- translations[""] = ""
 
-translations["Node_Name_Data"] = "Data"
-translations["Node_Name_Output"] = "Output"
-translations["Node_Name_Ordered_Output"] = "Ordered Output"
-translations["Node_Name_If_Else"] = "If Else"
-translations["Node_Name_Alternate"] = "Alternate"
-translations["Node_Name_Limit"] = "Limit"
-translations["Node_Name_Halt"] = "Halt"
+translations["Node_Data"] = "Data"
+translations["Node_Output"] = "Output"
+translations["Node_Ordered_Output"] = "Ordered Output"
+translations["Node_If_Else"] = "If Else"
+translations["Node_Alternate"] = "Alternate"
+translations["Node_Limit"] = "Limit"
+translations["Node_Halt"] = "Halt"
+translations["Node_Greater_Than"] = "Greater Than"
+translations["Node_Absolute"] = "Absolute"
+translations["Node_Add"] = "Add"
+translations["Node_Multiply"] = "Multiply"
+translations["Node_Subtract"] = "Subtract"
+translations["Node_Reroute"] = "Reroute"
+translations["Node_View"] = "View"
 
-translations["Node_Name_Math_Data"] = "Data"
-translations["Node_Name_Math_Output"] = "Output"
-translations["Node_Name_Math_Alternate"] = "Alternate"
-translations["Node_Name_Math_Greater_Than"] = "Greather Than"
-translations["Node_Name_Math_Absolute"] = "Absolute"
-translations["Node_Name_Math_Add"] = "Add"
-translations["Node_Name_Math_Multiply"] = "Multiply"
-translations["Node_Name_Math_Substract"] = "Substract"
+translations["Node_Name_Data"] = translations["Node_Data"]
+translations["Node_Name_Output"] = translations["Node_Output"]
+translations["Node_Name_Ordered_Output"] = translations["Node_Ordered_Output"]
+translations["Node_Name_If_Else"] = translations["Node_If_Else"]
+translations["Node_Name_Alternate"] = translations["Node_Alternate"]
+translations["Node_Name_Limit"] = translations["Node_Limit"]
+translations["Node_Name_Halt"] = translations["Node_Halt"]
 
-translations["Node_Name_Misc_View"] = "View"
+translations["Node_Name_Math_Data"] = translations["Node_Data"]
+translations["Node_Name_Math_Output"] = translations["Node_Output"]
+translations["Node_Name_Math_Alternate"] = translations["Node_Alternate"]
+translations["Node_Name_Math_Greater_Than"] = translations["Node_Greater_Than"]
+translations["Node_Name_Math_Absolute"] = translations["Node_Absolute"]
+translations["Node_Name_Math_Add"] = translations["Node_Add"]
+translations["Node_Name_Math_Multiply"] = translations["Node_Multiply"]
+translations["Node_Name_Math_Substract"] = translations["Node_Subtract"] 
+
+translations["Node_Name_Misc_View"] = translations["Node_View"]
+
+translations["Square"] = "Square"
+translations["Circle"] = "Circle"
+translations["Plus"] = "Plus"
+translations["Triangle"] = "Triangle"
 
 translations["Logic_Puzzles_Button"] = "LOGIC PUZZLES"
 translations["Math_Puzzles_Button"] = "MATH PUZZLES"
@@ -81,10 +101,12 @@ translations["Glossary_Misc_Reroute_Node_Desc"] = "The Reroute node allows you t
 translations["Glossary_Misc_View_Node_Title"] = "VIEW"
 translations["Glossary_Misc_View_Node_Desc"] = "The View Node helps you debug your program by see what the output is of another node. This node interrupts the program, meaning it won't complete, so should be disconnected when finished. This node does not effect the puzzle score."
 
+translations["Settings_Title"] = "Settings"
 translations["Sound_Effects_Volume"] = "Sound Effects Volume"
 translations["Music_Volume"] = "Music Volume"
 translations["Select_Language"] = "Language"
 translations["Save_Button"] = "Save Settings"
+translations["Close_Button"] = "Close Settings"
 
 translations["Puzzle"] = "Puzzle"
 translations["PUZZLE"] = "PUZZLE"
@@ -107,16 +129,16 @@ translations["Tutorial_Data_Node_Dummy"] = "Data"
 translations["Tutorial_Data_Node_Info"] = "Data Nodes hold the data that needs to be sent to Output Nodes. You can drag these nodes around by clicking and holding down the left mouse button on the node header."
 translations["Tutorial_Data_Node_2"] = "Click and drag the connectors to connect up nodes so send data between them.  To remove them, left click to select, then right click to cancel."
 translations["Tutorial_Output_Node_Info"] = "Output Nodes are where you need to send data too.  There can be more than 1 Output Node that need to have its conditions met.  Some Output Nodes need to receive data in the correct order."
-translations["Tutorial_Output_Node_2"] = "Output"
-translations["Tutorial_Data_Node"] = "Data"
-translations["Tutorial_If_Else_Node"] = "If Else"
-translations["Tutorial_Alternate_Node"] = "Alternate"
-translations["Tutorial_Limit_Node"] = "Limit"
-translations["Tutorial_Halt_Node"] = "Halt"
-translations["Tutorial_Ordered_Node"] = "Ordered Output"
-translations["Tutorial_Output_Node"] = "Output"
-translations["Tutorial_View_Node"] = "View"
-translations["Tutorial_Reroute_Node"] = "Reroute"
+translations["Tutorial_Output_Node_2"] = translations["Node_Output"]
+translations["Tutorial_Data_Node"] = translations["Node_Data"]
+translations["Tutorial_If_Else_Node"] = translations["Node_If_Else"]
+translations["Tutorial_Alternate_Node"] = translations["Node_Alternate"]
+translations["Tutorial_Limit_Node"] = translations["Node_Limit"]
+translations["Tutorial_Halt_Node"] = translations["Node_Halt"]
+translations["Tutorial_Ordered_Node"] = translations["Node_Ordered_Output"]
+translations["Tutorial_Output_Node"] = translations["Node_Output"]
+translations["Tutorial_View_Node"] = translations["Node_View"]
+translations["Tutorial_Reroute_Node"] = translations["Node_Reroute"]
 translations["Tutorial_Main_Menu_Button"] = "Main Menu"
 translations["Tutorial_Puzzle_Name"] = "Tutorial"
 translations["Tutorial_Run_Button"] = "Run"
@@ -125,6 +147,43 @@ translations["Tutorial_Hide_Nodes_Button"] = "Hide Nodes"
 translations["Tutorial_Save_Button"] = "Save Game"
 translations["Tutorial_Center_Button"] = "Center"
 translations["Tutorial_Clear_Button"] = "Clear"
-translations[""] = ""
+
+translations["Header_Main_Menu"] = "Main Menu"
+translations["Header_Run_Program"] = "Run"
+translations["Header_Edit_Program"] = "Edit"
+translations["Header_Show_Nodes"] = "Show Nodes"
+translations["Header_Hide_Nodes"] = "Hide Nodes"
+translations["Header_Save"] = "Save Game"
+translations["Header_Center"] = "Center"
+translations["Header_Clear"] = "Clear"
+
+translations["Saving"] = "Saving..."
+
+translations["Header_Logic"] = "Logic"
+translations["Header_Math"] = "Math"
+translations["Header_Puzzle"] = "Puzzle"
+
+translations["Show_Error_Log"] = "View Log"
+translations["Hide_Error_Log"] = "Hide Log"
+translations["Clear_Log"] = "Clear"
+translations["Disable_Scroll"] = "Disable Scrolling"
+translations["Enable_Scroll"] = "Enable Scrolling"
+translations["View_IDs"] = "Show Node IDs"
+translations["Hide_IDs"] = "Hide Node IDs"
+translations["Skip_Song"] = "Skip Song"
+
+translations["Log_Graph_Cleared"] = "Node graph cleared."
+translations["Log_Changed_Song"] = "Changed song to"
+
+translations["Well_Done"] = "Well Done!"
+translations["Well_Done_Complete"] = "Well Done, All Puzzles Complete"
+translations["Puzzle_Score"] = "Puzzle Score"
+translations["Try_Again"] = "Try Again"
+translations["Result_Title"] = "Well Done!"
+translations["Result_Edit"] = "Edit"
+translations["Result_Next"] = "Next"
+
+translations["Info_Data_1"] = "This node holds the data for the puzzle that needs to be transferred to the output nodes."
+translations["Info_Data_2"] = "Data can be different things, in the case of this node, the shape is a String and the quantity is a Number (Integer).  The Data node sends the string and number out when requested."
 
 return translations

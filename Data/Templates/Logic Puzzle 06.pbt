@@ -238,7 +238,7 @@ Assets {
       }
       Objects {
         Id: 16572157802051441977
-        Name: "Data Dummy Node"
+        Name: "Data"
         Transform {
           Scale {
             X: 1
@@ -339,7 +339,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.146000028
               B: 0.13673012
@@ -459,7 +459,7 @@ Assets {
       }
       Objects {
         Id: 3136496574782774487
-        Name: "If Else Dummy Node"
+        Name: "If Else"
         Transform {
           Scale {
             X: 1
@@ -554,7 +554,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.0251868609
               G: 0.25015837
@@ -678,7 +678,7 @@ Assets {
       }
       Objects {
         Id: 15346478294057998690
-        Name: "Alternate Dummy Node"
+        Name: "Alternate"
         Transform {
           Scale {
             X: 1
@@ -773,7 +773,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.227143213
               B: 0.53000021
@@ -893,7 +893,7 @@ Assets {
       }
       Objects {
         Id: 5298527552999972880
-        Name: "Output Dummy Node"
+        Name: "Output 1"
         Transform {
           Scale {
             X: 1
@@ -992,7 +992,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -1116,7 +1116,7 @@ Assets {
       }
       Objects {
         Id: 11571037966840329844
-        Name: "Output Dummy Node"
+        Name: "Output 2"
         Transform {
           Location {
           }
@@ -1219,7 +1219,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -1343,7 +1343,7 @@ Assets {
       }
       Objects {
         Id: 16583971270938176829
-        Name: "Output Dummy Node"
+        Name: "Output 3"
         Transform {
           Location {
           }
@@ -1446,7 +1446,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -1570,7 +1570,7 @@ Assets {
       }
       Objects {
         Id: 3347269340784299119
-        Name: "Reroute Dummy Node"
+        Name: "Reroute"
         Transform {
           Location {
           }
@@ -1660,14 +1660,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Button {
-            Label: "Reroute Node"
+            Label: "Reroute"
             FontColor {
               R: 1
               G: 1
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.0468751602
               B: 0.0383777134
@@ -1787,7 +1787,7 @@ Assets {
       }
       Objects {
         Id: 12945535740873023086
-        Name: "Viewer Dummy Node"
+        Name: "View"
         Transform {
           Location {
           }
@@ -1878,14 +1878,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Button {
-            Label: "Viewer"
+            Label: "View"
             FontColor {
               R: 1
               G: 1
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               A: 1
             }

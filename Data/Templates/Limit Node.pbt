@@ -2188,10 +2188,10 @@ Assets {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
         Control {
-          Width: 25
-          Height: 25
+          Width: 20
+          Height: 20
           UIX: -18.000061
-          UIY: 11
+          UIY: 13
           RotationAngle: 45
           RenderTransformPivot {
             Anchor {
@@ -2283,6 +2283,7 @@ Assets {
         }
         Control {
           Height: 37
+          UIY: 3
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -2297,7 +2298,7 @@ Assets {
               B: 1
               A: 1
             }
-            Size: 25
+            Size: 22
             Justification {
               Value: "mc:etextjustify:center"
             }
@@ -2344,10 +2345,10 @@ Assets {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
         Control {
-          Width: 50
-          Height: 50
-          UIX: 7
-          UIY: 5
+          Width: 30
+          Height: 30
+          UIX: 9
+          UIY: 8
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"

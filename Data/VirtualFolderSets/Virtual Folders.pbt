@@ -94,5 +94,14 @@ Assets {
       VirtualFolderPath: "Misc"
       PlatformAssetType: 3
     }
+    Folders {
+      VirtualFolderPath: "Localization"
+      PlatformAssetType: 3
+    }
+    Folders {
+      VirtualFolderPath: "Localization"
+      VirtualFolderPath: "Translations"
+      PlatformAssetType: 3
+    }
   }
 }

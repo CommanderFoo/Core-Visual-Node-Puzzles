@@ -1,4 +1,5 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
@@ -27,12 +28,16 @@ for i, p in pairs(math_puzzles_data:GetCustomProperties()) do
 end
 
 local current_puzzle = nil
+local is_logic = true
 
 function load_puzzle(id, logic)
 	local the_puzzles = logic_puzzles
-
+	
 	if(not logic) then
 		the_puzzles = math_puzzles
+		is_logic = false
+	else
+		is_logic = true
 	end
 
 	if(current_puzzle ~= nil and Object.IsValid(current_puzzle)) then
@@ -43,11 +48,13 @@ function load_puzzle(id, logic)
 		current_puzzle = World.SpawnAsset(the_puzzles[id], { parent = nodes_container })
 
 		local name = current_puzzle:GetCustomProperty("name")
+		local puzzle, id = CoreString.Split(name, " ")
+		local puzzle_txt = Localization.get_text("Header_Puzzle") .. " #" .. tostring(id)
 
 		if(logic) then
-			name = "Logic - " .. name
+			name = Localization.get_text("Header_Logic") .. " - " .. puzzle_txt
 		else
-			name = "Math - " .. name
+			name = Localization.get_text("Header_Math") .. " - " .. puzzle_txt
 		end
 
 		puzzle_name.text = name
@@ -88,3 +95,21 @@ end
 Events.Connect("load_logic_puzzle", load_logic_puzzle)
 Events.Connect("load_math_puzzle", load_math_puzzle)
 Events.Connect("clear_puzzle", clear_puzzle)
+
+Events.Connect("translate", function()
+	if(current_puzzle == nil) then
+		return
+	end
+
+	local name = current_puzzle:GetCustomProperty("name")
+	local puzzle, id = CoreString.Split(name, " ")
+	local puzzle_txt = Localization.get_text("Header_Puzzle") .. " #" .. tostring(id)
+
+	if(is_logic) then
+		name = Localization.get_text("Header_Logic") .. " - " .. puzzle_txt
+	else
+		name = Localization.get_text("Header_Math") .. " - " .. puzzle_txt
+	end
+
+	puzzle_name.text = name
+end)

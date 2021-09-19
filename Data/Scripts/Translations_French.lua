@@ -2,30 +2,50 @@ local translations = {}
 
 -- translations[""] = ""
 
-translations["Node_Name_Data"] = "Données"
-translations["Node_Name_Output"] = "Sortir"
-translations["Node_Name_Ordered_Output"] = "Sortie ordonnée"
-translations["Node_Name_If_Else"] = "Sinon"
-translations["Node_Name_Alternate"] = "Alterner"
-translations["Node_Name_Limit"] = "Limite"
-translations["Node_Name_Halt"] = "Arrêt"
+translations["Node_Data"] = "Données"
+translations["Node_Output"] = "Sortir"
+translations["Node_Ordered_Output"] = "Sortie ordonnée"
+translations["Node_If_Else"] = "Sinon"
+translations["Node_Alternate"] = "Alterner"
+translations["Node_Limit"] = "Limite"
+translations["Node_Halt"] = "Arrêt"
+translations["Node_Greater_Than"] = "Plus grand que"
+translations["Node_Absolute"] = "Absolue"
+translations["Node_Add"] = "Ajouter"
+translations["Node_Multiply"] = "Multiplier"
+translations["Node_Subtract"] = "Soustraire"
+translations["Node_Reroute"] = "Changer"
+translations["Node_View"] = "Vue"
 
-translations["Node_Name_Math_Data"] = "Données"
-translations["Node_Name_Math_Output"] = "Sortir"
-translations["Node_Name_Math_Alternate"] = "Alterner"
-translations["Node_Name_Math_Greater_Than"] = "Plus grand que"
-translations["Node_Name_Math_Absolute"] = "Absolue"
-translations["Node_Name_Math_Add"] = "Ajouter"
-translations["Node_Name_Math_Multiply"] = "Multiplier"
-translations["Node_Name_Math_Substract"] = "Soustraire"
+translations["Node_Name_Data"] = translations["Node_Data"]
+translations["Node_Name_Output"] = translations["Node_Output"]
+translations["Node_Name_Ordered_Output"] = translations["Node_Ordered_Output"]
+translations["Node_Name_If_Else"] = translations["Node_If_Else"]
+translations["Node_Name_Alternate"] = translations["Node_Alternate"]
+translations["Node_Name_Limit"] = translations["Node_Limit"]
+translations["Node_Name_Halt"] = translations["Node_Halt"]
 
-translations["Node_Name_Misc_View"] = "Vue"
+translations["Node_Name_Math_Data"] = translations["Node_Data"]
+translations["Node_Name_Math_Output"] = translations["Node_Output"]
+translations["Node_Name_Math_Alternate"] = translations["Node_Alternate"]
+translations["Node_Name_Math_Greater_Than"] = translations["Node_Greater_Than"]
+translations["Node_Name_Math_Absolute"] = translations["Node_Absolute"]
+translations["Node_Name_Math_Add"] = translations["Node_Add"]
+translations["Node_Name_Math_Multiply"] = translations["Node_Multiply"]
+translations["Node_Name_Math_Substract"] = translations["Node_Subtract"] 
+
+translations["Node_Name_Misc_View"] = translations["Node_View"]
+
+translations["Square"] = "Carré"
+translations["Circle"] = "Cercle"
+translations["Plus"] = "Plus"
+translations["Triangle"] = "Triangle"
 
 translations["Logic_Puzzles_Button"] = "PUZZLES LOGIQUES"
 translations["Math_Puzzles_Button"] = "PUZZLES DE MATHÉMATIQUES"
 translations["Tutorial_Button"] = "DIDACTICIEL"
-translations["Glossary_Button"] = "NODE GLOSSARY"
-translations["Donate_Button"] = "GLOSSAIRE DE NOEUDS"
+translations["Glossary_Button"] = "GLOSSAIRE DE NOEUDS"
+translations["Donate_Button"] = "DONNER UN POURBOIRE"
 translations["Settings_Button"] = "LES PARAMÈTRES"
 translations["Play_Logic"] = "JOUER"
 translations["Select_Logic"] = "SÉLECTIONNER"
@@ -76,15 +96,17 @@ translations["Glossary_Math_Subtract_Node_Title"] = "Soustraire"
 translations["Glossary_Math_Subtract_Node_Desc"] = "Le nœud de soustraction enlèvera les données numériques inférieures des données numériques supérieures et les affichera. Cela prend en charge les nombres négatifs."
 
 translations["Glossary_Misc_Nodes"] = "AUTRE"
-translations["Glossary_Misc_Reroute_Node_Title"] = "DIRECTE"
+translations["Glossary_Misc_Reroute_Node_Title"] = "CHANGER"
 translations["Glossary_Misc_Reroute_Node_Desc"] = "Le nœud Direct vous permet de ranger votre graphique en redirigeant les fils du connecteur. Ce nœud n'affecte pas le score du puzzle."
 translations["Glossary_Misc_View_Node_Title"] = "VUE"
 translations["Glossary_Misc_View_Node_Desc"] = "Le nœud de vue vous aide à déboguer votre programme en voyant quelle est la sortie d'un autre nœud. Ce nœud interrompt le programme, ce qui signifie qu'il ne se terminera pas, il doit donc être déconnecté une fois terminé. Ce nœud n'affecte pas le score du puzzle."
 
+translations["Settings_Title"] = "Paramètres"
 translations["Sound_Effects_Volume"] = "Volume des effets sonores"
 translations["Music_Volume"] = "Volume de la musique"
 translations["Select_Language"] = "Langue"
 translations["Save_Button"] = "Enregistrer les paramètres"
+translations["Close_Button"] = "Fermer les paramètres"
 
 translations["Puzzle"] = "Puzzle"
 translations["PUZZLE"] = "PUZZLE"
@@ -107,16 +129,16 @@ translations["Tutorial_Data_Node_Dummy"] = "Données"
 translations["Tutorial_Data_Node_Info"] = "Les nœuds de données contiennent les données qui doivent être envoyées aux nœuds de sortie. Vous pouvez faire glisser ces nœuds en cliquant et en maintenant enfoncé le bouton gauche de la souris sur l'en-tête du nœud."
 translations["Tutorial_Data_Node_2"] = "Cliquez et faites glisser les connecteurs pour connecter les nœuds afin d'envoyer des données entre eux. Pour les supprimer, faites un clic gauche pour sélectionner, puis un clic droit pour annuler."
 translations["Tutorial_Output_Node_Info"] = "Les nœuds de sortie sont également là où vous devez envoyer des données. Il peut y avoir plus d'un nœud de sortie dont les conditions doivent être remplies. Certains nœuds de sortie doivent recevoir des données dans le bon ordre."
-translations["Tutorial_Output_Node_2"] = "Sortir"
-translations["Tutorial_Data_Node"] = "Données"
-translations["Tutorial_If_Else_Node"] = "Sinon"
-translations["Tutorial_Alternate_Node"] = "Alterner"
-translations["Tutorial_Limit_Node"] = "Limite"
-translations["Tutorial_Halt_Node"] = "Arrêt"
-translations["Tutorial_Ordered_Node"] = "Sortie ordonnée"
-translations["Tutorial_Output_Node"] = "Sortir"
-translations["Tutorial_View_Node"] = "Vue"
-translations["Tutorial_Reroute_Node"] = "DIRECTE"
+translations["Tutorial_Output_Node_2"] = translations["Node_Output"]
+translations["Tutorial_Data_Node"] = translations["Node_Data"]
+translations["Tutorial_If_Else_Node"] = translations["Node_If_Else"]
+translations["Tutorial_Alternate_Node"] = translations["Node_Alternate"]
+translations["Tutorial_Limit_Node"] = translations["Node_Limit"]
+translations["Tutorial_Halt_Node"] = translations["Node_Halt"]
+translations["Tutorial_Ordered_Node"] = translations["Node_Ordered_Output"]
+translations["Tutorial_Output_Node"] = translations["Node_Output"]
+translations["Tutorial_View_Node"] = translations["Node_View"]
+translations["Tutorial_Reroute_Node"] = translations["Node_Reroute"]
 translations["Tutorial_Main_Menu_Button"] = "Menu principal"
 translations["Tutorial_Puzzle_Name"] = "Didacticiel"
 translations["Tutorial_Run_Button"] = "Courir"
@@ -125,5 +147,43 @@ translations["Tutorial_Hide_Nodes_Button"] = "Masquer les nœuds"
 translations["Tutorial_Save_Button"] = "Sauvegarder le jeu"
 translations["Tutorial_Center_Button"] = "Centre"
 translations["Tutorial_Clear_Button"] = "Dégager"
+
+translations["Header_Main_Menu"] = "Menu principal"
+translations["Header_Run_Program"] = "Courir"
+translations["Header_Edit_Program"] = "Éditer"
+translations["Header_Show_Nodes"] = "Afficher les nœuds"
+translations["Header_Hide_Nodes"] = "Masquer les nœuds"
+translations["Header_Save"] = "Sauvegarder le jeu"
+translations["Header_Center"] = "Centre"
+translations["Header_Clear"] = "Dégager"
+
+translations["Saving"] = "..."
+
+translations["Header_Logic"] = "Logique"
+translations["Header_Math"] = "Mathématiques"
+translations["Header_Puzzle"] = "Puzzle"
+
+translations["Show_Error_Log"] = "Afficher le journal"
+translations["Hide_Error_Log"] = "Masquer le journal"
+translations["Clear_Log"] = "Dégager"
+translations["Disable_Scroll"] = "Désactiver le défilement"
+translations["Enable_Scroll"] = "Activer le défilement"
+translations["View_IDs"] = "Afficher les ID de nœud"
+translations["Hide_IDs"] = "Masquer les ID de nœud"
+translations["Skip_Song"] = "Sauter la chanson"
+
+translations["Log_Graph_Cleared"] = "Écran de nœud effacé"
+translations["Log_Changed_Song"] = "Chanson changée en"
+
+translations["Well_Done"] = "Bien fait!"
+translations["Well_Done_Complete"] = "Bravo, tous les puzzles sont terminés"
+translations["Puzzle_Score"] = "Score d'énigme"
+translations["Try_Again"] = "Réessayer"
+translations["Result_Title"] = "Bien fait!"
+translations["Result_Edit"] = "Éditer"
+translations["Result_Next"] = "Prochaine"
+
+translations["Info_Data_1"] = "Ce nœud contient les données du puzzle qui doivent être transférées vers les nœuds de sortie."
+translations["Info_Data_2"] = "Les données peuvent être différentes choses, dans le cas de ce nœud, la forme est une chaîne et la quantité est un nombre (entier). Le nœud de données envoie la chaîne et le numéro sur demande."
 
 return translations

@@ -1,4 +1,5 @@
 ﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local slow_down_button = script:GetCustomProperty("slow_down_button"):WaitForObject()
 local speed_up_button = script:GetCustomProperty("speed_up_button"):WaitForObject()
@@ -119,12 +120,12 @@ function show_hide_nodes()
 
 	if(showing_nodes) then	
 		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = 400})
-		available_nodes_button.text = "Show Nodes"
+		available_nodes_button.text = Localization.get_text("Header_Show_Nodes")
 		
 		showing_nodes = false
 	else
 		tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -20})
-		available_nodes_button.text = "Hide Nodes"
+		available_nodes_button.text = Localization.get_text("Header_Hide_Nodes")
 		showing_nodes = true
 	end
 
@@ -169,7 +170,7 @@ run_edit_button.clickedEvent:Connect(function()
 		Events.Broadcast("enable_graph_panning")
 		Events.Broadcast("program_running", false)
 	else
-		run_edit_button.text = "Edit Program"
+		run_edit_button.text = Localization.get_text("Header_Edit_Program")
 		running = true
 
 		disable_ui(false)
@@ -182,19 +183,19 @@ run_edit_button.clickedEvent:Connect(function()
 
 		local total_nodes = 0
 		local total_reroute = 0
-		local total_viewer = 0
+		local total_view = 0
 		
 		for _, n in pairs(API.nodes) do
 			if(n:get_type() == "Reroute") then
 				total_reroute = total_reroute + 1
-			elseif(n:get_type() == "Viewer") then
-				total_viewer = total_viewer + 1
+			elseif(n:get_type() == "View") then
+				total_view = total_view + 1
 			else
 				total_nodes = total_nodes + 1
 			end
 		end
 
-		Events.Broadcast("add_log_message", "Total Nodes: " .. tostring(total_nodes) .. " - Total Reroute Nodes: " .. tostring(total_reroute) .. " - Total Viewer Nodes: " .. tostring(total_viewer) .. ".", "Info", false)
+		Events.Broadcast("add_log_message", "Total Nodes: " .. tostring(total_nodes) .. " - Total Reroute Nodes: " .. tostring(total_reroute) .. " - Total View Nodes: " .. tostring(total_view) .. ".", "Info", false)
 
 		Events.Broadcast("puzzle_run", speed)
 		Events.Broadcast("stop_auto_save")
@@ -372,7 +373,7 @@ save_button.hoveredEvent:Connect(API.play_hover_sound)
 
 save_button.clickedEvent:Connect(function()
 	save_button.isInteractable = false
-	save_button.text = "Saving..."
+	save_button.text = Localization.get_text("Saving")
 	Events.Broadcast("save")
 
 	API.play_click_sound()
@@ -380,7 +381,7 @@ end)
 
 Events.Connect("saving", function()
 	save_button.isInteractable = false
-	save_button.text = "Saving..."
+	save_button.text = Localization.get_text("Saving")
 end)
 
 Events.Connect("saved", function()
@@ -392,14 +393,14 @@ Events.Connect("saved", function()
 		save_button.isInteractable = true
 	end
 
-	save_button.text = "Save"
+	save_button.text = Localization.get_text("Header_Save")
 end)
 
 Events.Connect("disable_header_ui", disable_ui)
 Events.Connect("enable_header_ui", enable_ui)
 
 Events.Connect("puzzle_edit", function()
-	run_edit_button.text = "Run Program"
+	run_edit_button.text = Localization.get_text("Header_Run_Program")
 	running = false
 
 	if(score_conditions ~= nil) then
@@ -430,7 +431,7 @@ end)
 
 Events.Connect("show_nodes", function()
 	tween = YOOTIL.Tween:new(.7, {v = available_nodes_container.x}, {v = -30})
-	available_nodes_button.text = "Hide Nodes"
+	available_nodes_button.text = Localization.get_text("Header_Hide_Nodes")
 	showing_nodes = true
 
 	tween:on_start(function()

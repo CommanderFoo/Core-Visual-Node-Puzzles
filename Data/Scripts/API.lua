@@ -173,7 +173,7 @@ function API.get_total_nodes()
 	local count = 0
 
 	for k, v in pairs(API.nodes) do
-		if(v ~= nil and v:get_type() ~= "Reroute" and v:get_type() ~= "Viewer") then
+		if(v ~= nil and v:get_type() ~= "Reroute" and v:get_type() ~= "View") then
 			count = count + 1
 		end
 	end
@@ -278,6 +278,12 @@ end)
 
 Events.Connect("unpause", function()
 	API.Node_Events.trigger("unpause")
+end)
+
+Events.Connect("translate", function()
+	for i, n in ipairs(API.nodes) do
+		n:translate()
+	end
 end)
 
 return API, YOOTIL

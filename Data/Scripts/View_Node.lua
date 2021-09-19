@@ -6,7 +6,7 @@ local evts = {}
 local node = nil
 
 function init(node_data)
-	node = API.Node_Type.Viewer:new(script.parent.parent, {
+	node = API.Node_Type.View:new(script.parent.parent, {
 
 		node_time = 0
 

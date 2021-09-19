@@ -239,7 +239,7 @@ Assets {
       }
       Objects {
         Id: 7590066685085808916
-        Name: "Data Dummy Node"
+        Name: "Data"
         Transform {
           Scale {
             X: 1
@@ -344,7 +344,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.146000028
               B: 0.13673012
@@ -464,7 +464,7 @@ Assets {
       }
       Objects {
         Id: 464415466486873500
-        Name: "If Else Dummy Node"
+        Name: "If Else"
         Transform {
           Scale {
             X: 1
@@ -559,7 +559,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.0251868609
               G: 0.25015837
@@ -683,7 +683,7 @@ Assets {
       }
       Objects {
         Id: 17251572895709071515
-        Name: "Alternate Dummy Node"
+        Name: "Alternate"
         Transform {
           Scale {
             X: 1
@@ -778,7 +778,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.227143213
               B: 0.53000021
@@ -898,7 +898,7 @@ Assets {
       }
       Objects {
         Id: 10654024857457887382
-        Name: "Limit Dummy Node"
+        Name: "Limit"
         Transform {
           Scale {
             X: 1
@@ -993,7 +993,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.34270826
               B: 0.0271989647
@@ -1113,7 +1113,7 @@ Assets {
       }
       Objects {
         Id: 12163045996296173481
-        Name: "Halt Dummy Node"
+        Name: "Halt"
         Transform {
           Scale {
             X: 1
@@ -1206,7 +1206,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.426000118
               B: 0.27047646
@@ -1326,7 +1326,7 @@ Assets {
       }
       Objects {
         Id: 6846047229149258283
-        Name: "Ouput Dummy Node"
+        Name: "Output"
         Transform {
           Location {
           }
@@ -1433,7 +1433,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.198069349
               G: 0.0231533684
@@ -1557,7 +1557,7 @@ Assets {
       }
       Objects {
         Id: 4638245149338829780
-        Name: "Ordered Output Dummy Node"
+        Name: "Ordered Output"
         Transform {
           Location {
           }
@@ -1668,7 +1668,7 @@ Assets {
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               R: 0.51875
               G: 0.0606394149
@@ -1792,7 +1792,7 @@ Assets {
       }
       Objects {
         Id: 16578783940655425967
-        Name: "Reroute Dummy Node"
+        Name: "Reroute"
         Transform {
           Location {
           }
@@ -1882,14 +1882,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Button {
-            Label: "Reroute Node"
+            Label: "Reroute"
             FontColor {
               R: 1
               G: 1
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               G: 0.0468751602
               B: 0.0383777134
@@ -2009,7 +2009,7 @@ Assets {
       }
       Objects {
         Id: 7946079976645093243
-        Name: "Viewer Dummy Node"
+        Name: "View"
         Transform {
           Location {
           }
@@ -2100,14 +2100,14 @@ Assets {
           UseParentWidth: true
           UseParentHeight: true
           Button {
-            Label: "Viewer"
+            Label: "View"
             FontColor {
               R: 1
               G: 1
               B: 1
               A: 1
             }
-            FontSize: 28
+            FontSize: 25
             ButtonColor {
               A: 1
             }

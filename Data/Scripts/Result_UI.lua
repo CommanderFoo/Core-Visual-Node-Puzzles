@@ -1,4 +1,5 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local title = script:GetCustomProperty("title"):WaitForObject()
 local edit_button = script:GetCustomProperty("edit_button"):WaitForObject()
@@ -18,18 +19,18 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 	Events.Broadcast("pause")
 	Events.Broadcast("stop_auto_save")
 
-	title.text = "Well Done!"
+	title.text = Localization.get_text("Well_Done")
 
 	if(not finished) then
 		next_button.isInteractable = true
 	else
 		next_button.isInteractable = false
-		title.text = "Well Done, All Puzzles Complete"	
+		title.text = Localization.get_text("Well_Done_Complete")	
 	end
 
 	local score = 20000 - math.floor(((puzzle_score / 4) + ((API.get_total_nodes(true) - 2) * 25)))
 
-	program_score.text = string.format("Program Score: %.0f", score)
+	program_score.text = string.format("%s: %.0f", Localization.get_text("Puzzle_Score"), score)
 
 	gold_award:GetChildren()[1].text = string.format("%.0f", gold_score)
 
@@ -45,7 +46,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		bronze_award:GetChildren()[1].text = string.format("%.0f", bronze_score)
 	end
 
-	Events.Broadcast("add_log_message", puzzle_name.text .. " Score: " .. tostring(score), "Puzzle Info", false)
+	Events.Broadcast("add_log_message", puzzle_name.text .. " " .. Localization.get_text("Score") .. ": " .. tostring(score), "Puzzle Info", false)
 
 	local award = 0
 
@@ -73,7 +74,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		API.set_award(bronze_award, .1)
 
 		next_button.isInteractable = false
-		title.text = "Try Again"
+		title.text = Localization.get_text("Try_Again")
 	end
 
 	if(award > 0) then

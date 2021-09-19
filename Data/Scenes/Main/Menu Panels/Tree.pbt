@@ -34,7 +34,7 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   Control {
-    Width: 1000
+    Width: 850
     Height: 600
     UIY: -900
     RenderTransformPivot {
@@ -3256,7 +3256,7 @@ Objects {
 }
 Objects {
   Id: 10765928647006187616
-  Name: "Viewer Node"
+  Name: "View Node"
   Transform {
     Location {
     }
@@ -3315,7 +3315,7 @@ Objects {
 }
 Objects {
   Id: 14086543433814129302
-  Name: "Viewer Math Node"
+  Name: "View Math Node"
   Transform {
     Scale {
       X: 1

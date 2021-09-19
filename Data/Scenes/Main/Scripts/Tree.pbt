@@ -16,6 +16,9 @@ Objects {
   }
   ParentId: 5021637449606560396
   ChildIds: 6014269706763216048
+  ChildIds: 7471602985482309000
+  ChildIds: 12891453928019376231
+  ChildIds: 8647895354594219497
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -29,6 +32,249 @@ Objects {
     Value: "mc:eindicatorvisibility:visiblewhenselected"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 8647895354594219497
+  Name: "Result_Translatables"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 15885186826416985866
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
+    Overrides {
+      Name: "cs:Result_Title"
+      ObjectReference {
+        SelfId: 11240545292566663612
+      }
+    }
+    Overrides {
+      Name: "cs:Result_Edit"
+      ObjectReference {
+        SelfId: 6565952566436155257
+      }
+    }
+    Overrides {
+      Name: "cs:Result_Next"
+      ObjectReference {
+        SelfId: 11898753146948464473
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 6461296571376920617
+    }
+  }
+}
+Objects {
+  Id: 12891453928019376231
+  Name: "Error_Log_Translatables"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 15885186826416985866
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
+    Overrides {
+      Name: "cs:Show_Error_Log"
+      ObjectReference {
+        SelfId: 11111585532005637532
+      }
+    }
+    Overrides {
+      Name: "cs:Clear_Log"
+      ObjectReference {
+        SelfId: 6647695688971823446
+      }
+    }
+    Overrides {
+      Name: "cs:Disable_Scroll"
+      ObjectReference {
+        SelfId: 15923050546157474944
+      }
+    }
+    Overrides {
+      Name: "cs:View_IDs"
+      ObjectReference {
+        SelfId: 6664268774446466192
+      }
+    }
+    Overrides {
+      Name: "cs:Skip_Song"
+      ObjectReference {
+        SelfId: 5791940092048010206
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 11171017431274803439
+    }
+  }
+}
+Objects {
+  Id: 7471602985482309000
+  Name: "Header_Translatables"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 15885186826416985866
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
+    Overrides {
+      Name: "cs:Header_Main_Menu"
+      ObjectReference {
+        SelfId: 1788394385922609731
+      }
+    }
+    Overrides {
+      Name: "cs:Header_Run_Program"
+      ObjectReference {
+        SelfId: 8014293986482026159
+      }
+    }
+    Overrides {
+      Name: "cs:Header_Show_Nodes"
+      ObjectReference {
+        SelfId: 16498719261319731661
+      }
+    }
+    Overrides {
+      Name: "cs:Header_Save"
+      ObjectReference {
+        SelfId: 2323963055041167086
+      }
+    }
+    Overrides {
+      Name: "cs:Header_Center"
+      ObjectReference {
+        SelfId: 15307185592566286566
+      }
+    }
+    Overrides {
+      Name: "cs:Header_Clear"
+      ObjectReference {
+        SelfId: 17291627843593195179
+      }
+    }
+    Overrides {
+      Name: "cs:Settings_Title"
+      ObjectReference {
+        SelfId: 8314421302107081357
+      }
+    }
+    Overrides {
+      Name: "cs:Sound_Effects_Volume"
+      ObjectReference {
+        SelfId: 10621022571944720980
+      }
+    }
+    Overrides {
+      Name: "cs:Music_Volume"
+      ObjectReference {
+        SelfId: 708995736485301128
+      }
+    }
+    Overrides {
+      Name: "cs:Select_Language"
+      ObjectReference {
+        SelfId: 3963518621662240433
+      }
+    }
+    Overrides {
+      Name: "cs:Save_Button"
+      ObjectReference {
+        SelfId: 8251273773209668011
+      }
+    }
+    Overrides {
+      Name: "cs:Close_Button"
+      ObjectReference {
+        SelfId: 2599676393383195691
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 6339668987976130716
+    }
   }
 }
 Objects {
@@ -497,6 +743,12 @@ Objects {
         SelfId: 10451940414839123191
       }
     }
+    Overrides {
+      Name: "cs:Settings_Title"
+      ObjectReference {
+        SelfId: 3789305095802256169
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -871,6 +1123,12 @@ Objects {
       Name: "cs:current_song"
       ObjectReference {
         SelfId: 7869379842707255342
+      }
+    }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
       }
     }
   }
@@ -1563,6 +1821,12 @@ Objects {
         SelfId: 17829228507645182166
       }
     }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1712,6 +1976,12 @@ Objects {
         SelfId: 16983164848258026425
       }
     }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -1772,6 +2042,12 @@ Objects {
       Name: "cs:math_puzzles_data"
       ObjectReference {
         SelfId: 720670617962651731
+      }
+    }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
       }
     }
   }

@@ -4,6 +4,10 @@
 
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
+-- Localization
+
+local Localization = require(script:GetCustomProperty("Localization"))
+
 -- Line for connections
 
 local line_asset = script:GetCustomProperty("line")
@@ -141,6 +145,7 @@ function Node:setup(r)
 	self.highlight_color = Color.New(0.665387, 0.665387, 0.665387)
 	self.error_highlight_color = Color.RED
 	self.lines = {}
+	self.id_showing = false
 
 	-- Store all node events here so they can be disconnected later.
 
@@ -353,6 +358,28 @@ function Node:receive_data(data, from_node)
 	end
 end
 
+function Node:translate()
+	if(self:get_type() == "Reroute") then
+		return
+	end
+	
+	local key = string.gsub(self.root.name, "%s", "_")
+
+	self.node_name = Localization.get_text("Node_" .. key)
+
+	self.handle_name.text = self.node_name
+
+	if(self.id_showing) then
+		self.handle_name.text = self.handle_name.text .. "[" .. tostring(self.unique_id) .. "]"
+	end
+
+	self:sub_translate()
+end
+
+function Node:sub_translate()
+
+end
+
 function Node:setup_node(root)
 	self.handle = self.root:FindDescendantByName("Node Handle")
 	self.highlight = self.root:FindDescendantByName("Highlight Border")
@@ -362,7 +389,14 @@ function Node:setup_node(root)
 	self.items_container = self.root:FindDescendantByName("Items Container")
 	self.node_ui = self.root:FindAncestorByName("Root"):FindDescendantByName("Node UI"):FindChildByName("Graph")
 	self.body = self.root:FindDescendantByName("Body Background")
-	self.node_name = self.handle:FindChildByName("Node Name").text
+	self.handle_name = self.handle:FindChildByName("Node Name")
+	self.node_name = self.handle_name.text
+
+	if(self:get_type() ~= "Reroute") then
+		self.root.name = self.node_name
+	end
+
+	self:translate()
 
 	if(Object.IsValid(self.body)) then
 		self.circle_bubble = self.body:FindDescendantByName("Circle Bubble")
@@ -495,16 +529,16 @@ function Node:remove()
 end
 
 function Node:show_id(v)
-	local handle_text = self.handle:FindChildByName("Node Name")
-
-	if(not Object.IsValid(handle_text)) then
+	if(not Object.IsValid(self.handle_name)) then
 		return
 	end
 
 	if(v) then
-		handle_text.text = self.node_name .. "[" .. tostring(self.unique_id) .. "]"
+		self.id_showing = true
+		self.handle_name.text = self.node_name .. "[" .. tostring(self.unique_id) .. "]"
 	else
-		handle_text.text = self.node_name
+		self.id_showing = false
+		self.handle_name.text = self.node_name
 	end
 end
 
@@ -1412,8 +1446,6 @@ function Node:get_output_connections_as_string()
 		end
 	end
 
-	--print(self:get_type(), table.concat(out_connections, ","))
-
 	return table.concat(out_connections, ",")
 end
 
@@ -1621,13 +1653,13 @@ function Node_Output:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Output"
 
 	if(options.sub_type ~= nil) then
 		this.node_sub_type = options.sub_type
 	end
+
+	this:setup(r)
 
 	this.halt_order = 1
 
@@ -1718,9 +1750,13 @@ function Node_If:new(r, options)
 		this.options.if_condition = nil
 	end
 
-	this:setup(r)
-
 	this.node_type = "If"
+
+	function this:sub_translate()
+		self.body:FindChildByName("Else").text = Localization.get_text("Node_If_Else_Else")
+	end
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -1889,9 +1925,9 @@ function Node_Alternate:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Alternate"
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -2075,9 +2111,9 @@ function Node_Limit:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Limit"
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -2295,9 +2331,9 @@ function Node_Halt:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Halt"
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -2524,9 +2560,9 @@ function Node_Add:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Add"
+
+	this:setup(r)
 
 	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
 	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
@@ -2716,9 +2752,9 @@ function Node_Substract:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Substract"
+
+	this:setup(r)
 
 	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
 	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
@@ -2902,9 +2938,9 @@ function Node_Multiply:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Multiply"
+
+	this:setup(r)
 
 	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
 	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
@@ -3088,9 +3124,9 @@ function Node_Divide:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Divide"
+
+	this:setup(r)
 
 	local top_queue_count = this.body:FindDescendantByName("Total Queued Top")
 	local bottom_queue_count = this.body:FindDescendantByName("Total Queued Bottom")
@@ -3274,9 +3310,9 @@ function Node_Greater_Than:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Greater_Than"
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -3506,9 +3542,9 @@ function Node_Less_Than:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Less_Than"
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -3738,9 +3774,9 @@ function Node_Equal:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Equal"
+	
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -3967,9 +4003,9 @@ function Node_Absolute:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Absolute"
+
+	this:setup(r)
 
 	this.options.queue_task = nil
 
@@ -4105,10 +4141,9 @@ function Node_Reroute:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
-
 	this.node_type = "Reroute"
-	this.node_sub_type = nil
+
+	this:setup(r)
 
 	local has_sent_no_connections_error = false
 
@@ -4184,11 +4219,11 @@ end
 
 -- End Reroute Node
 
--- Viewer Node
+-- View Node
 
-local Node_Viewer = {}
+local Node_View = {}
 
-function Node_Viewer:new(r, options)
+function Node_View:new(r, options)
 	self.__index = self
 
 	local this = setmetatable({
@@ -4199,9 +4234,9 @@ function Node_Viewer:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this:setup(r)
+	this.node_type = "View"
 
-	this.node_type = "Viewer"
+	this:setup(r)
 
 	local active = nil
 
@@ -4234,7 +4269,7 @@ function Node_Viewer:new(r, options)
 	return this
 end
 
--- End Viewer Node
+-- End View Node
 
 return Node, Node_Events, {
 
@@ -4252,6 +4287,6 @@ return Node, Node_Events, {
 	Less_Than = Node_Less_Than,
 	Absolute = Node_Absolute,
 	Reroute = Node_Reroute,
-	Viewer = Node_Viewer
+	View = Node_View
 
 }

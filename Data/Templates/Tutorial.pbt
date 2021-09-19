@@ -14207,6 +14207,12 @@ Assets {
               SubObjectId: 4040305443446928552
             }
           }
+          Overrides {
+            Name: "cs:Localization"
+            AssetReference {
+              Id: 15226941556822594646
+            }
+          }
         }
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"

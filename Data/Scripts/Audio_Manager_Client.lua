@@ -1,3 +1,5 @@
+local Localization = require(script:GetCustomProperty("Localization"))
+
 local main_menu = script:GetCustomProperty("main_menu"):WaitForObject()
 local sfx = script:GetCustomProperty("sfx"):WaitForObject()
 local music_folder = script:GetCustomProperty("music"):WaitForObject()
@@ -28,10 +30,7 @@ end
 
 local function play_song()
 	if(can_change_song) then
-		local old_name = nil
-
 		if(current ~= nil) then
-			old_name = current.name
 			current:Stop()
 		end
 
@@ -42,16 +41,7 @@ local function play_song()
 		local new_name = get_song_name(current.name)
 
 		Events.Broadcast("set_song_name", new_name)
-
-		local log_str = "Changed song "
-
-		if(old_name ~= nil) then
-			log_str = log_str .. "from \"" .. get_song_name(old_name) .. "\""
-		end
-
-		log_str = log_str .. " to \"" .. new_name .. "\"."
-
-		Events.Broadcast("add_log_message", log_str, "Info", false)
+		Events.Broadcast("add_log_message", Localization.get_text("Log_Changed_Song") .. " \"" .. new_name .. "\".", "Info", false)
 	end
 end
 

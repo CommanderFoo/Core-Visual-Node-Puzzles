@@ -25,7 +25,7 @@ function init(node_data)
 			node:set_option("if_condition", "plus")
 		end
 
-		Events.Broadcast("on_set_" .. script.parent.parent.id .. "_selected", node_data.condition)
+		Events.Broadcast("on_set_" .. script.parent.parent.id .. " Node_selected", node_data.condition)
 	end
 
 	API.register_node(node)

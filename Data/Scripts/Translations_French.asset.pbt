@@ -5,4 +5,6 @@ Assets {
   TextAsset {
   }
   SerializationVersion: 98
+  VirtualFolderPath: "Localization"
+  VirtualFolderPath: "Translations"
 }
