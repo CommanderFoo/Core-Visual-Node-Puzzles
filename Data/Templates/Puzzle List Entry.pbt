@@ -538,7 +538,7 @@ Assets {
         Control {
           Width: 174
           Height: 36
-          UIX: -159.915955
+          UIX: -135
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -553,7 +553,7 @@ Assets {
             }
             Size: 20
             Justification {
-              Value: "mc:etextjustify:left"
+              Value: "mc:etextjustify:right"
             }
             Font {
               Id: 7336185804317448730

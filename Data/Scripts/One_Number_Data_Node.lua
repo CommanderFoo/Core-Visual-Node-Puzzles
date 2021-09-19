@@ -75,11 +75,17 @@ evts[#evts + 1] = Events.Connect("puzzle_run", function(speed)
 	node:tick()
 end)
 
-script.destroyEvent:Connect(function()
+local d_evt = nil
+
+d_evt = script.destroyEvent:Connect(function()
 	for k, e in ipairs(evts) do
 		if(e.isConnected) then
 			e:Disconnect()
 		end
+	end
+
+	if(d_evt.isConnected) then
+		d_evt:Disconnect()
 	end
 
 	evts = nil

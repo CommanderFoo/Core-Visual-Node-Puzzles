@@ -1174,7 +1174,7 @@ Assets {
           }
           UseParentWidth: true
           Text {
-            Label: "Viewer"
+            Label: "View"
             Color {
               R: 1
               G: 1
@@ -1348,7 +1348,7 @@ Assets {
         UnregisteredParameters {
           Overrides {
             Name: "cs:title"
-            String: "Viewer"
+            String: "View"
           }
           Overrides {
             Name: "cs:button_offset"

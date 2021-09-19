@@ -1,0 +1,9 @@
+Assets {
+  Id: 5934593171778482987
+  Name: "UI_Dropdown_Default"
+  PlatformAssetType: 3
+  TextAsset {
+  }
+  SerializationVersion: 98
+  VirtualFolderPath: "Misc"
+}

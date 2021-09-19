@@ -56,7 +56,9 @@ evts[#evts + 1] = Events.Connect("score", function(t)
 	total_puzzle_score = total_puzzle_score + (t * 100)
 end)
 
-script.destroyEvent:Connect(function()
+local d_evt = nil
+
+d_evt = script.destroyEvent:Connect(function()
 	for k, e in ipairs(evts) do
 		if(e.isConnected) then
 			e:Disconnect()
@@ -64,8 +66,12 @@ script.destroyEvent:Connect(function()
 	end
 
 	evts = nil
-	
+
 	for k, e in ipairs(p_evts) do
 		API.Puzzle_Events.off(e)
+	end
+
+	if(d_evt.isConnected) then
+		d_evt:Disconnect()
 	end
 end)

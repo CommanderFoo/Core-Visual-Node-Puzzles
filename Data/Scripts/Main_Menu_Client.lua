@@ -1,4 +1,5 @@
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local menu_container = script:GetCustomProperty("menu_container"):WaitForObject()
 local bg_effect = script:GetCustomProperty("bg_effect"):WaitForObject()
@@ -31,8 +32,9 @@ local buttons_panels = {
 
 	{ 
 
-		button = script:GetCustomProperty("my_games_button"):WaitForObject(),
-		panel = script:GetCustomProperty("my_games_panel"):WaitForObject(),
+		button = script:GetCustomProperty("settings_button"):WaitForObject(),
+		panel = script:GetCustomProperty("settings_panel"):WaitForObject()
+
 
 	},
 
@@ -106,13 +108,13 @@ end
 
 local function disable_messages()
 	display_messages = false
-	message_tween = nil
-	messages.opacity = 0
+	-- message_tween = nil
+	-- messages.opacity = 0
 
-	if(last_message ~= nil) then
-		messages:GetChildren()[last_message].visibility = Visibility.FORCE_OFF
-		last_message = nil
-	end
+	-- if(last_message ~= nil) then
+	-- 	messages:GetChildren()[last_message].visibility = Visibility.FORCE_OFF
+	-- 	last_message = nil
+	-- end
 end
 
 local function show_messages()
@@ -120,45 +122,45 @@ local function show_messages()
 		return
 	end
 
-	local index = math.random(#messages:GetChildren())
+	-- local index = math.random(#messages:GetChildren())
 
-	while(last_message == index) do
-		index = math.random(#messages:GetChildren())
-	end
+	-- while(last_message == index) do
+	-- 	index = math.random(#messages:GetChildren())
+	-- end
 
-	last_message = index
+	-- last_message = index
 
-	local the_message = messages:GetChildren()[index]
-	local txt_len = string.len(the_message:GetChildren()[1].text)
-	local delay = 5 + (txt_len / 100 * 3.5)
+	-- local the_message = messages:GetChildren()[index]
+	-- local txt_len = string.len(the_message:GetChildren()[1].text)
+	-- local delay = 5 + (txt_len / 100 * 3.5)
 
-	message_tween = YOOTIL.Tween:new(1, { a = 0 }, { a = 1 })
+	-- message_tween = YOOTIL.Tween:new(1, { a = 0 }, { a = 1 })
 
-	message_tween:on_start(function()
-		the_message.visibility = Visibility.FORCE_ON
-	end)
+	-- message_tween:on_start(function()
+	-- 	the_message.visibility = Visibility.FORCE_ON
+	-- end)
 
-	message_tween:on_change(function(c)
-		messages.opacity = c.a
-	end)
+	-- message_tween:on_change(function(c)
+	-- 	messages.opacity = c.a
+	-- end)
 
-	message_tween:on_complete(function()
-		message_tween = YOOTIL.Tween:new(1, { a = 1 }, { a = 0 })
+	-- message_tween:on_complete(function()
+	-- 	message_tween = YOOTIL.Tween:new(1, { a = 1 }, { a = 0 })
 
-		message_tween:on_change(function(c)
-			messages.opacity = c.a
-		end)
+	-- 	message_tween:on_change(function(c)
+	-- 		messages.opacity = c.a
+	-- 	end)
 
-		message_tween:on_complete(function()
-			the_message.visibility = Visibility.FORCE_OFF
+	-- 	message_tween:on_complete(function()
+	-- 		the_message.visibility = Visibility.FORCE_OFF
 
-			show_messages()
-		end)
+	-- 		show_messages()
+	-- 	end)
 
-		message_tween:set_delay(delay) -- TODO: Change per message
-	end)
+	-- 	message_tween:set_delay(delay) -- TODO: Change per message
+	-- end)
 
-	message_tween:set_delay(2)
+	-- message_tween:set_delay(2)
 end
 
 local function hide_last()
@@ -396,7 +398,7 @@ Events.Connect("update_logic_list", function(data)
 				end
 
 				if(p[3] > 0) then
-					entry:GetCustomProperty("score_txt"):GetObject().text = "Score: " .. tostring(YOOTIL.Utils.number_format(p[3]))
+					entry:GetCustomProperty("score_txt"):GetObject().text = tostring(YOOTIL.Utils.number_format(p[3]))
 					entry:GetCustomProperty("score_txt"):GetObject().visibility = Visibility.FORCE_ON
 				end
 			end
@@ -454,7 +456,7 @@ Events.Connect("update_math_list", function(data)
 				end
 
 				if(p[3] > 0) then
-					entry:GetCustomProperty("score_txt"):GetObject().text = "Score: " .. tostring(YOOTIL.Utils.number_format(p[3]))
+					entry:GetCustomProperty("score_txt"):GetObject().text = tostring(YOOTIL.Utils.number_format(p[3]))
 					entry:GetCustomProperty("score_txt"):GetObject().visibility = Visibility.FORCE_ON
 				end
 			end
@@ -476,7 +478,7 @@ for i = 1, 25 do
 
 	local entry = World.SpawnAsset(puzzle_list_entry, { parent = logic_list_scroll })
 
-	entry:GetCustomProperty("name_txt"):GetObject().text = "PUZZLE #" .. tostring(i)
+	entry:GetCustomProperty("name_txt"):GetObject().text = Localization.get_text("PUZZLE") .. " #" .. tostring(i)
 
 	if(i == 1) then
 		entry.isInteractable = true
@@ -515,7 +517,7 @@ for i = 1, 25 do
 
 	local entry = World.SpawnAsset(puzzle_list_entry, { parent = math_list_scroll })
 
-	entry:GetCustomProperty("name_txt"):GetObject().text = "PUZZLE #" .. tostring(i)
+	entry:GetCustomProperty("name_txt"):GetObject().text = Localization.get_text("PUZZLE") .. " #" .. tostring(i)
 
 	if(i == 1) then
 		entry.isInteractable = true
@@ -550,3 +552,15 @@ for i = 1, 25 do
 	entry.y = math_offset
 	math_offset = math_offset + 60
 end
+
+Events.Connect("translate", function()
+	for i = 1, 25 do
+		local entry = logic_list_scroll:FindChildByName("Puzzle " .. tostring(i))
+
+		entry:FindChildByName("Puzzle Name").text = Localization.get_text("PUZZLE") .. " #" .. tostring(i)
+
+		local entry = math_list_scroll:FindChildByName("Puzzle " .. tostring(i))
+
+		entry:FindChildByName("Puzzle Name").text = Localization.get_text("PUZZLE") .. " #" .. tostring(i)
+	end
+end)

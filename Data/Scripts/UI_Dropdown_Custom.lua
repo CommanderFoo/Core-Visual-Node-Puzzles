@@ -174,11 +174,17 @@ evts[#evts + 1] = Events.Connect("on_" .. event .. "enable", enable_select)
 evts[#evts + 1] = Events.Connect("on_disable_all_dropdowns", disable_select)
 evts[#evts + 1] = Events.Connect("on_enable_all_dropdowns", enable_select)
 
-script.destroyEvent:Connect(function()
+local d_evt = nil
+
+d_evt = script.destroyEvent:Connect(function()
 	for k, e in ipairs(evts) do
 		if(e.isConnected) then
 			e:Disconnect()
 		end
+	end
+
+	if(d_evt.isConnected) then
+		d_evt:Disconnect()
 	end
 
 	evts = nil

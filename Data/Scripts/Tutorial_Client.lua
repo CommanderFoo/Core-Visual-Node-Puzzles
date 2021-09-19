@@ -1,4 +1,5 @@
 local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local nodes_panel = script:GetCustomProperty("nodes_panel"):WaitForObject()
 local show_hide_nodes_button = script:GetCustomProperty("show_hide_nodes_button"):WaitForObject()
@@ -123,7 +124,7 @@ function init()
 end
 
 function show_nodes()
-	show_hide_nodes_button.text = "Hide Nodes"
+	show_hide_nodes_button.text = Localization.get_text("Tutorial_Hide_Nodes_Button")
 	node_tween = YOOTIL.Tween:new(.3, {v = nodes_panel.x}, {v = -20})
 
 	node_tween:on_complete(function()
@@ -199,10 +200,17 @@ function Tick(dt)
 	end
 end
 
-local evt = Events.Connect("start_tutorial", init)
+Events.Broadcast("translate_tutorial")
 
-script.destroyEvent:Connect(function()
-	if(evt.isConnected) then
-		evt:Disconnect()
+local start_evt = Events.Connect("start_tutorial", init)
+local d_evt = nil
+
+d_evt = script.destroyEvent:Connect(function()
+	if(start_evt.isConnected) then
+		start_evt:Disconnect()
+	end
+
+	if(d_evt.isConnected) then
+		d_evt:Disconnect()
 	end
 end)

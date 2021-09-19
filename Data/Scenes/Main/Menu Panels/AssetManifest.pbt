@@ -8,6 +8,15 @@ Assets {
   }
 }
 Assets {
+  Id: 17940382598547805671
+  Name: "Center Arrow 005 Wedge"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "CenterArrow_005Wedge"
+  }
+}
+Assets {
   Id: 17474260047495867694
   Name: "BG Flat 002"
   PlatformAssetType: 9
@@ -104,6 +113,15 @@ Assets {
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "UI_Scifi_Icon_020"
+  }
+}
+Assets {
+  Id: 1557426602478375544
+  Name: "Center Arrow 004 Wedge"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "CenterArrow_004Wedge"
   }
 }
 Assets {

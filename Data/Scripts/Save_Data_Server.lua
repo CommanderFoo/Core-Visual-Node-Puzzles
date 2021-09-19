@@ -16,7 +16,8 @@ function save_data(player)
 		sv = player:GetResource("sfx_volume"),
 		mv = player:GetResource("music_volume"),
 		sn = player:GetResource("show_notifications"),
-		an = player:GetResource("show_nodes")
+		an = player:GetResource("show_nodes"),
+		li = player:GetResource("language_index")
 
 	}
 
@@ -45,8 +46,8 @@ function save_data(player)
 
 	--data = {}
 
-	print(YOOTIL.JSON.encode(data.mnd))
-	print(YOOTIL.JSON.encode(data.lnd))
+	--print(YOOTIL.JSON.encode(data.mnd))
+	--print(YOOTIL.JSON.encode(data.lnd))
 	
 	Storage.SetPlayerData(player, data)
 end

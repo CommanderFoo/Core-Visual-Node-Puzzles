@@ -213,7 +213,9 @@ evts[#evts + 1] = Events.Connect("spawn_node", function(i, uid, x, y, condition,
 	end
 end)
 
-script.destroyEvent:Connect(function()
+local d_evt = nil
+
+d_evt = script.destroyEvent:Connect(function()
 	for k, e in ipairs(evts) do
 		if(e.isConnected) then
 			e:Disconnect()
@@ -224,5 +226,9 @@ script.destroyEvent:Connect(function()
 
 	if(node_destroy_evt ~= nil) then
 		API.Node_Events.off(node_destroy_evt)
+	end
+
+	if(d_evt.isConnected) then
+		d_evt:Disconnect()
 	end
 end)

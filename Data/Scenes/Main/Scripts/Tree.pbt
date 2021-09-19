@@ -1,6 +1,522 @@
 Name: "Scripts"
 RootId: 5021637449606560396
 Objects {
+  Id: 15885186826416985866
+  Name: "Translatables"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 5021637449606560396
+  ChildIds: 6014269706763216048
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:forceoff"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  NetworkContext {
+  }
+}
+Objects {
+  Id: 6014269706763216048
+  Name: "Main_Menu_Translatables"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 15885186826416985866
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
+      }
+    }
+    Overrides {
+      Name: "cs:Logic_Puzzles_Button"
+      ObjectReference {
+        SelfId: 8438781845575146486
+      }
+    }
+    Overrides {
+      Name: "cs:Math_Puzzles_Button"
+      ObjectReference {
+        SelfId: 4811420969484955970
+      }
+    }
+    Overrides {
+      Name: "cs:Tutorial_Button"
+      ObjectReference {
+        SelfId: 4496700212130550146
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Button"
+      ObjectReference {
+        SelfId: 12239909245855010872
+      }
+    }
+    Overrides {
+      Name: "cs:Donate_Button"
+      ObjectReference {
+        SelfId: 15952886435593148495
+      }
+    }
+    Overrides {
+      Name: "cs:Settings_Button"
+      ObjectReference {
+        SelfId: 5149048525241501507
+      }
+    }
+    Overrides {
+      Name: "cs:Play_Logic"
+      ObjectReference {
+        SelfId: 3781127727571058365
+      }
+    }
+    Overrides {
+      Name: "cs:Select_Logic"
+      ObjectReference {
+        SelfId: 14107064983325937405
+      }
+    }
+    Overrides {
+      Name: "cs:Play_Math"
+      ObjectReference {
+        SelfId: 11721336275783770835
+      }
+    }
+    Overrides {
+      Name: "cs:Select_Math"
+      ObjectReference {
+        SelfId: 4578650089263080959
+      }
+    }
+    Overrides {
+      Name: "cs:Donate_Title"
+      ObjectReference {
+        SelfId: 18331275082364152124
+      }
+    }
+    Overrides {
+      Name: "cs:Donate_Body"
+      ObjectReference {
+        SelfId: 8642955080509819213
+      }
+    }
+    Overrides {
+      Name: "cs:Logic_List_Title"
+      ObjectReference {
+        SelfId: 12625424967105776375
+      }
+    }
+    Overrides {
+      Name: "cs:Math_List_Title"
+      ObjectReference {
+        SelfId: 2660448405812934358
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Title"
+      ObjectReference {
+        SelfId: 12080316040415773761
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Logic_Nodes"
+      ObjectReference {
+        SelfId: 7144081437836703456
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Data_Node_Title"
+      ObjectReference {
+        SelfId: 157300047182672476
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Data_Node_Desc"
+      ObjectReference {
+        SelfId: 13014984064477917296
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Data"
+      ObjectReference {
+        SelfId: 17340765114926977275
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Output_Node_Title"
+      ObjectReference {
+        SelfId: 2566180570753674509
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Output_Node_Desc"
+      ObjectReference {
+        SelfId: 7609801297167257424
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Output"
+      ObjectReference {
+        SelfId: 1999398092530220407
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Ordered_Output_Node_Title"
+      ObjectReference {
+        SelfId: 57866642815203823
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Ordered_Output_Node_Desc"
+      ObjectReference {
+        SelfId: 3625550526917669501
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Ordered_Output"
+      ObjectReference {
+        SelfId: 16231551356678516757
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_If_Else_Node_Title"
+      ObjectReference {
+        SelfId: 3055915944371161503
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_If_Else_Node_Desc"
+      ObjectReference {
+        SelfId: 11481442927506277002
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_If_Else"
+      ObjectReference {
+        SelfId: 400405227433037979
+      }
+    }
+    Overrides {
+      Name: "cs:Node_If_Else_Else"
+      ObjectReference {
+        SelfId: 2632697992224005210
+      }
+    }
+    Overrides {
+      Name: "cs:Node_If_Else_Square"
+      ObjectReference {
+        SelfId: 16352186523699646923
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Alternate_Node_Title"
+      ObjectReference {
+        SelfId: 16189291425745008243
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Alternate_Node_Desc"
+      ObjectReference {
+        SelfId: 4460163811367454745
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Alternate"
+      ObjectReference {
+        SelfId: 11312458254059316692
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Limit_Node_Title"
+      ObjectReference {
+        SelfId: 14443589860142446015
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Limit_Node_Desc"
+      ObjectReference {
+        SelfId: 9434602251834927037
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Limit"
+      ObjectReference {
+        SelfId: 13869754265110498447
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Halt_Node_Title"
+      ObjectReference {
+        SelfId: 11666488290088294502
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Halt_Node_Desc"
+      ObjectReference {
+        SelfId: 5622363668337377487
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Halt"
+      ObjectReference {
+        SelfId: 1318079801377085257
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Nodes"
+      ObjectReference {
+        SelfId: 8795781835006979595
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Data_Node_Title"
+      ObjectReference {
+        SelfId: 9345892818446985734
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Data_Node_Desc"
+      ObjectReference {
+        SelfId: 9133453458667097132
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Data"
+      ObjectReference {
+        SelfId: 5130054525500719448
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Output_Node_Title"
+      ObjectReference {
+        SelfId: 13441006778719233062
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Output_Node_Desc"
+      ObjectReference {
+        SelfId: 17004177093523971292
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Output"
+      ObjectReference {
+        SelfId: 3412411293328406700
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Alternate_Node_Title"
+      ObjectReference {
+        SelfId: 10879054626760455628
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Alternate_Node_Desc"
+      ObjectReference {
+        SelfId: 16984289860076127887
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Alternate"
+      ObjectReference {
+        SelfId: 12711669599572616323
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Greater_Than_Node_Title"
+      ObjectReference {
+        SelfId: 7422964641556984897
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Greater_Than_Node_Desc"
+      ObjectReference {
+        SelfId: 3052275754407040188
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Greater_Than"
+      ObjectReference {
+        SelfId: 13202298361305709214
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Absolute_Node_Title"
+      ObjectReference {
+        SelfId: 7543410632008149237
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Absolute_Node_Desc"
+      ObjectReference {
+        SelfId: 2069358690732204906
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Absolute"
+      ObjectReference {
+        SelfId: 4542543937778611248
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Add_Node_Title"
+      ObjectReference {
+        SelfId: 2309566792879465587
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Add_Node_Desc"
+      ObjectReference {
+        SelfId: 1825282238565077203
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Add"
+      ObjectReference {
+        SelfId: 1426216212900613639
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Multiply_Node_Title"
+      ObjectReference {
+        SelfId: 14709741664395236580
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Multiply_Node_Desc"
+      ObjectReference {
+        SelfId: 10177893894325522844
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Multiply"
+      ObjectReference {
+        SelfId: 1872241678412578951
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Subtract_Node_Title"
+      ObjectReference {
+        SelfId: 5554046028367176898
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Math_Subtract_Node_Desc"
+      ObjectReference {
+        SelfId: 15739290712068192719
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Math_Substract"
+      ObjectReference {
+        SelfId: 11466656278050355362
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Misc_Nodes"
+      ObjectReference {
+        SelfId: 2481178902310784905
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Misc_Reroute_Node_Title"
+      ObjectReference {
+        SelfId: 3755688915150914549
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Misc_Reroute_Node_Desc"
+      ObjectReference {
+        SelfId: 12358150524140687859
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Misc_View_Node_Title"
+      ObjectReference {
+        SelfId: 16803663835914041509
+      }
+    }
+    Overrides {
+      Name: "cs:Glossary_Misc_View_Node_Desc"
+      ObjectReference {
+        SelfId: 2214400432816120612
+      }
+    }
+    Overrides {
+      Name: "cs:Node_Name_Misc_View"
+      ObjectReference {
+        SelfId: 16858924599324385293
+      }
+    }
+    Overrides {
+      Name: "cs:Sound_Effects_Volume"
+      ObjectReference {
+        SelfId: 9116475872833630021
+      }
+    }
+    Overrides {
+      Name: "cs:Music_Volume"
+      ObjectReference {
+        SelfId: 6129926341879991471
+      }
+    }
+    Overrides {
+      Name: "cs:Select_Language"
+      ObjectReference {
+        SelfId: 2364708647608965580
+      }
+    }
+    Overrides {
+      Name: "cs:Save_Button"
+      ObjectReference {
+        SelfId: 10451940414839123191
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 12676877940186846515
+    }
+  }
+}
+Objects {
   Id: 917384028508757458
   Name: "Server Scripts"
   Transform {
@@ -236,6 +752,12 @@ Objects {
       Name: "cs:YOOTIL"
       AssetReference {
         Id: 16622261663679835299
+      }
+    }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
       }
     }
   }
@@ -617,6 +1139,24 @@ Objects {
       Name: "cs:messages"
       ObjectReference {
         SelfId: 14801045368449505191
+      }
+    }
+    Overrides {
+      Name: "cs:settings_button"
+      ObjectReference {
+        SelfId: 11937130591100788327
+      }
+    }
+    Overrides {
+      Name: "cs:settings_panel"
+      ObjectReference {
+        SelfId: 5405561804080879256
+      }
+    }
+    Overrides {
+      Name: "cs:Localization"
+      AssetReference {
+        Id: 15226941556822594646
       }
     }
   }
