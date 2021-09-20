@@ -1,9 +1,10 @@
 Assets {
-  Id: 6461296571376920617
-  Name: "Result_Translatables"
+  Id: 7892154415123657071
+  Name: "Translations_Chinese"
   PlatformAssetType: 3
   TextAsset {
   }
   SerializationVersion: 98
   VirtualFolderPath: "Localization"
+  VirtualFolderPath: "Translations"
 }

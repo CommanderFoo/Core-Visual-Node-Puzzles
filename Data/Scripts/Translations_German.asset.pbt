@@ -1,9 +1,10 @@
 Assets {
-  Id: 6461296571376920617
-  Name: "Result_Translatables"
+  Id: 16423497577215324101
+  Name: "Translations_German"
   PlatformAssetType: 3
   TextAsset {
   }
   SerializationVersion: 98
   VirtualFolderPath: "Localization"
+  VirtualFolderPath: "Translations"
 }
