@@ -2217,7 +2217,6 @@ Assets {
         }
         ParentId: 3948822285016487595
         ChildIds: 6933804056049373303
-        ChildIds: 2443073168098492919
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -2265,70 +2264,6 @@ Assets {
         Script {
           ScriptAsset {
             Id: 3994034919272004444
-          }
-        }
-      }
-      Objects {
-        Id: 2443073168098492919
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 4265968178875703080
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "Halt"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 520
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 680
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node plays an important role in making sure that the data is sent to the output in the correct order.  Each Halt node will be assigned an order number based on the order you connect it to the Output Node."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "It is important to remember that Halt Nodes must be directly connected to Output Nodes, otherwise your program will fail.  It makes no sense halting data early in your program, you should process data then set the order at the end to improve performance."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 365
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
           }
         }
       }

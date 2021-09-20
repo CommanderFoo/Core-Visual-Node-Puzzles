@@ -1834,7 +1834,6 @@ Assets {
           }
         }
         ParentId: 14684898248377808307
-        ChildIds: 6001488835801838958
         ChildIds: 5933860958927467983
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -1846,80 +1845,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 6001488835801838958
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 5272034569068851689
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "Absolute"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 375
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 445
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node will return the absolute value of a number."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "So if the number is negative, then this node will return it as a positive number.  If the number is zero, or positive, then no change will take place."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 185
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 220
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: true
-          }
-          Overrides {
-            Name: "cs:example_code"
-            AssetReference {
-              Id: 12069209599382107025
-            }
-          }
-          Overrides {
-            Name: "cs:example_width"
-            Float: 445
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

@@ -406,7 +406,6 @@ function Node:setup_node(root)
 	end
 
 	self.info_button = self.handle:FindChildByName("Info")
-	self.info_data = self.root:FindDescendantByName("Node_Information_Data")
 
 	if(self.options.node_time) then
 		local node_time_ui = self.root:FindDescendantByName("Node Time")
@@ -481,10 +480,10 @@ function Node:setup_node(root)
 		self:remove()
 	end)
 
-	if(self.info_button ~= nil and self.info_data ~= nil) then
+	if(self.info_button ~= nil) then
 		self.evts[#self.evts + 1] = self.info_button.clickedEvent:Connect(function()
 			Node_Events.trigger("node_info_click")
-			Events.Broadcast("show_node_information", self.info_data)
+			Events.Broadcast("show_node_information", self.root.name)
 		end)
 
 		self.evts[#self.evts + 1] = self.info_button.hoveredEvent:Connect(function()
@@ -1628,7 +1627,7 @@ function Node_Data:new(r, options)
 
 			this.options.index = this.options.index + 1
 		elseif(not has_sent_no_connection_error) then
-			this:has_errors("No output connection. The data needs to go somewhere.")
+			this:has_errors(Localization.get_text("Error_No_Output_Connection_Where_To"))
 			has_sent_no_connection_error = true
 		end
 	end
@@ -1828,7 +1827,7 @@ function Node_If:new(r, options)
 						})
 					end
 				elseif(not has_sent_no_else_error) then
-					this:has_errors("No falsy output connection.")
+					this:has_errors(Localization.get_text("Error_No_Falsy_Output"))
 					has_sent_no_else_error = true
 				end
 
@@ -1859,7 +1858,7 @@ function Node_If:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connection_error) then
-				this:has_errors("No truthy or falsy output connections.")
+				this:has_errors(Localization.get_text("Error_No_Truthy_Falsy_Output"))
 				has_sent_no_connection_error = true
 			end
 		end
@@ -2033,17 +2032,17 @@ function Node_Alternate:new(r, options)
 			else
 				if(not top_connection and not bottom_connection) then
 					if(not has_sent_no_connection_error) then
-						this:has_errors("No output connections to alternate.")
+						this:has_errors(Localization.get_text("Error_No_Alternate_Output"))
 						has_sent_no_connection_error = true
 					end
 				elseif(not top_connection) then
 					if(not has_sent_no_connection_top_error) then
-						this:has_errors("No top output connection to alternate.")
+						this:has_errors(Localization.get_text("Error_No_Alternate_Top_Output"))
 						has_sent_no_connection_top_error = true
 					end
 				elseif(not bottom_connection) then
 					if(not has_sent_no_connection_bottom_error) then
-						this:has_errors("No bottom output connection to alternate.")
+						this:has_errors(Localization.get_text("Error_No_Alternate_Bottom_Output"))
 						has_sent_no_connection_bottom_error = true
 					end
 				end
@@ -2228,7 +2227,7 @@ function Node_Limit:new(r, options)
 						})
 					end
 				elseif(not has_sent_no_bottom_connection_error) then
-					this:has_errors("No bottom output connection.")
+					this:has_errors(Localization.get_text("Error_No_Bottom_Output"))
 					has_sent_no_bottom_connection_error = true
 				end
 
@@ -2259,7 +2258,7 @@ function Node_Limit:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connections_error) then
-				this:has_errors("No output connections.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connections"))
 				has_sent_no_connections_error = true
 			end
 		end
@@ -2403,7 +2402,7 @@ function Node_Halt:new(r, options)
 			this.body:FindDescendantByName("None").visibility = Visibility.FORCE_OFF
 		elseif(halting_data_type ~= data.condition) then
 			if(not has_sent_input_data_not_matched) then
-				this:has_errors("Input data does not match stored data.")
+				this:has_errors(Localization.get_text("Error_Input_Data_Not_Match_Stored"))
 				has_sent_input_data_not_matched = true
 			end
 
@@ -2413,13 +2412,13 @@ function Node_Halt:new(r, options)
 			local sub_type =  this:get_top_connection_node_type(true)
 
 			if(not has_sent_no_connection_error and type == nil) then
-				this:has_errors("No output connection.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 				has_sent_no_connection_error = true
 
 				return
 			else
 				if(not has_sent_no_ordered_output_error and type ~= nil and sub_type ~= "Ordered") then
-					this:has_errors("Connected to node is not an Ordered Output Node. Direct connection required.")
+					this:has_errors(Localization.get_text("Error_Not_Ordered_Output_Node"))
 					has_sent_no_ordered_output_error = true
 
 					return
@@ -2682,7 +2681,7 @@ function Node_Add:new(r, options)
 						end)
 					end
 				elseif(not has_sent_no_connection_error) then
-					this:has_errors("No output connection.")
+					this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 					has_sent_no_connection_error = true
 				end
 			end
@@ -2737,11 +2736,11 @@ end
 
 -- End Add Node
 
--- Substract Node
+-- Subtract Node
 
-local Node_Substract = {}
+local Node_Subtract = {}
 
-function Node_Substract:new(r, options)
+function Node_Subtract:new(r, options)
 	self.__index = self
 
 	local this = setmetatable({
@@ -2752,7 +2751,7 @@ function Node_Substract:new(r, options)
 
 	setmetatable(this, {__index = Node})
 
-	this.node_type = "Substract"
+	this.node_type = "Subtract"
 
 	this:setup(r)
 
@@ -2865,7 +2864,7 @@ function Node_Substract:new(r, options)
 						end)
 					end
 				elseif(not has_sent_no_connection_error) then
-					this:has_errors("No output connection.")
+					this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 					has_sent_no_connection_error = true
 				end
 			end
@@ -2921,7 +2920,7 @@ function Node_Substract:new(r, options)
 	return this
 end
 
--- End Substract Node
+-- End Subtract Node
 
 -- Multiply Node
 
@@ -3051,7 +3050,7 @@ function Node_Multiply:new(r, options)
 						end)
 					end
 				elseif(not has_sent_no_connection_error) then
-					this:has_errors("No output connection.")
+					this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 					has_sent_no_connection_error = true
 				end
 			end
@@ -3237,7 +3236,7 @@ function Node_Divide:new(r, options)
 						end)
 					end
 				elseif(not has_sent_no_connection_error) then
-					this:has_errors("No output connection.")
+					this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 					has_sent_no_connection_error = true
 				end
 			end
@@ -3439,7 +3438,7 @@ function Node_Greater_Than:new(r, options)
 						})
 					end
 				elseif(not has_sent_no_falsy_connection_error) then
-					this:has_errors("No falsy output connection.")
+					this:has_errors(Localization.get_text("Error_No_Falsy_Output"))
 					has_sent_no_falsy_connection_error = true
 				end
 
@@ -3470,7 +3469,7 @@ function Node_Greater_Than:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connections_error) then
-				this:has_errors("No output connection.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 				has_sent_no_connections_error = true
 			end
 		end
@@ -3671,7 +3670,7 @@ function Node_Less_Than:new(r, options)
 						})
 					end
 				elseif(not has_sent_no_falsy_connection_error) then
-					this:has_errors("No falsy output connection.")
+					this:has_errors(Localization.get_text("Error_No_Falsy_Output"))
 					has_sent_no_falsy_connection_error = true
 				end
 
@@ -3702,7 +3701,7 @@ function Node_Less_Than:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connections_error) then
-				this:has_errors("No output connection.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 				has_sent_no_connections_error = true
 			end
 		end
@@ -3900,7 +3899,7 @@ function Node_Equal:new(r, options)
 						})
 					end
 				elseif(not has_sent_no_falsy_connection_error) then
-					this:has_errors("No falsy output connection.")
+					this:has_errors(Localization.get_text("Error_No_Falsy_Output"))
 					has_sent_no_falsy_connection_error = true
 				end
 
@@ -3931,7 +3930,7 @@ function Node_Equal:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connections_error) then
-				this:has_errors("No output connection.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 				has_sent_no_connections_error = true
 			end
 		end
@@ -4084,7 +4083,7 @@ function Node_Absolute:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connections_error) then
-				this:has_errors("No output connection.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 				has_sent_no_connections_error = true
 			end
 		end
@@ -4197,7 +4196,7 @@ function Node_Reroute:new(r, options)
 					end)
 				end
 			elseif(not has_sent_no_connections_error) then
-				this:has_errors("No output connection.")
+				this:has_errors(Localization.get_text("Error_No_Output_Connection"))
 				has_sent_no_connections_error = true
 			end
 		end
@@ -4280,7 +4279,7 @@ return Node, Node_Events, {
 	Limit = Node_Limit,
 	Halt = Node_Halt,
 	Add = Node_Add,
-	Substract = Node_Substract,
+	Subtract = Node_Subtract,
 	Multiply = Node_Multiply,
 	Divide = Node_Divide,
 	Greater_Than = Node_Greater_Than,

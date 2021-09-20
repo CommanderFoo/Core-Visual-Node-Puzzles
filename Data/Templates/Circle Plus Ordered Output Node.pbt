@@ -1711,7 +1711,6 @@ Assets {
           }
         }
         ParentId: 9994603233779697298
-        ChildIds: 12065624388720805956
         ChildIds: 3405413195330172087
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -1723,66 +1722,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 12065624388720805956
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 5000710335576062602
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 405
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 0
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Ordered Output"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node requires data to be received in a specific order and meet the conditions."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "Use Halt Nodes to order the data.  When connecting a Halt Node, it will receive an order based on how many Halt Nodes are currently connected to this node."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 200
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

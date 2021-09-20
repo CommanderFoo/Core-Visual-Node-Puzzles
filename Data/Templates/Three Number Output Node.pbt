@@ -1727,7 +1727,6 @@ Assets {
           }
         }
         ParentId: 7576802448668856251
-        ChildIds: 4449570941131620130
         ChildIds: 14344777996850625453
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -1739,66 +1738,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 4449570941131620130
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 10844914301170379288
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 325
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 0
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Output"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node is the final place the data is sent too.  Data sent to this node must meet the conditions set.  If any condition fails, then the whole program will fail to complete."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: ""
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 320
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

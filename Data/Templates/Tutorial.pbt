@@ -8724,6 +8724,7 @@ Assets {
               Id: 9402814787072448834
             }
             IsButtonEnabled: true
+            OnlyUseMainColor: true
             ClickMode {
               Value: "mc:ebuttonclickmode:default"
             }
@@ -8875,6 +8876,7 @@ Assets {
               Id: 9402814787072448834
             }
             IsButtonEnabled: true
+            OnlyUseMainColor: true
             ClickMode {
               Value: "mc:ebuttonclickmode:default"
             }

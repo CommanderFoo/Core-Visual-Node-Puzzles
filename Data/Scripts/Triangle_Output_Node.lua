@@ -1,4 +1,5 @@
 local API = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local triangle_count = script:GetCustomProperty("triangle_count"):WaitForObject()
 
@@ -38,7 +39,7 @@ function init(node_data)
 					API.Puzzle_Events.trigger("output_" .. data.condition .. "_complete")
 				elseif(total > amount) then
 					if(not has_sent_exceeded_triangle_error) then
-						node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+						node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 						has_sent_exceeded_triangle_error = true
 					end
 
@@ -46,7 +47,7 @@ function init(node_data)
 				end
 			else
 				if(not has_sent_condition_not_met_error) then
-					node:has_errors("Input data does not match required data.")
+					node:has_errors(Localization.get_text("Error_No_Match"))
 					has_sent_condition_not_met_error = true
 				end
 

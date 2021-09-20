@@ -2441,7 +2441,6 @@ Assets {
           }
         }
         ParentId: 6766201784053821413
-        ChildIds: 7519753581537854869
         ChildIds: 14544588074275894553
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -2453,72 +2452,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 7519753581537854869
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 16185117764298887879
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 445
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 370
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "If Else"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node will execute the if block statements if the expression is true.  If the expression is false then the statements in the else block will be executed."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "The else is optional."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 310
-          }
-          Overrides {
-            Name: "cs:example_code"
-            AssetReference {
-              Id: 5128182279547617667
-            }
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 340
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

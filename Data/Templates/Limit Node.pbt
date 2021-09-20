@@ -2434,7 +2434,6 @@ Assets {
         }
         ParentId: 720176685068782400
         ChildIds: 7343800303522006842
-        ChildIds: 6788592683075707648
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -2482,80 +2481,6 @@ Assets {
         Script {
           ScriptAsset {
             Id: 7974891888571603460
-          }
-        }
-      }
-      Objects {
-        Id: 6788592683075707648
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 1420597738240958177
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 445
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 370
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Limit"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node behaves very similar to a If / Else node.  The only difference is this node uses a counter in the if condition to act as our truthy value.  Once that counter hits 0, the else block statements will be executed."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: ""
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 310
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: true
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 465
-          }
-          Overrides {
-            Name: "cs:example_code"
-            AssetReference {
-              Id: 5141972782318501306
-            }
-          }
-          Overrides {
-            Name: "cs:example_width"
-            Float: 460
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
           }
         }
       }

@@ -1,13 +1,13 @@
 Assets {
   Id: 13115451351220926624
-  Name: "Substract Node"
+  Name: "Subtract Node"
   PlatformAssetType: 5
   TemplateAsset {
     ObjectBlock {
       RootId: 7060420773864220114
       Objects {
         Id: 7060420773864220114
-        Name: "Substract Node"
+        Name: "Subtract Node"
         Transform {
           Scale {
             X: 1
@@ -2133,7 +2133,7 @@ Assets {
           }
           UseParentWidth: true
           Text {
-            Label: "Substract"
+            Label: "Subtract"
             Color {
               R: 1
               G: 1
@@ -2275,7 +2275,6 @@ Assets {
           }
         }
         ParentId: 7060420773864220114
-        ChildIds: 819959496429145309
         ChildIds: 7207231746664073159
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -2290,72 +2289,8 @@ Assets {
         }
       }
       Objects {
-        Id: 819959496429145309
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 1254916354872189302
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "Subtract"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 520
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 275
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node will substact the bottom input data away from the top input data. This works with positive and negative numbers."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: ""
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 365
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
-        }
-      }
-      Objects {
         Id: 7207231746664073159
-        Name: "Substract_Node"
+        Name: "Subtract_Node"
         Transform {
           Location {
           }

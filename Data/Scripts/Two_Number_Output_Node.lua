@@ -1,4 +1,5 @@
 local API, YOOTIL = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local first_number = script:GetCustomProperty("first_number"):WaitForObject()
 local first_required = script:GetCustomProperty("first_required"):WaitForObject()
@@ -57,7 +58,7 @@ function init(node_data)
 
 				if(not has_match) then
 					if(not has_sent_no_number_match) then
-						node:has_errors("Input data does not match required data.")
+						node:has_errors(Localization.get_text("Error_No_Match"))
 						has_sent_no_number_match = true
 					end
 

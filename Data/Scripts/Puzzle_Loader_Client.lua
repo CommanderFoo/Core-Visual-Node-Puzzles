@@ -59,7 +59,7 @@ function load_puzzle(id, logic)
 
 		puzzle_name.text = name
 
-		Events.Broadcast("add_log_message", name .. " Loaded.", "Puzzle Info", false)
+		--Events.Broadcast("add_log_message", name .. " Loaded.", "Puzzle Info", false)
 		Events.Broadcast("score_conditions", {
 
 			gold = current_puzzle:GetCustomProperty("gold_score"),

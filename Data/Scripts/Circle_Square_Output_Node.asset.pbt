@@ -10,6 +10,12 @@ Assets {
           Id: 11355776926042268297
         }
       }
+      Overrides {
+        Name: "cs:Localization"
+        AssetReference {
+          Id: 15226941556822594646
+        }
+      }
     }
   }
   SerializationVersion: 98

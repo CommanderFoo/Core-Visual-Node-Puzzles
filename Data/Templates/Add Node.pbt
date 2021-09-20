@@ -2275,7 +2275,6 @@ Assets {
           }
         }
         ParentId: 16531692784475286900
-        ChildIds: 9701996512901488826
         ChildIds: 4604755501790960829
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -2287,70 +2286,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 9701996512901488826
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 8676110836640986104
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "Add"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 520
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 250
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node will add the top and bottom input data together. This node works with positive and negative numbers."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: ""
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 365
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

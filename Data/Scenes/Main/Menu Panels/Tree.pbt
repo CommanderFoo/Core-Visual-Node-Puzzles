@@ -6380,7 +6380,7 @@ Objects {
 }
 Objects {
   Id: 17461323895861627070
-  Name: "Substract Node"
+  Name: "Subtract Node"
   Transform {
     Scale {
       X: 1
@@ -6582,7 +6582,7 @@ Objects {
     }
     UseParentWidth: true
     Text {
-      Label: "Substract"
+      Label: "Subtract"
       Color {
         R: 1
         G: 1

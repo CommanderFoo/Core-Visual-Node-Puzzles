@@ -210,7 +210,7 @@ Events.Connect("graph_cleared", function()
 		end
 	end
 
-	add_log_message(Localization.get_text("Log_Node_Graph_Cleared"), "Info", false)
+	add_log_message(Localization.get_text("Log_Graph_Cleared"), "Info", false)
 end)
 
 Events.Connect("set_song_name", function(s)

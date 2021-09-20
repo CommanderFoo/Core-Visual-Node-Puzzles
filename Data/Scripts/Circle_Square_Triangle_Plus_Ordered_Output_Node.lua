@@ -4,6 +4,7 @@ local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
 local square_count = script:GetCustomProperty("square_count"):WaitForObject()
 local triangle_count = script:GetCustomProperty("triangle_count"):WaitForObject()
 local plus_count = script:GetCustomProperty("plus_count"):WaitForObject()
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local condition_circle = script:GetCustomProperty("condition_circle")
 local condition_square = script:GetCustomProperty("condition_square")
@@ -61,7 +62,7 @@ function init(node_data)
 						node:check_halting()
 					elseif(total_circle > amount) then
 						if(not has_sent_exceeded_circle_error) then
-							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 							has_sent_exceeded_circle_error = true
 						end
 						
@@ -87,7 +88,7 @@ function init(node_data)
 						node:check_halting()
 					elseif(total_square > amount) then
 						if(not has_sent_exceeded_square_error) then
-							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 							has_sent_exceeded_square_error = true
 						end
 						
@@ -113,7 +114,7 @@ function init(node_data)
 						node:check_halting()
 					elseif(total_triangle > amount) then
 						if(not has_sent_exceeded_triangle_error) then
-							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 							has_sent_exceeded_triangle_error = true
 						end
 						
@@ -137,7 +138,7 @@ function init(node_data)
 						plus_complete = true
 					elseif(total_plus > amount) then
 						if(not has_sent_exceeded_plus_error) then
-							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 							has_sent_exceeded_plus_error = true
 						end
 						
@@ -145,7 +146,7 @@ function init(node_data)
 					end
 				else
 					if(not has_sent_order_error) then
-						node:has_errors("Input data is not in the correct order.")
+						node:has_errors(Localization.get_text("Error_Wrong_Order"))
 						has_sent_order_error = true
 					end
 					

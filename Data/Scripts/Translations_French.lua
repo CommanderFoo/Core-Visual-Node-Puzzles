@@ -32,7 +32,7 @@ translations["Node_Name_Math_Greater_Than"] = translations["Node_Greater_Than"]
 translations["Node_Name_Math_Absolute"] = translations["Node_Absolute"]
 translations["Node_Name_Math_Add"] = translations["Node_Add"]
 translations["Node_Name_Math_Multiply"] = translations["Node_Multiply"]
-translations["Node_Name_Math_Substract"] = translations["Node_Subtract"] 
+translations["Node_Name_Math_Subtract"] = translations["Node_Subtract"] 
 
 translations["Node_Name_Misc_View"] = translations["Node_View"]
 
@@ -183,7 +183,45 @@ translations["Result_Title"] = "Bien fait!"
 translations["Result_Edit"] = "Éditer"
 translations["Result_Next"] = "Prochaine"
 
-translations["Info_Data_1"] = "Ce nœud contient les données du puzzle qui doivent être transférées vers les nœuds de sortie."
-translations["Info_Data_2"] = "Les données peuvent être différentes choses, dans le cas de ce nœud, la forme est une chaîne et la quantité est un nombre (entier). Le nœud de données envoie la chaîne et le numéro sur demande."
+translations["Info_Data"] = "Ce nœud contient les données du puzzle qui doivent être transférées vers les nœuds de sortie.\n\nLes données peuvent être différentes choses, dans le cas de ce nœud, la forme est une chaîne et la quantité est un nombre (entier). Le nœud de données envoie la chaîne et le numéro sur demande."
+translations["Info_Alternate"] = "Ce nœud basculera entre la connexion supérieure et inférieure sur chaque donnée reçue. Considérez cela comme un interrupteur marche/arrêt. Lorsqu'il est activé, les données passeront par le haut, lorsqu'il est désactivé, les données passeront par le bas.\n\nCeci est utile lorsque vous devez diviser le même type de données afin qu'il aille dans 2 entrées différentes."
+translations["Info_Halt"] = "Ce nœud joue un rôle important en s'assurant que les données sont envoyées à la sortie dans le bon ordre. Chaque nœud d'arrêt se verra attribuer un numéro de commande en fonction de l'ordre dans lequel vous le connectez au nœud de sortie.\n\nIl est important de se rappeler que les nœuds d'arrêt doivent être directement connectés aux nœuds de sortie, sinon votre programme échouera. Cela n'a aucun sens d'arrêter les données au début de votre programme, vous devez traiter les données puis définir l'ordre à la fin pour améliorer les performances."
+translations["Info_If_Else"] = "Ce nœud exécutera les instructions du bloc if si l'expression est vraie. Si l'expression est fausse, les instructions du bloc else seront exécutées."
+translations["Info_View"] = "Ce nœud est utilisé pour déboguer la sortie des autres nœuds. Ce nœud n'affecte pas le score du puzzle."
+translations["Info_Absolute"] = "Ce nœud renverra la valeur absolue d'un nombre.\n\nDonc, si le nombre est négatif, ce nœud le renverra sous forme de nombre positif. Si le nombre est zéro ou positif, aucun changement n'aura lieu."
+translations["Info_Add"] = "Ce nœud ajoutera les données d'entrée supérieure et inférieure ensemble. Ce nœud fonctionne avec des nombres positifs et négatifs."
+translations["Info_Divide"] = "Ce nœud divisera les données d'entrée supérieures par les données inférieures et les sortira."
+translations["Info_Greater_Than"] = "Ce nœud vérifie les données d'entrée pour voir si elles sont supérieures à l'ensemble de conditions. S'il est supérieur, les données seront envoyées à la connexion supérieure, sinon à la connexion inférieure. Ceci est très similaire à un nœud if else.\n\nAstuce : Vous pouvez maintenir la touche Maj enfoncée tout en cliquant pour incrémenter de 5."
+translations["Info_Multiply"] = "Ce nœud multipliera les données d'entrée supérieures avec les données d'entrée inférieures. Ce nœud fonctionne avec des nombres positifs et négatifs."
+translations["Info_Subtract"] = "Ce nœud soustraira les données d'entrée inférieures des données d'entrée supérieures. Cela fonctionne avec des nombres positifs et négatifs."
+translations["Info_View"] = "Ce nœud est utilisé pour déboguer la sortie des autres nœuds. Ce nœud n'affecte pas le score du puzzle."
+translations["Info_Output"] = "Ce nœud est également le dernier endroit où les données sont envoyées. Les données envoyées à ce nœud doivent remplir les conditions définies. Si une condition échoue, l'ensemble du programme échouera."
+translations["Info_Ordered_Output"] = "Ce nœud nécessite que les données soient reçues dans un ordre spécifique et remplissent les conditions.\n\nUtilisez Halt Nodes pour ordonner les données. Lors de la connexion d'un nœud d'arrêt, il recevra un ordre basé sur le nombre de nœuds d'arrêt actuellement connectés à ce nœud."
+translations["Info_Limit"] = "Ce nœud se comporte de manière très similaire à un nœud If Else. La seule différence est que ce nœud utilise un compteur dans la condition if pour agir comme notre valeur de vérité. Une fois que ce compteur atteint 0, les instructions du bloc else seront exécutées."
+translations["Info_View_Example"] = "Voir l'exemple"
+
+translations["Error_No_Output_Connection_Where_To"] = "Pas de connexion de sortie. Les données doivent aller quelque part."
+translations["Error_No_Falsy_Output"] = "Pas de fausse connexion de sortie."
+translations["Error_No_Truthy_Falsy_Output"] = "Pas de connexions de sortie vraies ou fausses."
+translations["Error_No_Alternate_Output"] = "Pas de connexions de sortie à alterner."
+translations["Error_No_Alternate_Top_Output"] = "Pas de connexion de sortie supérieure pour alterner."
+translations["Error_No_Alternate_Bottom_Output"] = "Pas de connexion de sortie inférieure pour alterner."
+translations["Error_No_Bottom_Output"] = "Pas de connexion de sortie inférieure."
+translations["Error_No_Output_Connections"] = "Pas de connexions de sortie."
+translations["Error_Input_Data_Not_Match_Stored"] = "Les données d'entrée ne correspondent pas aux données stockées."
+translations["Error_No_Output_Connection"] = "Pas de connexion de sortie."
+translations["Error_Not_Ordered_Output_Node"] = "Connecté au nœud n'est pas un nœud de sortie ordonné. Connexion directe requise."
+translations["Error_Exceeded_square"] = "Les données (carré) ont dépassé la quantité requise."
+translations["Error_Exceeded_circle"] = "Les données (cercle) ont dépassé le montant requis."
+translations["Error_Exceeded_plus"] = "Les données (Plus) ont dépassé le montant requis."
+translations["Error_Exceeded_triangle"] = "Les données (Triangle) ont dépassé la quantité requise."
+translations["Error_No_Match"] = "Les données d'entrée ne correspondent pas aux données requises."
+translations["Error_Wrong_Order"] = "Les données d'entrée ne sont pas dans le bon ordre."
+
+translations["Graph_Reset_Center"] = "Graphique remis au centre."
+translations["Total_Nodes"] = "Nombre total de nœuds"
+translations["Total_Reroute_Nodes"] = "Total des nœuds de réacheminement"
+translations["Total_View_Nodes"] = "Nombre total de nœuds d'affichage"
+translations["Game_Saved"] = "Jeu enregistré."
 
 return translations

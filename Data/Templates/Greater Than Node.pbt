@@ -2429,7 +2429,6 @@ Assets {
           }
         }
         ParentId: 4436514661084900233
-        ChildIds: 5547190464183525044
         ChildIds: 14054873907051113629
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -2441,72 +2440,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 5547190464183525044
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 10429387950878000919
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 405
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Greater Than"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node checks the input data to see if it\'s greater than the condition set.  If it\'s greater, then the data will be sent to the top connection, otherwise the bottom.  This is very similar to an if else node."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "Tip:  You can hold Shift while clicking to increment by 5."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 310
-          }
-          Overrides {
-            Name: "cs:example_code"
-            AssetReference {
-              Id: 13777284914457991702
-            }
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 340
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

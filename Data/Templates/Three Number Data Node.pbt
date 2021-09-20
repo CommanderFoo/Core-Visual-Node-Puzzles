@@ -1571,7 +1571,6 @@ Assets {
           }
         }
         ParentId: 11238915648939458473
-        ChildIds: 6242688142110033254
         ChildIds: 13620352532437208028
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -1583,66 +1582,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 6242688142110033254
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 6123404805138367056
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 0
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Data"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node holds the data for the puzzle that needs to be transferred to the output nodes."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "Data can be different things, in the case of this node, the shape is a String and the quantity is a Number (Integer).  The Data node sends the string and number out when requested."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 230
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

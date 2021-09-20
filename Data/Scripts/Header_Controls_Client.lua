@@ -74,7 +74,7 @@ center_graph_button.hoveredEvent:Connect(API.play_hover_sound)
 
 center_graph_button.clickedEvent:Connect(function()
 	Events.Broadcast("reset_graph", true)
-	Events.Broadcast("add_log_message", "Graph reset to center.", "Info", false)
+	Events.Broadcast("add_log_message", Localization.get_text("Graph_Reset_Center"), "Info", false)
 	API.play_click_sound()
 end)
 
@@ -195,7 +195,7 @@ run_edit_button.clickedEvent:Connect(function()
 			end
 		end
 
-		Events.Broadcast("add_log_message", "Total Nodes: " .. tostring(total_nodes) .. " - Total Reroute Nodes: " .. tostring(total_reroute) .. " - Total View Nodes: " .. tostring(total_view) .. ".", "Info", false)
+		Events.Broadcast("add_log_message", Localization.get_text("Total_Nodes") .. ": " .. tostring(total_nodes) .. " - " .. Localization.get_text("Total_Reroute_Nodes") .. ": " .. tostring(total_reroute) .. " - " .. Localization.get_text("Total_View_Nodes") .. ": " .. tostring(total_view) .. ".", "Info", false)
 
 		Events.Broadcast("puzzle_run", speed)
 		Events.Broadcast("stop_auto_save")
@@ -387,7 +387,7 @@ end)
 Events.Connect("saved", function()
 	Task.Wait(2)
 
-	Events.Broadcast("add_log_message", "Game saved.", "Info", false)
+	Events.Broadcast("add_log_message", Localization.get_text("Game_Saved"), "Info", false)
 
 	if(not ui_is_disabled) then
 		save_button.isInteractable = true

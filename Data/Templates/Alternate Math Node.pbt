@@ -2007,7 +2007,6 @@ Assets {
         }
         ParentId: 2284859506447171385
         ChildIds: 8547121732820342287
-        ChildIds: 9135373175906913985
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -2055,72 +2054,6 @@ Assets {
         Script {
           ScriptAsset {
             Id: 17723035598768826219
-          }
-        }
-      }
-      Objects {
-        Id: 9135373175906913985
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 5947146906938873956
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "Alternate"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 520
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 590
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node will switch between the top and bottom connection on each data received.  Think of this as an On and Off switch.  When it is On, the data will go through the top, when it is Off the data will go through the bottom."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "This is useful when you need to split up the same data type so that it goes into 2 different inputs."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 370
-          }
-          Overrides {
-            Name: "cs:example_code"
-            AssetReference {
-              Id: 176769903754432965
-            }
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 470
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
           }
         }
       }

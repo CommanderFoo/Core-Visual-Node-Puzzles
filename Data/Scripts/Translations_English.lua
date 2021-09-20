@@ -32,7 +32,7 @@ translations["Node_Name_Math_Greater_Than"] = translations["Node_Greater_Than"]
 translations["Node_Name_Math_Absolute"] = translations["Node_Absolute"]
 translations["Node_Name_Math_Add"] = translations["Node_Add"]
 translations["Node_Name_Math_Multiply"] = translations["Node_Multiply"]
-translations["Node_Name_Math_Substract"] = translations["Node_Subtract"] 
+translations["Node_Name_Math_Subtract"] = translations["Node_Subtract"] 
 
 translations["Node_Name_Misc_View"] = translations["Node_View"]
 
@@ -92,7 +92,7 @@ translations["Glossary_Math_Add_Node_Title"] = "ADD"
 translations["Glossary_Math_Add_Node_Desc"] = "The Add Node will add the number data incoming top and bottom, and output the number data added together. This supports negative numbers."
 translations["Glossary_Math_Multiply_Node_Title"] = "MULTIPLY"
 translations["Glossary_Math_Multiply_Node_Desc"] = "The Multiply Node will multiply the top and bottom incoming number data, and output it multiplied. This supports negative numbers."
-translations["Glossary_Math_Subtract_Node_Title"] = "SUBSTRACT"
+translations["Glossary_Math_Subtract_Node_Title"] = "SUBTRACT"
 translations["Glossary_Math_Subtract_Node_Desc"] = "The Subtract Node will take away the bottom number data from the top number data, and output it. This supports negative numbers."
 
 translations["Glossary_Misc_Nodes"] = "OTHER"
@@ -183,7 +183,45 @@ translations["Result_Title"] = "Well Done!"
 translations["Result_Edit"] = "Edit"
 translations["Result_Next"] = "Next"
 
-translations["Info_Data_1"] = "This node holds the data for the puzzle that needs to be transferred to the output nodes."
-translations["Info_Data_2"] = "Data can be different things, in the case of this node, the shape is a String and the quantity is a Number (Integer).  The Data node sends the string and number out when requested."
+translations["Info_Data"] = "This node holds the data for the puzzle that needs to be transferred to the output nodes.\n\nData can be different things, in the case of this node, the shape is a String and the quantity is a Number (Integer).  The Data node sends the string and number out when requested."
+translations["Info_Alternate"] = "This node will switch between the top and bottom connection on each data received.  Think of this as an On and Off switch.  When it is On, the data will go through the top, when it is Off the data will go through the bottom.\n\nThis is useful when you need to split up the same data type so that it goes into 2 different inputs."
+translations["Info_Halt"] = "This node plays an important role in making sure that the data is sent to the output in the correct order.  Each Halt node will be assigned an order number based on the order you connect it to the Output Node.\n\nIt is important to remember that Halt Nodes must be directly connected to Output Nodes, otherwise your program will fail.  It makes no sense halting data early in your program, you should process data then set the order at the end to improve performance."
+translations["Info_If_Else"] = "This node will execute the if block statements if the expression is true.  If the expression is false then the statements in the else block will be executed."
+translations["Info_View"] = "This node is used for debugging the output of other nodes. This node does not effect the puzzle score."
+translations["Info_Absolute"] = "This node will return the absolute value of a number.\n\nSo if the number is negative, then this node will return it as a positive number.  If the number is zero, or positive, then no change will take place."
+translations["Info_Add"] = "This node will add the top and bottom input data together. This node works with positive and negative numbers."
+translations["Info_Divide"] = "This node will divide the top by the bottom input data, and output it."
+translations["Info_Greater_Than"] = "This node checks the input data to see if it's greater than the condition set.  If it's greater, then the data will be sent to the top connection, otherwise the bottom.  This is very similar to an if else node.\n\nTip:  You can hold Shift while clicking to increment by 5."
+translations["Info_Multiply"] = "This node will multiple the top input data with the bottom input data. This node works with positive and negative numbers."
+translations["Info_Subtract"] = "This node will substact the bottom input data away from the top input data. This works with positive and negative numbers."
+translations["Info_View"] = "This node is used for debugging the output of other nodes. This node does not effect the puzzle score."
+translations["Info_Output"] = "This node is the final place the data is sent too.  Data sent to this node must meet the conditions set.  If any condition fails, then the whole program will fail to complete."
+translations["Info_Ordered_Output"] = "This node requires data to be received in a specific order and meet the conditions.\n\nUse Halt Nodes to order the data.  When connecting a Halt Node, it will receive an order based on how many Halt Nodes are currently connected to this node."
+translations["Info_Limit"] = "This node behaves very similar to a If Else node.  The only difference is this node uses a counter in the if condition to act as our truthy value.  Once that counter hits 0, the else block statements will be executed."
+translations["Info_View_Example"] = "View Example"
+
+translations["Error_No_Output_Connection_Where_To"] = "No output connection. The data needs to go somewhere."
+translations["Error_No_Falsy_Output"] = "No false output connection."
+translations["Error_No_Truthy_Falsy_Output"] = "No truth or false output connections."
+translations["Error_No_Alternate_Output"] = "No output connections to alternate."
+translations["Error_No_Alternate_Top_Output"] = "No top output connection to alternate."
+translations["Error_No_Alternate_Bottom_Output"] = "No bottom output connection to alternate."
+translations["Error_No_Bottom_Output"] = "No bottom output connection."
+translations["Error_No_Output_Connections"] = "No output connections."
+translations["Error_Input_Data_Not_Match_Stored"] = "Input data does not match stored data."
+translations["Error_No_Output_Connection"] = "No output connection."
+translations["Error_Not_Ordered_Output_Node"] = "Connected to node is not an Ordered Output Node. Direct connection required."
+translations["Error_Exceeded_square"] = "Data (Square) has exceeded required amount."
+translations["Error_Exceeded_circle"] = "Data (Circle) has exceeded required amount."
+translations["Error_Exceeded_plus"] = "Data (Plus) has exceeded required amount."
+translations["Error_Exceeded_triangle"] = "Data (Triangle) has exceeded required amount."
+translations["Error_No_Match"] = "Input data does not match required data."
+translations["Error_Wrong_Order"] = "Input data is not in the correct order."
+
+translations["Graph_Reset_Center"] = "Graph reset to center."
+translations["Total_Nodes"] = "Total Nodes"
+translations["Total_Reroute_Nodes"] = "Total Reroute Nodes"
+translations["Total_View_Nodes"] = "Total View Nodes"
+translations["Game_Saved"] = "Game saved"
 
 return translations

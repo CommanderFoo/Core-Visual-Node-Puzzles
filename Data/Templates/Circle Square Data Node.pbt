@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 3627026760658224672
+        ParentId: 4575669187186454556
         ChildIds: 184742459557271892
         ChildIds: 9907717707020121914
         ChildIds: 16750887938602607749
@@ -1374,7 +1374,6 @@ Assets {
         }
         ParentId: 16051239651173823158
         ChildIds: 12351572185236289003
-        ChildIds: 5320040055262698203
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
         }
@@ -1440,66 +1439,6 @@ Assets {
         Script {
           ScriptAsset {
             Id: 3049456538407593852
-          }
-        }
-      }
-      Objects {
-        Id: 5320040055262698203
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 9205861193306607666
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 0
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Data"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node holds the data for the puzzle that needs to be transferred to the output nodes."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "Data can be different things, in the case of this node, the shape is a String and the quantity is a Number (Integer).  The Data node sends the string and number out when requested."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 230
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
           }
         }
       }

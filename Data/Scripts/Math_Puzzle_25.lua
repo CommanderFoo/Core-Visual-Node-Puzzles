@@ -29,7 +29,7 @@ function show_result()
 
 		Events.Broadcast("disable_header_ui", true)
 		Events.Broadcast("puzzle_complete")
-		Events.Broadcast("show_result", total_puzzle_score, gold_score, silver_score, bronze_score)
+		Events.Broadcast("show_result", total_puzzle_score, gold_score, silver_score, bronze_score, true)
 	end
 end
 

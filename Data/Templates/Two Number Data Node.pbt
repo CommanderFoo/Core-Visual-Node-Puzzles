@@ -1381,7 +1381,6 @@ Assets {
           }
         }
         ParentId: 14228435501614426189
-        ChildIds: 1956922158816197874
         ChildIds: 6990937859075314802
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -1393,66 +1392,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 1956922158816197874
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 11955917864879713938
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:info_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 0
-          }
-          Overrides {
-            Name: "cs:title"
-            String: "Data"
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node holds the data for the puzzle that may need adjusting and possible sent to an output node."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: "This node holds numbers only.  The top number is the value that will be sent to connecting nodes.  The bottom number is how many of that number will be sent out."
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 230
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

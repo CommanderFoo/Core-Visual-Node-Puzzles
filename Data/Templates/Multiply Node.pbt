@@ -2276,7 +2276,6 @@ Assets {
           }
         }
         ParentId: 13200976154950639386
-        ChildIds: 5485498691863565900
         ChildIds: 9059844072248880277
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -2288,70 +2287,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 5485498691863565900
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 15472963079732817805
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "Multiple"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 520
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 275
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node will multiple the top input data with the bottom input data. This node works with positive and negative numbers."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: ""
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 365
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

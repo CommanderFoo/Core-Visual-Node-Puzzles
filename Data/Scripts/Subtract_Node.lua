@@ -4,7 +4,7 @@ local evts = {}
 local node = nil
 
 function init(node_data)
-	node = API.Node_Type.Substract:new(script.parent.parent, {
+	node = API.Node_Type.Subtract:new(script.parent.parent, {
 
 		node_time = 0.30
 

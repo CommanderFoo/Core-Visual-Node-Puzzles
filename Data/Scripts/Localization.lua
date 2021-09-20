@@ -17,6 +17,14 @@ function Localization.set_language_from_index(index)
 	end
 end
 
+function Localization.id_exists(id)
+	if(Localization[Localization.language][id] ~= nil) then
+		return true
+	end
+
+	return false
+end
+
 function Localization.get_text(id)
 	if(Localization[Localization.language][id] ~= nil) then
 		return Localization[Localization.language][id]

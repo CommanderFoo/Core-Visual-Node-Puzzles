@@ -1491,7 +1491,6 @@ Assets {
           }
         }
         ParentId: 12741332020001339387
-        ChildIds: 4361948269057860685
         ChildIds: 7799348181171595105
         Collidable_v2 {
           Value: "mc:ecollisionsetting:forceoff"
@@ -1503,70 +1502,6 @@ Assets {
           Value: "mc:ecollisionsetting:forceoff"
         }
         NetworkContext {
-        }
-      }
-      Objects {
-        Id: 4361948269057860685
-        Name: "Node_Information_Data"
-        Transform {
-          Location {
-          }
-          Rotation {
-          }
-          Scale {
-            X: 1
-            Y: 1
-            Z: 1
-          }
-        }
-        ParentId: 15639536475964842195
-        UnregisteredParameters {
-          Overrides {
-            Name: "cs:title"
-            String: "View"
-          }
-          Overrides {
-            Name: "cs:button_offset"
-            Float: 520
-          }
-          Overrides {
-            Name: "cs:info_height"
-            Float: 250
-          }
-          Overrides {
-            Name: "cs:info_1_text"
-            String: "This node is used for debugging the output of other nodes. This node does not effect the puzzle score."
-          }
-          Overrides {
-            Name: "cs:info_2_text"
-            String: ""
-          }
-          Overrides {
-            Name: "cs:info_2_offset"
-            Float: 365
-          }
-          Overrides {
-            Name: "cs:example_height"
-            Float: 470
-          }
-          Overrides {
-            Name: "cs:show_code"
-            Bool: false
-          }
-        }
-        Collidable_v2 {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Visible_v2 {
-          Value: "mc:evisibilitysetting:inheritfromparent"
-        }
-        CameraCollidable {
-          Value: "mc:ecollisionsetting:inheritfromparent"
-        }
-        Script {
-          ScriptAsset {
-            Id: 14631171582364972515
-          }
         }
       }
       Objects {

@@ -1,4 +1,5 @@
 local API = require(script:GetCustomProperty("API"))
+local Localization = require(script:GetCustomProperty("Localization"))
 
 local triangle_count = script:GetCustomProperty("triangle_count"):WaitForObject()
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()
@@ -48,7 +49,7 @@ function init(node_data)
 						triangle_complete = true
 					elseif(total_triangle > amount) then
 						if(not has_sent_exceeded_triangle_error) then
-							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 							has_sent_exceeded_triangle_error = true
 						end
 
@@ -72,7 +73,7 @@ function init(node_data)
 						circle_complete = true
 					elseif(total_circle > amount) then
 						if(not has_sent_exceeded_circle_error) then
-							node:has_errors("Data (" .. data.condition .. ") has exceeded required amount.")
+							node:has_errors(Localization.get_text("Error_Exceeded_" .. data.condition))
 							has_sent_exceeded_circle_error = true
 						end
 
@@ -80,7 +81,7 @@ function init(node_data)
 					end
 				else
 					if(not has_sent_condition_not_met_error) then
-						node:has_errors("Input data does not match required data.")
+						node:has_errors(Localization.get_text("Error_No_Match"))
 						has_sent_condition_not_met_error = true
 					end
 
