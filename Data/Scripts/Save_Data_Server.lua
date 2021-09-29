@@ -2,7 +2,20 @@ local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 local Logic_Solutions = require(script:GetCustomProperty("logic_puzzle_solutions"))
 local Math_Solutions = require(script:GetCustomProperty("math_puzzle_solutions"))
 
+local players = {}
+
 local clear_player_data = false
+
+local function get_play_time(player)
+	local data = Storage.GetPlayerData(player)
+	local total = data.pt or 0
+	local start = players[player.id]
+
+	total = total + (time() - start)
+	players[player.id] = time()
+
+	return total
+end
 
 -- Logic Puzzle@Internal ID|Unique ID|Position|If / Else Condition|Limit|Output Connections (Index;Unique ID~Index)|Halt Order:
 -- Math  Puzzle@Internal ID|Unique ID|Position|If / Else Condition|Limit|Output Connections (Index;Unique ID~Index)|Halt Order:
@@ -44,10 +57,14 @@ function save_data(player)
 	data.lp_p = player.serverUserData.logic_progress or {}
 	data.mp_p = player.serverUserData.math_progress or {}
 
+	data.pt = get_play_time(player)
+	
+	Events.Broadcast("update_time_played", player, data.pt, data.li)
+
 	--data = {}
 
-	--print(YOOTIL.JSON.encode(data.mnd))
-	--print(YOOTIL.JSON.encode(data.lnd))
+	print(YOOTIL.JSON.encode(data.mnd))
+	print(YOOTIL.JSON.encode(data.lnd))
 	
 	Storage.SetPlayerData(player, data)
 end
@@ -234,5 +251,15 @@ Events.ConnectForPlayer("save_puzzle_completed", function(player, award, score, 
 		end
 
 		player:SetPrivateNetworkedData("math_progress", player.serverUserData.math_progress)
+	end
+end)
+
+Game.playerJoinedEvent:Connect(function(player)
+	players[player.id] = time()
+end)
+
+Events.Connect("cleanup", function(player)
+	if(players[player.id] ~= nil) then
+		player = nil
 	end
 end)

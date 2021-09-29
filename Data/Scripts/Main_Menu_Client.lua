@@ -80,6 +80,13 @@ local buttons_panels = {
 		button = script:GetCustomProperty("node_glossary_button"):WaitForObject(),
 		panel = script:GetCustomProperty("node_glossary_panel"):WaitForObject()
 
+	},
+
+	{
+		
+		button = script:GetCustomProperty("leaderboards_button"):WaitForObject(),
+		panel = script:GetCustomProperty("leaderboards_panel"):WaitForObject()
+
 	}
 
 }

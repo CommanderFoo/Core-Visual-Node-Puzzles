@@ -749,6 +749,18 @@ Objects {
         SelfId: 3789305095802256169
       }
     }
+    Overrides {
+      Name: "cs:Leaderboard_Button"
+      ObjectReference {
+        SelfId: 3954294681918459148
+      }
+    }
+    Overrides {
+      Name: "cs:Leaderboard_Title"
+      ObjectReference {
+        SelfId: 1908465339680359258
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -786,6 +798,7 @@ Objects {
   ChildIds: 1419306634217875590
   ChildIds: 15294849702650267166
   ChildIds: 15241202507953327223
+  ChildIds: 3388609616151916622
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -797,6 +810,50 @@ Objects {
   }
   NetworkContext {
     Type: Server
+  }
+}
+Objects {
+  Id: 3388609616151916622
+  Name: "Leaderboard_Server"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 917384028508757458
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:time_played_lb"
+      NetReference {
+        Key: "1D335DDA535A098F"
+        Type {
+          Value: "mc:enetreferencetype:leaderboard"
+        }
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 14827907303976948592
+    }
   }
 }
 Objects {
@@ -972,6 +1029,7 @@ Objects {
   ChildIds: 12690753362760052858
   ChildIds: 8026521745831996317
   ChildIds: 6237632426768673951
+  ChildIds: 10548884431483506911
   Collidable_v2 {
     Value: "mc:ecollisionsetting:forceoff"
   }
@@ -982,6 +1040,56 @@ Objects {
     Value: "mc:ecollisionsetting:forceoff"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 10548884431483506911
+  Name: "Leaderboard_Client"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 2456857752610234367
+  UnregisteredParameters {
+    Overrides {
+      Name: "cs:time_played_lb"
+      NetReference {
+        Key: "1D335DDA535A098F"
+        Type {
+          Value: "mc:enetreferencetype:leaderboard"
+        }
+      }
+    }
+    Overrides {
+      Name: "cs:entries"
+      ObjectReference {
+        SelfId: 10508859645490681876
+      }
+    }
+  }
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  EditorIndicatorVisibility {
+    Value: "mc:eindicatorvisibility:visiblewhenselected"
+  }
+  Script {
+    ScriptAsset {
+      Id: 10127259921531346729
+    }
   }
 }
 Objects {
@@ -1415,6 +1523,18 @@ Objects {
       Name: "cs:Localization"
       AssetReference {
         Id: 15226941556822594646
+      }
+    }
+    Overrides {
+      Name: "cs:leaderboards_button"
+      ObjectReference {
+        SelfId: 632972571232249204
+      }
+    }
+    Overrides {
+      Name: "cs:leaderboards_panel"
+      ObjectReference {
+        SelfId: 1426502818373825600
       }
     }
   }

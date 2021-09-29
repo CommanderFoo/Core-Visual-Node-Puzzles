@@ -10,9 +10,9 @@ end)
 
 --@TODO: REMOVE
 
-local load_solutions = true
-local force_load_logic_puzzle = 25
-local force_load_math_puzzle = 25
+local load_solutions = false
+--local force_load_logic_puzzle = 25
+--local force_load_math_puzzle = 25
 
 -- Prefetch node data and send early.
 
@@ -61,6 +61,7 @@ Game.playerJoinedEvent:Connect(on_join)
 
 Game.playerLeftEvent:Connect(function(p)
 	Events.Broadcast("save_data", p)
+	Events.Broadcast("cleanup", p)
 end)
 
 Events.ConnectForPlayer("load_puzzle_id", function(player, id, is_math)

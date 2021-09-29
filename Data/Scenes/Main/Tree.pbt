@@ -574,6 +574,7 @@ Objects {
   ChildIds: 5253677316244535897
   ChildIds: 9987044696563398802
   ChildIds: 14801045368449505191
+  ChildIds: 15627948922945447751
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -612,6 +613,67 @@ Objects {
       TargetAnchor {
         Anchor {
           Value: "mc:euianchor:topleft"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 15627948922945447751
+  Name: "Background"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 3560492653544681397
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:forceoff"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 200
+    Height: 200
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    UseParentWidth: true
+    UseParentHeight: true
+    Image {
+      Brush {
+      }
+      Color {
+        G: 0.0177083015
+        B: 0.0147571275
+        A: 0.804
+      }
+      TeamSettings {
+      }
+      GameId: "e57b9e/visual-node-puzzles"
+      ScreenshotIndex: 1
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
         }
       }
     }
@@ -4745,6 +4807,7 @@ Objects {
   ChildIds: 140392818205184969
   ChildIds: 14844984461882649663
   ChildIds: 16320969655512262863
+  ChildIds: 632972571232249204
   ChildIds: 11937130591100788327
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
@@ -4757,26 +4820,25 @@ Objects {
   }
   Control {
     Width: 300
-    Height: 100
-    UIY: -50
+    Height: 560
+    UIX: 150
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
       }
     }
-    UseParentWidth: true
     Panel {
       Opacity: 1
     }
     AnchorLayout {
       SelfAnchor {
         Anchor {
-          Value: "mc:euianchor:bottomcenter"
+          Value: "mc:euianchor:middleleft"
         }
       }
       TargetAnchor {
         Anchor {
-          Value: "mc:euianchor:bottomcenter"
+          Value: "mc:euianchor:middleleft"
         }
       }
     }
@@ -4810,7 +4872,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: 700
+    UIY: 480
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -4944,6 +5006,167 @@ Objects {
   }
 }
 Objects {
+  Id: 632972571232249204
+  Name: "Leaderboards"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 5253677316244535897
+  ChildIds: 3954294681918459148
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 280
+    Height: 80
+    UIY: 400
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    Button {
+      FontColor {
+        A: 1
+      }
+      FontSize: 27
+      ButtonColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.4
+      }
+      HoveredColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.8
+      }
+      PressedColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.8
+      }
+      DisabledColor {
+        G: 0.109375156
+        B: 0.0895477682
+        A: 0.4
+      }
+      Brush {
+        Id: 9402814787072448834
+      }
+      IsButtonEnabled: true
+      ClickMode {
+        Value: "mc:ebuttonclickmode:default"
+      }
+      Font {
+        Id: 18375965876900075365
+      }
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:center"
+      }
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:topcenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:topcenter"
+        }
+      }
+    }
+  }
+}
+Objects {
+  Id: 3954294681918459148
+  Name: "UI Text Box"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 632972571232249204
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  CameraCollidable {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Control {
+    Width: 200
+    Height: 42
+    RenderTransformPivot {
+      Anchor {
+        Value: "mc:euianchor:middlecenter"
+      }
+    }
+    UseParentWidth: true
+    Text {
+      Label: "LEADERBOARDS"
+      Color {
+        R: 1
+        G: 0.898
+        B: 0.898
+        A: 1
+      }
+      Size: 22
+      Justification {
+        Value: "mc:etextjustify:center"
+      }
+      AutoWrapText: true
+      Font {
+        Id: 18375965876900075365
+      }
+      VerticalJustification {
+        Value: "mc:everticaljustification:top"
+      }
+      OutlineColor {
+        A: 1
+      }
+      OutlineSize: 2
+    }
+    AnchorLayout {
+      SelfAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+      TargetAnchor {
+        Anchor {
+          Value: "mc:euianchor:middlecenter"
+        }
+      }
+    }
+  }
+}
+Objects {
   Id: 16320969655512262863
   Name: "Donate"
   Transform {
@@ -4971,7 +5194,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: 420
+    UIY: 320
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -5132,7 +5355,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: 260
+    UIY: 320
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -5293,7 +5516,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: 140
+    UIY: 240
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -5454,7 +5677,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: -140
+    UIY: 160
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -5616,7 +5839,7 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: -420
+    UIY: 80
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -6154,7 +6377,6 @@ Objects {
   Control {
     Width: 280
     Height: 80
-    UIX: -700
     RenderTransformPivot {
       Anchor {
         Value: "mc:euianchor:middlecenter"
@@ -6701,12 +6923,15 @@ Objects {
       Brush {
       }
       Color {
-        G: 0.0177083015
-        B: 0.0147571275
-        A: 0.804
+        R: 1
+        G: 1
+        B: 1
+        A: 1
       }
       TeamSettings {
       }
+      GameId: "e57b9e/visual-node-puzzles"
+      ScreenshotIndex: 1
     }
     AnchorLayout {
       SelfAnchor {
@@ -6842,7 +7067,6 @@ Objects {
     TeamSettings {
     }
     Vfx {
-      AutoPlay: true
     }
   }
   Relevance {
@@ -9280,7 +9504,7 @@ Objects {
     }
     UseParentWidth: true
     Button {
-      Label: "Espa\303\261ola"
+      Label: "Espa\303\261ol"
       FontColor {
         R: 1
         G: 1

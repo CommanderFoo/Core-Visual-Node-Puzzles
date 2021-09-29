@@ -37,7 +37,7 @@ end
 
 function Localization.get_text(id)
 	if(Localization[Localization.language][id] ~= nil) then
-		return Localization[Localization.language][id]
+		return CoreString.Trim(Localization[Localization.language][id])
 	elseif(Localization["English"][id] ~= nil) then
 		print("Localization Missing: ", id)
 
