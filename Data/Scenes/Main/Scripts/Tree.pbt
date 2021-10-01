@@ -1061,6 +1061,42 @@ Objects {
         SelfId: 10508859645490681876
       }
     }
+    Overrides {
+      Name: "cs:english"
+      ObjectReference {
+        SelfId: 1028199270086421053
+      }
+    }
+    Overrides {
+      Name: "cs:french"
+      ObjectReference {
+        SelfId: 6291427140716087977
+      }
+    }
+    Overrides {
+      Name: "cs:german"
+      ObjectReference {
+        SelfId: 18182314609599837411
+      }
+    }
+    Overrides {
+      Name: "cs:spanish"
+      ObjectReference {
+        SelfId: 8713324170632528275
+      }
+    }
+    Overrides {
+      Name: "cs:chinese"
+      ObjectReference {
+        SelfId: 5012182230059167936
+      }
+    }
+    Overrides {
+      Name: "cs:language_stats"
+      ObjectReference {
+        SelfId: 10031725744810399646
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
