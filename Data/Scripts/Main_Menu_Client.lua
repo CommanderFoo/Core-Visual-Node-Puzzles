@@ -270,7 +270,7 @@ function open_up_math_puzzle(id)
 	entry:GetCustomProperty("name_txt"):GetObject().x = 15
 end
 
-Events.Connect("update_logic_list", function(data)
+local function update_logic_list(data)
 	if(data ~= nil) then
 		local last_id = 0
 
@@ -326,9 +326,9 @@ Events.Connect("update_logic_list", function(data)
 			open_up_logic_puzzle(last_id + 1)
 		end
 	end
-end)
+end
 
-Events.Connect("update_math_list", function(data)
+local function update_math_list(data)
 	if(data ~= nil) then
 		local last_id = 0
 
@@ -384,7 +384,10 @@ Events.Connect("update_math_list", function(data)
 			open_up_math_puzzle(last_id + 1)
 		end
 	end
-end)
+end
+
+Events.Connect("update_logic_list", update_logic_list)
+Events.Connect("update_math_list", update_math_list)
 
 local logic_offset = 0
 local math_offset = 0
@@ -478,3 +481,19 @@ Events.Connect("translate", function()
 		entry:FindChildByName("Puzzle Name").text = Localization.get_text("PUZZLE") .. " #" .. tostring(i)
 	end
 end)
+
+function update_lists(player, key)
+	local data = local_player:GetPrivateNetworkedData(key)
+
+	if(key == "logic_progress") then
+		update_logic_list(data)
+	elseif(key == "math_progress") then
+		update_math_list(data)
+	end
+end
+
+local_player.privateNetworkedDataChangedEvent:Connect(update_lists)
+
+for i, key in ipairs(local_player:GetPrivateNetworkedDataKeys()) do
+    update_lists(local_player, key)
+end

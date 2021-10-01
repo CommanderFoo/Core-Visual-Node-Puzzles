@@ -8,7 +8,7 @@ local songs = music_folder:GetChildren()
 local current = nil
 local can_change_song = true
 local total_play_time = 0
-local allowed_play_time = 60
+local allowed_play_time = 120
 
 local function get_song_name(song_name)
 	return song_name:match("\"(.+)\"")

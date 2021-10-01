@@ -210,7 +210,7 @@ end)
 speed_up_button.hoveredEvent:Connect(API.play_hover_sound)
 
 speed_up_button.clickedEvent:Connect(function()
-	if(speed < 20) then
+	if(speed < 10) then
 		speed = speed + 1
 	end
 
@@ -230,7 +230,7 @@ slow_down_button.clickedEvent:Connect(function()
 
 	current_speed.text = tostring(speed)
 
-	YOOTIL.Events.broadcast_to_server("update_player_prefs", speed, showing_nodes)
+	YOOTIL.Events.broadcast_to_server("update_game_settings", speed, showing_nodes)
 	
 	API.play_click_sound()
 end)

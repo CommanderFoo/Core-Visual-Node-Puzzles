@@ -1,6 +1,17 @@
 local time_played_lb = script:GetCustomProperty("time_played_lb")
 local entries = script:GetCustomProperty("entries"):WaitForObject()
 
+local english = script:GetCustomProperty("english"):WaitForObject()
+local french = script:GetCustomProperty("french"):WaitForObject()
+local german = script:GetCustomProperty("german"):WaitForObject()
+local spanish = script:GetCustomProperty("spanish"):WaitForObject()
+local chinese = script:GetCustomProperty("chinese"):WaitForObject()
+local language_stats = script:GetCustomProperty("language_stats"):WaitForObject()
+
+local languages = { 0, 0, 0, 0, 0 }
+local local_player = Game.GetLocalPlayer()
+local showing_stats = false
+
 local function long_time_string(the_time)
 	if(not the_time) then
 		return "--"
@@ -57,6 +68,12 @@ local function long_time_string(the_time)
 end
 
 local updater = Task.Spawn(function()
+	english.text = "0"
+	french.text = "0"
+	german.text = "0"
+	spanish.text = "0"
+	chinese.text = "0"
+
 	if(Leaderboards.HasLeaderboards()) then
 		local time_played_results = Leaderboards.GetLeaderboard(time_played_lb, LeaderboardType.GLOBAL)
 
@@ -73,6 +90,10 @@ local updater = Task.Spawn(function()
 				if(entry ~= nil) then
 					entry:FindDescendantByName("Name").text = v.name
 					entry:FindDescendantByName("Time Played").text = long_time_string(v.score)
+
+					if(tonumber(v.additionalData) ~= nil) then
+						languages[tonumber(v.additionalData)] = languages[tonumber(v.additionalData)] + 1
+					end
 				end
 			
 				counter = counter + 1
@@ -83,3 +104,21 @@ end)
 
 updater.repeatInterval = 60
 updater.repeatCount = -1
+
+Input.actionPressedEvent:Connect(function(player, action)
+	if(action == "Languages") then
+		if(showing_stats) then
+			language_stats.visibility = Visibility.FORCE_OFF
+			showing_stats = false
+		else
+			english.text = tostring(languages[1])
+			french.text = tostring(languages[2])
+			german.text = tostring(languages[3])
+			spanish.text = tostring(languages[4])
+			chinese.text = tostring(languages[5])
+
+			language_stats.visibility = Visibility.FORCE_ON
+			showing_stats = true
+		end
+	end
+end)
