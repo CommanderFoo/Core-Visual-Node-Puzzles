@@ -106,6 +106,10 @@ updater.repeatInterval = 60
 updater.repeatCount = -1
 
 Input.actionPressedEvent:Connect(function(player, action)
+	if(player.name ~= "CommanderFoo" and player.name ~= "coreslinkous" and player.name ~= "disastronaut") then
+		return
+	end
+
 	if(action == "Language Stats") then
 		if(showing_stats) then
 			language_stats.visibility = Visibility.FORCE_OFF

@@ -5,4 +5,5 @@ Assets {
   TextAsset {
   }
   SerializationVersion: 100
+  VirtualFolderPath: "Misc"
 }

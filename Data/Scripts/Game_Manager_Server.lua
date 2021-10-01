@@ -10,13 +10,15 @@ end)
 
 --@TODO: REMOVE
 
-local load_solutions = false
-local force_load_logic_puzzle = 25
-local force_load_math_puzzle = 25
+local load_solutions = true
+local force_load_logic_puzzle = 1
+local force_load_math_puzzle = 1
 
 -- Prefetch node data and send early.
 
 local function on_join(player)
+	player:GrantRewardPoints(50000, "Daily Login")
+	
 	player.isVisible = false
 	player.movementControlMode = MovementControlMode.NONE
 	player.lookControlMode = LookControlMode.NONE

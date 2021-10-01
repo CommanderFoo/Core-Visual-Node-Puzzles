@@ -744,7 +744,7 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:Leaderboard_Title"
+      Name: "cs:Column_Time_Played"
       ObjectReference {
         SelfId: 1908465339680359258
       }

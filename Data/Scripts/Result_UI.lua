@@ -46,7 +46,7 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 		bronze_award:GetChildren()[1].text = string.format("%.0f", bronze_score)
 	end
 
-	Events.Broadcast("add_log_message", puzzle_name.text .. " " .. Localization.get_text("Score") .. ": " .. tostring(score), "Puzzle Info", false)
+	Events.Broadcast("add_log_message", puzzle_name.text .. " " .. Localization.get_text("Score") .. ": " .. YOOTIL.Utils.number_format(score), "Puzzle Info", false)
 
 	local award = 0
 
