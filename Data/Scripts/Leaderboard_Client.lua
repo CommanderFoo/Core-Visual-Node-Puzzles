@@ -106,7 +106,7 @@ updater.repeatInterval = 60
 updater.repeatCount = -1
 
 Input.actionPressedEvent:Connect(function(player, action)
-	if(action == "Languages") then
+	if(action == "Language Stats") then
 		if(showing_stats) then
 			language_stats.visibility = Visibility.FORCE_OFF
 			showing_stats = false

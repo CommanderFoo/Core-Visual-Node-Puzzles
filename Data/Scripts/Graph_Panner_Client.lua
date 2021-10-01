@@ -24,21 +24,21 @@ local function tween_graph()
 	end
 end
 
-local_player.bindingPressedEvent:Connect(function(_, binding)
-	if(binding == YOOTIL.Input.right_button) then
+Input.actionPressedEvent:Connect(function(player, action)
+	if(action == "Pan Graph") then
 		local pos = UI.GetCursorPosition()
 
 		offset.x = pos.x - graph.x
 		offset.y = pos.y - graph.y
 
 		is_moving = true
-	elseif(binding == YOOTIL.Input.f) then
+	elseif(action == "Center Graph") then
 		tween_graph()
 	end
 end)
 
-local_player.bindingReleasedEvent:Connect(function(_, binding)
-	if(binding == "ability_secondary") then
+Input.actionReleasedEvent:Connect(function(player, action)
+	if(action == "Pan Graph") then
 		is_moving = false
 	end
 end)
@@ -70,19 +70,19 @@ function Tick(dt)
 	elseif(can_move) then
 		local speed = 1
 
-		if(local_player:IsBindingPressed(YOOTIL.Input.left_shift)) then
+		if(Input.IsActionHeld(local_player, "Pan Graph Faster")) then
 			speed = 4
 		end
 
-		if(local_player:IsBindingPressed(YOOTIL.Input.w) and graph.y < 3000) then
+		if(Input.IsActionHeld(local_player, "Pan Up") and graph.y < 3000) then
 			graph.y = graph.y + 4 * speed
-		elseif(local_player:IsBindingPressed(YOOTIL.Input.s) and graph.y > -3000) then
+		elseif(Input.IsActionHeld(local_player, "Pan Down") and graph.y > -3000) then
 			graph.y = graph.y - 4 * speed
 		end
 
-		if(local_player:IsBindingPressed(YOOTIL.Input.a) and graph.x < 3000) then
+		if(Input.IsActionHeld(local_player, "Pan Left") and graph.x < 3000) then
 			graph.x = graph.x + 4 * speed
-		elseif(local_player:IsBindingPressed(YOOTIL.Input.d) and graph.x > -3000) then
+		elseif(Input.IsActionHeld(local_player, "Pan Right") and graph.x > -3000) then
 			graph.x = graph.x - 4 * speed
 		end
 	end
