@@ -1,7 +1,7 @@
 GameId: "e57b9ed36e4042eab3f95ed5636c4a33"
 ClientVersion: "1.0.217-prod-s"
 Name: "Visual Node Puzzles"
-Description: "Private Alpha (Reworking Menu)"
+Description: "Private Alpha"
 MaxPlayers: 1
 Tags: "Simulation"
 Tags: "Puzzle"

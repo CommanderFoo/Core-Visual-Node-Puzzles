@@ -330,12 +330,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:Settings_Button"
-      ObjectReference {
-        SelfId: 5149048525241501507
-      }
-    }
-    Overrides {
       Name: "cs:Play_Logic"
       ObjectReference {
         SelfId: 3781127727571058365
@@ -747,12 +741,6 @@ Objects {
       Name: "cs:Settings_Title"
       ObjectReference {
         SelfId: 3789305095802256169
-      }
-    }
-    Overrides {
-      Name: "cs:Leaderboard_Button"
-      ObjectReference {
-        SelfId: 3954294681918459148
       }
     }
     Overrides {
@@ -1370,36 +1358,6 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:my_games_panel"
-      ObjectReference {
-        SelfId: 1284222172028452821
-      }
-    }
-    Overrides {
-      Name: "cs:my_games_button"
-      ObjectReference {
-        SelfId: 14844984461882649663
-      }
-    }
-    Overrides {
-      Name: "cs:overrun_button"
-      ObjectReference {
-        SelfId: 16535097290882388630
-      }
-    }
-    Overrides {
-      Name: "cs:stonehenge_button"
-      ObjectReference {
-        SelfId: 6430374109958776374
-      }
-    }
-    Overrides {
-      Name: "cs:kooky_button"
-      ObjectReference {
-        SelfId: 8502755276440792793
-      }
-    }
-    Overrides {
       Name: "cs:logic_button"
       ObjectReference {
         SelfId: 3922638577498897365
@@ -1504,7 +1462,7 @@ Objects {
     Overrides {
       Name: "cs:messages"
       ObjectReference {
-        SelfId: 14801045368449505191
+        SelfId: 841534158063459245
       }
     }
     Overrides {

@@ -35,6 +35,15 @@ Assets {
   }
 }
 Assets {
+  Id: 15363972589367858033
+  Name: "Icon Leaderboard"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "Icon_Leaderboard"
+  }
+}
+Assets {
   Id: 13239260661472566277
   Name: "UI Basic Shape Square"
   PlatformAssetType: 9

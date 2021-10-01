@@ -10,10 +10,6 @@ local hover_sound = script:GetCustomProperty("hover_sound"):WaitForObject()
 local math_play = script:GetCustomProperty("math_play"):WaitForObject()
 local logic_play = script:GetCustomProperty("logic_play"):WaitForObject()
 
-local overrun_button = script:GetCustomProperty("overrun_button"):WaitForObject()
-local stonehenge_button = script:GetCustomProperty("stonehenge_button"):WaitForObject()
-local kooky_button = script:GetCustomProperty("kooky_button"):WaitForObject()
-
 local logic_list = script:GetCustomProperty("logic_list"):WaitForObject()
 local math_list = script:GetCustomProperty("math_list"):WaitForObject()
 
@@ -97,9 +93,6 @@ local tutorial_ui = script:GetCustomProperty("tutorial_ui"):WaitForObject()
 local last_active = nil
 local tween = nil
 local local_player = Game.GetLocalPlayer()
-local last_message = nil
-local message_tween = nil
-local display_messages = false
 
 function play_hover()
 	hover_sound:Play()
@@ -111,63 +104,6 @@ local function clean_up()
 
 	logic_list.visibility = Visibility.FORCE_OFF
 	logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
-end
-
-local function disable_messages()
-	display_messages = false
-	-- message_tween = nil
-	-- messages.opacity = 0
-
-	-- if(last_message ~= nil) then
-	-- 	messages:GetChildren()[last_message].visibility = Visibility.FORCE_OFF
-	-- 	last_message = nil
-	-- end
-end
-
-local function show_messages()
-	if(not display_messages) then
-		return
-	end
-
-	-- local index = math.random(#messages:GetChildren())
-
-	-- while(last_message == index) do
-	-- 	index = math.random(#messages:GetChildren())
-	-- end
-
-	-- last_message = index
-
-	-- local the_message = messages:GetChildren()[index]
-	-- local txt_len = string.len(the_message:GetChildren()[1].text)
-	-- local delay = 5 + (txt_len / 100 * 3.5)
-
-	-- message_tween = YOOTIL.Tween:new(1, { a = 0 }, { a = 1 })
-
-	-- message_tween:on_start(function()
-	-- 	the_message.visibility = Visibility.FORCE_ON
-	-- end)
-
-	-- message_tween:on_change(function(c)
-	-- 	messages.opacity = c.a
-	-- end)
-
-	-- message_tween:on_complete(function()
-	-- 	message_tween = YOOTIL.Tween:new(1, { a = 1 }, { a = 0 })
-
-	-- 	message_tween:on_change(function(c)
-	-- 		messages.opacity = c.a
-	-- 	end)
-
-	-- 	message_tween:on_complete(function()
-	-- 		the_message.visibility = Visibility.FORCE_OFF
-
-	-- 		show_messages()
-	-- 	end)
-
-	-- 	message_tween:set_delay(delay) -- TODO: Change per message
-	-- end)
-
-	-- message_tween:set_delay(2)
 end
 
 local function hide_last()
@@ -201,8 +137,6 @@ tutorial_button.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
-		disable_messages()
-
 		menu_container.visibility = Visibility.FORCE_OFF
 		
 		clean_up()
@@ -224,8 +158,6 @@ logic_play.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
-		disable_messages()
-
 		menu_container.visibility = Visibility.FORCE_OFF
 		
 		clean_up()
@@ -243,8 +175,6 @@ math_play.clickedEvent:Connect(function()
 	click_sound:Play()
 
 	Events.Broadcast("transition_in", function()
-		disable_messages()
-
 		menu_container.visibility = Visibility.FORCE_OFF
 
 		clean_up()
@@ -311,10 +241,6 @@ function Tick(dt)
 	if(tween ~= nil) then
 		tween:tween(dt)
 	end
-
-	if(message_tween ~= nil) then
-		message_tween:tween(dt)
-	end
 end
 
 Events.Connect("show_main_menu", function()
@@ -325,22 +251,7 @@ Events.Connect("show_main_menu", function()
 	menu_container.visibility = Visibility.FORCE_ON
 	bg_effect.visibility = Visibility.FORCE_ON
 
-	Events.Broadcast("transition_out", function()
-		display_messages = true
-		show_messages()
-	end)
-end)
-
-overrun_button.clickedEvent:Connect(function()
-	local_player:TransferToGame("bf87a8/overrun")
-end)
-
-stonehenge_button.clickedEvent:Connect(function()
-	local_player:TransferToGame("923e7b/stonehenge")
-end)
-
-kooky_button.clickedEvent:Connect(function()
-	local_player:TransferToGame("3be43c/kooky-racer")
+	Events.Broadcast("transition_out")
 end)
 
 function open_up_logic_puzzle(id)
@@ -502,8 +413,6 @@ for i = 1, 25 do
 
 		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
 			Events.Broadcast("transition_in", function()
-				disable_messages()
-
 				menu_container.visibility = Visibility.FORCE_OFF
 				logic_list.visibility = Visibility.FORCE_OFF
 				logic_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
@@ -540,9 +449,7 @@ for i = 1, 25 do
 		clicked = true
 
 		if(entry:GetCustomProperty("lock"):GetObject().visibility == Visibility.FORCE_OFF) then
-			Events.Broadcast("transition_in", function()
-				disable_messages()
-				
+			Events.Broadcast("transition_in", function()		
 				menu_container.visibility = Visibility.FORCE_OFF
 				math_list.visibility = Visibility.FORCE_OFF
 				math_list_button:SetButtonColor(logic_list_button:GetDisabledColor())
