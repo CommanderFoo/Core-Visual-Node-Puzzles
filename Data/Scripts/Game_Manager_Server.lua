@@ -8,9 +8,7 @@ Events.ConnectForPlayer("init", function(player)
 	YOOTIL.Events.broadcast_to_player(player, "show_main_menu")
 end)
 
---@TODO: REMOVE
-
-local load_solutions = true
+local load_solutions = false
 local force_load_logic_puzzle = 1
 local force_load_math_puzzle = 1
 

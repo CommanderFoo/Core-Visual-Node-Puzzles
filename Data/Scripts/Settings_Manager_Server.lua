@@ -8,7 +8,7 @@ Events.Connect("send_settings", function(player)
 	end
 
 	player_data.sv = player_data.sv or 100 -- Sound FX Volume
-	player_data.mv = player_data.mv or 25 -- Music Volume
+	player_data.mv = player_data.mv or 100 -- Music Volume
 	player_data.li = player_data.li or 1 -- Language
 
 	if(player_data.cs == nil or player_data.cs < 1) then

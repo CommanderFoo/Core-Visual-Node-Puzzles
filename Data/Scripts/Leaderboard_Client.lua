@@ -9,7 +9,6 @@ local chinese = script:GetCustomProperty("chinese"):WaitForObject()
 local language_stats = script:GetCustomProperty("language_stats"):WaitForObject()
 
 local languages = { 0, 0, 0, 0, 0 }
-local local_player = Game.GetLocalPlayer()
 local showing_stats = false
 
 local function long_time_string(the_time)
@@ -37,7 +36,7 @@ local function long_time_string(the_time)
 			str = str .. ", "
 		end
 
-		str = str .. tostring(hours) .. " Min"
+		str = str .. tostring(hours) .. " Hour"
 
 		if(hours > 1) then
 			str = str .. "s"	
