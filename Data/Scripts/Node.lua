@@ -146,7 +146,7 @@ function Node:setup(r)
 	self.error_highlight_color = Color.RED
 	self.lines = {}
 	self.id_showing = false
-	self.enable_line_culling_solution = false
+	self.enable_line_culling_solution = true
 
 	-- Store all node events here so they can be disconnected later.
 
@@ -711,9 +711,23 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 	self:do_output_connect(connected_to_node, connected_to_connection, self.active_connection)
 
 	self.active_connection.moving = false
+	self:move_connections()
 	self.active_connection.connector_image:SetColor(self.default_connector_color)
 
 	Node_Events.trigger("output_connected_to", connected_to_node, self)
+end
+
+function Node:get_connector_line_info(connector)
+	local line = connector:FindChildByName("Line")
+
+	return {
+
+		x = line.x,
+		y = line.y,
+		width = line.width,
+		rotation = line.rotationAngle
+
+	}
 end
 
 function Node:create_line(connected_from_node, connected_from_connection, connected_to_connection)
@@ -724,12 +738,12 @@ function Node:create_line(connected_from_node, connected_from_connection, connec
 	local line = World.SpawnAsset(line_asset, { parent = connected_to_connection.connection })
 
 	line.name = connected_from_node.root.id
+		
+	local from_handle_y = connected_to_connection.connection.y + 30
+	local to_handle_y = connected_from_connection.connector.y + 30
 
-	local from_handle_y = connected_from_connection.connector.y + 30
-	local to_handle_y = connected_to_connection.connection.y + 30
-
-	local to = Vector2.New(self.root.x - (self.root.width / 2), self.root.y + to_handle_y)
-	local from = Vector2.New(connected_from_node.root.x + (connected_from_node.root.width / 2), connected_from_node.root.y + from_handle_y)
+	local from = Vector2.New(connected_from_node.root.x + connected_from_node.output_container.x, connected_from_node.root.y + connected_from_node.output_container.y + to_handle_y)
+	local to = Vector2.New(self.root.x - (self.root.width / 2) - 10, self.root.y + from_handle_y)
 
 	line.x = -15
 	line.width = connected_from_connection.line.width
