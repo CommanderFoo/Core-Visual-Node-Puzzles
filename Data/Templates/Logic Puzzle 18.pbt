@@ -25,11 +25,11 @@ Assets {
           }
           Overrides {
             Name: "cs:gold_score"
-            Float: 13713
+            Float: 14100
           }
           Overrides {
             Name: "cs:silver_score"
-            Float: 13538
+            Float: 13638
           }
           Overrides {
             Name: "cs:bronze_score"
