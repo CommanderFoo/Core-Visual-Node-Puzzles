@@ -73,6 +73,8 @@ local updater = Task.Spawn(function()
 	spanish.text = "0"
 	chinese.text = "0"
 
+	languages = { 0, 0, 0, 0, 0 }
+	
 	if(Leaderboards.HasLeaderboards()) then
 		local time_played_results = Leaderboards.GetLeaderboard(time_played_lb, LeaderboardType.GLOBAL)
 
