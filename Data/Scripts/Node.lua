@@ -146,6 +146,7 @@ function Node:setup(r)
 	self.error_highlight_color = Color.RED
 	self.lines = {}
 	self.id_showing = false
+	self.enable_line_culling_solution = false
 
 	-- Store all node events here so they can be disconnected later.
 
@@ -716,6 +717,10 @@ function Node:output_connect_to(connected_to_node, connected_to_connection)
 end
 
 function Node:create_line(connected_from_node, connected_from_connection, connected_to_connection)
+	if(not self.enable_line_culling_solution) then
+		return	
+	end
+
 	local line = World.SpawnAsset(line_asset, { parent = connected_to_connection.connection })
 
 	line.name = connected_from_node.root.id
@@ -738,6 +743,24 @@ function Node:create_line(connected_from_node, connected_from_connection, connec
 		connected_from_node = connected_from_node
 
 	}
+end
+
+function Node:update_lines()
+	if(not self.enable_line_culling_solution) then
+		return
+	end
+
+	for i, l in ipairs(self.lines) do
+		local from_handle_y = l.connected_to_connection.connection.y + 30
+		local to_handle_y = l.connected_from_connection.connector.y + 30
+
+		local from = Vector2.New(l.connected_from_node.root.x + l.connected_from_node.output_container.x, l.connected_from_node.root.y + l.connected_from_node.output_container.y + to_handle_y)
+		local to = Vector2.New(self.root.x - (self.root.width / 2) - 10, self.root.y + from_handle_y)
+
+		l.line.x = -15
+		l.line.width = l.connected_from_connection.line.width
+		l.line.rotationAngle = Node.angle_to(from, to)
+	end
 end
 
 function Node:do_input_connect(connected_from_node, connected_from_connection, connected_to_connection)
@@ -788,20 +811,6 @@ function Node:input_connect_to(connected_from_node, connected_from_connection, c
 	self:create_line(connected_from_node, connected_from_connection, connected_to_connection)
 
 	Node_Events.trigger("input_connected_to", connected_from_node, self, set_order)
-end
-
-function Node:update_lines()
-	for i, l in ipairs(self.lines) do
-		local from_handle_y = l.connected_to_connection.connection.y + 30
-		local to_handle_y = l.connected_from_connection.connector.y + 30
-
-		local from = Vector2.New(l.connected_from_node.root.x + l.connected_from_node.output_container.x, l.connected_from_node.root.y + l.connected_from_node.output_container.y + to_handle_y)
-		local to = Vector2.New(self.root.x - (self.root.width / 2) - 10, self.root.y + from_handle_y)
-
-		l.line.x = -15
-		l.line.width = l.connected_from_connection.line.width
-		l.line.rotationAngle = Node.angle_to(from, to)
-	end
 end
 
 function Node:move_connections()

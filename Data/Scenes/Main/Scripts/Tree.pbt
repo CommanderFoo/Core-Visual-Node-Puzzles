@@ -2122,6 +2122,12 @@ Objects {
         Id: 15226941556822594646
       }
     }
+    Overrides {
+      Name: "cs:item_container"
+      ObjectReference {
+        SelfId: 841534158063459245
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
