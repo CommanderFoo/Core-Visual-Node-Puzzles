@@ -12770,14 +12770,14 @@ Objects {
       }
       HoveredColor {
         R: 1
-        G: 0.826
-        B: 0.826
+        G: 1
+        B: 1
         A: 1
       }
       PressedColor {
         R: 1
-        G: 0.826
-        B: 0.826
+        G: 1
+        B: 1
         A: 1
       }
       DisabledColor {

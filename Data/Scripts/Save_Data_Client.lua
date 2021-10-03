@@ -45,7 +45,6 @@ function create_nodes(node_data)
 	local output_connections = {}
 	local has_connections = false
 	local last_uid = 0
-	local screen = UI.GetScreenSize()
 
 	for i, s in ipairs(split_nodes) do
 		if(string.len(s) > 0) then
@@ -61,18 +60,6 @@ function create_nodes(node_data)
 			end
 
 			last_uid = tonumber(uid)
-
-			-- if(x < -(screen.x / 2)) then
-			-- 	x = 250	
-			-- elseif(x > screen.x) then
-			-- 	x = (screen.x / 2) - 300
-			-- end
-
-			-- if(y < -(screen.y / 2)) then
-			-- 	y = 150	
-			-- elseif(y > screen.y) then
-			-- 	y = (screen.y / 2) - 150
-			-- end
 
 			Events.Broadcast("spawn_node", tonumber(index), tonumber(uid), x, y, condition, tonumber(limit), tonumber(order))
 		end
@@ -126,26 +113,42 @@ function set_connections(output_connections)
 end
 
 Events.Connect("load_saved_logic_nodes", function(logic_id)
+	local has_data = true
+
 	if(loaded_logic_node_data ~= nil and loaded_logic_node_data ~= "--") then
 		local puzzle_id, node_data = CoreString.Split(loaded_logic_node_data, "@")
 
 		if(tonumber(puzzle_id) ~= logic_id or string.len(node_data) < 3) then
-			return
+			has_data = false
+		else
+			create_nodes(node_data)
 		end
+	else
+		has_data = false
+	end
 
-		create_nodes(node_data)
+	if(not has_data) then
+		Events.Broadcast("create_default_nodes")
 	end
 end)
 
 Events.Connect("load_saved_math_nodes", function(math_id)
+	local has_data = true
+
 	if(loaded_math_node_data ~= nil and loaded_math_node_data ~= "--") then
 		local puzzle_id, node_data = CoreString.Split(loaded_math_node_data, "@")
 
 		if(tonumber(puzzle_id) ~= math_id or string.len(node_data) < 3) then
-			return
+			has_data = false
+		else
+			create_nodes(node_data)
 		end
+	else
+		has_data = false
+	end
 
-		create_nodes(node_data)
+	if(not has_data) then
+		Events.Broadcast("create_default_nodes")
 	end
 end)
 

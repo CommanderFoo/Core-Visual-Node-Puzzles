@@ -169,13 +169,14 @@ function spawn_node(x, y, uid, condition, limit, order)
 	API.Puzzle_Events.trigger("node_total_change")
 end
 
-evts[#evts + 1] = button.hoveredEvent:Connect(API.play_hover_sound)
-
-evts[#evts + 1] = button.clickedEvent:Connect(function()
+function create_node(x_offset, y_offset)
 	if(total_spawned < total or total == -1) then
 		local graph = container:FindChildByName("Graph")
 		local x = 0
 		local y = 0
+
+		x_offset = x_offset or 0
+		y_offset = y_offset or 0
 
 		if(graph.x ~= 0) then
 			x = -graph.x
@@ -185,11 +186,19 @@ evts[#evts + 1] = button.clickedEvent:Connect(function()
 			y = -graph.y
 		end
 
+		x = x + x_offset
+		y = y + y_offset
+
 		spawn_node(x, y, nil)
 
-		API.play_click_sound()
+		if(x_offset == 0 and y_offset == 0) then
+			API.play_click_sound()
+		end
 	end
-end)
+end
+
+evts[#evts + 1] = button.hoveredEvent:Connect(API.play_hover_sound)
+evts[#evts + 1] = button.clickedEvent:Connect(create_node)
 
 evts[#evts + 1] = Events.Connect("disable_available_nodes", function()
 	if(Object.IsValid(button)) then

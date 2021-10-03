@@ -6,6 +6,7 @@ local show_hide_nodes_button = script:GetCustomProperty("show_hide_nodes_button"
 local dummy_data_node = script:GetCustomProperty("dummy_data_node"):WaitForObject()
 local dummy_output_node = script:GetCustomProperty("dummy_output_node"):WaitForObject()
 local line = script:GetCustomProperty("line"):WaitForObject()
+local halt_dummy = script:GetCustomProperty("halt_dummy"):WaitForObject()
 
 local tips = {
 
@@ -21,7 +22,8 @@ local tips = {
 	script:GetCustomProperty("nodes"):WaitForObject(),
 	script:GetCustomProperty("data_node"):WaitForObject(),
 	script:GetCustomProperty("data_node_2"):WaitForObject(),
-	script:GetCustomProperty("output_node"):WaitForObject()
+	script:GetCustomProperty("output_node"):WaitForObject(),
+	script:GetCustomProperty("halt_nodes"):WaitForObject()
 
 }
 
@@ -29,8 +31,8 @@ local panel_tween = nil
 local node_tween = nil
 local node_tween_2 = nil
 
-local in_duration = .5
-local out_duration = .4
+local in_duration = .3
+local out_duration = .3
 
 local current_index = 0
 
@@ -92,7 +94,7 @@ function fade_out()
 		panel_tween:on_change(change)
 		panel_tween:on_complete(out_complete)
 
-		Task.Wait(.5)
+		Task.Wait(.4)
 	end
 end
 
@@ -104,10 +106,15 @@ function fade_in()
 	if(current_index == 10) then
 		show_nodes()
 	elseif(current_index == 11) then
-		show_data_node()
+		dummy_data_node.visibility = Visibility.FORCE_ON
 	elseif(current_index == 13) then
-		show_output_node()
-		show_line()
+		dummy_output_node.visibility = Visibility.FORCE_ON
+		line.visibility = Visibility.FORCE_ON
+	elseif(current_index == 14) then
+		dummy_data_node.visibility = Visibility.FORCE_OFF
+		dummy_output_node.visibility = Visibility.FORCE_OFF
+		line.visibility = Visibility.FORCE_OFF
+		halt_dummy.visibility = Visibility.FORCE_ON
 	end
 
 	panel_tween = YOOTIL.Tween:new(in_duration, { a = 0 }, { a = 1 })
@@ -123,6 +130,22 @@ function init()
 	fade_in()
 end
 
+function show_halt_dummy()
+	node_tween = YOOTIL.Tween:new(.3, { v = 0 }, { v = 1 })
+
+	node_tween:on_complete(function()
+		node_tween = nil
+	end)
+
+	node_tween:on_start(function()
+		halt_dummy.visibility = Visibility.FORCE_ON
+	end)
+
+	node_tween:on_change(function(c)
+		halt_dummy.opacity = c.v
+	end)
+end
+
 function show_nodes()
 	show_hide_nodes_button.text = Localization.get_text("Tutorial_Hide_Nodes_Button")
 	node_tween = YOOTIL.Tween:new(.3, {v = nodes_panel.x}, {v = -20})
@@ -135,54 +158,6 @@ function show_nodes()
 
 	node_tween:on_change(function(changed)
 		nodes_panel.x = changed.v
-	end)
-end
-
-function show_data_node()
-	node_tween = YOOTIL.Tween:new(.4, { v = 0 }, { v = 1 })
-
-	node_tween:on_complete(function()
-		node_tween = nil
-	end)
-
-	node_tween:on_start(function()
-		dummy_data_node.visibility = Visibility.FORCE_ON
-	end)
-
-	node_tween:on_change(function(c)
-		dummy_data_node.opacity = c.v
-	end)
-end
-
-function show_line()
-	node_tween_2 = YOOTIL.Tween:new(.4, { v = 0 }, { v = 1 })
-
-	node_tween_2:on_complete(function()
-		node_tween_2 = nil
-	end)
-
-	node_tween_2:on_change(function(c)
-		local col = line:GetColor()
-
-		col.a = c.v
-
-		line:SetColor(col)
-	end)
-end
-
-function show_output_node()
-	node_tween = YOOTIL.Tween:new(.4, { v = 0 }, { v = 1 })
-
-	node_tween:on_complete(function()
-		node_tween = nil
-	end)
-
-	node_tween:on_start(function()
-		dummy_output_node.visibility = Visibility.FORCE_ON
-	end)
-
-	node_tween:on_change(function(c)
-		dummy_output_node.opacity = c.v
 	end)
 end
 

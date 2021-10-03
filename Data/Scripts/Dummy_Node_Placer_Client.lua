@@ -42,6 +42,41 @@ translate()
 
 local connect_evt = Events.Connect("translate", translate)
 local destroy_evt = nil
+local create_evt = Events.Connect("create_default_nodes", function()
+	local output_nodes = {}
+
+	for i, c in ipairs(children) do
+		local s = c:FindDescendantByName("Spawn_Node")
+
+		if(c.name == "Data") then
+			s.context.create_node(-650)
+		elseif(c.name:find("Output")) then
+			table.insert(output_nodes, s)
+		end
+	end
+
+	if(#output_nodes == 1) then
+		output_nodes[1].context.create_node(600, 0)
+	else
+		local offset = 0
+
+		if(#output_nodes == 2) then
+			offset = 100
+		elseif(#output_nodes == 3) then
+			offset = 200
+		elseif(#output_nodes == 4) then
+			offset = 300
+		elseif(#output_nodes == 5) then
+			offset = 400
+		end
+
+		for i, s in ipairs(output_nodes) do
+			s.context.create_node(440, -offset)
+
+			offset = offset - 200
+		end
+	end
+end)
 
 destroy_evt = script.destroyEvent:Connect(function()
 	if(connect_evt.isConnected) then
@@ -50,5 +85,9 @@ destroy_evt = script.destroyEvent:Connect(function()
 
 	if(destroy_evt.isConnected) then
 		destroy_evt:Disconnect()
+	end
+
+	if(create_evt.isConnected) then
+		create_evt:Disconnect()
 	end
 end)
