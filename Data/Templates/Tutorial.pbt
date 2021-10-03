@@ -652,6 +652,7 @@ Assets {
         ChildIds: 11318600357529685072
         ChildIds: 16378282934626704095
         ChildIds: 15718152265093700687
+        ChildIds: 5403211707376756259
         Collidable_v2 {
           Value: "mc:ecollisionsetting:inheritfromparent"
         }
@@ -664,7 +665,7 @@ Assets {
         Control {
           Width: 80
           Height: 100
-          UIX: -845
+          UIX: -870
           RenderTransformPivot {
             Anchor {
               Value: "mc:euianchor:middlecenter"
@@ -934,6 +935,101 @@ Assets {
             TargetAnchor {
               Anchor {
                 Value: "mc:euianchor:middleleft"
+              }
+            }
+          }
+        }
+      }
+      Objects {
+        Id: 5403211707376756259
+        Name: "Speed Up"
+        Transform {
+          Location {
+          }
+          Rotation {
+          }
+          Scale {
+            X: 1
+            Y: 1
+            Z: 1
+          }
+        }
+        ParentId: 6960289336657475069
+        Collidable_v2 {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Visible_v2 {
+          Value: "mc:evisibilitysetting:inheritfromparent"
+        }
+        CameraCollidable {
+          Value: "mc:ecollisionsetting:inheritfromparent"
+        }
+        Control {
+          Width: 30
+          Height: 30
+          UIX: 20
+          UIY: 1
+          RotationAngle: 90
+          RenderTransformPivot {
+            Anchor {
+              Value: "mc:euianchor:middlecenter"
+            }
+          }
+          Button {
+            FontColor {
+              A: 1
+            }
+            FontSize: 1
+            ButtonColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 1
+            }
+            HoveredColor {
+              R: 1
+              G: 0.826
+              B: 0.826
+              A: 1
+            }
+            PressedColor {
+              R: 1
+              G: 0.826
+              B: 0.826
+              A: 1
+            }
+            DisabledColor {
+              R: 1
+              G: 1
+              B: 1
+              A: 0.2
+            }
+            Brush {
+              Id: 17940382598547805671
+            }
+            IsButtonEnabled: true
+            OnlyUseMainColor: true
+            ClickMode {
+              Value: "mc:ebuttonclickmode:default"
+            }
+            Font {
+            }
+            Justification {
+              Value: "mc:etextjustify:center"
+            }
+            VerticalJustification {
+              Value: "mc:everticaljustification:center"
+            }
+          }
+          AnchorLayout {
+            SelfAnchor {
+              Anchor {
+                Value: "mc:euianchor:middlecenter"
+              }
+            }
+            TargetAnchor {
+              Anchor {
+                Value: "mc:euianchor:middleright"
               }
             }
           }
@@ -3561,7 +3657,7 @@ Assets {
         Control {
           Width: 576
           Height: 239
-          UIX: -934.08783
+          UIX: -957.318848
           UIY: 150
           RenderTransformPivot {
             Anchor {

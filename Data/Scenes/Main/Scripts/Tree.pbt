@@ -2054,6 +2054,12 @@ Objects {
         Id: 15226941556822594646
       }
     }
+    Overrides {
+      Name: "cs:speed_up_2"
+      ObjectReference {
+        SelfId: 17093276425123540444
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
