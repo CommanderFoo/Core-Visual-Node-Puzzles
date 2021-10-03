@@ -134,9 +134,9 @@ next_button.clickedEvent:Connect(function()
 	Events.Broadcast("start_auto_save")
 
 	if(is_logic) then
-		Events.Broadcast("load_logic_puzzle", current_puzzle + 1)
+		Events.Broadcast("load_logic_puzzle", current_puzzle + 1, true)
 	else
-		Events.Broadcast("load_math_puzzle", current_puzzle + 1)
+		Events.Broadcast("load_math_puzzle", current_puzzle + 1, true)
 	end
 
 	Events.Broadcast("puzzle_edit")

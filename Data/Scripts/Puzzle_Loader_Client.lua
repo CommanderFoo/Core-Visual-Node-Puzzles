@@ -76,12 +76,20 @@ function load_puzzle(id, logic)
 	end
 end
 
-function load_logic_puzzle(id)
+function load_logic_puzzle(id, load_default_nodes)
 	load_puzzle(id, true)
+
+	if(load_default_nodes) then
+		Events.Broadcast("create_default_nodes")
+	end
 end
 
-function load_math_puzzle(id)
+function load_math_puzzle(id, load_default_nodes)
 	load_puzzle(id, false)
+
+	if(load_default_nodes) then
+		Events.Broadcast("create_default_nodes")
+	end
 end
 
 function clear_puzzle()
