@@ -198,7 +198,9 @@ function create_node(x_offset, y_offset)
 end
 
 evts[#evts + 1] = button.hoveredEvent:Connect(API.play_hover_sound)
-evts[#evts + 1] = button.clickedEvent:Connect(create_node)
+evts[#evts + 1] = button.clickedEvent:Connect(function()
+	create_node(0, 0)
+end)
 
 evts[#evts + 1] = Events.Connect("disable_available_nodes", function()
 	if(Object.IsValid(button)) then
