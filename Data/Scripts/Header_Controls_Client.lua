@@ -2,7 +2,10 @@
 local Localization = require(script:GetCustomProperty("Localization"))
 
 local slow_down_button = script:GetCustomProperty("slow_down_button"):WaitForObject()
+
 local speed_up_button = script:GetCustomProperty("speed_up_button"):WaitForObject()
+local speed_up_button2 = script:GetCustomProperty("speed_up_2"):WaitForObject()
+
 local current_speed = script:GetCustomProperty("current_speed"):WaitForObject()
 local run_edit_button = script:GetCustomProperty("run_edit_button"):WaitForObject()
 
@@ -208,8 +211,9 @@ end)
 -- Speed
 
 speed_up_button.hoveredEvent:Connect(API.play_hover_sound)
+speed_up_button2.hoveredEvent:Connect(API.play_hover_sound)
 
-speed_up_button.clickedEvent:Connect(function()
+function increase_speed()
 	if(speed < 10) then
 		speed = speed + 1
 	end
@@ -219,7 +223,10 @@ speed_up_button.clickedEvent:Connect(function()
 	YOOTIL.Events.broadcast_to_server("update_game_settings", speed, showing_nodes and 1 or 0)
 
 	API.play_click_sound()
-end)
+end
+
+speed_up_button.clickedEvent:Connect(increase_speed)
+speed_up_button2.clickedEvent:Connect(increase_speed)
 
 slow_down_button.hoveredEvent:Connect(API.play_hover_sound)
 
@@ -244,6 +251,7 @@ end
 function disable_ui(disable_run_edit, ignore_settings, ignore_help)
 	slow_down_button.isInteractable = false
 	speed_up_button.isInteractable = false
+	speed_up_button2.isInteractable = false
 	available_nodes_button.isInteractable = false
 	save_button.isInteractable = false
 	main_menu_button.isInteractable = false
@@ -271,6 +279,7 @@ end
 function enable_ui()
 	slow_down_button.isInteractable = true
 	speed_up_button.isInteractable = true
+	speed_up_button2.isInteractable = true
 	available_nodes_button.isInteractable = true
 	run_edit_button.isInteractable = true
 	settings_button.isInteractable = true

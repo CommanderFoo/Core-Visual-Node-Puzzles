@@ -33,6 +33,8 @@ Events.ConnectForPlayer("update_misc_settings", function(player, sfx_amount, mus
 end)
 
 Events.ConnectForPlayer("update_game_settings", function(player, speed, show_nodes)
+	show_nodes = show_nodes and 1 or 0
+
 	player:SetResource("speed", speed or player:GetResource("speed"))
 	player:SetResource("show_nodes", show_nodes or player:GetResource("show_nodes"))
 end)
