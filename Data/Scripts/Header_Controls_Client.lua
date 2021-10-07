@@ -90,6 +90,7 @@ clear_button.clickedEvent:Connect(function()
 	Events.Broadcast("reset_graph")
 	Events.Broadcast("graph_cleared")
 	API.play_click_sound()
+	Events.Broadcast("create_default_nodes")
 end)
 
 -- Main Menu

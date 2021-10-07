@@ -9102,6 +9102,12 @@ Objects {
         Id: 15226941556822594646
       }
     }
+    Overrides {
+      Name: "cs:cheer"
+      ObjectReference {
+        SelfId: 12751241048516057930
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"

@@ -92,8 +92,10 @@ local updater = Task.Spawn(function()
 					entry:FindDescendantByName("Name").text = v.name
 					entry:FindDescendantByName("Time Played").text = long_time_string(v.score)
 
-					if(tonumber(v.additionalData) ~= nil) then
-						languages[tonumber(v.additionalData)] = languages[tonumber(v.additionalData)] + 1
+					local lang = tonumber(v.additionalData)
+
+					if(lang ~= nil and lang > 0) then
+						languages[lang] = languages[lang] + 1
 					end
 				end
 			

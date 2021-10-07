@@ -12,6 +12,8 @@ local bronze_award = script:GetCustomProperty("bronze_award"):WaitForObject()
 
 local puzzle_name = script:GetCustomProperty("puzzle_name"):WaitForObject()
 
+local cheer = script:GetCustomProperty("cheer"):WaitForObject()
+
 local local_player = Game.GetLocalPlayer()
 
 Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, bronze_score, finished)
@@ -78,6 +80,8 @@ Events.Connect("show_result", function(puzzle_score, gold_score, silver_score, b
 	end
 
 	if(award > 0) then
+		cheer:Play()
+	
 		local current_puzzle = 1
 		local is_logic = local_player.clientUserData.logic
 

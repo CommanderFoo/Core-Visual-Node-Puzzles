@@ -8,6 +8,15 @@ Assets {
   }
 }
 Assets {
+  Id: 13733613642660134673
+  Name: "Crowd Small Cheering 01 SFX"
+  PlatformAssetType: 7
+  PrimaryAsset {
+    AssetType: "AudioAssetRef"
+    AssetId: "sfx_crowd_small_cheering_01_Cue_ref"
+  }
+}
+Assets {
   Id: 12726923135669644958
   Name: "Button Click Press Core 01 SFX"
   PlatformAssetType: 7
