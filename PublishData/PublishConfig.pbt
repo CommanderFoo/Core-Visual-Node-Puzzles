@@ -12,7 +12,7 @@ ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visu
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\2.png"
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\3.png"
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\4.png"
-ReleaseNotes: "7th Oct 2021\r\n- Updated translations\r\n- Result screen plays a cheer sound\r\n- Fixed typo\r\n- Clearing the graph will now spawn default nodes as well"
+ReleaseNotes: "- Updated language stat"
 OwnerId: "93d6eaf2514940a08c5481a4c03c1ee3"
 SerializationVersion: 1
 PublishedState: Public

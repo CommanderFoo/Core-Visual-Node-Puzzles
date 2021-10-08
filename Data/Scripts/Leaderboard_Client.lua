@@ -82,23 +82,21 @@ local updater = Task.Spawn(function()
 			local counter = 1
 
 			for k, v in pairs(time_played_results) do
-				if(counter == 11) then
-					break
+				local lang = tonumber(v.additionalData)
+
+				if(lang ~= nil and lang > 0) then
+					languages[lang] = languages[lang] + 1
 				end
 
-				local entry = entries:GetChildren()[counter]
+				if(counter < 11) then
+					local entry = entries:GetChildren()[counter]
 
-				if(entry ~= nil) then
-					entry:FindDescendantByName("Name").text = v.name
-					entry:FindDescendantByName("Time Played").text = long_time_string(v.score)
-
-					local lang = tonumber(v.additionalData)
-
-					if(lang ~= nil and lang > 0) then
-						languages[lang] = languages[lang] + 1
+					if(entry ~= nil) then
+						entry:FindDescendantByName("Name").text = v.name
+						entry:FindDescendantByName("Time Played").text = long_time_string(v.score)
 					end
 				end
-			
+
 				counter = counter + 1
 			end
 		end
