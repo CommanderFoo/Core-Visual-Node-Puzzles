@@ -2,7 +2,7 @@ Assets {
   Id: 6532462855914785989
   Name: "Bindings"
   PlatformAssetType: 29
-  SerializationVersion: 100
+  SerializationVersion: 101
   BindingSetAsset {
     Bindings {
       BindingType {
@@ -55,7 +55,7 @@ Assets {
       BasicBindingData {
         BasicInputs {
           KeyboardPrimary {
-            Value: "mc:ebindingkeyboard:mouseright"
+            Value: "mc:ebindingkeyboard:rightclick"
           }
           KeyboardSecondary {
             Value: "mc:ebindingkeyboard:none"

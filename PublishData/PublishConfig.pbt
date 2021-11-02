@@ -12,12 +12,13 @@ ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visu
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\2.png"
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\3.png"
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\4.png"
-ReleaseNotes: "- Updated language stat"
+ReleaseNotes: "Fixed dragging graph around due to a bug fix to bindings."
 OwnerId: "93d6eaf2514940a08c5481a4c03c1ee3"
-SerializationVersion: 1
+SerializationVersion: 2
 PublishedState: Public
 ContainsRewardPointEvents: true
 SceneNameToSceneIdMap {
   key: "Main"
   value: "db53f7e748b8394da61deebec276520d"
 }
+MaxPlayersForMainScene: 1

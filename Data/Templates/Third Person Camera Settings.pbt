@@ -199,6 +199,6 @@ Assets {
       AssetId: "Third_Person_Camera_Settings"
     }
   }
-  SerializationVersion: 100
+  SerializationVersion: 101
   VirtualFolderPath: "Misc"
 }

@@ -70,21 +70,21 @@ function Tick(dt)
 	elseif(can_move) then
 		local speed = 1
 
-		if(Input.IsActionHeld(local_player, "Pan Graph Faster")) then
-			speed = 4
-		end
+		-- if(Input.IsActionHeld(local_player, "Pan Graph Faster")) then
+		-- 	speed = 4
+		-- end
 
-		if(Input.IsActionHeld(local_player, "Pan Up") and graph.y < 3000) then
-			graph.y = graph.y + 4 * speed
-		elseif(Input.IsActionHeld(local_player, "Pan Down") and graph.y > -3000) then
-			graph.y = graph.y - 4 * speed
-		end
+		-- if(Input.IsActionHeld(local_player, "Pan Up") and graph.y < 3000) then
+		-- 	graph.y = graph.y + 4 * speed
+		-- elseif(Input.IsActionHeld(local_player, "Pan Down") and graph.y > -3000) then
+		-- 	graph.y = graph.y - 4 * speed
+		-- end
 
-		if(Input.IsActionHeld(local_player, "Pan Left") and graph.x < 3000) then
-			graph.x = graph.x + 4 * speed
-		elseif(Input.IsActionHeld(local_player, "Pan Right") and graph.x > -3000) then
-			graph.x = graph.x - 4 * speed
-		end
+		-- if(Input.IsActionHeld(local_player, "Pan Left") and graph.x < 3000) then
+		-- 	graph.x = graph.x + 4 * speed
+		-- elseif(Input.IsActionHeld(local_player, "Pan Right") and graph.x > -3000) then
+		-- 	graph.x = graph.x - 4 * speed
+		-- end
 	end
 end
 
