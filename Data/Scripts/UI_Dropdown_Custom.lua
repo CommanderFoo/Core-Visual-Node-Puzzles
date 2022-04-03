@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: undefined-field
+---@diagnostic disable: undefined-field
 local Localization = require(script:GetCustomProperty("Localization"))
 
 local root = script.parent.parent

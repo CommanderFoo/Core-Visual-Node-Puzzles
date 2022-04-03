@@ -1,4 +1,4 @@
-﻿local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
+local YOOTIL = require(script:GetCustomProperty("YOOTIL"))
 
 local data_holder = script:GetCustomProperty("data"):WaitForObject()
 local clear_player_data = script:GetCustomProperty("clear_player_data")

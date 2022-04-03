@@ -1,4 +1,4 @@
-﻿local API = require(script:GetCustomProperty("API"))
+local API = require(script:GetCustomProperty("API"))
 local Localization = require(script:GetCustomProperty("Localization"))
 
 local circle_count = script:GetCustomProperty("circle_count"):WaitForObject()

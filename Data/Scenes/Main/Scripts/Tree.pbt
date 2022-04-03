@@ -1194,6 +1194,12 @@ Objects {
         SelfId: 16755618915736676610
       }
     }
+    Overrides {
+      Name: "cs:MenuCount"
+      ObjectReference {
+        SelfId: 17208329357992894454
+      }
+    }
   }
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
