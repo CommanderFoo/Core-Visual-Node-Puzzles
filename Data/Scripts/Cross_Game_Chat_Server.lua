@@ -2,8 +2,8 @@ local CROSS_GAME_CHAT_KEY = script:GetCustomProperty("CrossGameChat")
 
 local message_queue = {}
 local wait_time = 5
-local max_queue = 10
-local max_concurrent = 30
+local max_queue = 20
+local max_concurrent = 50
 local last_timestamp = 0
 local server_id = nil
 local RNG = RandomStream.New(os.time())
