@@ -3,7 +3,9 @@ Assets {
   Name: "Main_Menu_Translatables"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Localization"
 }

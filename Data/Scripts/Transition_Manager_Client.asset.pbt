@@ -3,7 +3,9 @@ Assets {
   Name: "Transition_Manager_Client"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Client"
 }

@@ -8,12 +8,34 @@ Assets {
   }
 }
 Assets {
+  Id: 18033127175011253994
+  Name: "Icon Player"
+  PlatformAssetType: 9
+  PrimaryAsset {
+    AssetType: "PlatformBrushAssetRef"
+    AssetId: "Icon_Player"
+  }
+}
+Assets {
   Id: 17940382598547805671
   Name: "Center Arrow 005 Wedge"
   PlatformAssetType: 9
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "CenterArrow_005Wedge"
+  }
+}
+Assets {
+  Id: 17820760288772839818
+  Name: "Cross Game Chat"
+  PlatformAssetType: 23
+  NetReferenceAsset {
+    NetReference {
+      Key: "1d18ec2caa61477f8b7941efd5e3a2d7"
+      Type {
+        Value: "mc:enetreferencetype:concurrentpersistence"
+      }
+    }
   }
 }
 Assets {
@@ -77,6 +99,19 @@ Assets {
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "CenterCircle_001"
+  }
+}
+Assets {
+  Id: 7668681651341041429
+  Name: "Node Link Total Players"
+  PlatformAssetType: 23
+  NetReferenceAsset {
+    NetReference {
+      Key: "f15397bf40b04b2f8963676edfa46820"
+      Type {
+        Value: "mc:enetreferencetype:concurrentpersistence"
+      }
+    }
   }
 }
 Assets {

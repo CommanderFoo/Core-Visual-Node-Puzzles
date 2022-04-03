@@ -2,7 +2,7 @@ Assets {
   Id: 6532462855914785989
   Name: "Bindings"
   PlatformAssetType: 29
-  SerializationVersion: 101
+  SerializationVersion: 110
   BindingSetAsset {
     Bindings {
       BindingType {
@@ -25,6 +25,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -47,6 +48,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -69,6 +71,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -91,6 +94,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -113,6 +117,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -135,6 +140,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -157,6 +163,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
     Bindings {
       BindingType {
@@ -179,6 +186,7 @@ Assets {
       CoreBehavior {
         Value: "mc:ecorebehavior:none"
       }
+      IsEnabledOnStart: true
     }
   }
 }

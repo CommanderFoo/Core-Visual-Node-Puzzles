@@ -170,7 +170,7 @@ resize_handle.clickedEvent:Connect(API.play_click_sound)
 
 function Tick()
 	if(is_dragging) then
-		local mouse_pos = UI.GetCursorPosition()
+		local mouse_pos = Input.GetCursorPosition()
 		local screen = UI.GetScreenSize()
 
 		error_log_panel.parent.height = math.max(143, math.min(800, math.floor(screen.y - mouse_pos.y))) + 7

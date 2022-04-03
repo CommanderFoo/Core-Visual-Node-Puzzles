@@ -40,7 +40,7 @@ local slider_amount = width * default_fill_percent
 local local_player = Game.GetLocalPlayer()
 
 function Tick()
-	local mouse_pos = UI.GetCursorPosition()
+	local mouse_pos = Input.GetCursorPosition()
 
 	if(moving_handle) then
 		local screen = UI.GetScreenSize()

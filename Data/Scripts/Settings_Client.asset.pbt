@@ -3,7 +3,9 @@ Assets {
   Name: "Settings_Client"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Client"
 }

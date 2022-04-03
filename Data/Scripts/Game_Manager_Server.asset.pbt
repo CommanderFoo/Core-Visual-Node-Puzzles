@@ -3,7 +3,9 @@ Assets {
   Name: "Game_Manager_Server"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Server"
 }

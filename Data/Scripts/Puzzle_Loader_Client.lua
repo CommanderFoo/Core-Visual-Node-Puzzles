@@ -49,12 +49,13 @@ function load_puzzle(id, logic)
 
 		local name = current_puzzle:GetCustomProperty("name")
 		local puzzle, id = CoreString.Split(name, " ")
-		local puzzle_txt = Localization.get_text("Header_Puzzle") .. " #" .. tostring(id)
+		--local puzzle_txt = Localization.get_text("Header_Puzzle") .. " #" .. tostring(id)
+		local puzzle_txt = "#" .. tostring(id)
 
 		if(logic) then
-			name = Localization.get_text("Header_Logic") .. " - " .. puzzle_txt
+			name = Localization.get_text("Header_Logic") .. " " .. puzzle_txt
 		else
-			name = Localization.get_text("Header_Math") .. " - " .. puzzle_txt
+			name = Localization.get_text("Header_Math") .. " " .. puzzle_txt
 		end
 
 		puzzle_name.text = name
@@ -111,12 +112,13 @@ Events.Connect("translate", function()
 
 	local name = current_puzzle:GetCustomProperty("name")
 	local puzzle, id = CoreString.Split(name, " ")
-	local puzzle_txt = Localization.get_text("Header_Puzzle") .. " #" .. tostring(id)
+	--local puzzle_txt = Localization.get_text("Header_Puzzle") .. " #" .. tostring(id)
+	local puzzle_txt = "#" .. tostring(id)
 
 	if(is_logic) then
-		name = Localization.get_text("Header_Logic") .. " - " .. puzzle_txt
+		name = Localization.get_text("Header_Logic") .. " " .. puzzle_txt
 	else
-		name = Localization.get_text("Header_Math") .. " - " .. puzzle_txt
+		name = Localization.get_text("Header_Math") .. " " .. puzzle_txt
 	end
 
 	puzzle_name.text = name

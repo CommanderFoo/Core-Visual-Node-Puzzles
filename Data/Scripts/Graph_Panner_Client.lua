@@ -26,7 +26,7 @@ end
 
 Input.actionPressedEvent:Connect(function(player, action)
 	if(action == "Pan Graph") then
-		local pos = UI.GetCursorPosition()
+		local pos = Input.GetCursorPosition()
 
 		offset.x = pos.x - graph.x
 		offset.y = pos.y - graph.y
@@ -45,7 +45,7 @@ end)
 
 function Tick(dt)
 	if(can_move and is_moving and tween == nil) then
-		local pos = UI.GetCursorPosition()
+		local pos = Input.GetCursorPosition()
 
 		graph.x = pos.x - offset.x
 		graph.y = pos.y - offset.y

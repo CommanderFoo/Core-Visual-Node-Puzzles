@@ -445,7 +445,7 @@ function Node:setup_node(root)
 
 		self.moving = true
 		
-		local pos = UI.GetCursorPosition()
+		local pos = Input.GetCursorPosition()
 
 		self.offset.x = pos.x - self.root.x
 		self.offset.y = pos.y - self.root.y
@@ -874,7 +874,7 @@ end
 
 function Node:drag_node()
 	if(self.moving) then
-		local pos = UI.GetCursorPosition()
+		local pos = Input.GetCursorPosition()
 
 		if(Object.IsValid(self.root)) then
 			if(pos.x >= 0) then
@@ -906,7 +906,7 @@ function Node:drag_connection()
 	if(self.active_connection ~= nil and self.active_connection.moving) then
 		local handle_y = self.active_connection.connector.y
 
-		local a = UI.GetCursorPosition() - (UI.GetScreenSize() / 2)
+		local a = Input.GetCursorPosition() - (UI.GetScreenSize() / 2)
 		local b = Vector2.New(self.root.x + self.output_container.x + self.node_ui.x, self.root.y + self.output_container.y + handle_y + self.node_ui.y)
 		
 		self.active_connection.line.width = Node.distance(a, b)

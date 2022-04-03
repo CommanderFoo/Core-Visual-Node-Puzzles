@@ -3,7 +3,9 @@ Assets {
   Name: "UI_Dropdown_Default"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Misc"
 }
