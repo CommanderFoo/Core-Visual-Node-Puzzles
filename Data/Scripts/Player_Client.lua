@@ -1,4 +1,4 @@
-﻿Game.playerJoinedEvent:Connect(function()
+Game.playerJoinedEvent:Connect(function()
 	UI.SetCursorVisible(true)
 	UI.SetCanCursorInteractWithUI(true)
 end)

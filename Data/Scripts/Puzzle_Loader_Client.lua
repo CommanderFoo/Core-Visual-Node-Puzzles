@@ -1,4 +1,4 @@
-﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API, YOOTIL = require(script:GetCustomProperty("API"))
 local Localization = require(script:GetCustomProperty("Localization"))
 
 local nodes_container = script:GetCustomProperty("nodes_container"):WaitForObject()

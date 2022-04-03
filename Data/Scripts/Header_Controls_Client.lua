@@ -1,4 +1,4 @@
-﻿local API, YOOTIL = require(script:GetCustomProperty("API"))
+local API, YOOTIL = require(script:GetCustomProperty("API"))
 local Localization = require(script:GetCustomProperty("Localization"))
 
 local slow_down_button = script:GetCustomProperty("slow_down_button"):WaitForObject()

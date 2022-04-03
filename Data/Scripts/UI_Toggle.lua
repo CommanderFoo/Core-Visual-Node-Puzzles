@@ -1,4 +1,4 @@
-﻿local root = script.parent
+local root = script.parent
 
 local check = root:FindDescendantByName("Check")
 local border = root:FindDescendantByName("Border")
