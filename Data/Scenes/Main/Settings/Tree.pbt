@@ -28,6 +28,9 @@ Objects {
     IsFilePartition: true
     FilePartitionName: "Envir"
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 17155350337763271724
@@ -67,6 +70,9 @@ Objects {
     TemplateId: 6355090156842347423
     WasRoot: true
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 2893866941149311992
@@ -102,6 +108,9 @@ Objects {
     SubobjectId: 10397188341633673808
     InstanceId: 5447976386673454867
     TemplateId: 6355090156842347423
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -157,6 +166,9 @@ Objects {
     SubobjectId: 12377164915522451180
     InstanceId: 5447976386673454867
     TemplateId: 6355090156842347423
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -242,6 +254,9 @@ Objects {
     InstanceId: 5447976386673454867
     TemplateId: 6355090156842347423
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 16813558807825262224
@@ -273,6 +288,11 @@ Objects {
   PlayerSpawnPoint {
     TeamInt: 1
     PlayerScaleMultiplier: 1
+    SpawnEffectsTemplate {
+    }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -309,21 +329,21 @@ Objects {
       EnablePlayModeProfiler: true
       ChatSettings {
         ChatMode {
-          Value: "mc:echatmode:none"
+          Value: "mc:echatmode:allonly"
         }
         ChatPosition {
           X: 40
-          Y: 130.542908
+          Y: 86.8874512
         }
         ChatSize {
           X: 450
-          Y: 1
+          Y: 250
         }
         ChatHorizontalAlignment {
           Value: "mc:ecorehorizontalalign:left"
         }
         ChatVerticalAlignment {
-          Value: "mc:ecorehorizontalalign:center"
+          Value: "mc:ecoreverticalalign:top"
         }
       }
       PhysicsSettings {
@@ -332,6 +352,14 @@ Objects {
       }
       RelevanceSettings {
         key: "decal"
+        value {
+          LowDistance: 4500
+          MediumDistance: 7000
+          HighDistance: 9000
+        }
+      }
+      RelevanceSettings {
+        key: "mesh"
         value {
           LowDistance: 4500
           MediumDistance: 7000
@@ -375,13 +403,20 @@ Objects {
         VoiceChatEntryVerticalFlow {
           Value: "mc:ecoreverticalflow:toptobottom"
         }
+        IsVoiceChatWidgetVisible: true
       }
       PlayerInteractDistance: 500
       PlayerInteractAngleDeg: 50
       PlayerStorageMode {
         Value: "mc:eplayerstoragemode:none"
       }
+      EnableConcurrentPlayerStorage: true
+      EnableConcurrentCreatorStorage: true
+      EnableNetworkedEventsQueuing: true
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -415,5 +450,8 @@ Objects {
     BindingSetAsset {
       Id: 6532462855914785989
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }

@@ -3,8 +3,10 @@ Assets {
   Name: "Translations_Spanish"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Localization"
   VirtualFolderPath: "Translations"
 }

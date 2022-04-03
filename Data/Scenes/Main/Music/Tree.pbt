@@ -49,6 +49,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 3652548516299282297
@@ -91,6 +94,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 11747254585239303058
@@ -129,6 +135,9 @@ Objects {
       FadeInTime: 3
       FadeOutTime: 1
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -169,6 +178,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 13477180164202983214
@@ -207,6 +219,9 @@ Objects {
       FadeInTime: 3
       FadeOutTime: 1
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -255,6 +270,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 12019628287941411554
@@ -294,6 +312,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 6961188392770621853
@@ -332,6 +353,9 @@ Objects {
       FadeInTime: 3
       FadeOutTime: 1
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -380,6 +404,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 1252000008128197860
@@ -418,6 +445,9 @@ Objects {
       FadeInTime: 3
       FadeOutTime: 1
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -458,6 +488,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 8012064182914243591
@@ -496,6 +529,9 @@ Objects {
       FadeInTime: 3
       FadeOutTime: 1
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }
 Objects {
@@ -536,6 +572,9 @@ Objects {
       FadeOutTime: 1
     }
   }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
+  }
 }
 Objects {
   Id: 9888997290924283758
@@ -574,5 +613,8 @@ Objects {
       FadeInTime: 3
       FadeOutTime: 1
     }
+  }
+  NetworkRelevanceDistance {
+    Value: "mc:eproxyrelevance:critical"
   }
 }

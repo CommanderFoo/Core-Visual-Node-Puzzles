@@ -3,7 +3,9 @@ Assets {
   Name: "Math_Puzzle_Solutions"
   PlatformAssetType: 3
   TextAsset {
+    CustomParameters {
+    }
   }
-  SerializationVersion: 101
+  SerializationVersion: 110
   VirtualFolderPath: "Misc"
 }
