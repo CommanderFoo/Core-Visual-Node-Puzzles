@@ -84,6 +84,19 @@ Assets {
   }
 }
 Assets {
+  Id: 10929247170524556285
+  Name: "Node Link Total Players"
+  PlatformAssetType: 23
+  NetReferenceAsset {
+    NetReference {
+      Key: "d94d1b1580d548fe8b9f1162caf395a3"
+      Type {
+        Value: "mc:enetreferencetype:concurrentpersistence"
+      }
+    }
+  }
+}
+Assets {
   Id: 9402814787072448834
   Name: "BG Flat 001"
   PlatformAssetType: 9
@@ -99,19 +112,6 @@ Assets {
   PrimaryAsset {
     AssetType: "PlatformBrushAssetRef"
     AssetId: "CenterCircle_001"
-  }
-}
-Assets {
-  Id: 7668681651341041429
-  Name: "Node Link Total Players"
-  PlatformAssetType: 23
-  NetReferenceAsset {
-    NetReference {
-      Key: "f15397bf40b04b2f8963676edfa46820"
-      Type {
-        Value: "mc:enetreferencetype:concurrentpersistence"
-      }
-    }
   }
 }
 Assets {
