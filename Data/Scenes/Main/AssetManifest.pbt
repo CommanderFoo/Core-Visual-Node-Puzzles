@@ -102,19 +102,6 @@ Assets {
   }
 }
 Assets {
-  Id: 7668681651341041429
-  Name: "Node Link Total Players"
-  PlatformAssetType: 23
-  NetReferenceAsset {
-    NetReference {
-      Key: "f15397bf40b04b2f8963676edfa46820"
-      Type {
-        Value: "mc:enetreferencetype:concurrentpersistence"
-      }
-    }
-  }
-}
-Assets {
   Id: 7336185804317448730
   Name: "Teko Bold"
   PlatformAssetType: 28

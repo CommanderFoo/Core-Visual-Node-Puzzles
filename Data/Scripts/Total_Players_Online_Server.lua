@@ -7,7 +7,7 @@ end
 
 local function on_player_joined(player)
 	Storage.SetConcurrentCreatorData(TOTAL_PLAYERS_KEY, function(data)
-		if(not data.count) then
+		if(not data.count or data.count < 0) then
 			data.count = 0
 		end
 	
@@ -21,10 +21,10 @@ end
 
 local function on_player_left(player)
 	Storage.SetConcurrentCreatorData(TOTAL_PLAYERS_KEY, function(data)
-		if(not data.count) then
+		if(not data.count or data.count < 0) then
 			data.count = 0
 		else
-			data.count = data.count - 1
+			data.count = math.max(0, data.count - 1)
 		end
 	
 		return data

@@ -12,7 +12,6 @@ ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visu
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\2.png"
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\3.png"
 ScreenshotPaths: "C:\\Users\\pixel\\Documents\\My Games\\CORE\\Saved\\Maps\\Visual Node Puzzles\\Screenshots\\4.png"
-ReleaseNotes: "Test"
 OwnerId: "93d6eaf2514940a08c5481a4c03c1ee3"
 SerializationVersion: 3
 PublishedState: Public
