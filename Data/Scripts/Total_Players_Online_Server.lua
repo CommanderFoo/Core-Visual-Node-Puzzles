@@ -35,3 +35,16 @@ Storage.ConnectToConcurrentCreatorDataChanged(TOTAL_PLAYERS_KEY, update_clients)
 
 Game.playerJoinedEvent:Connect(on_player_joined)
 Game.playerLeftEvent:Connect(on_player_left)
+
+Chat.receiveMessageHook:Connect(function(speaker, params)
+	if(speaker.name == "CommanderFoo" and params.message == "/clear") then
+		Task.Spawn(function()
+			Storage.SetConcurrentCreatorData(TOTAL_PLAYERS_KEY, function(data)
+				data.count = 1
+				return data
+			end)
+		end)
+
+		params.message = ""
+	end
+end)

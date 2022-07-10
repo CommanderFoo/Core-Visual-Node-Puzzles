@@ -142,6 +142,19 @@ Assets {
   }
 }
 Assets {
+  Id: 4759794301577236286
+  Name: "Node Link Total Players"
+  PlatformAssetType: 23
+  NetReferenceAsset {
+    NetReference {
+      Key: "d94d1b1580d548fe8b9f1162caf395a3"
+      Type {
+        Value: "mc:enetreferencetype:concurrentpersistence"
+      }
+    }
+  }
+}
+Assets {
   Id: 2620458082996281893
   Name: "Tip 100"
   PlatformAssetType: 24

@@ -118,6 +118,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 17500028518638828169
@@ -174,6 +175,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 1846522781371718674
@@ -207,6 +209,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          IsHittable: true
           Button {
             Label: "Apple"
             FontColor {
@@ -270,6 +273,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 6522515682239085590
@@ -304,6 +308,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          IsHittable: true
           Button {
             Label: "Banana"
             FontColor {
@@ -367,6 +372,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 11288741480251077104
@@ -401,6 +407,7 @@ Assets {
             }
           }
           UseParentWidth: true
+          IsHittable: true
           Button {
             Label: "Melon"
             FontColor {
@@ -464,6 +471,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 8978936441011981150
@@ -519,6 +527,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 997669586998559921
@@ -575,6 +584,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 5592949714251951271
@@ -635,6 +645,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 6333773922550756628
@@ -671,6 +682,7 @@ Assets {
           }
           UseParentWidth: true
           UseParentHeight: true
+          IsHittable: true
           Button {
             FontColor {
               A: 1
@@ -733,6 +745,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 1947085713418787670
@@ -794,6 +807,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 410269594184321831
@@ -847,6 +861,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 4600654389238091323
@@ -909,6 +924,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 15767110161504651399
@@ -973,6 +989,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 6390831148547306292
@@ -1008,6 +1025,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
     }
     Assets {
@@ -1036,7 +1054,7 @@ Assets {
   Marketplace {
     Description: "A UI dropdown component where you can select an option from the list.  Easy to setup and use.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Dropdown-Docs/"
   }
-  SerializationVersion: 110
+  SerializationVersion: 118
   DirectlyPublished: true
   VirtualFolderPath: "UI"
 }

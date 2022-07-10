@@ -6,7 +6,7 @@ Assets {
     CustomParameters {
     }
   }
-  SerializationVersion: 110
+  SerializationVersion: 118
   VirtualFolderPath: "Localization"
   VirtualFolderPath: "Translations"
 }

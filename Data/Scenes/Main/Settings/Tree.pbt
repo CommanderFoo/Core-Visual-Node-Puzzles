@@ -31,6 +31,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 17155350337763271724
@@ -73,6 +74,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 2893866941149311992
@@ -102,6 +104,12 @@ Objects {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
   NetworkContext {
+    MinDetailLevel {
+      Value: "mc:edetaillevel:low"
+    }
+    MaxDetailLevel {
+      Value: "mc:edetaillevel:ultra"
+    }
   }
   InstanceHistory {
     SelfId: 2893866941149311992
@@ -112,6 +120,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 1416288601498431300
@@ -160,6 +169,7 @@ Objects {
     MaxPitch: 89
     DoesPositionOffsetSpring: true
     UseAsAudioListener: true
+    IsCameraCollisionEnabled: true
   }
   InstanceHistory {
     SelfId: 1416288601498431300
@@ -170,6 +180,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 1766102436171509243
@@ -246,6 +257,7 @@ Objects {
       CanMoveDown: true
       MaxHitpoints: 100
       PlayerMasterVolumeMultiplier: 1
+      ComplexCollision: true
     }
   }
   InstanceHistory {
@@ -257,6 +269,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 16813558807825262224
@@ -294,6 +307,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 7367735074338159388
@@ -352,6 +366,14 @@ Objects {
       }
       RelevanceSettings {
         key: "decal"
+        value {
+          LowDistance: 4500
+          MediumDistance: 7000
+          HighDistance: 9000
+        }
+      }
+      RelevanceSettings {
+        key: "mergedmesh"
         value {
           LowDistance: 4500
           MediumDistance: 7000
@@ -418,6 +440,7 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }
 Objects {
   Id: 804346419914311170
@@ -454,4 +477,5 @@ Objects {
   NetworkRelevanceDistance {
     Value: "mc:eproxyrelevance:critical"
   }
+  IsReplicationEnabledByDefault: true
 }

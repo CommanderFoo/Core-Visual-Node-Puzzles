@@ -44,6 +44,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
     }
     PrimaryAssetId {
@@ -58,5 +59,5 @@ Assets {
     Version: "1.1.0"
     Description: "A UI toggle component.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Toggle-Docs/"
   }
-  SerializationVersion: 110
+  SerializationVersion: 118
 }

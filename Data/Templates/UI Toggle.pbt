@@ -107,6 +107,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 2744502404100127323
@@ -161,6 +162,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 13029647769361375604
@@ -221,6 +223,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 7769018480625643313
@@ -257,6 +260,7 @@ Assets {
           AddSizeToParentIfUsingParentSize: true
           UseParentWidth: true
           UseParentHeight: true
+          IsHittable: true
           Button {
             FontColor {
               A: 1
@@ -319,6 +323,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 1236101275674668014
@@ -381,6 +386,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
       Objects {
         Id: 1407894997658169036
@@ -415,6 +421,7 @@ Assets {
         NetworkRelevanceDistance {
           Value: "mc:eproxyrelevance:critical"
         }
+        IsReplicationEnabledByDefault: true
       }
     }
     Assets {
@@ -443,7 +450,7 @@ Assets {
   Marketplace {
     Description: "A UI toggle component.\r\n\r\nDocumentation: https://popthosepringles.github.io/Core-UI-Toggle-Docs/"
   }
-  SerializationVersion: 110
+  SerializationVersion: 118
   DirectlyPublished: true
   VirtualFolderPath: "UI"
 }
