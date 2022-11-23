@@ -1,3 +1,5 @@
+local LEADERBOARD_ROW = script:GetCustomProperty("LeaderboardRow")
+
 local time_played_lb = script:GetCustomProperty("time_played_lb")
 local entries = script:GetCustomProperty("entries"):WaitForObject()
 
@@ -75,12 +77,14 @@ local updater = Task.Spawn(function()
 
 	languages = { 0, 0, 0, 0, 0 }
 	
+	local offset = 0
+
 	if(Leaderboards.HasLeaderboards()) then
 		local time_played_results = Leaderboards.GetLeaderboard(time_played_lb, LeaderboardType.GLOBAL)
 
 		if(time_played_results ~= nil) then
 			local counter = 1
-
+			
 			for k, v in pairs(time_played_results) do
 				local lang = tonumber(v.additionalData)
 
@@ -88,13 +92,15 @@ local updater = Task.Spawn(function()
 					languages[lang] = languages[lang] + 1
 				end
 
-				if(counter < 11) then
-					local entry = entries:GetChildren()[counter]
+				if(counter <= 100) then
+					local entry = World.SpawnAsset(LEADERBOARD_ROW, { parent = entries })
 
-					if(entry ~= nil) then
-						entry:FindDescendantByName("Name").text = v.name
-						entry:FindDescendantByName("Time Played").text = long_time_string(v.score)
-					end
+					entry:FindDescendantByName("Position").text = tostring(counter)
+					entry:FindDescendantByName("Name").text = v.name
+					entry:FindDescendantByName("Time Played").text = long_time_string(v.score)
+
+					entry.y = offset
+					offset = offset + entry.height + 2
 				end
 
 				counter = counter + 1
@@ -107,7 +113,7 @@ updater.repeatInterval = 60
 updater.repeatCount = -1
 
 Input.actionPressedEvent:Connect(function(player, action)
-	if(player.name ~= "CommanderFoo" and player.name ~= "coreslinkous" and player.name ~= "disastronaut") then
+	if(player.name ~= "CommanderFoo") then
 		return
 	end
 

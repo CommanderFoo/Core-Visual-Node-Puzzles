@@ -1276,7 +1276,7 @@ Objects {
     Overrides {
       Name: "cs:entries"
       ObjectReference {
-        SelfId: 10508859645490681876
+        SelfId: 4864597847118666254
       }
     }
     Overrides {
@@ -1313,6 +1313,12 @@ Objects {
       Name: "cs:language_stats"
       ObjectReference {
         SelfId: 10031725744810399646
+      }
+    }
+    Overrides {
+      Name: "cs:LeaderboardRow"
+      AssetReference {
+        Id: 16142534987750928338
       }
     }
   }

@@ -1396,7 +1396,7 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 118
+  SerializationVersion: 120
   VirtualFolderPath: "Nodes"
   VirtualFolderPath: "Logic Nodes"
 }
